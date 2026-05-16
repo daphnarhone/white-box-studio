@@ -2,6 +2,21 @@
 <html lang="en" dir="ltr">
 <head>
 <meta charset="UTF-8">
+<script>
+  (function() {
+    try {
+      var KEY = 'wbs-lang';
+      var lang = localStorage.getItem(KEY);
+      if (lang !== 'en' && lang !== 'he') {
+        var tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        lang = (tz === 'Asia/Jerusalem') ? 'he' : 'en';
+        localStorage.setItem(KEY, lang);
+      }
+      document.documentElement.lang = lang;
+      document.documentElement.dir = (lang === 'he') ? 'rtl' : 'ltr';
+    } catch(e) {}
+  })();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The White Box Studio — Architectural finishes, Tel Aviv</title>
 <meta name="description" content="Hand-applied plaster, concrete, gold leaf, iron, gypsum, and sculpture for architects, designers, and the spaces they make. Tel Aviv-based atelier.">
@@ -49,7 +64,7 @@
     <div class="lang-toggle" role="group" aria-label="Language">
       <button type="button" data-lang="en" lang="en" class="active">EN</button>
       <span class="lang-divider" aria-hidden="true">·</span>
-      <button type="button" data-lang="he" lang="he">HE</button>
+      <button type="button" data-lang="he" lang="he">עב</button>
     </div>
     <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
       <span></span>
@@ -68,7 +83,7 @@
   <div class="lang-toggle" role="group" aria-label="Language">
     <button type="button" data-lang="en" lang="en" class="active">EN</button>
     <span class="lang-divider" aria-hidden="true">·</span>
-    <button type="button" data-lang="he" lang="he">HE</button>
+    <button type="button" data-lang="he" lang="he">עב</button>
   </div>
 </div>
 
