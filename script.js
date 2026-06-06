@@ -17,7 +17,7 @@ const strings = {
 
     // ── Logo lockup (stays in EN in both languages) ──
     wordmark: 'white box studio',
-    tagline: 'live your dreams',
+    tagline: 'bring the dream to life',
 
     // ── Hero ──────────────────────────────────────
     hero_eyebrow: 'Atelier of architectural finishes',
@@ -30,10 +30,20 @@ const strings = {
     // ── Selected work section ─────────────────────
     selected_work_eyebrow: 'Nine categories · one studio',
     selected_work_heading: 'Selected work',
+    selected_work_note: 'Every piece shown here was made and installed by our own studio.',
 
     // ── Recurring UI ──────────────────────────────
     cta_start: 'Start a project',
     cta_view: 'View work',
+    cta_sec_01: 'Plan your plaster wall',
+    cta_sec_02: 'Commission a table',
+    cta_sec_03: 'Commission a sculpture',
+    cta_sec_04: 'Design your ceiling',
+    cta_sec_05: 'Order display pieces',
+    cta_sec_06: 'Get the iron look',
+    cta_sec_07: 'Add classical detail',
+    cta_sec_08: 'Commission a mural',
+    cta_sec_09: 'Start a concrete project',
     next_label: 'Next —',
     contact_heading: 'Start a project',
 
@@ -85,6 +95,7 @@ const strings = {
     // ── Studio section ────────────────────────────
     studio_eyebrow: 'THE STUDIO',
     studio_headline: 'Tailored by hand, in our studio.',
+    studio_established: 'Established 2005 · two decades of handmade architectural finishes, made and installed across Israel.',
     studio_philosophy: "Built for experts and connoisseurs, The White Box Studio redefines the traditional creative space. We are a true artist's atelier with the unique ability to manifest any concept you can imagine. Through an advanced understanding of material behaviors, history, and aesthetics, we engineer tailored solutions to bring your visions to life.",
     studio_howwework_eyebrow: 'How we work',
     studio_howwework_body: 'We co-design alongside architects, designers, or end clients, then handle full on-site installation. We currently take on projects exclusively in Israel. We strongly prefer early-stage collaboration to guarantee that all required infrastructure is seamlessly planned and executed.',
@@ -103,8 +114,27 @@ const strings = {
     contact_hours_value: 'Sunday–Thursday 10:00–17:00 · Friday 10:00–14:00',
     contact_whatsapp_cta: 'WhatsApp us',
     contact_email_cta: 'Email us',
-    contact_instagram_cta: 'Instagram',
-    contact_instagram_label: 'Instagram'
+    contact_instagram_cta: '@whiteboxstudio9',
+    contact_instagram_label: 'Instagram',
+
+    // ── Contact form ──────────────────────────────
+    form_name_label: 'Name',
+    form_name_ph: 'Your name',
+    form_contact_label: 'Email or phone',
+    form_contact_ph: 'So we can get back to you',
+    form_type_label: 'Project type',
+    form_type_default: 'Select a category',
+    form_type_other: 'Not sure / other',
+    form_message_label: 'Message',
+    form_message_ph: 'Tell us about your space, ideas, timeline, or any reference images that inspire you.',
+    form_submit_email: 'Send via email',
+    form_submit_whatsapp: 'Send via WhatsApp',
+    form_alt_label: 'Or reach us directly',
+    form_wa_title: 'New project inquiry',
+    form_status_required: 'Please add your name and an email or phone so we can reach you.',
+    form_status_sending: 'Sending…',
+    form_status_success: "Thank you — your message is on its way. We'll be in touch shortly.",
+    form_status_error: 'Something went wrong. Please try WhatsApp, or email us at info@white-box.co.il.'
   },
 
   he: {
@@ -130,10 +160,20 @@ const strings = {
     // ── Selected work section ─────────────────────
     selected_work_eyebrow: 'תשע קטגוריות · סטודיו אחד',
     selected_work_heading: 'עבודות נבחרות',
+    selected_work_note: 'כל יצירה המוצגת כאן נוצרה והותקנה על ידי הסטודיו שלנו.',
 
     // ── Recurring UI ──────────────────────────────
     cta_start: 'הזמינו פרוייקט',
     cta_view: 'צפו בעבודות',
+    cta_sec_01: 'תכננו גימור לקירות',
+    cta_sec_02: 'הזמינו פרטי ריהוט',
+    cta_sec_03: 'הזמינו עבודת פיסול',
+    cta_sec_04: 'תכננו גימור תקרה',
+    cta_sec_05: 'הזמינו אביזרי תצוגה/אירועים',
+    cta_sec_06: 'הזמינו גימור דמוי ברזל/בטון',
+    cta_sec_07: 'הוסיפו עיטורים',
+    cta_sec_08: 'הזמינו ציור קיר',
+    cta_sec_09: 'הזמינו פרוייקט בבטון',
     next_label: 'הבא —',
     contact_heading: 'הזמינו פרוייקט',
 
@@ -185,6 +225,7 @@ const strings = {
     // ── Studio section ────────────────────────────
     studio_eyebrow: 'הסטודיו',
     studio_headline: 'רוקמים חלומות, בסטודיו שלנו',
+    studio_established: 'נוסד ב-2005 · שני עשורים של גימורים אדריכליים בעבודת יד, ביצוע והתקנה ברחבי ישראל.',
     studio_philosophy: 'סטודיו The White Box מגדיר מחדש את אפשרויות העיצוב והיצירתיות עבור מעצבי פנים, אדריכלים ולמחפשים נראות מיוחדת. כסטודיו אומנים אמיתי יש לנו יכולת ייחודית להגשים כל קונספט שתוכלו לדמיין. באמצעות הבנה מתקדמת של התנהגויות חומרים, ההיסטוריה שלהם והאסתטיקה, אנו מתכננים פתרונות מותאמים אישית כדי להגשים את החזונות שלכם.',
     studio_howwework_eyebrow: 'איך אנחנו עובדים',
     studio_howwework_body: 'אנחנו עובדים ישירות עם אדריכלים, מעצבים ולקוחות סופיים, החל משלב התכנון המשותף ועד להתקנה באתר. כיום אנו מתמקדים בפרויקטים בתוך ישראל. נשמח להתחיל את התכנון בשלבים הראשונים של הפרויקט כדי להבטיח שכל התשתיות הנדרשות מתוכננות ומשולבות בצורה מושלמת.',
@@ -203,8 +244,27 @@ const strings = {
     contact_hours_value: 'ראשון–חמישי 10:00–17:00 · שישי 10:00–14:00',
     contact_whatsapp_cta: 'שלחו וואטסאפ',
     contact_email_cta: 'שלחו אימייל',
-    contact_instagram_cta: 'אינסטגרם',
-    contact_instagram_label: 'אינסטגרם'
+    contact_instagram_cta: '@whiteboxstudio9',
+    contact_instagram_label: 'אינסטגרם',
+
+    // ── Contact form ──────────────────────────────
+    form_name_label: 'שם',
+    form_name_ph: 'השם שלכם',
+    form_contact_label: 'אימייל או טלפון',
+    form_contact_ph: 'כדי שנוכל לחזור אליכם',
+    form_type_label: 'סוג הפרויקט',
+    form_type_default: 'בחרו קטגוריה',
+    form_type_other: 'לא בטוח/ה / אחר',
+    form_message_label: 'הודעה',
+    form_message_ph: 'ספרו לנו על החלל, הרעיונות, לוח הזמנים או כל תמונת השראה.',
+    form_submit_email: 'שליחה במייל',
+    form_submit_whatsapp: 'שליחה בוואטסאפ',
+    form_alt_label: 'או צרו קשר ישירות',
+    form_wa_title: 'פנייה לפרויקט חדש',
+    form_status_required: 'אנא הוסיפו שם ואימייל או טלפון כדי שנוכל לחזור אליכם.',
+    form_status_sending: 'שולח…',
+    form_status_success: 'תודה — ההודעה בדרך אלינו. נחזור אליכם בהקדם.',
+    form_status_error: 'משהו השתבש. נסו בוואטסאפ, או כתבו לנו ל-info@white-box.co.il.'
   }
 };
 
@@ -241,6 +301,12 @@ function applyLang(lang) {
     } else if (fallback[key] !== undefined) {
       el.textContent = fallback[key];
     }
+  });
+
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    const value = dict[key] !== undefined ? dict[key] : fallback[key];
+    if (value !== undefined) el.setAttribute('placeholder', value);
   });
 
   document.querySelectorAll('.lang-toggle button').forEach(btn => {
@@ -307,6 +373,277 @@ function setupMobileMenu() {
   });
 }
 
+// ── Lenis smooth scrolling ───────────────────────────────────────────────
+// Buttery inertial scroll for the whole page. Returns the instance (or null
+// when skipped) so callers know whether smooth scroll is active.
+function setupSmoothScroll() {
+  // Respect reduced-motion, and bail gracefully if the CDN didn't load.
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return null;
+  if (typeof Lenis === 'undefined') return null;
+
+  // expo-out: instant response, long graceful settle — used for in-page jumps.
+  const easeOutExpo = (t) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t));
+
+  const lenis = new Lenis({
+    // Continuous lerp follow instead of a fixed duration: the wheel glides and
+    // catches up smoothly frame-to-frame, which reads more premium than a timed
+    // ease. Lower = smoother/floatier, higher = snappier; 0.08 is a touch
+    // smoother than Lenis's 0.1 default.
+    lerp: 0.08,
+    smoothWheel: true,
+    // In-page anchor jumps (nav links, CTAs, next-teasers, the scroll cue).
+    // A bounded duration keeps long jumps from drifting under lerp mode;
+    // offset clears the fixed header.
+    anchors: { offset: -100, duration: 1.2, easing: easeOutExpo }
+  });
+
+  // Canonical Lenis + GSAP integration: drive Lenis from GSAP's ticker and feed
+  // every scroll frame to ScrollTrigger so the glide animations track 1:1.
+  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add((time) => lenis.raf(time * 1000));
+    gsap.ticker.lagSmoothing(0);
+  } else {
+    const raf = (time) => { lenis.raf(time); requestAnimationFrame(raf); };
+    requestAnimationFrame(raf);
+  }
+
+  return lenis;
+}
+
+// ── Scroll-driven "glide into place" reveals (GSAP ScrollTrigger) ─────────
+// The work-grid cards deal themselves into their slots; section images glide
+// in from alternating sides and settle. Each lands in its own spot — stacked
+// in time, never stacked on top of one another.
+function setupGlide() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Mirror the horizontal entrance direction for RTL (Hebrew).
+  const dirSign = document.documentElement.getAttribute('dir') === 'rtl' ? -1 : 1;
+
+  // Give each element its own start offset, then batch-tween the group to rest
+  // with a short stagger so a row "deals" into place. clearProps hands the
+  // element back to CSS afterwards, so :hover lifts keep working.
+  const glide = (selector, fromState, toVars) => {
+    const els = gsap.utils.toArray(selector);
+    if (!els.length) return;
+
+    els.forEach((el, i) => gsap.set(el, fromState(el, i)));
+
+    ScrollTrigger.batch(els, {
+      start: 'top 88%',
+      onEnter: (batch) => gsap.to(batch, Object.assign({
+        overwrite: true,
+        clearProps: 'transform,willChange'
+      }, toVars))
+    });
+
+    // Reload-mid-page safeguard: elements already scrolled fully past the top
+    // never fire onEnter, so reveal those immediately instead of leaving them
+    // stuck at their hidden start state.
+    requestAnimationFrame(() => {
+      els.forEach((el) => {
+        if (el.getBoundingClientRect().bottom < 0) {
+          gsap.set(el, { clearProps: 'transform,willChange', opacity: 1 });
+        }
+      });
+    });
+  };
+
+  // 1) "Selected work" — the 9 asymmetric cards deal into their grid slots.
+  glide('.work-card',
+    (el, i) => {
+      const d = (i % 2 === 0 ? -1 : 1) * dirSign;
+      return { opacity: 0, yPercent: 8, xPercent: d * 6, rotation: d * 2.2,
+               scale: 0.93, transformOrigin: 'center', willChange: 'transform' };
+    },
+    { opacity: 1, yPercent: 0, xPercent: 0, rotation: 0, scale: 1,
+      duration: 0.9, ease: 'power3.out', stagger: 0.08 }
+  );
+
+  // 2) Section imagery — glide in from alternating sides and settle.
+  glide('.detail-image, .collage-item, .studio-image',
+    (el, i) => {
+      const d = (i % 2 === 0 ? -1 : 1) * dirSign;
+      return { opacity: 0, xPercent: d * 9, yPercent: 6, scale: 0.96,
+               willChange: 'transform' };
+    },
+    { opacity: 1, xPercent: 0, yPercent: 0, scale: 1,
+      duration: 1.0, ease: 'power3.out', stagger: 0.1 }
+  );
+
+  // Recalculate trigger positions once fonts and lazy images have settled.
+  window.addEventListener('load', () => ScrollTrigger.refresh());
+}
+
+// ── Velocity skew (Lenis "special sauce") ─────────────────────────────────
+// Section images lean a hair in the scroll direction while you move fast, then
+// settle back to flat when you stop — driven by Lenis's live scroll velocity.
+// Applied only to detail/collage <img>s (which have no :hover transform), so
+// the inline transform never clashes with a hover lift; the work-card images
+// are intentionally excluded for that reason.
+function setupVelocitySkew(lenis) {
+  if (!lenis) return; // null under reduced-motion or if Lenis didn't load
+  if (typeof gsap === 'undefined') return;
+
+  const imgs = gsap.utils.toArray('.detail-image img, .collage-item img');
+  if (!imgs.length) return;
+
+  gsap.set(imgs, { transformOrigin: 'center center', willChange: 'transform' });
+
+  // Smoothly interpolate each image toward the target skew so it eases in and
+  // settles out rather than snapping to raw velocity.
+  const skewTo = imgs.map((img) =>
+    gsap.quickTo(img, 'skewY', { duration: 0.5, ease: 'power3.out' })
+  );
+
+  // Keep it a "hair": cap at ±4° and scale velocity down hard.
+  const clampSkew = gsap.utils.clamp(-4, 4);
+  lenis.on('scroll', (e) => {
+    const skew = clampSkew((e.velocity || 0) * 0.12);
+    for (let i = 0; i < skewTo.length; i++) skewTo[i](skew);
+  });
+}
+
+function setupRevealAnimations() {
+  if (!('IntersectionObserver' in window)) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  // Text blocks keep the lightweight CSS reveal. The work cards, section images,
+  // and collage tiles are handled by setupGlide() (GSAP) instead — so they're
+  // intentionally NOT in this list to avoid two systems fighting over opacity.
+  const items = document.querySelectorAll(
+    '.detail-headline, ' +
+    '.studio-headline, .studio-pullquote, ' +
+    '.contact-headline, .contact-card, .contact-ctas'
+  );
+  items.forEach(el => el.classList.add('reveal'));
+
+  document.querySelectorAll('.contact-card').forEach((card, i) => {
+    card.style.transitionDelay = `${i * 0.08}s`;
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+}
+
+function setupContactForm() {
+  const form = document.getElementById('contact-form');
+  if (!form) return;
+
+  const statusEl = document.getElementById('cf-status');
+  const waBtn = document.getElementById('cf-whatsapp');
+
+  // Resolve a string in the current language, falling back to EN.
+  const t = (key) => {
+    const lang = document.documentElement.getAttribute('lang') || 'en';
+    const dict = strings[lang] || strings.en;
+    return dict[key] !== undefined ? dict[key] : strings.en[key];
+  };
+
+  const getFields = () => ({
+    name: form.querySelector('#cf-name').value.trim(),
+    contact: form.querySelector('#cf-contact').value.trim(),
+    type: form.querySelector('#cf-type').value.trim(),
+    message: form.querySelector('#cf-message').value.trim()
+  });
+
+  const setStatus = (key, state) => {
+    statusEl.textContent = t(key);
+    statusEl.className = 'contact-form-status' + (state ? ' is-' + state : '');
+  };
+
+  // WhatsApp (secondary) — needs at least a name + message; contact is optional
+  // since the conversation continues in WhatsApp itself.
+  waBtn.addEventListener('click', () => {
+    const f = getFields();
+    if (!f.name || !f.contact) {
+      setStatus('form_status_required', 'error');
+      (f.name ? form.querySelector('#cf-contact') : form.querySelector('#cf-name')).focus();
+      return;
+    }
+    const lines = [
+      '*' + t('form_wa_title') + '*',
+      t('form_name_label') + ': ' + f.name,
+      t('form_contact_label') + ': ' + f.contact,
+      t('form_type_label') + ': ' + (f.type || '—'),
+      t('form_message_label') + ': ' + (f.message || '—')
+    ];
+    const url = 'https://wa.me/' + whatsappNumber + '?text=' + encodeURIComponent(lines.join('\n'));
+    window.open(url, '_blank', 'noopener');
+  });
+
+  // Email (primary) — Web3Forms AJAX submit, visitor stays on the page.
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const f = getFields();
+    if (!f.name || !f.contact) {
+      setStatus('form_status_required', 'error');
+      return;
+    }
+    setStatus('form_status_sending', 'sending');
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: new FormData(form)
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          setStatus('form_status_success', 'success');
+          form.reset();
+        } else {
+          setStatus('form_status_error', 'error');
+        }
+      })
+      .catch(() => setStatus('form_status_error', 'error'));
+  });
+
+  // Contextual section CTAs: preselect the matching project type, then the
+  // anchor href="#contact" scrolls the visitor straight to the form.
+  document.querySelectorAll('[data-project]').forEach(link => {
+    link.addEventListener('click', () => {
+      const key = link.getAttribute('data-project');
+      const select = form.querySelector('#cf-type');
+      const opt = select && select.querySelector(`option[data-i18n="${key}"]`);
+      if (opt) select.value = opt.value;
+    });
+  });
+}
+
+function setupStickyCta() {
+  const sticky = document.getElementById('sticky-cta');
+  const hero = document.querySelector('.hero');
+  const contact = document.getElementById('contact');
+  if (!sticky || !hero || !contact || !('IntersectionObserver' in window)) return;
+
+  let pastHero = false;
+  let atContact = false;
+  const update = () => {
+    const show = pastHero && !atContact;
+    sticky.classList.toggle('visible', show);
+    sticky.setAttribute('aria-hidden', show ? 'false' : 'true');
+  };
+
+  new IntersectionObserver(([e]) => { pastHero = !e.isIntersecting; update(); },
+    { threshold: 0 }).observe(hero);
+  // Hide once the contact section reaches the middle of the viewport (its own
+  // CTAs take over there) — rootMargin trims the bottom half of the root.
+  new IntersectionObserver(([e]) => { atContact = e.isIntersecting; update(); },
+    { threshold: 0, rootMargin: '0px 0px -50% 0px' }).observe(contact);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const yearEl = document.getElementById('contact-footer-year');
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
@@ -320,4 +657,10 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   setupMobileMenu();
+  const lenis = setupSmoothScroll();  // Lenis — drives the GSAP ticker for setupGlide()
+  setupGlide();          // GSAP ScrollTrigger — cards/images glide into place
+  setupVelocitySkew(lenis);  // images lean with scroll velocity, settle at rest
+  setupRevealAnimations();
+  setupContactForm();
+  setupStickyCta();
 });

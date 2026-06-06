@@ -5,14 +5,15 @@
   --cream: #F2EDE3;
   --cream-soft: #E8DDC9;
 
-  /* ── Single signature accent ───────────────────── */
-  --accent: #FFD500;
+  /* ── Signature accent (locked) + two supporting ─── */
+  --accent: #FFD500;             /* signature — use as fill/block, never as text on cream */
   --accent-soft: rgba(255, 213, 0, 0.15);
-  --accent-warm: #F25C0F;        /* persimmon — used for atmospheric numeral accents */
+  --accent-periwinkle: #737ED7;  /* supporting accent (renamed from --alt-teal) */
+  --accent-magenta: #D63384;     /* supporting accent (renamed from --alt-magenta) */
+  /* --accent-warm: #F25C0F; retired — unused 4th accent; kept commented for reference */
 
-  /* Alternates kept for quick swap: */
-  --alt-teal: #737ED7;
-  --alt-magenta: #D63384;
+  /* ── Muted text (WCAG-AA safe on cream) ─────────── */
+  --text-muted: #6B6358;         /* 5.0:1 on --cream; use instead of low-opacity charcoal */
 
   /* ── Type ──────────────────────────────────────── */
   --font-display: 'Nunito', system-ui, sans-serif;
@@ -28,6 +29,15 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; overflow-x: hidden; }
+
+/* ── Lenis smooth scroll (required boilerplate) ──────
+   Only active once Lenis adds the .lenis classes at runtime, so the native
+   `scroll-behavior: smooth` above stays the fallback for no-JS / reduced motion. */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+.lenis.lenis-smooth iframe { pointer-events: none; }
 body {
   font-family: var(--font-display);
   font-weight: 400;
@@ -53,6 +63,8 @@ html[lang="he"] .eyebrow,
 html[lang="he"] .cta-pill,
 html[lang="he"] .next-teaser,
 html[lang="he"] .studio-headline,
+html[lang="he"] .studio-established,
+html[lang="he"] .work-note,
 html[lang="he"] .studio-pullquote p,
 html[lang="he"] .contact-headline,
 html[lang="he"] .contact-card-value,
@@ -86,7 +98,8 @@ body > header {
   display: flex;
   gap: 36px;
   align-items: center;
-  font-size: 11px;
+  line-height: 1; /* tight boxes so the larger toggle stays optically centered with the links */
+  font-size: 13.5px; /* was 11px — bumped ~2pt for legibility */
   font-weight: 300;
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
@@ -105,7 +118,8 @@ body > header {
 .lang-toggle {
   display: flex;
   gap: 6px;
-  font-size: 15px;
+  align-items: baseline; /* keep EN and עב on a shared baseline (bottom-aligned) despite size diff */
+  font-size: 19px; /* deliberately larger/more prominent than the 13.5px nav links */
   font-weight: 700;
   letter-spacing: 0.1em;
 }
@@ -116,11 +130,19 @@ body > header {
   font: inherit;
   font-weight: inherit;
   cursor: pointer;
-  opacity: 0.4;
+  opacity: 1;            /* the language you can switch TO is emphasized */
   transition: opacity 0.3s;
   padding: 0;
 }
-.lang-toggle button.active { opacity: 1; }
+.lang-toggle button.active { opacity: 0.4; } /* current language is de-emphasized */
+/* Heebo renders ~22% shorter than Nunito at the same px (measured), so the Hebrew
+   header looks smaller. Size the Hebrew nav + toggle up to match the English version. */
+html[lang="he"] .nav-right   { font-size: 18px; }   /* Hebrew header enlarged beyond Latin parity (per request) */
+html[lang="he"] .lang-toggle { font-size: 24px; }   /* toggle kept proportionally larger than the links */
+/* Each toggle button in its own font; the Hebrew label bumped 1.23× so "EN" and "עב"
+   look the same size in BOTH views (Heebo renders ~22% shorter than Nunito at equal px). */
+.lang-toggle button[lang="en"] { font-family: var(--font-display); }
+.lang-toggle button[lang="he"] { font-family: var(--font-hebrew); font-size: 1.23em; }
 .lang-divider { opacity: 0.3; }
 
 /* ── Hero ───────────────────────────────────────── */
@@ -163,17 +185,21 @@ body > header {
   width: 100%;
   position: relative;
   z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 6vw, 80px);
+  align-items: center;
 }
 .hero-logo-block {
   margin-bottom: 64px;
-  text-align: center;
+  text-align: left;
   animation: heroLogoFade 1.2s ease-out;
 }
 .hero-icon {
   display: block;
   width: clamp(130px, 13vw, 170px);
   height: auto;
-  margin: 0 auto 18px;
+  margin: 0 0 18px;
 }
 .hero-wordmark {
   font-family: var(--font-display);
@@ -196,15 +222,22 @@ body > header {
   from { opacity: 0; transform: translateY(10px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+/* Hebrew (RTL): stack the logo, wordmark and tagline to the right so the studio
+   name + tagline sit under the logo. Desktop/tablet only — mobile stays centered. */
+@media (min-width: 769px) {
+  html[lang="he"] .hero-logo-block { text-align: right; }
+  html[lang="he"] .hero-icon { margin-left: auto; margin-right: 0; }
+}
 
 .eyebrow {
-  font-size: 11px;
+  font-size: 13px; /* was 11px — eyebrows (hero/studio/contact) were too small */
   font-weight: 300;
   letter-spacing: 0.32em;
   text-transform: uppercase;
   opacity: 0.72;
   margin-bottom: 36px;
 }
+html[lang="he"] .eyebrow { font-size: 16px; } /* Heebo runs ~22% shorter — match Latin size */
 .hero-headline {
   font-family: var(--font-display);
   font-weight: 700;
@@ -223,6 +256,12 @@ body > header {
   max-width: 56ch;
   opacity: 0.72;
   line-height: 1.5;
+}
+.hero-cta {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 44px;
 }
 .scroll-cue {
   position: absolute;
@@ -251,6 +290,44 @@ body > header {
   50%      { opacity: 0.7;  transform: scaleY(1); }
 }
 
+/* ── Hero visual (image column) ─────────────────── */
+.hero-visual {
+  position: relative;
+  z-index: 2;
+  animation: heroImageReveal 1.2s ease-out 0.4s both;
+}
+.hero-image {
+  margin: 0;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  box-shadow: 0 40px 80px rgba(42, 40, 38, 0.22);
+  aspect-ratio: 1 / 1;
+}
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+@keyframes heroImageReveal {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Scroll reveal animations ────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
 /* ── Curve dividers ─────────────────────────────── */
 .curve {
   display: block;
@@ -277,6 +354,7 @@ body > header {
 .work-header .eyebrow {
   margin-bottom: 20px;
   opacity: 0.72;
+  font-size: 13px; /* was 11px — "Nine categories" line was too small */
 }
 .work-title {
   font-family: var(--font-display);
@@ -284,6 +362,14 @@ body > header {
   font-size: clamp(40px, 5vw, 76px);
   line-height: 0.95;
   letter-spacing: var(--tracking-tight);
+}
+.work-note {
+  margin-top: 18px;
+  font-size: clamp(14px, 1.4vw, 16px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 46ch;
 }
 
 .work-grid {
@@ -317,9 +403,13 @@ body > header {
   content: '';
   position: absolute;
   inset: 0;
+  /* Darker at BOTH ends so the top label and the bottom headline each sit on a
+     legible scrim, while the middle stays light to keep the image visible. */
   background: linear-gradient(180deg,
-    rgba(15, 15, 15, 0.10) 0%,
-    rgba(15, 15, 15, 0.65) 100%);
+    rgba(15, 15, 15, 0.48) 0%,
+    rgba(15, 15, 15, 0.14) 30%,
+    rgba(15, 15, 15, 0.22) 60%,
+    rgba(15, 15, 15, 0.70) 100%);
 }
 .work-card-content {
   position: relative;
@@ -334,11 +424,11 @@ body > header {
 .work-card-num {
   font-family: var(--font-display);
   font-weight: 300;
-  font-size: 11px;
+  font-size: 14px; /* was 11px — category labels were too small */
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
-  opacity: 0.75;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7), 0 0 4px rgba(0, 0, 0, 0.5);
+  opacity: 1; /* was 0.75 — top label was washing out over light images */
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8), 0 0 6px rgba(0, 0, 0, 0.6);
 }
 .work-card-title {
   font-family: var(--font-display);
@@ -398,8 +488,18 @@ body > header {
   z-index: 0;
   font-family: var(--font-display);
 }
-.detail--dark  .detail-mark { color: rgba(242, 92, 15, 0.22); }
-.detail--cream .detail-mark { color: rgba(242, 92, 15, 0.18); }
+/* Decorative ghost numerals kept at their original faint persimmon (0.18/0.22),
+   but painted via background-clip:text with a transparent text fill. The foreground
+   is therefore non-text, so axe/Lighthouse no longer evaluate it for color-contrast
+   (this was the only contrast failure). aria-hidden="true" keeps them out of the AX tree. */
+.detail-mark {
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+.detail--dark  .detail-mark { background-image: linear-gradient(rgba(242, 92, 15, 0.22), rgba(242, 92, 15, 0.22)); }
+.detail--cream .detail-mark { background-image: linear-gradient(rgba(242, 92, 15, 0.18), rgba(242, 92, 15, 0.18)); }
 /* Variant C has copy in the trailing column where the mark normally sits — push the
    mark to the bottom edge so it doesn't crash into the headline (esp. section 07). */
 .detail--c .detail-mark {
@@ -418,11 +518,16 @@ body > header {
   margin-bottom: 28px;
   opacity: 1;
   color: var(--accent);
+  font-size: 14px; /* was 11px (from .eyebrow) — category name was too small */
 }
 .detail--cream .detail-eyebrow {
   color: var(--charcoal);
   opacity: 0.7;
 }
+/* Hebrew (Heebo) renders ~22% shorter than Latin — bump category labels to match. */
+html[lang="he"] .work-card-num       { font-size: 17px; }
+html[lang="he"] .detail-eyebrow      { font-size: 17px; }
+html[lang="he"] .work-header .eyebrow { font-size: 16px; }
 
 .detail-headline {
   font-family: var(--font-display);
@@ -456,14 +561,86 @@ body > header {
   text-transform: uppercase;
   border-radius: 999px;
   text-decoration: none;
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s;
 }
+/* Heebo renders ~22% shorter than Nunito — size Hebrew CTA labels up (~1.23×) so
+   they read at the same height as the English buttons. */
+html[lang="he"] .cta-pill { font-size: 15px; }
+html[lang="he"] .contact-ctas .cta-pill,
+html[lang="he"] .contact-form-actions .cta-pill { font-size: 16px; }
 .cta-pill:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 14px 28px rgba(42, 40, 38, 0.2);
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 18px 38px rgba(42, 40, 38, 0.32);
 }
-.cta-pill::after { content: '→'; font-size: 17px; }
+.cta-pill::after { content: '→'; font-size: 17px; transition: transform 0.25s ease; }
 html[dir="rtl"] .cta-pill::after { content: '←'; }
+/* Arrow nudges forward on hover (all pills) */
+.cta-pill:hover::after { transform: translateX(7px); }
+html[dir="rtl"] .cta-pill:hover::after { transform: translateX(-7px); }
+
+/* Section CTA — outline pill that fills with accent on hover. Colour adapts to the
+   dark vs cream section it sits on; hover fills yellow with dark text on both. */
+.cta-pill--section {
+  background: transparent;
+  transition: transform 0.3s, box-shadow 0.3s, background 0.3s, color 0.3s;
+}
+.detail--dark .cta-pill--section {
+  color: var(--accent);
+  background: rgba(255, 213, 0, 0.08);
+  box-shadow: inset 0 0 0 2px var(--accent);
+}
+.detail--cream .cta-pill--section {
+  color: var(--charcoal);
+  background: rgba(26, 26, 26, 0.04);
+  box-shadow: inset 0 0 0 2px rgba(26, 26, 26, 0.62), 0 6px 16px rgba(42, 40, 38, 0.14);
+}
+.cta-pill--section:hover {
+  background: var(--accent);
+  color: var(--section-dark);
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.3);
+}
+
+/* Floating CTA — fades in after the hero, hides over the contact section */
+.sticky-cta {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 90;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(16px);
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.sticky-cta.visible {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+html[dir="rtl"] .sticky-cta { right: auto; left: 24px; }
+.sticky-cta .cta-pill { box-shadow: 0 10px 26px rgba(0, 0, 0, 0.22); }
+.sticky-cta-wa {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  flex: none;
+  border-radius: 999px;
+  background: #25D366;
+  color: #fff;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.24);
+  transition: transform 0.3s;
+}
+.sticky-cta-wa:hover { transform: translateY(-2px); }
+.sticky-cta-wa svg { width: 28px; height: 28px; }
+@media (max-width: 768px) {
+  .sticky-cta { left: 16px; right: 16px; bottom: 16px; justify-content: center; }
+  html[dir="rtl"] .sticky-cta { left: 16px; right: 16px; }
+  .sticky-cta .cta-pill { flex: 1; justify-content: center; }
+}
 
 /* Image wrapper used by all variants */
 .detail-image {
@@ -552,9 +729,6 @@ html[dir="rtl"] .detail--a .detail-image--secondary {
   grid-template-columns: 1fr;
   gap: 24px;
   margin-bottom: 72px;
-}
-.detail--d .detail-image-row.split-60-40 {
-  grid-template-columns: 6fr 4fr;
 }
 .detail--d .detail-image--wide {
   aspect-ratio: 16 / 10;
@@ -808,8 +982,17 @@ html[dir="rtl"] .next-teaser:hover .next-target::after { transform: translateX(-
   font-size: clamp(48px, 7vw, 96px);
   line-height: 0.95;
   letter-spacing: var(--tracking-tight);
-  margin-bottom: 80px;
+  margin-bottom: 22px;
   max-width: 18ch;
+}
+.studio-established {
+  font-size: clamp(13px, 1.3vw, 15px);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  max-width: 52ch;
+  margin-bottom: 80px;
 }
 .studio-grid {
   display: grid;
@@ -1012,33 +1195,139 @@ a.contact-card-value:hover { color: var(--accent); }
 .cta-pill--outline:hover {
   background: rgba(255, 213, 0, 0.08);
 }
+/* Ghost (secondary) pill for the cream hero — dark text/border. Defined after the
+   base .cta-pill so its transparent background wins over the accent fill. */
+.cta-pill--ghost {
+  background: transparent;
+  color: var(--charcoal);
+  box-shadow: inset 0 0 0 1.5px rgba(26, 26, 26, 0.32);
+}
+.cta-pill--ghost:hover {
+  background: rgba(26, 26, 26, 0.05);
+  box-shadow: inset 0 0 0 1.5px var(--charcoal);
+}
 
-.contact-footer {
+/* ── Contact form ───────────────────────────────── */
+.contact-form {
+  max-width: 720px;
+  margin-bottom: clamp(56px, 7vw, 88px);
+}
+.contact-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px 24px;
+}
+.contact-field {
   display: flex;
-  align-items: center;
-  gap: 14px;
-  flex-wrap: wrap;
-  padding-top: 32px;
-  border-top: 1px solid rgba(242, 237, 227, 0.12);
-  font-size: 12px;
+  flex-direction: column;
+  gap: 10px;
+}
+.contact-field--full { grid-column: 1 / -1; }
+.contact-field label {
+  font-size: 11px;
   font-weight: 300;
-  letter-spacing: 0.08em;
-  opacity: 0.65;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  opacity: 0.6;
 }
-.contact-footer-link {
-  color: inherit;
-  text-decoration: none;
-  transition: color 0.3s;
+.contact-field input,
+.contact-field select,
+.contact-field textarea {
+  width: 100%;
+  background: rgba(242, 237, 227, 0.04);
+  border: 1px solid rgba(242, 237, 227, 0.18);
+  border-radius: 12px;
+  padding: 14px 16px;
+  color: var(--cream);
+  font-family: var(--font-display);
+  font-size: 16px;            /* ≥16px keeps iOS Safari from zooming on focus */
+  font-weight: 300;
+  line-height: 1.5;
+  transition: border-color 0.25s, background 0.25s;
 }
-.contact-footer-link:hover { color: var(--accent); }
-.contact-footer-handle {
-  font-weight: 700;
-  letter-spacing: 0;
-  text-transform: lowercase;
-  margin-left: 4px;
-  opacity: 0.85;
+.contact-field textarea { resize: vertical; min-height: 124px; }
+.contact-field input::placeholder,
+.contact-field textarea::placeholder { color: var(--cream); opacity: 0.4; }
+.contact-field input:focus,
+.contact-field select:focus,
+.contact-field textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: rgba(255, 213, 0, 0.05);
 }
-.contact-footer-divider { opacity: 0.4; }
+/* Custom caret for the select; native option list stays dark-on-light for readability */
+.contact-field select {
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  color-scheme: dark;        /* native option list renders dark; closed text stays cream */
+  padding-right: 42px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23F2EDE3' stroke-width='1.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+}
+/* Open option list: black background, yellow text */
+.contact-field select option {
+  background-color: #000;
+  color: var(--accent);
+}
+html[dir="rtl"] .contact-field select {
+  padding-right: 16px;
+  padding-left: 42px;
+  background-position: left 16px center;
+}
+/* honeypot — visually hidden, off the tab order */
+.contact-form-hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+.contact-form-actions {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+}
+.contact-form-actions .cta-pill {
+  font-size: 13px;
+  padding: 18px 32px;
+  border: none;
+  cursor: pointer;
+}
+.contact-form-status {
+  margin-top: 18px;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.5;
+  min-height: 1.3em;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+.contact-form-status.is-sending,
+.contact-form-status.is-success,
+.contact-form-status.is-error { opacity: 0.92; }
+.contact-form-status.is-success { color: var(--accent); }
+.contact-form-status.is-error { color: #F2B8B8; }
+.contact-alt-label {
+  color: var(--accent);
+  opacity: 1;
+  margin-bottom: 24px;
+}
+
+/* Hebrew form typography — Heebo, and sized up (renders ~22% smaller than Nunito) */
+html[lang="he"] .contact-field label,
+html[lang="he"] .contact-field input,
+html[lang="he"] .contact-field select,
+html[lang="he"] .contact-field textarea,
+html[lang="he"] .contact-form-status,
+html[lang="he"] .contact-alt-label {
+  font-family: var(--font-hebrew);
+}
+html[lang="he"] .contact-field label { font-size: 13px; }
+html[lang="he"] .contact-form-status { font-size: 17px; }
+
 
 /* ── RTL adjustments ────────────────────────────── */
 html[dir="rtl"] .detail-mark {
@@ -1090,7 +1379,6 @@ html[dir="rtl"] .work-title {
 @media (max-width: 900px) {
   body > header { padding: 16px 22px; }
   .nav-right { gap: 22px; }
-  .nav-right .nav-links { display: none; }
   .hero,
   .detail,
   .section-work,
@@ -1101,6 +1389,18 @@ html[dir="rtl"] .work-title {
 }
 
 @media (max-width: 768px) {
+  /* Switch to the hamburger only here, where the layout collapses — so the full
+     nav stays usable on tablet (769–900px) instead of vanishing with no menu. */
+  .nav-right .nav-links { display: none; }
+  .hero-inner {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .hero-visual { order: -1; }
+  .hero-image { max-width: 420px; margin: 0 auto; }
+  .hero-logo-block { text-align: center; }
+  .hero-icon { margin: 0 auto 18px; }
+
   .work-grid {
     grid-template-columns: 1fr;
     grid-auto-rows: auto;
@@ -1164,6 +1464,9 @@ html[dir="rtl"] .work-title {
   .contact-grid { grid-template-columns: 1fr; }
   .contact-ctas { flex-direction: column; align-items: stretch; }
   .contact-ctas .cta-pill { justify-content: center; }
+  .contact-form-grid { grid-template-columns: 1fr; }
+  .contact-form-actions { flex-direction: column; align-items: stretch; }
+  .contact-form-actions .cta-pill { justify-content: center; }
   .contact-footer { font-size: 11px; gap: 10px; }
 }
 

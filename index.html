@@ -24,28 +24,67 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="The White Box Studio — Architectural finishes, Tel Aviv">
 <meta property="og:description" content="Hand-applied plaster, concrete, gold leaf, iron, gypsum, and sculpture for architects, designers, and the spaces they make.">
-<meta property="og:image" content="assets/logo.svg">
+<meta property="og:image" content="https://white-box.co.il/assets/images/three-horses.jpg">
+<meta property="og:url" content="https://white-box.co.il/">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#F2EDE3">
 
 <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
 
-<!-- Avoid flash of wrong language: apply saved lang/dir before first paint. -->
-<script>
-  (function () {
-    try {
-      var saved = localStorage.getItem('wbs-lang');
-      var lang = saved === 'he' ? 'he' : 'en';
-      var html = document.documentElement;
-      html.setAttribute('lang', lang);
-      html.setAttribute('dir', lang === 'he' ? 'rtl' : 'ltr');
-    } catch (_) {}
-  })();
-</script>
+<!-- Preload the LCP hero image (modern browsers grab the WebP; others fall back via <picture>) -->
+<link rel="preload" as="image" href="assets/images/three-horses.webp" type="image/webp" fetchpriority="high">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700;800&family=Heebo:wght@300;400;700;800&display=swap" rel="stylesheet">
+<!-- Fonts loaded non-render-blocking; display=swap paints text immediately in the fallback -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700;800&family=Heebo:wght@300;400;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700;800&family=Heebo:wght@300;400;700;800&display=swap"></noscript>
 <link rel="stylesheet" href="styles.css">
+
+<!-- LocalBusiness structured data (SEO / Google local results). Optional: to add an exact
+     map pin, look up the studio on Google Maps, right-click it → copy the lat,long, and add a
+     "geo": { "@type": "GeoCoordinates", "latitude": 00.0000, "longitude": 00.0000 } property. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "The White Box Studio",
+  "description": "Hand-applied plaster, concrete, gold leaf, iron, gypsum, and sculpture for architects, designers, and the spaces they make. Tel Aviv-based atelier of architectural finishes.",
+  "url": "https://white-box.co.il/",
+  "logo": "https://white-box.co.il/assets/logo.svg",
+  "image": "https://white-box.co.il/assets/images/three-horses.jpg",
+  "telephone": "+972-3-509-9959",
+  "email": "info@white-box.co.il",
+  "foundingDate": "2005",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Leibovitz 7",
+    "addressLocality": "Rishon LeZion",
+    "addressCountry": "IL"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "Israel"
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"],
+      "opens": "10:00",
+      "closes": "17:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Friday",
+      "opens": "10:00",
+      "closes": "14:00"
+    }
+  ],
+  "sameAs": [
+    "https://instagram.com/whiteboxstudio9"
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -93,16 +132,30 @@
   <div class="blob-1" aria-hidden="true"></div>
   <div class="blob-2" aria-hidden="true"></div>
   <div class="hero-inner">
-    <div class="hero-logo-block">
-      <img class="hero-icon" src="assets/logo.svg" alt="The White Box Studio">
-      <div class="hero-wordmark" data-i18n="wordmark">white box studio</div>
-      <div class="hero-tagline" data-i18n="tagline">live your dreams</div>
+    <div class="hero-text">
+      <div class="hero-logo-block">
+        <img class="hero-icon" src="assets/logo.svg" alt="The White Box Studio">
+        <div class="hero-wordmark" data-i18n="wordmark">white box studio</div>
+        <div class="hero-tagline" data-i18n="tagline">bring the dream to life</div>
+      </div>
+      <p class="eyebrow" data-i18n="hero_eyebrow">Tel Aviv · Atelier of architectural finishes</p>
+      <h1 class="hero-headline">
+        <span data-i18n="hero_h1_part1">Handmade </span><span class="light" data-i18n="hero_h1_light">architectural</span><span data-i18n="hero_h1_part2"> finishes.</span>
+      </h1>
+      <p class="hero-sub" data-i18n="hero_sub">Plaster, concrete, gold leaf, iron, gypsum, sculpture — applied directly on site, for architects, designers, and the spaces they make.</p>
+      <div class="hero-cta">
+        <a href="#contact" class="cta-pill cta-pill--filled" data-i18n="cta_start">Start a project</a>
+        <a href="#work" class="cta-pill cta-pill--ghost" data-i18n="cta_view">View work</a>
+      </div>
     </div>
-    <p class="eyebrow" data-i18n="hero_eyebrow">Tel Aviv · Atelier of architectural finishes</p>
-    <h1 class="hero-headline">
-      <span data-i18n="hero_h1_part1">Handmade </span><span class="light" data-i18n="hero_h1_light">architectural</span><span data-i18n="hero_h1_part2"> finishes.</span>
-    </h1>
-    <p class="hero-sub" data-i18n="hero_sub">Plaster, concrete, gold leaf, iron, gypsum, sculpture — applied directly on site, for architects, designers, and the spaces they make.</p>
+    <div class="hero-visual">
+      <figure class="hero-image">
+        <picture>
+          <source type="image/webp" srcset="assets/images/three-horses.webp">
+          <img src="assets/images/three-horses.jpg" alt="Three sculptural horse heads — black and white — wall-mounted, made in the studio" width="800" height="800" loading="eager" fetchpriority="high" decoding="async">
+        </picture>
+      </figure>
+    </div>
   </div>
   <div class="scroll-cue" aria-hidden="true">
     <span data-i18n="scroll_cue">Scroll</span>
@@ -116,6 +169,7 @@
     <div class="work-header">
       <p class="eyebrow" data-i18n="selected_work_eyebrow">Nine categories · one studio</p>
       <h2 class="work-title" data-i18n="selected_work_heading">Selected work</h2>
+      <p class="work-note" data-i18n="selected_work_note">Every piece shown here was made and installed by our own studio.</p>
     </div>
 
     <div class="work-grid">
@@ -207,7 +261,7 @@
         <p class="eyebrow detail-eyebrow" data-i18n="sec_01_eyebrow">01 / Plaster wall finishes</p>
         <h2 class="detail-headline" data-i18n="sec_01_headline">Not paint. Not wallpaper.</h2>
         <p class="detail-body" data-i18n="sec_01_body">Every wall can become a canvas. Hand-applied plaster finishes with custom patterns, from bold relief textures like crocodile skin to aged surfaces with delicate decorative overlays.</p>
-        <a href="#contact" class="cta-pill" data-i18n="cta_start">Start a project</a>
+        <a href="#contact" class="cta-pill cta-pill--section" data-project="sec_01_eyebrow" data-i18n="cta_sec_01">Plan your plaster wall</a>
       </div>
       <div class="image-pair image-pair--bl">
         <figure class="detail-image image-pair__primary">
@@ -245,7 +299,7 @@
       <p class="eyebrow detail-eyebrow" data-i18n="sec_02_eyebrow">02 / Sculptural coffee tables</p>
       <h2 class="detail-headline" data-i18n="sec_02_headline">Not just a table. A statement.</h2>
       <p class="detail-body" data-i18n="sec_02_body">One piece, the whole character of the room. Sculptural coffee tables with custom-cast bases and signature finishes, from deep iridescent blue to soft rose-gold metallic.</p>
-      <a href="#contact" class="cta-pill" data-i18n="cta_start">Start a project</a>
+      <a href="#contact" class="cta-pill cta-pill--section" data-project="sec_02_eyebrow" data-i18n="cta_sec_02">Commission a table</a>
     </div>
     <a class="next-teaser" href="#section-03">
       <span class="next-pre" data-i18n="next_label">Next —</span>
@@ -275,7 +329,7 @@
         <p class="eyebrow detail-eyebrow" data-i18n="sec_03_eyebrow">03 / Custom sculpture</p>
         <h2 class="detail-headline" data-i18n="sec_03_headline">If you can imagine it, we can sculpt it.</h2>
         <p class="detail-body" data-i18n="sec_03_body">Bespoke sculpture, made by hand. From classical figures (yes, even Michelangelo&rsquo;s David) to contemporary pieces, animal busts, and richly carved relief panels.</p>
-        <a href="#contact" class="cta-pill" data-i18n="cta_start">Start a project</a>
+        <a href="#contact" class="cta-pill cta-pill--section" data-project="sec_03_eyebrow" data-i18n="cta_sec_03">Commission a sculpture</a>
       </div>
     </div>
     <a class="next-teaser" href="#section-04">
@@ -305,7 +359,7 @@
       <p class="eyebrow detail-eyebrow" data-i18n="sec_04_eyebrow">04 / Gypsum panels for walls &amp; ceilings</p>
       <h2 class="detail-headline" data-i18n="sec_04_headline">A ceiling doesn&rsquo;t have to be flat.</h2>
       <p class="detail-body" data-i18n="sec_04_body">Our spaces deserve more than paint. Hand-cast gypsum panels with intricate patterns — from Moroccan geometry overhead to figurative wall mosaics.</p>
-      <a href="#contact" class="cta-pill" data-i18n="cta_start">Start a project</a>
+      <a href="#contact" class="cta-pill cta-pill--section" data-project="sec_04_eyebrow" data-i18n="cta_sec_04">Design your ceiling</a>
     </div>
     <a class="next-teaser" href="#section-05">
       <span class="next-pre" data-i18n="next_label">Next —</span>
@@ -327,7 +381,7 @@
         <p class="eyebrow detail-eyebrow" data-i18n="sec_05_eyebrow">05 / Display, event &amp; gift accessories</p>
         <h2 class="detail-headline" data-i18n="sec_05_headline">The small detail is the whole story.</h2>
         <p class="detail-body" data-i18n="sec_05_body">Sometimes it&rsquo;s the small details that leave the strongest impression. Artistic hand-made hair pins, display stands, and event props for retail, parties, and brand launches.</p>
-        <a href="#contact" class="cta-pill" data-i18n="cta_start">Start a project</a>
+        <a href="#contact" class="cta-pill cta-pill--section" data-project="sec_05_eyebrow" data-i18n="cta_sec_05">Order display pieces</a>
       </div>
       <div class="image-pair image-pair--tl">
         <figure class="detail-image image-pair__primary">
@@ -368,7 +422,7 @@
       </div>
       <div class="detail-text-right">
         <p class="detail-body" data-i18n="sec_06_body">All the presence of forged iron, without the weight or the actual rust. Iron-look coating for doors, walls, and surfaces — in tones of dark patina, warm rust, and smoked metal.</p>
-        <a href="#contact" class="cta-pill" data-i18n="cta_start">Start a project</a>
+        <a href="#contact" class="cta-pill cta-pill--section" data-project="sec_06_eyebrow" data-i18n="cta_sec_06">Get the iron look</a>
       </div>
     </div>
     <a class="next-teaser" href="#section-07">
@@ -390,7 +444,7 @@
       <p class="eyebrow detail-eyebrow" data-i18n="sec_07_eyebrow">07 / Gypsum capitals &amp; architectural ornaments</p>
       <h2 class="detail-headline" data-i18n="sec_07_headline">Gold, gypsum, and a little drama.</h2>
       <p class="detail-body" data-i18n="sec_07_body">Classical detail never goes out of style. Corinthian column capitals, baroque scroll wall ornaments, and gold-leaf accents — all made in-house at the studio.</p>
-      <a href="#contact" class="cta-pill" data-i18n="cta_start">Start a project</a>
+      <a href="#contact" class="cta-pill cta-pill--section" data-project="sec_07_eyebrow" data-i18n="cta_sec_07">Add classical detail</a>
     </header>
 
     <div class="detail-collage">
@@ -429,7 +483,7 @@
       <p class="eyebrow detail-eyebrow" data-i18n="sec_08_eyebrow">08 / Custom wall murals</p>
       <h2 class="detail-headline" data-i18n="sec_08_headline">Every wall is a story that hasn&rsquo;t been told yet.</h2>
       <p class="detail-body" data-i18n="sec_08_body">A wall can tell a story. Hand-painted custom murals, designed specifically for your space — from full narrative scenes to graphic and pattern-based designs.</p>
-      <a href="#contact" class="cta-pill" data-i18n="cta_start">Start a project</a>
+      <a href="#contact" class="cta-pill cta-pill--section" data-project="sec_08_eyebrow" data-i18n="cta_sec_08">Commission a mural</a>
     </div>
     <a class="next-teaser" href="#section-09">
       <span class="next-pre" data-i18n="next_label">Next —</span>
@@ -461,7 +515,7 @@
       </div>
       <div class="detail-text-right">
         <p class="detail-body" data-i18n="sec_09_body">Concrete doesn&rsquo;t have to be minimalist. Hand-finished decorative concrete works, from sculptural-functional objects to flowing, drapery-like wall panels.</p>
-        <a href="#contact" class="cta-pill" data-i18n="cta_start">Start a project</a>
+        <a href="#contact" class="cta-pill cta-pill--section" data-project="sec_09_eyebrow" data-i18n="cta_sec_09">Start a concrete project</a>
       </div>
     </div>
     <a class="next-teaser" href="#contact">
@@ -480,6 +534,7 @@
   <div class="section-inner">
     <p class="eyebrow studio-eyebrow" data-i18n="studio_eyebrow">THE STUDIO</p>
     <h2 class="studio-headline" data-i18n="studio_headline">Tailored by hand, in our studio.</h2>
+    <p class="studio-established" data-i18n="studio_established">Established 2005 · two decades of handmade architectural finishes, made and installed across Israel.</p>
 
     <div class="studio-grid">
       <div class="studio-text">
@@ -494,7 +549,7 @@
     </div>
 
     <blockquote class="studio-pullquote">
-      <p data-i18n="studio_pullquote">Extraordinary designs that evoke breathless wonder.</p>
+      <p data-i18n="studio_pullquote">The gaze meets the work — the breath is taken.</p>
     </blockquote>
   </div>
 </section>
@@ -509,6 +564,57 @@
     <p class="eyebrow contact-eyebrow" data-i18n="contact_eyebrow">START A PROJECT</p>
     <h2 class="contact-headline" data-i18n="contact_headline">Let&rsquo;s make a dream come true.</h2>
     <p class="contact-body" data-i18n="contact_body">Ready to turn your concept into visual reality? Call or WhatsApp us with your ideas, project needs, and any reference imagery that inspires you.</p>
+
+    <form class="contact-form" id="contact-form" novalidate>
+      <input type="hidden" name="access_key" value="3b704e8b-3512-4328-a85d-491ec93ee40c">
+      <input type="hidden" name="subject" value="New project inquiry — white-box.co.il">
+      <input type="hidden" name="from_name" value="White Box website">
+      <input type="hidden" name="cc" value="info@white-box.co.il,daphna@white-box.co.il">
+      <!-- honeypot: bots fill this, humans never see it -->
+      <input type="checkbox" name="botcheck" class="contact-form-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+      <div class="contact-form-grid">
+        <div class="contact-field">
+          <label for="cf-name" data-i18n="form_name_label">Name</label>
+          <input type="text" id="cf-name" name="name" autocomplete="name" required
+                 data-i18n-placeholder="form_name_ph" placeholder="Your name">
+        </div>
+        <div class="contact-field">
+          <label for="cf-contact" data-i18n="form_contact_label">Email or phone</label>
+          <input type="text" id="cf-contact" name="email_or_phone" autocomplete="email" required
+                 data-i18n-placeholder="form_contact_ph" placeholder="So we can get back to you">
+        </div>
+        <div class="contact-field">
+          <label for="cf-type" data-i18n="form_type_label">Project type</label>
+          <select id="cf-type" name="project_type">
+            <option value="" data-i18n="form_type_default">Select a category</option>
+            <option data-i18n="sec_01_eyebrow">01 / Plaster wall finishes</option>
+            <option data-i18n="sec_02_eyebrow">02 / Sculptural coffee tables</option>
+            <option data-i18n="sec_03_eyebrow">03 / Custom sculpture</option>
+            <option data-i18n="sec_04_eyebrow">04 / Gypsum panels for walls &amp; ceilings</option>
+            <option data-i18n="sec_05_eyebrow">05 / Display, event &amp; gift accessories</option>
+            <option data-i18n="sec_06_eyebrow">06 / Iron-look coating for doors &amp; walls</option>
+            <option data-i18n="sec_07_eyebrow">07 / Gypsum capitals &amp; architectural ornaments</option>
+            <option data-i18n="sec_08_eyebrow">08 / Custom wall murals</option>
+            <option data-i18n="sec_09_eyebrow">09 / Decorative concrete works &amp; finishes</option>
+            <option data-i18n="form_type_other">Not sure / other</option>
+          </select>
+        </div>
+        <div class="contact-field contact-field--full">
+          <label for="cf-message" data-i18n="form_message_label">Message</label>
+          <textarea id="cf-message" name="message" rows="4"
+                    data-i18n-placeholder="form_message_ph" placeholder="Tell us about your space, ideas, timeline, or any reference images that inspire you."></textarea>
+        </div>
+      </div>
+
+      <div class="contact-form-actions">
+        <button type="submit" class="cta-pill cta-pill--filled" data-i18n="form_submit_email">Send via email</button>
+        <button type="button" id="cf-whatsapp" class="cta-pill cta-pill--outline" data-i18n="form_submit_whatsapp">Send via WhatsApp</button>
+      </div>
+      <p class="contact-form-status" id="cf-status" role="status" aria-live="polite"></p>
+    </form>
+
+    <p class="contact-alt-label eyebrow" data-i18n="form_alt_label">Or reach us directly</p>
 
     <div class="contact-grid">
       <div class="contact-card contact-card--whatsapp">
@@ -552,7 +658,20 @@
   <a href="accessibility.html" class="site-footer-link" data-i18n="accessibility_link">Accessibility Statement</a>
 </footer>
 
-<script src="script.js"></script>
+<div class="sticky-cta" id="sticky-cta" aria-hidden="true">
+  <a href="#contact" class="cta-pill cta-pill--filled" data-i18n="cta_start">Start a project</a>
+  <a data-whatsapp-link href="https://wa.me/972545216416?text=Hi%2C%20I%27d%20like%20to%20discuss%20a%20project" target="_blank" rel="noopener" class="sticky-cta-wa" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 0 1 8.413 3.488 11.82 11.82 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.515 5.26l-.999 3.648 3.873-1.017zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.247-.694.247-1.289.173-1.413z"/></svg>
+  </a>
+</div>
+
+<!-- Smooth scroll (Lenis) + scroll-driven glide (GSAP ScrollTrigger).
+     Deferred so they run after parse but before script.js (defer preserves order);
+     script.js feature-detects them and degrades gracefully if a CDN is blocked. -->
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+<script src="script.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/sienna-accessibility/dist/sienna-accessibility.umd.js" async></script>
 </body>
 </html>
