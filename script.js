@@ -452,18 +452,25 @@ function setupGlide() {
   // Give each element its own start offset, then batch-tween the group to rest
   // with a short stagger so a row "deals" into place. clearProps hands the
   // element back to CSS afterwards, so :hover lifts keep working.
+  //
+  // The glide REPLAYS: onLeaveBack re-arms (re-hides) each element once you
+  // scroll back above it, so returning to the top (e.g. via the logo) and
+  // scrolling down again makes the pictures glide in fresh every time, instead
+  // of being stuck already-revealed after the first pass.
   const glide = (selector, fromState, toVars) => {
     const els = gsap.utils.toArray(selector);
     if (!els.length) return;
 
-    els.forEach((el, i) => gsap.set(el, fromState(el, i)));
+    const settle = Object.assign({ overwrite: true, clearProps: 'transform,willChange' }, toVars);
+
+    // Stash each element's own hidden start state, then apply it.
+    els.forEach((el, i) => { el.__glideFrom = fromState(el, i); gsap.set(el, el.__glideFrom); });
 
     ScrollTrigger.batch(els, {
       start: 'top 88%',
-      onEnter: (batch) => gsap.to(batch, Object.assign({
-        overwrite: true,
-        clearProps: 'transform,willChange'
-      }, toVars))
+      onEnter: (batch) => gsap.to(batch, settle),
+      // Re-arm when scrolled back above, so the next downward pass glides again.
+      onLeaveBack: (batch) => batch.forEach((el) => gsap.set(el, el.__glideFrom))
     });
 
     // Reload-mid-page safeguard: elements already scrolled fully past the top
