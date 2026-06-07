@@ -409,7 +409,15 @@ function setupSmoothScroll() {
     if (!href) return;
     e.preventDefault();
     if (href === '#' || href === '#top') {
-      lenis.scrollTo(0, { duration: 1.2, easing: easeOutExpo });
+      lenis.scrollTo(0, {
+        duration: 1.2,
+        easing: easeOutExpo,
+        // After landing at the top, re-sync ScrollTrigger. On mobile the browser
+        // toolbar can re-appear during the scroll-up and change the viewport
+        // height, leaving the first work card's trigger stale (it wouldn't glide
+        // on the way back down until the next resize). A refresh fixes that.
+        onComplete: () => { if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh(); }
+      });
       return;
     }
     const target = document.getElementById(href.slice(1));
@@ -577,6 +585,24 @@ function setupHeroScroll() {
   parallax('.blob-2', 25);
   parallax('.hero-image', -6);  // foreground image lifts a hair faster
   parallax('.hero-text', -10);
+
+  // Replay the hero image reveal whenever you return to the very top. The hero
+  // is the topmost element, so the glide system's "re-arm when scrolled above"
+  // can never fire for it, and its CSS entrance only plays once on load — which
+  // is why it looked dead after tapping the logo home. onLeaveBack fires when
+  // you scroll back up to scroll 0. We animate the inner <img> (the figure
+  // carries the parallax transform), so the two never collide.
+  const heroImg = document.querySelector('.hero-image img');
+  if (heroImg) {
+    ScrollTrigger.create({
+      trigger: hero,
+      start: 'top top',
+      onLeaveBack: () => gsap.fromTo(heroImg,
+        { opacity: 0, scale: 1.06 },
+        { opacity: 1, scale: 1, duration: 0.9, ease: 'power3.out',
+          overwrite: true, clearProps: 'opacity,transform' })
+    });
+  }
 
   window.addEventListener('load', () => ScrollTrigger.refresh());
 }
