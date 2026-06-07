@@ -314,6 +314,30 @@ html[lang="he"] .eyebrow { font-size: 16px; } /* Heebo runs ~22% shorter — mat
   to   { opacity: 1; transform: translateY(0); }
 }
 
+/* ── Hero entrance (cinematic, staggered) ─────────────
+   CSS keyframes (not JS) so the cascade runs on first paint with no flash and
+   no CDN dependency. Strong ease-out curve (Emil Kowalski's --ease-out). The
+   headline animates transform ONLY — it stays fully painted the whole time, so
+   it never delays Largest Contentful Paint; only the supporting copy fades. */
+/* Two fade keyframes so `both` fill lands each element on its DESIGNED resting
+   opacity — the eyebrow and subtext stay muted at 0.72, the CTAs at full. */
+@keyframes heroRiseMuted {
+  from { opacity: 0;    transform: translateY(20px); }
+  to   { opacity: 0.72; transform: translateY(0); }
+}
+@keyframes heroRise {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes heroHeadlineRise {
+  from { transform: translateY(18px); }
+  to   { transform: translateY(0); }
+}
+.hero .eyebrow { animation: heroRiseMuted   0.85s cubic-bezier(0.23, 1, 0.32, 1) 0.10s both; }
+.hero-headline { animation: heroHeadlineRise 0.85s cubic-bezier(0.23, 1, 0.32, 1) 0.20s both; }
+.hero-sub      { animation: heroRiseMuted   0.85s cubic-bezier(0.23, 1, 0.32, 1) 0.40s both; }
+.hero-cta      { animation: heroRise        0.85s cubic-bezier(0.23, 1, 0.32, 1) 0.55s both; }
+
 /* ── Scroll reveal animations ────────────────────── */
 .reveal {
   opacity: 0;
@@ -326,6 +350,15 @@ html[lang="he"] .eyebrow { font-size: 16px; } /* Heebo runs ~22% shorter — mat
 }
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
+  /* Neutralise every hero motion (entrance cascade, logo/image reveal, the
+     scroll-cue pulse) — show the final, settled state instead. */
+  .hero-logo-block, .hero-visual,
+  .hero .eyebrow, .hero-headline, .hero-sub, .hero-cta,
+  .scroll-cue-line {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 
 /* ── Curve dividers ─────────────────────────────── */

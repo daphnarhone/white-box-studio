@@ -397,6 +397,22 @@ function setupSmoothScroll() {
     anchors: { offset: -100, duration: 1.2, easing: easeOutExpo }
   });
 
+  // The logo "home" link is href="#". Lenis's anchor handler resolves targets
+  // with document.querySelector(), and querySelector('#') THROWS — the error
+  // fires inside the click handler and wedges Lenis so smooth scroll stops
+  // working after you tap home (notably on mobile). Handle bare-hash links
+  // ourselves (scroll to the very top) and stop the event in the capture phase
+  // so Lenis's own click listener never sees the invalid selector.
+  document.addEventListener('click', (e) => {
+    const el = e.target;
+    if (!(el instanceof Element)) return;
+    const a = el.closest('a[href="#"]');
+    if (!a) return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    lenis.scrollTo(0, { duration: 1.2, easing: easeOutExpo });
+  }, true);
+
   // Canonical Lenis + GSAP integration: drive Lenis from GSAP's ticker and feed
   // every scroll frame to ScrollTrigger so the glide animations track 1:1.
   if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
@@ -506,6 +522,47 @@ function setupVelocitySkew(lenis) {
     const skew = clampSkew((e.velocity || 0) * 0.12);
     for (let i = 0; i < skewTo.length; i++) skewTo[i](skew);
   });
+}
+
+// ── Hero scroll effects (scroll-cue fade + parallax depth) ────────────────
+// Scroll-driven, so GSAP ScrollTrigger (fed by Lenis) owns these. The on-load
+// entrance cascade lives in CSS; this is only what depends on scroll position.
+// Everything maps to identity at scroll 0, so there's no effect on first paint
+// or LCP — the parallax only engages once you start moving.
+function setupHeroScroll() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+  const hero = document.querySelector('.hero');
+  if (!hero) return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  // The scroll cue has done its job the moment you move — fade it out over the
+  // first slice of the hero. (Opacity only, to keep its translateX centering.)
+  const cue = document.querySelector('.scroll-cue');
+  if (cue) {
+    gsap.to(cue, {
+      opacity: 0, ease: 'none',
+      scrollTrigger: { trigger: hero, start: 'top top', end: '22% top', scrub: true }
+    });
+  }
+
+  // Parallax depth across the hero exit: the soft blobs lag behind while the
+  // image and text drift at their own rates. Subtle on purpose.
+  const parallax = (selector, yPct) => {
+    const el = document.querySelector(selector);
+    if (!el) return;
+    gsap.to(el, {
+      yPercent: yPct, ease: 'none',
+      scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: true }
+    });
+  };
+  parallax('.blob-1', 40);   // background blobs lag (drift down as you scroll up)
+  parallax('.blob-2', 25);
+  parallax('.hero-image', -6);  // foreground image lifts a hair faster
+  parallax('.hero-text', -10);
+
+  window.addEventListener('load', () => ScrollTrigger.refresh());
 }
 
 function setupRevealAnimations() {
@@ -658,6 +715,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   setupMobileMenu();
   const lenis = setupSmoothScroll();  // Lenis — drives the GSAP ticker for setupGlide()
+  setupHeroScroll();     // hero scroll-cue fade + parallax (top-of-page triggers first)
   setupGlide();          // GSAP ScrollTrigger — cards/images glide into place
   setupVelocitySkew(lenis);  // images lean with scroll velocity, settle at rest
   setupRevealAnimations();
