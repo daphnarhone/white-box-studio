@@ -594,13 +594,21 @@ function setupHeroScroll() {
   // carries the parallax transform), so the two never collide.
   const heroImg = document.querySelector('.hero-image img');
   if (heroImg) {
+    let heroReveal;
     ScrollTrigger.create({
       trigger: hero,
       start: 'top top',
-      onLeaveBack: () => gsap.fromTo(heroImg,
-        { opacity: 0, scale: 1.06 },
-        { opacity: 1, scale: 1, duration: 0.9, ease: 'power3.out',
-          overwrite: true, clearProps: 'opacity,transform' })
+      // A gentle scale-settle, NOT an opacity fade. The image is already visible
+      // as you scroll back up, so fading it from 0 made it blink/flicker. Leaving
+      // opacity untouched and easing a subtle zoom to rest reads as a smooth
+      // settle. The guard stops a double-fire (e.g. the post-home
+      // ScrollTrigger.refresh()) from restarting it mid-animation and strobing.
+      onLeaveBack: () => {
+        if (heroReveal && heroReveal.isActive()) return;
+        heroReveal = gsap.fromTo(heroImg,
+          { scale: 1.05 },
+          { scale: 1, duration: 1.1, ease: 'power2.out', overwrite: true, clearProps: 'transform' });
+      }
     });
   }
 
