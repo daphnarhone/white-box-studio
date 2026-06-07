@@ -390,37 +390,46 @@ function setupSmoothScroll() {
     // ease. Lower = smoother/floatier, higher = snappier; 0.08 is a touch
     // smoother than Lenis's 0.1 default.
     lerp: 0.08,
-    smoothWheel: true,
-    // In-page anchor jumps (nav links, CTAs, next-teasers, the scroll cue).
-    // A bounded duration keeps long jumps from drifting under lerp mode;
-    // offset clears the fixed header.
-    anchors: { offset: -100, duration: 1.2, easing: easeOutExpo }
+    smoothWheel: true
+    // NOTE: Lenis's built-in `anchors` is deliberately NOT used. It resolves
+    // targets with document.querySelector(href), and the logo's href="#" makes
+    // querySelector('#') THROW. We handle every in-page #link ourselves below.
   });
 
-  // The logo "home" link is href="#". Lenis's anchor handler resolves targets
-  // with document.querySelector(), and querySelector('#') THROWS — the error
-  // fires inside the click handler and wedges Lenis so smooth scroll stops
-  // working after you tap home (notably on mobile). Handle bare-hash links
-  // ourselves (scroll to the very top) and stop the event in the capture phase
-  // so Lenis's own click listener never sees the invalid selector.
+  // Handle ALL in-page anchor links ourselves (nav, CTAs, next-teasers, scroll
+  // cue, and the bare "#" logo). preventDefault stops the native jump; we do NOT
+  // stop propagation, so other click handlers (form preselect, menu close) still
+  // run. The bare "#" is treated as "scroll to top" — never passed to a selector.
   document.addEventListener('click', (e) => {
     const el = e.target;
     if (!(el instanceof Element)) return;
-    const a = el.closest('a[href="#"]');
+    const a = el.closest('a[href^="#"]');
     if (!a) return;
+    const href = a.getAttribute('href');
+    if (!href) return;
     e.preventDefault();
-    e.stopImmediatePropagation();
-    lenis.scrollTo(0, { duration: 1.2, easing: easeOutExpo });
-  }, true);
+    if (href === '#' || href === '#top') {
+      lenis.scrollTo(0, { duration: 1.2, easing: easeOutExpo });
+      return;
+    }
+    const target = document.getElementById(href.slice(1));
+    if (!target) return;
+    lenis.scrollTo(target, { offset: -100, duration: 1.2, easing: easeOutExpo });
+    // Restore the focus move native anchors give, for keyboard/screen-reader users.
+    target.setAttribute('tabindex', '-1');
+    target.focus({ preventScroll: true });
+  }, false);
 
   // Canonical Lenis + GSAP integration: drive Lenis from GSAP's ticker and feed
   // every scroll frame to ScrollTrigger so the glide animations track 1:1.
   if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
     lenis.on('scroll', ScrollTrigger.update);
-    gsap.ticker.add((time) => lenis.raf(time * 1000));
+    // try/catch so a single bad frame can never permanently kill the rAF loop
+    // (which would drop the page back to un-smoothed native scrolling).
+    gsap.ticker.add((time) => { try { lenis.raf(time * 1000); } catch (_) {} });
     gsap.ticker.lagSmoothing(0);
   } else {
-    const raf = (time) => { lenis.raf(time); requestAnimationFrame(raf); };
+    const raf = (time) => { try { lenis.raf(time); } catch (_) {} requestAnimationFrame(raf); };
     requestAnimationFrame(raf);
   }
 
