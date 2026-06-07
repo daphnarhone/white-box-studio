@@ -412,11 +412,15 @@ function setupSmoothScroll() {
       lenis.scrollTo(0, {
         duration: 1.2,
         easing: easeOutExpo,
-        // After landing at the top, re-sync ScrollTrigger. On mobile the browser
-        // toolbar can re-appear during the scroll-up and change the viewport
-        // height, leaving the first work card's trigger stale (it wouldn't glide
-        // on the way back down until the next resize). A refresh fixes that.
-        onComplete: () => { if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh(); }
+        // After landing at the top: re-sync ScrollTrigger to the (possibly
+        // toolbar-changed) mobile viewport, then DETERMINISTICALLY re-arm the
+        // glides. This guarantees the first work card re-hides and glides in
+        // again on the way down instead of staying static — the onLeaveBack
+        // re-arm alone was unreliable on mobile programmatic scrolls.
+        onComplete: () => {
+          if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+          if (rearmGlides) rearmGlides();
+        }
       });
       return;
     }
@@ -444,6 +448,12 @@ function setupSmoothScroll() {
   return lenis;
 }
 
+// Module-scoped so the logo "home" handler can DETERMINISTICALLY re-arm the
+// glides when you return to the top. (Relying on onLeaveBack to fire during the
+// scroll-up proved unreliable on mobile — the first work card stayed revealed
+// and never glided again. Rebuilding the triggers forces a clean re-hide.)
+let rearmGlides = null;
+
 // ── Scroll-driven "glide into place" reveals (GSAP ScrollTrigger) ─────────
 // The work-grid cards deal themselves into their slots; section images glide
 // in from alternating sides and settle. Each lands in its own spot — stacked
@@ -456,30 +466,33 @@ function setupGlide() {
 
   // Mirror the horizontal entrance direction for RTL (Hebrew).
   const dirSign = document.documentElement.getAttribute('dir') === 'rtl' ? -1 : 1;
+  const groups = [];
 
-  // Give each element its own start offset, then batch-tween the group to rest
-  // with a short stagger so a row "deals" into place. clearProps hands the
-  // element back to CSS afterwards, so :hover lifts keep working.
-  //
-  // The glide REPLAYS: onLeaveBack re-arms (re-hides) each element once you
-  // scroll back above it, so returning to the top (e.g. via the logo) and
-  // scrolling down again makes the pictures glide in fresh every time, instead
-  // of being stuck already-revealed after the first pass.
+  // Each group sets its elements to a hidden start state and batch-tweens them
+  // to rest with a stagger (a row "deals" into place). clearProps hands each
+  // element back to CSS afterwards so :hover lifts keep working.
+  // group.build() is re-runnable: it kills the old trigger, re-hides every
+  // element, and re-creates the batch — so onEnter fires fresh on the next
+  // downward pass. That's how the pictures replay after returning home.
   const glide = (selector, fromState, toVars) => {
     const els = gsap.utils.toArray(selector);
     if (!els.length) return;
 
     const settle = Object.assign({ overwrite: true, clearProps: 'transform,willChange' }, toVars);
+    const group = { els, triggers: [] };
 
-    // Stash each element's own hidden start state, then apply it.
-    els.forEach((el, i) => { el.__glideFrom = fromState(el, i); gsap.set(el, el.__glideFrom); });
-
-    ScrollTrigger.batch(els, {
-      start: 'top 88%',
-      onEnter: (batch) => gsap.to(batch, settle),
-      // Re-arm when scrolled back above, so the next downward pass glides again.
-      onLeaveBack: (batch) => batch.forEach((el) => gsap.set(el, el.__glideFrom))
-    });
+    group.build = () => {
+      group.triggers.forEach((t) => t.kill());
+      els.forEach((el, i) => { el.__glideFrom = fromState(el, i); gsap.set(el, el.__glideFrom); });
+      group.triggers = ScrollTrigger.batch(els, {
+        start: 'top 88%',
+        onEnter: (batch) => gsap.to(batch, settle),
+        // Re-arm on manual upward scrolls too (the rebuild covers the logo home).
+        onLeaveBack: (batch) => batch.forEach((el) => gsap.set(el, el.__glideFrom))
+      });
+    };
+    group.build();
+    groups.push(group);
 
     // Reload-mid-page safeguard: elements already scrolled fully past the top
     // never fire onEnter, so reveal those immediately instead of leaving them
@@ -514,6 +527,11 @@ function setupGlide() {
     { opacity: 1, xPercent: 0, yPercent: 0, scale: 1,
       duration: 1.0, ease: 'power3.out', stagger: 0.1 }
   );
+
+  // Deterministic re-arm for the logo "home" action: rebuild every group so the
+  // pictures (including the first work card) glide in fresh on the way down,
+  // regardless of whether onLeaveBack fired during the scroll up.
+  rearmGlides = () => groups.forEach((g) => g.build());
 
   // Recalculate trigger positions once fonts and lazy images have settled.
   window.addEventListener('load', () => ScrollTrigger.refresh());
