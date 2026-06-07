@@ -409,18 +409,26 @@ function setupSmoothScroll() {
     if (!href) return;
     e.preventDefault();
     if (href === '#' || href === '#top') {
+      // Hero "reappears" smoothly: only when the hero image is actually OFF
+      // screen (we're scrolled down) do we hide it — invisible up there, so no
+      // blink — then fade it back in slowly as the page glides home. The fade
+      // runs concurrently with the scroll, so by the time the hero comes into
+      // view it's already easing in. (No ScrollTrigger.refresh() here — it was
+      // re-applying the parallax transforms and causing the flicker.)
+      const heroImg = document.querySelector('.hero-image img');
+      const canFadeHero = heroImg && typeof gsap !== 'undefined' &&
+                          heroImg.getBoundingClientRect().bottom < 50;
+      if (canFadeHero) {
+        gsap.set(heroImg, { opacity: 0 });
+        gsap.to(heroImg, { opacity: 1, duration: 1.6, ease: 'power2.out',
+                           delay: 0.3, clearProps: 'opacity' });
+      }
       lenis.scrollTo(0, {
         duration: 1.2,
         easing: easeOutExpo,
-        // After landing at the top: re-sync ScrollTrigger to the (possibly
-        // toolbar-changed) mobile viewport, then DETERMINISTICALLY re-arm the
-        // glides. This guarantees the first work card re-hides and glides in
-        // again on the way down instead of staying static — the onLeaveBack
-        // re-arm alone was unreliable on mobile programmatic scrolls.
-        onComplete: () => {
-          if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
-          if (rearmGlides) rearmGlides();
-        }
+        // Deterministically re-arm the glides so the work pictures (incl. the
+        // first card) glide in fresh on the way back down.
+        onComplete: () => { if (rearmGlides) rearmGlides(); }
       });
       return;
     }
@@ -604,31 +612,10 @@ function setupHeroScroll() {
   parallax('.hero-image', -6);  // foreground image lifts a hair faster
   parallax('.hero-text', -10);
 
-  // Replay the hero image reveal whenever you return to the very top. The hero
-  // is the topmost element, so the glide system's "re-arm when scrolled above"
-  // can never fire for it, and its CSS entrance only plays once on load — which
-  // is why it looked dead after tapping the logo home. onLeaveBack fires when
-  // you scroll back up to scroll 0. We animate the inner <img> (the figure
-  // carries the parallax transform), so the two never collide.
-  const heroImg = document.querySelector('.hero-image img');
-  if (heroImg) {
-    let heroReveal;
-    ScrollTrigger.create({
-      trigger: hero,
-      start: 'top top',
-      // A gentle scale-settle, NOT an opacity fade. The image is already visible
-      // as you scroll back up, so fading it from 0 made it blink/flicker. Leaving
-      // opacity untouched and easing a subtle zoom to rest reads as a smooth
-      // settle. The guard stops a double-fire (e.g. the post-home
-      // ScrollTrigger.refresh()) from restarting it mid-animation and strobing.
-      onLeaveBack: () => {
-        if (heroReveal && heroReveal.isActive()) return;
-        heroReveal = gsap.fromTo(heroImg,
-          { scale: 1.05 },
-          { scale: 1, duration: 1.1, ease: 'power2.out', overwrite: true, clearProps: 'transform' });
-      }
-    });
-  }
+  // NOTE: the hero image's "reappear on return home" is handled in the logo
+  // click handler in setupSmoothScroll() (it fades the image in while the page
+  // glides up), not here — doing it on scroll meant fighting the parallax and
+  // flickering. See the a[href="#"] handler.
 
   window.addEventListener('load', () => ScrollTrigger.refresh());
 }
