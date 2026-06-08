@@ -26,7 +26,7 @@ const strings = {
     hero_h1_part1: 'Handmade ',
     hero_h1_light: 'architectural',
     hero_h1_part2: ' finishes.',
-    hero_sub: 'Plaster, concrete, gold leaf, iron, gypsum, sculpture — applied directly on site, for architects, designers, and the spaces they make.',
+    hero_sub: 'Plaster, concrete, gold leaf, iron, gypsum, sculpture, applied directly on site, for architects, designers, and the spaces they make.',
     scroll_cue: 'Scroll',
 
     // ── Selected work section ─────────────────────
@@ -52,7 +52,7 @@ const strings = {
     // ── Section 01 — Plaster ──────────────────────
     sec_01_eyebrow: '01 / Plaster wall finishes',
     sec_01_headline: 'Not paint. Not wallpaper.',
-    sec_01_body: 'Every wall can become a canvas. Hand-applied plaster finishes with custom patterns, from bold relief textures like crocodile skin to aged surfaces with delicate decorative overlays. Suited to interiors and exteriors — private homes, restaurants, boutique hotels. Each finish is created on site, directly on the wall.',
+    sec_01_body: 'Every wall can become a canvas. Hand-applied plaster finishes with custom patterns, from bold relief textures like crocodile skin to aged surfaces with delicate decorative overlays. Suited to interiors and exteriors, private homes, restaurants, boutique hotels. Each finish is created on site, directly on the wall.',
 
     // ── Section 02 — Tables ───────────────────────
     sec_02_eyebrow: '02 / Sculptural coffee tables',
@@ -67,7 +67,7 @@ const strings = {
     // ── Section 04 — Gypsum panels ────────────────
     sec_04_eyebrow: '04 / Gypsum panels for walls & ceilings',
     sec_04_headline: 'A ceiling doesn’t have to be flat.',
-    sec_04_body: 'Our spaces deserve more than paint. Hand-cast gypsum panels with intricate patterns — from Moroccan geometry overhead to figurative wall mosaics. Designed for living rooms, bedrooms, hotel lobbies, and executive offices. Adds depth, volume, and character to any space.',
+    sec_04_body: 'Our spaces deserve more than paint. Hand-cast gypsum panels with intricate patterns, from Moroccan geometry overhead to figurative wall mosaics. Designed for living rooms, bedrooms, hotel lobbies, and executive offices. Adds depth, volume, and character to any space.',
 
     // ── Section 05 — Display & gift ───────────────
     sec_05_eyebrow: '05 / Display, event & gift accessories',
@@ -77,22 +77,22 @@ const strings = {
     // ── Section 06 — Iron-look ────────────────────
     sec_06_eyebrow: '06 / Iron-look coating for doors & walls',
     sec_06_headline: 'Iron. Without the iron.',
-    sec_06_body: 'All the presence of forged iron, without the weight or the actual rust. Iron-look coating for doors, walls, and surfaces — in tones of dark patina, warm rust, and smoked metal. Ideal for statement entry doors, accent walls, and spaces with an industrial-luxe edge.',
+    sec_06_body: 'All the presence of forged iron, without the weight or the actual rust. Iron-look coating for doors, walls, and surfaces, in tones of dark patina, warm rust, and smoked metal. Ideal for statement entry doors, accent walls, and spaces with an industrial-luxe edge.',
 
     // ── Section 07 — Capitals & ornaments ─────────
     sec_07_eyebrow: '07 / Gypsum capitals & architectural ornaments',
     sec_07_headline: 'Gold, gypsum, and a little drama.',
-    sec_07_body: 'Classical detail never goes out of style. Corinthian column capitals, baroque scroll wall ornaments, and gold-leaf accents — all made in-house at the studio. Designed for classical and neo-classical spaces, luxury residences, event venues, and commercial facades.',
+    sec_07_body: 'Classical detail never goes out of style. Corinthian column capitals, baroque scroll wall ornaments, and gold-leaf accents, all made in-house at the studio. Designed for classical and neo-classical spaces, luxury residences, event venues, and commercial facades.',
 
     // ── Section 08 — Murals ───────────────────────
     sec_08_eyebrow: '08 / Custom wall murals',
     sec_08_headline: 'Every wall is a story that hasn’t been told yet.',
-    sec_08_body: 'A wall can tell a story. Hand-painted custom murals, designed specifically for your space — from full narrative scenes (like our “Wild West Last Supper”) to graphic and pattern-based designs. Made for restaurants, bars, boutique hotels, retail, and any private space ready for character.',
+    sec_08_body: 'A wall can tell a story. Hand-painted custom murals, designed specifically for your space, from full narrative scenes (like our “Wild West Last Supper”) to graphic and pattern-based designs. Made for restaurants, bars, boutique hotels, retail, and any private space ready for character.',
 
     // ── Section 09 — Concrete ─────────────────────
     sec_09_eyebrow: '09 / Decorative concrete works & finishes',
     sec_09_headline: 'Concrete can be the most dramatic material in the room.',
-    sec_09_body: 'Concrete doesn’t have to be minimalist. Hand-finished decorative concrete works, from sculptural-functional objects (like our stone-textured candle holders) to flowing, drapery-like wall panels. Made for modern spaces — commercial and residential — that want something raw and refined at once.',
+    sec_09_body: 'Concrete doesn’t have to be minimalist. Hand-finished decorative concrete works, from sculptural-functional objects (like our stone-textured candle holders) to flowing, drapery-like wall panels. Made for modern spaces, commercial and residential, that want something raw and refined at once.',
 
     // ── Studio section ────────────────────────────
     studio_eyebrow: 'THE STUDIO',
@@ -101,7 +101,7 @@ const strings = {
     studio_philosophy: "Built for experts and connoisseurs, The White Box Studio redefines the traditional creative space. We are a true artist's atelier with the unique ability to manifest any concept you can imagine. Through an advanced understanding of material behaviors, history, and aesthetics, we engineer tailored solutions to bring your visions to life.",
     studio_howwework_eyebrow: 'How we work',
     studio_howwework_body: 'We co-design alongside architects, designers, or end clients, then handle full on-site installation. We currently take on projects exclusively in Israel. We strongly prefer early-stage collaboration to guarantee that all required infrastructure is seamlessly planned and executed.',
-    studio_pullquote: 'The gaze meets the work — the breath is taken.',
+    studio_pullquote: 'The gaze meets the work, the breath is taken.',
 
     // ── Contact section ───────────────────────────
     contact_eyebrow: 'START A PROJECT',
@@ -135,7 +135,7 @@ const strings = {
     form_wa_title: 'New project inquiry',
     form_status_required: 'Please add your name and an email or phone so we can reach you.',
     form_status_sending: 'Sending…',
-    form_status_success: "Thank you — your message is on its way. We'll be in touch shortly.",
+    form_status_success: "Thank you, your message is on its way. We'll be in touch shortly.",
     form_status_error: 'Something went wrong. Please try WhatsApp, or email us at info@white-box.co.il.'
   },
 
@@ -199,7 +199,7 @@ const strings = {
     // ── Section 04 — Gypsum panels ────────────────
     sec_04_eyebrow: '04 / פאנלים מגבס לקירות ולתקרות',
     sec_04_headline: 'התקרה לא חייבת להיות שטוחה.',
-    sec_04_body: 'החללים שלנו ראויים ליותר מצבע. פאנלי גבס בעבודת יד עם תבניות מורכבות — מגיאומטריה מרוקאית בתקרה לפסיפסי דמויות על הקיר. מתאים לסלון, חדר שינה, לובאי מלון ומשרדי הנהלה. מוסיפים לחלל עומק, נפח ואופי.',
+    sec_04_body: 'החללים שלנו ראויים ליותר מצבע. פאנלי גבס בעבודת יד עם תבניות מורכבות, מגיאומטריה מרוקאית בתקרה לפסיפסי דמויות על הקיר. מתאים לסלון, חדר שינה, לובאי מלון ומשרדי הנהלה. מוסיפים לחלל עומק, נפח ואופי.',
 
     // ── Section 05 — Display & gift ───────────────
     sec_05_eyebrow: '05 / אביזרי תצוגה ומתנה',
@@ -267,7 +267,7 @@ const strings = {
     form_wa_title: 'פנייה לפרויקט חדש',
     form_status_required: 'אנא הוסיפו שם ואימייל או טלפון כדי שנוכל לחזור אליכם.',
     form_status_sending: 'שולח…',
-    form_status_success: 'תודה — ההודעה בדרך אלינו. נחזור אליכם בהקדם.',
+    form_status_success: 'תודה, ההודעה בדרך אלינו. נחזור אליכם בהקדם.',
     form_status_error: 'משהו השתבש. נסו בוואטסאפ, או כתבו לנו ל-info@white-box.co.il.'
   }
 };
@@ -708,8 +708,8 @@ function setupContactForm() {
       '*' + t('form_wa_title') + '*',
       t('form_name_label') + ': ' + f.name,
       t('form_contact_label') + ': ' + f.contact,
-      t('form_type_label') + ': ' + (f.type || '—'),
-      t('form_message_label') + ': ' + (f.message || '—')
+      t('form_type_label') + ': ' + (f.type || '-'),
+      t('form_message_label') + ': ' + (f.message || '-')
     ];
     const url = 'https://wa.me/' + whatsappNumber + '?text=' + encodeURIComponent(lines.join('\n'));
     window.open(url, '_blank', 'noopener');

@@ -10,7 +10,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const VER = '20260607i';
+const VER = '20260608a';
 const ORIGIN = 'https://white-box.co.il';
 const WA = '972545216416';
 
@@ -99,7 +99,7 @@ function chrome({ lang, hrefHe, hrefEn }) {
 <a class="skip-link" href="#main" data-i18n="skip_to_main">${u.skip}</a>
 
 <header>
-  <a href="/index.html" aria-label="The White Box Studio — ${u.home}">
+  <a href="/index.html" aria-label="The White Box Studio, ${u.home}">
     <img class="header-icon" src="/assets/logo.svg" alt="">
   </a>
   <nav class="nav-right">
