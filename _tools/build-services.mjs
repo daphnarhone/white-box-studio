@@ -10,7 +10,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const VER = '20260608a';
+const VER = '20260608b';
 const ORIGIN = 'https://white-box.co.il';
 const WA = '972545216416';
 

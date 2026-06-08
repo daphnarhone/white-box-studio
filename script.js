@@ -1,5 +1,10 @@
 const STORAGE_KEY = 'wbs-lang';
 
+// Google Analytics 4. The tag is gated behind cookie consent — it only loads
+// after the visitor clicks Accept on the banner (see setupConsentBanner).
+const GA_MEASUREMENT_ID = 'G-ZYK627NZFG';
+const CONSENT_KEY = 'wbs-consent';
+
 const whatsappNumber = '972545216416';
 const whatsappPrefills = {
   en: "Hi, I'd like to discuss a project",
@@ -828,6 +833,95 @@ function setupNavDropdown() {
   });
 }
 
+// Cookie-consent banner copy. Hebrew is sized up in CSS (Heebo renders smaller).
+const consentStrings = {
+  en: {
+    text: 'We use cookies to see how visitors use the site. Analytics only, never ads.',
+    accept: 'Accept',
+    decline: 'Decline'
+  },
+  he: {
+    text: 'אנחנו משתמשים בעוגיות כדי להבין איך משתמשים באתר. רק לאנליטיקס, אף פעם לא לפרסום.',
+    accept: 'אישור',
+    decline: 'לא תודה'
+  }
+};
+
+// Inject and configure GA4. Guarded so it loads at most once, and never with a
+// placeholder ID. Called only after consent is granted.
+function loadGA4() {
+  if (window.__wbsGALoaded) return;
+  if (!GA_MEASUREMENT_ID || GA_MEASUREMENT_ID.indexOf('G-') !== 0 || GA_MEASUREMENT_ID === 'G-XXXXXXXXXX') return;
+  window.__wbsGALoaded = true;
+
+  const s = document.createElement('script');
+  s.async = true;
+  s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_MEASUREMENT_ID;
+  document.head.appendChild(s);
+
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { window.dataLayer.push(arguments); }
+  window.gtag = gtag;
+  gtag('js', new Date());
+  gtag('config', GA_MEASUREMENT_ID);
+}
+
+// Cookie-consent gate. If the visitor already chose, honour it silently;
+// otherwise show a dismissible banner and only load GA4 on Accept.
+function setupConsentBanner() {
+  let choice = null;
+  try { choice = localStorage.getItem(CONSENT_KEY); } catch (_) {}
+  if (choice === 'granted') { loadGA4(); return; }
+  if (choice === 'denied') return;
+
+  const banner = document.createElement('div');
+  banner.className = 'wbs-consent';
+  banner.setAttribute('role', 'dialog');
+  banner.setAttribute('aria-label', 'Cookie consent');
+  banner.innerHTML =
+    '<p class="wbs-consent__text"></p>' +
+    '<div class="wbs-consent__actions">' +
+      '<button type="button" class="wbs-consent__btn wbs-consent__btn--decline"></button>' +
+      '<button type="button" class="wbs-consent__btn wbs-consent__btn--accept"></button>' +
+    '</div>';
+
+  const textEl = banner.querySelector('.wbs-consent__text');
+  const acceptBtn = banner.querySelector('.wbs-consent__btn--accept');
+  const declineBtn = banner.querySelector('.wbs-consent__btn--decline');
+
+  const render = (lang) => {
+    const d = consentStrings[lang] || consentStrings.en;
+    textEl.textContent = d.text;
+    acceptBtn.textContent = d.accept;
+    declineBtn.textContent = d.decline;
+  };
+  render(getSavedLang());
+
+  // Keep the copy in sync if the visitor flips language while the banner is open
+  // (home page only; sub-page toggles are <a> links that reload a fresh banner).
+  document.querySelectorAll('.lang-toggle button').forEach(btn => {
+    btn.addEventListener('click', () => render(btn.dataset.lang));
+  });
+
+  const close = () => {
+    banner.classList.remove('is-visible');
+    setTimeout(() => banner.remove(), 350);
+  };
+
+  acceptBtn.addEventListener('click', () => {
+    try { localStorage.setItem(CONSENT_KEY, 'granted'); } catch (_) {}
+    loadGA4();
+    close();
+  });
+  declineBtn.addEventListener('click', () => {
+    try { localStorage.setItem(CONSENT_KEY, 'denied'); } catch (_) {}
+    close();
+  });
+
+  document.body.appendChild(banner);
+  requestAnimationFrame(() => banner.classList.add('is-visible'));
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const yearEl = document.getElementById('contact-footer-year');
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
@@ -850,4 +944,5 @@ document.addEventListener('DOMContentLoaded', () => {
   setupContactForm();
   setupStickyCta();
   setupInitialHashScroll(lenis);  // land on #contact/#work/#studio when arriving from a sub-page
+  setupConsentBanner();  // cookie consent → loads GA4 only after Accept
 });
