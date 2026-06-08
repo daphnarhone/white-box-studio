@@ -7,13 +7,13 @@ export const SERVICES = [
     slug: 'plaster-walls',
     he: {
       title: 'טיח דקורטיבי לקירות בעבודת יד | White Box Studio',
-      desc: 'גימורי טיח דקורטיבי בעבודת יד לקירות — טקסטורות תבליט, פטינה מתיישנת ודוגמאות בהתאמה אישית לבתים פרטיים, מסעדות, מלונות בוטיק וחללי מסחר בישראל.',
+      desc: 'גימורי טיח דקורטיבי בעבודת יד לקירות, טקסטורות תבליט, פטינה מתיישנת ודוגמאות בהתאמה אישית לבתים פרטיים, מסעדות, מלונות בוטיק וחללי מסחר בישראל.',
       serviceType: 'טיח דקורטיבי לקירות', crumb: 'טיח דקורטיבי',
       eyebrow: '01 / טיח דקורטיבי לקירות',
       h1: 'טיח דקורטיבי לקירות, בעבודת יד',
       lead: 'לא צבע. לא טפט. קיר עם נוכחות חומרית.',
       intro: [
-        'קיר יכול להיות הרבה יותר מצבע. בעזרת טיח דקורטיבי בעבודת יד הוא הופך למשטח חי — בעל טקסטורה, שכבות ועומק, שמשנה את האופן שבו האור נע בחלל ואת התחושה של החדר כולו.',
+        'קיר יכול להיות הרבה יותר מצבע. טיח דקורטיבי בעבודת יד נותן לו טקסטורה ועומק, ומשנה את הדרך שבה האור נע עליו לאורך היום.',
         'כל גימור טיח אצלנו נעשה ביד, באתר, ישירות על הקיר. פרויקט אחד דורש תבליט עמוק בטקסטורת עור תנין; אחר דורש פטינה דקה שאת הדקויות שלה ניתן לראות רק מקרוב. אין שני קירות שנראים אותו דבר.'
       ],
       ctaHero: 'תכננו קיר טיח',
@@ -26,7 +26,7 @@ export const SERVICES = [
       finishesTitle: 'כיווני גימור',
       finishes: ['תבליט עמוק בעל אופי פיסולי (כמו עור תנין)', 'משטחים מתיישנים ופטינה', 'שכבות דקורטיביות עם שפה דוגמתית עדינה', 'טקסטורות בהשראת חומרי טבע או גימורים היסטוריים', 'משטחים גולמיים, מעודנים, דרמטיים או מאופקים'],
       customTitle: 'אפשרויות התאמה',
-      custom: 'צבע, גודל הטקסטורה, עוצמת הדוגמה, תנועת המשטח והאווירה הכללית — כולם ניתנים להתאמה אישית. אפשר לעבוד מתוך בריף מפורט או מתוך תמונות השראה שתביאו, ואנחנו נתרגם אותן לשפת גימור מדויקת לחלל שלכם.',
+      custom: 'צבע, טקסטורה, כמה הדוגמה בולטת. הכול נקבע יחד אתכם. תביאו בריף מסודר או כמה תמונות השראה, ואנחנו נגזור מהן את הגימור.',
       processTitle: 'תהליך העבודה',
       steps: [
         { t: 'הבנת החלל', b: 'לומדים את החלל, את ההשראה ואת התחושה הרצויה לחדר.' },
@@ -35,25 +35,25 @@ export const SERVICES = [
       ],
       faqTitle: 'שאלות נפוצות',
       faq: [
-        { q: 'אפשר ליישם טיח דקורטיבי במגוון טקסטורות?', a: 'כן — מטקסטורה עדינה ומינימליסטית ועד תבליט עשיר ובולט מאוד. כל גימור נבנה בהתאמה אישית לאופי החלל.' },
+        { q: 'אפשר ליישם טיח דקורטיבי במגוון טקסטורות?', a: 'כן, מטקסטורה עדינה ומינימליסטית ועד תבליט עשיר ובולט מאוד. כל גימור נבנה בהתאמה אישית לאופי החלל.' },
         { q: 'הטיח הדקורטיבי מתאים לחללים מסחריים?', a: 'בהחלט. אנחנו מבצעים גימורי טיח במסעדות, בתי קפה, חנויות בוטיק, מלונות ומשרדים, בהתאם לאופי הפרויקט.' },
-        { q: 'אפשר ליישם טיח דקורטיבי על קירות חוץ?', a: 'כן, על משטחי חוץ נבחרים — בכפוף לבדיקת התשתית ותנאי החשיפה של הקיר.' },
+        { q: 'אפשר ליישם טיח דקורטיבי על קירות חוץ?', a: 'כן, על משטחי חוץ נבחרים, בכפוף לבדיקת התשתית ותנאי החשיפה של הקיר.' },
         { q: 'כמה זמן לוקח ביצוע של קיר טיח דקורטיבי?', a: 'זה תלוי בגודל הקיר ובמורכבות הגימור. לאחר היכרות עם הפרויקט נספק הערכת זמן מדויקת.' },
         { q: 'איך מתחילים פרויקט?', a: 'שולחים לנו תמונות השראה ופרטים על החלל, ואנחנו חוזרים עם כיוון גימור מתאים והצעת מחיר.' },
         { q: 'אתם עובדים רק בישראל?', a: 'כן, נכון לעכשיו אנחנו לוקחים פרויקטים בישראל בלבד.' }
       ],
       bandH2: 'רוצים קיר עם עומק, רכות ואופי שצבע או טפט לא יכולים לתת?',
-      bandP: 'ספרו לנו על החלל, על הרעיונות ועל תמונות ההשראה שמדברות אליכם — ונחזור אליכם עם כיוון מתאים.'
+      bandP: 'ספרו לנו על החלל, על הרעיונות ועל תמונות ההשראה שמדברות אליכם, ונחזור אליכם עם כיוון מתאים.'
     },
     en: {
       title: 'Decorative Plaster Wall Finishes in Israel | The White Box Studio',
-      desc: 'Handmade decorative plaster wall finishes — relief textures, aged patina, and custom patterns for homes, restaurants, hotels, and boutique interiors across Israel.',
+      desc: 'Handmade decorative plaster wall finishes, relief textures, aged patina, and custom patterns for homes, restaurants, hotels, and boutique interiors across Israel.',
       serviceType: 'Decorative plaster wall finishes', crumb: 'Plaster wall finishes',
       eyebrow: '01 / Plaster wall finishes',
       h1: 'Decorative plaster wall finishes, applied by hand',
       lead: 'Not paint. Not wallpaper. A wall with material presence.',
       intro: [
-        'A wall can do much more than hold a colour. With hand-applied plaster it becomes tactile, layered, and expressive — something that changes the way light moves through a room and the way the room itself is experienced.',
+        'A wall can do more than hold a colour. Hand-applied plaster gives it texture and depth, and changes the way light moves across it through the day.',
         'We mix and trowel every plaster finish on site, straight onto your wall. One project wants deep, crocodile-skin relief; the next, a thin aged patina you only catch up close. No two walls leave the same.'
       ],
       ctaHero: 'Plan your plaster wall',
@@ -66,7 +66,7 @@ export const SERVICES = [
       finishesTitle: 'Finish directions',
       finishes: ['Deep relief textures with sculptural character (crocodile-skin and more)', 'Aged and weathered surfaces with patina', 'Decorative overlays with a subtle pattern language', 'Textures inspired by natural references or historic finishes', 'Surfaces that read raw, refined, dramatic, or restrained'],
       customTitle: 'Customization',
-      custom: 'Colour, texture scale, pattern intensity, surface movement, and overall mood can all be adapted. We can work from a detailed brief or from reference images you bring — translating them into a finish language that is precise to your space.',
+      custom: "Colour, texture, how bold the pattern reads. All of it is yours to set. Bring a detailed brief or a few reference photos, and we'll work the finish out from there.",
       processTitle: 'How we work',
       steps: [
         { t: 'Understand the space', b: 'We study the space, the references, and the feeling the room is meant to hold.' },
@@ -75,15 +75,15 @@ export const SERVICES = [
       ],
       faqTitle: 'Frequently asked questions',
       faq: [
-        { q: 'Can plaster be applied in many textures?', a: 'Yes — from a subtle, minimal finish to a richly expressive, high-relief surface. Every finish is built bespoke to the character of the space.' },
+        { q: 'Can plaster be applied in many textures?', a: 'Yes, from a subtle, minimal finish to a richly expressive, high-relief surface. Every finish is built bespoke to the character of the space.' },
         { q: 'Is decorative plaster suitable for commercial spaces?', a: 'Absolutely. We apply plaster finishes in restaurants, cafés, boutiques, hotels, and offices, depending on the project.' },
-        { q: 'Can decorative plaster be applied to exterior walls?', a: "Yes, on selected exterior surfaces — subject to a review of the substrate and the wall's exposure conditions." },
+        { q: 'Can decorative plaster be applied to exterior walls?', a: "Yes, on selected exterior surfaces, subject to a review of the substrate and the wall's exposure conditions." },
         { q: 'How long does a plaster wall take to complete?', a: 'It depends on the size of the wall and the complexity of the finish. We provide a precise time estimate once we understand the project.' },
         { q: 'How do I start a project?', a: "Send us reference images and details about your space, and we'll come back with a suitable finish direction and a quote." },
         { q: 'Do you work only in Israel?', a: 'Yes, we currently take on projects in Israel only.' }
       ],
       bandH2: 'Looking for a wall with more depth, softness, and individuality than paint or wallpaper can offer?',
-      bandP: "Tell us about your space, your ideas, and the reference images that speak to you — and we'll come back with a direction."
+      bandP: "Tell us about your space, your ideas, and the reference images that speak to you, and we'll come back with a direction."
     }
   },
 
@@ -91,13 +91,13 @@ export const SERVICES = [
     slug: 'coffee-tables',
     he: {
       title: 'שולחנות קפה פיסוליים בהזמנה אישית | White Box Studio',
-      desc: 'שולחנות קפה פיסוליים בעבודת יד — בסיסים יצוקים בהתאמה אישית, גימורים ייחודיים וצורות פסל לחללי יוקרה, לובי מלון וסלון בישראל.',
+      desc: 'שולחנות קפה פיסוליים בעבודת יד, בסיסים יצוקים בהתאמה אישית, גימורים ייחודיים וצורות פסל לחללי יוקרה, לובי מלון וסלון בישראל.',
       serviceType: 'שולחנות קפה פיסוליים', crumb: 'שולחנות קפה פיסוליים',
       eyebrow: '02 / שולחנות קפה פיסוליים',
       h1: 'שולחנות קפה פיסוליים, בהזמנה אישית',
       lead: 'לא רק שולחן. הצהרה.',
       intro: [
-        'יש רהיטים שתומכים בחדר. יש כאלה שנותנים לו את מרכז הכובד. שולחן קפה פיסולי שייך לקטגוריה השנייה — פונקציונלי, כן, אבל גם אטמוספרי, אקספרסיבי ובלתי אפשרי להתעלמות.',
+        'רוב הרהיטים ממלאים חדר. מעטים נותנים לו מרכז כובד. שולחן קפה פיסולי הוא מהסוג השני: הוא עדיין שולחן, אבל הוא גם הדבר הראשון שרואים בכניסה.',
         'אנחנו מתייחסים לכל שולחן כמו לפסל שבמקרה אפשר להניח עליו כוס. הפרופורציות, הגימור, הצבע וצורת הבסיס נקבעים מול החדר שבו הוא יעמוד. אנחנו מייצרים אובייקט אחד, לחדר אחד ולא משהו מהמדף.'
       ],
       ctaHero: 'הזמינו שולחן',
@@ -110,7 +110,7 @@ export const SERVICES = [
       finishesTitle: 'שפת עיצוב',
       finishes: ['מונוליטי ופיסולי', 'מטאלי ומבריק', 'רך וזורם', 'בסיסים יצוקים בהתאמה אישית', 'גוונים אירידיסנטיים ועזים', 'צורות אורגניות או אדריכליות'],
       customTitle: 'אפשרויות התאמה',
-      custom: 'מידות, גובה, צללית, גימור, פלטת צבעים ורמת הנועזות החזותית — כולם מותאמים לחדר ולכוונה של הלקוח.',
+      custom: 'מידות, גובה, צללית, גימור, צבע, כמה הוא נועז. הכול מותאם לחדר ולמה שאתם מחפשים.',
       processTitle: 'תהליך העבודה',
       steps: [
         { t: 'הבנת החלל', b: 'לומדים את הקונטקסט הפנימי, הפרופורציות וההפניות.' },
@@ -121,12 +121,12 @@ export const SERVICES = [
       faq: [
         { q: 'אפשר להתאים את המידות?', a: 'כן, לפי החדר ומערך הישיבה.' },
         { q: 'אפשר שהגימור יתאים לפלטת הצבעים של החלל?', a: 'בהחלט.' },
-        { q: 'אלה פריטים מהמדף?', a: 'לא — כל שולחן נוצר בהזמנה אישית לפרויקט.' },
+        { q: 'אלה פריטים מהמדף?', a: 'לא, כל שולחן נוצר בהזמנה אישית לפרויקט.' },
         { q: 'כמה זמן לוקח?', a: 'תלוי במורכבות; נספק הערכה לאחר היכרות עם הפרויקט.' },
         { q: 'אתם עובדים רק בישראל?', a: 'כן, נכון לעכשיו.' }
       ],
       bandH2: 'רוצים שולחן שמרגיש אסוף, אומנותי ובנוי לחדר אחד בלבד?',
-      bandP: 'שלחו לנו את פרטי הפרויקט ותמונות השראה — ונחזור אליכם עם כיוון.'
+      bandP: 'שלחו לנו את פרטי הפרויקט ותמונות השראה, ונחזור אליכם עם כיוון.'
     },
     en: {
       title: 'Custom Sculptural Coffee Tables | The White Box Studio',
@@ -136,7 +136,7 @@ export const SERVICES = [
       h1: 'Sculptural coffee tables that define the room',
       lead: 'Not just a table. A statement.',
       intro: [
-        'Some pieces support a room. Others give it its centre of gravity. A sculptural coffee table belongs to the second category: functional, yes — but also atmospheric, expressive, and impossible to ignore.',
+        'Some pieces support a room. Others give it its centre of gravity. A sculptural coffee table belongs to the second category: functional, yes, but also atmospheric, expressive, and impossible to ignore.',
         "We treat each table as a sculpture that happens to be useful. Proportions, finish, colour, the shape of the base. We set them up against the room it'll sit in. You get one object made for one space, not a catalogue piece."
       ],
       ctaHero: 'Commission a table',
@@ -149,7 +149,7 @@ export const SERVICES = [
       finishesTitle: 'Design language',
       finishes: ['Monolithic and sculptural', 'Metallic and reflective', 'Soft-edged and organic', 'Custom-cast bases', 'Iridescent or bold colour', 'Organic or architectural forms'],
       customTitle: 'Customization',
-      custom: "Dimensions, height, silhouette, finish, palette, and level of visual boldness can all be tailored to the room and the client's intent.",
+      custom: "Size, height, silhouette, finish, colour, how loud or quiet it reads. All set to the room and what you're after.",
       processTitle: 'How we work',
       steps: [
         { t: 'Understand the space', b: 'We study the interior context, proportions, and references.' },
@@ -160,12 +160,12 @@ export const SERVICES = [
       faq: [
         { q: 'Can dimensions be adjusted?', a: 'Yes, to fit the room and seating layout.' },
         { q: 'Can the finish match the interior palette?', a: 'Absolutely.' },
-        { q: 'Are these off-the-shelf pieces?', a: 'No — each table is made bespoke per project.' },
+        { q: 'Are these off-the-shelf pieces?', a: 'No, each table is made bespoke per project.' },
         { q: 'How long does it take?', a: 'It depends on complexity; we provide an estimate once we know the project.' },
         { q: 'Do you work only in Israel?', a: 'Yes, currently.' }
       ],
       bandH2: 'Want a coffee table that feels collected, artistic, and built for one room only?',
-      bandP: "Send us your project details and visual references — and we'll come back with a direction."
+      bandP: "Send us your project details and visual references, and we'll come back with a direction."
     }
   },
 
@@ -173,13 +173,13 @@ export const SERVICES = [
     slug: 'custom-sculpture',
     he: {
       title: 'פיסול בהזמנה אישית בישראל | White Box Studio',
-      desc: 'עבודות פיסול בהזמנה אישית בישראל — מדמויות קלאסיות ועיטוריות ועד פסלים עכשוויים, ראשי חיות ופאנלי תבליט, בעבודת יד.',
+      desc: 'עבודות פיסול בהזמנה אישית בישראל, מדמויות קלאסיות ועיטוריות ועד פסלים עכשוויים, ראשי חיות ופאנלי תבליט, בעבודת יד.',
       serviceType: 'פיסול בהזמנה אישית', crumb: 'פיסול בהזמנה אישית',
       eyebrow: '03 / פיסול בהזמנה אישית',
       h1: 'פיסול בהזמנה אישית, מעוצב ומיוצר בעבודת יד',
       lead: 'אם אפשר לדמיין את זה, אפשר לפסל את זה.',
       intro: [
-        'פסל בהזמנה אישית מכניס לחלל נוכחות מסוג אחר. הוא יכול לעגן כניסה, ליצור רגע מוקד, להוסיף סמליות, להכניס דרמה, או פשוט לגרום לחדר להרגיש שלם ואסוף יותר. בניגוד לאובייקטים דקורטיביים מהמדף, פסל מוזמן נוצר עבור חלל, קנה מידה וכוונה ספציפיים.',
+        'פסל בהזמנה אישית משנה את האופן שבו חלל מרגיש. הוא יכול לעגן כניסה, להחזיק נקודת מוקד, או פשוט לגרום לחדר להרגיש גמור. בניגוד לאובייקט מהמדף, פסל מוזמן נעשה לחלל אחד, בקנה מידה אחד, מסיבה אחת.',
         'תנו לנו סקיצה, תמונה, או אפילו משפט אחד ונפסל אותם ביד. גילפנו "דוד" שלם. ייצרנו פריטים שובבים חד-פעמיים שהגיוניים רק למי שהזמין אותם. קלאסי או מוזר, עשינו את שניהם, ואוהבים אותם.'
       ],
       ctaHero: 'הזמינו פסל',
@@ -192,7 +192,7 @@ export const SERVICES = [
       finishesTitle: 'מה אפשר ליצור',
       finishes: ['פיסול פיגורטיבי', 'צורות בהשראה קלאסית', 'ראשי חיות ופריטים דקורטיביים', 'פאנלי תבליט וגילופי קיר', 'אובייקטים פיסוליים עכשוויים', 'הזמנות לפי תמונות או קונספט מקורי'],
       customTitle: 'קנה מידה וחומר',
-      custom: 'מאובייקטים דקורטיביים ועד פריטי הצהרה גדולים, בכל גימור וחומר. אנחנו עוזרים להגדיר את קנה המידה, שפת החומר והמיקום כך שהעבודה תשתלב במלואה בסביבתה.',
+      custom: 'מאובייקטים דקורטיביים קטנים ועד פריטי הצהרה גדולים, בכל חומר. נעזור לכם להגדיר את קנה המידה, הגימור והמיקום, כך שהעבודה תשתלב בחדר ולא רק תקשט אותו.',
       processTitle: 'תהליך ההזמנה',
       steps: [
         { t: 'קונספט', b: 'כל פסל מתחיל ברעיון, בהפניה או בסקיצה.' },
@@ -203,22 +203,22 @@ export const SERVICES = [
       faq: [
         { q: 'אפשר לעבוד לפי תמונות או סקיצות?', a: 'כן.' },
         { q: 'איזה קנה מידה אפשרי?', a: 'מאובייקטים דקורטיביים ועד פריטי הצהרה גדולים.' },
-        { q: 'אפשר לשעתק דמויות קלאסיות?', a: 'כן — אפילו "דוד" של מיכלאנג׳לו.' },
+        { q: 'אפשר לשעתק דמויות קלאסיות?', a: 'כן, אפילו "דוד" של מיכלאנג׳לו.' },
         { q: 'איך מתחילים?', a: 'משתפים קונספט, הפניות ופרטי חלל.' },
         { q: 'אתם עובדים רק בישראל?', a: 'כן, נכון לעכשיו.' }
       ],
-      bandH2: 'יש רעיון לפסל — ברור או עדיין מתגבש?',
+      bandH2: 'יש רעיון לפסל, ברור או עדיין מתגבש?',
       bandP: 'שתפו אותנו בהפניות, בקונספט ובפרטי החלל.'
     },
     en: {
       title: 'Custom Sculpture in Israel | Bespoke Commissions by White Box',
-      desc: 'Bespoke sculpture commissions in Israel — from classical and ornamental forms to contemporary objects, animal busts, and relief panels, all made by hand.',
+      desc: 'Bespoke sculpture commissions in Israel, from classical and ornamental forms to contemporary objects, animal busts, and relief panels, all made by hand.',
       serviceType: 'Custom sculpture', crumb: 'Custom sculpture',
       eyebrow: '03 / Custom sculpture',
       h1: 'Custom sculpture, designed and made by hand',
       lead: 'If you can imagine it, we can sculpt it.',
       intro: [
-        'Custom sculpture brings a different kind of presence into a space. It can anchor an entrance, create a focal moment, add symbolism, introduce drama, or simply make a room feel more collected and complete. Unlike off-the-shelf decorative objects, a commissioned sculpture is made for a specific setting, scale, and intention.',
+        'Custom sculpture changes how a space feels. It can anchor an entrance, hold a focal point, or just make a room feel finished. Unlike something off a shelf, a commissioned piece is made for one setting, at one scale, for one reason.',
         "We sculpt by hand, turning a brief or a rough sketch into a finished form. We've done classical and ornamental work, and we've done pieces that are contemporary, playful, or built around one client's private references, including a hand-carved David."
       ],
       ctaHero: 'Commission a sculpture',
@@ -231,7 +231,7 @@ export const SERVICES = [
       finishesTitle: 'What can be created',
       finishes: ['Figurative sculpture', 'Classical-inspired forms', 'Animal busts and decorative pieces', 'Relief panels and carved wall elements', 'Contemporary sculptural objects', 'Commissions from references or original concepts'],
       customTitle: 'Scale and material',
-      custom: 'From decorative objects to larger statement pieces, in any finish and material. We help define the right scale, material language, and placement so the work feels fully integrated into its environment.',
+      custom: "From small decorative objects to large statement pieces, in any material. We'll help work out the scale, the finish, and where it sits, so it belongs in the room rather than decorating it.",
       processTitle: 'The commission process',
       steps: [
         { t: 'Concept', b: 'Every sculpture begins with an idea, a reference, or a sketch.' },
@@ -242,11 +242,11 @@ export const SERVICES = [
       faq: [
         { q: 'Can you work from references or sketches?', a: 'Yes.' },
         { q: 'What scale is possible?', a: 'From decorative objects to larger statement pieces.' },
-        { q: 'Can you reproduce classical figures?', a: "Yes — even Michelangelo's David." },
+        { q: 'Can you reproduce classical figures?', a: "Yes, even Michelangelo's David." },
         { q: 'How do I start?', a: 'Share your concept, references, and space details.' },
         { q: 'Do you work only in Israel?', a: 'Yes, currently.' }
       ],
-      bandH2: 'Have a sculpture idea — clear or still forming?',
+      bandH2: 'Have a sculpture idea, clear or still forming?',
       bandP: 'Share your references, concept, and space details with us.'
     }
   },
@@ -255,14 +255,14 @@ export const SERVICES = [
     slug: 'gypsum-panels',
     he: {
       title: 'פאנלים דקורטיביים מגבס לקירות ולתקרות | White Box Studio',
-      desc: 'פאנלי גבס דקורטיביים בעבודת יד לקירות ולתקרות בישראל — דוגמאות מותאמות אישית, תבליט אדריכלי ומשטחים עיטוריים.',
+      desc: 'פאנלי גבס דקורטיביים בעבודת יד לקירות ולתקרות בישראל, דוגמאות מותאמות אישית, תבליט אדריכלי ומשטחים עיטוריים.',
       serviceType: 'פאנלי גבס דקורטיביים', crumb: 'פאנלי גבס',
       eyebrow: '04 / פאנלים מגבס לקירות ולתקרות',
       h1: 'פאנלי גבס לקירות ולתקרות, יצוקים בעבודת יד',
       lead: 'תקרה לא חייבת להיות שטוחה.',
       intro: [
-        'חלק מרגעי העיצוב החזקים ביותר מתרחשים מעל גובה העיניים, או על משטחים גדולים ושקטים שבדרך כלל נשארים חלקים. פאנלי גבס מאפשרים למשטחים האלה להפוך לפיצ׳רים אדריכליים בפני עצמם — שכבתיים, עיטוריים, פיסוליים ומשולבים עמוק בזהות החדר.',
-        'אנחנו יוצקים פאנלים מגבס לקירות ולתקרות — חלקם גיאומטריים ומדויקים, חלקם פיגורטיביים או קלאסיים. פאנל אחד שיצקנו היה דיוקן של מרילין מונרו בפסיפס; אחר, דוגמה מרוקאית על פני תקרה שלמה.'
+        'חלק מרגעי העיצוב החזקים ביותר קורים מעל גובה העיניים, על המשטחים הגדולים והשקטים שרוב החדרים משאירים חלקים. פאנל גבס הופך תקרה או קיר לפיצ׳ר בפני עצמו, עם עומק ודוגמה אמיתיים.',
+        'אנחנו יוצקים פאנלים מגבס לקירות ולתקרות, חלקם גיאומטריים ומדויקים, חלקם פיגורטיביים או קלאסיים. פאנל אחד שיצקנו היה דיוקן של מרילין מונרו בפסיפס; אחר, דוגמה מרוקאית על פני תקרה שלמה.'
       ],
       ctaHero: 'תכננו תקרה או קיר',
       images: [
@@ -290,18 +290,18 @@ export const SERVICES = [
         { q: 'אתם עובדים רק בישראל?', a: 'כן, נכון לעכשיו.' }
       ],
       bandH2: 'צריך קיר או תקרה עם יותר נוכחות, מבנה ואימפקט?',
-      bandP: 'שתפו אותנו בפרטי החלל — ונחזור אליכם עם כיוון.'
+      bandP: 'שתפו אותנו בפרטי החלל, ונחזור אליכם עם כיוון.'
     },
     en: {
       title: 'Decorative Gypsum Panels for Walls & Ceilings in Israel | White Box Studio',
-      desc: 'Hand-cast decorative gypsum panels for walls and ceilings in Israel — bespoke patterns, architectural relief, and ornamental surfaces, custom-made for interiors.',
+      desc: 'Hand-cast decorative gypsum panels for walls and ceilings in Israel, bespoke patterns, architectural relief, and ornamental surfaces, custom-made for interiors.',
       serviceType: 'Decorative gypsum panels', crumb: 'Gypsum panels',
       eyebrow: '04 / Gypsum panels for walls & ceilings',
       h1: 'Hand-cast gypsum panels for walls and ceilings',
       lead: "A ceiling doesn't have to be flat.",
       intro: [
-        'Some of the most powerful design moments happen above eye level, or across large quiet surfaces that are usually left plain. Gypsum panels allow those surfaces to become architectural features in their own right — layered, ornamental, sculptural, and deeply integrated into the identity of the room.',
-        'We cast gypsum panels for walls and ceilings — some strict and geometric, some figurative or classical. One recent panel was a Marilyn Monroe portrait built up as a mosaic; another, a Moroccan lattice across a whole ceiling.'
+        'Some of the best design moments happen above eye level, on the big quiet surfaces most rooms leave blank. A gypsum panel turns a ceiling or a wall into a feature in its own right, with real depth and pattern.',
+        'We cast gypsum panels for walls and ceilings, some strict and geometric, some figurative or classical. One recent panel was a Marilyn Monroe portrait built up as a mosaic; another, a Moroccan lattice across a whole ceiling.'
       ],
       ctaHero: 'Design your ceiling',
       images: [
@@ -329,7 +329,7 @@ export const SERVICES = [
         { q: 'Do you work only in Israel?', a: 'Yes, currently.' }
       ],
       bandH2: 'Need a wall or ceiling with more presence, structure, and impact?',
-      bandP: 'Share the space details with us — and we will come back with a direction.'
+      bandP: 'Share the space details with us, and we will come back with a direction.'
     }
   },
 
@@ -354,7 +354,7 @@ export const SERVICES = [
       applicationsTitle: 'שימושים',
       applications: ['פריטי תצוגה לקמעונאות ולמוצר', 'פרופים לאירועים והתקנות מעוצבות', 'אביזרים דקורטיביים להשקות ולרגעים ממותגים', 'אלמנטים למתנה בעבודת יד', 'אובייקטים קטנים שמשלימים חלל או עריכת שולחן'],
       finishesTitle: 'מה אפשר להתאים',
-      finishes: ['נושא ופלטת צבעים', 'מקרה השימוש', 'הזהות החזותית', 'שפת החומר', 'כמות — פריט בודד או סדרה'],
+      finishes: ['נושא ופלטת צבעים', 'מקרה השימוש', 'הזהות החזותית', 'שפת החומר', 'כמות, פריט בודד או סדרה'],
       customTitle: 'פריט בודד או סדרה',
       custom: 'אפשר ליצור פריט בודד או סדרה שלמה, מותאמים למותג, לאירוע או לאדם שמקבל אותם.',
       processTitle: 'תהליך העבודה',
@@ -372,7 +372,7 @@ export const SERVICES = [
         { q: 'אתם עובדים רק בישראל?', a: 'כן, נכון לעכשיו.' }
       ],
       bandH2: 'צריך פרט מותאם אישית שייתן לאירוע, לתצוגה או למתנה את הזהות שלהם?',
-      bandP: 'שתפו אותנו בקונספט — ונחזור אליכם עם כיוון.'
+      bandP: 'שתפו אותנו בקונספט, ונחזור אליכם עם כיוון.'
     },
     en: {
       title: 'Custom Display, Event & Gift Accessories | White Box Studio',
@@ -393,9 +393,9 @@ export const SERVICES = [
       applicationsTitle: 'Use cases',
       applications: ['Retail and product display pieces', 'Event props and styled installations', 'Decorative accessories for launches and branded moments', 'Handmade gift elements', 'Small objects that complete a space or table setting'],
       finishesTitle: 'What can be tailored',
-      finishes: ['Theme and colour palette', 'Use case', 'Visual identity', 'Material expression', 'Quantity — a single piece or a set'],
+      finishes: ['Theme and colour palette', 'Use case', 'Visual identity', 'Material expression', 'Quantity, a single piece or a set'],
       customTitle: 'One piece or a set',
-      custom: 'We can create a single piece or a full set, tailored to your brand, your event, or the person receiving it.',
+      custom: "We can make a single piece or a full set, built around your brand, your event, or whoever's receiving it.",
       processTitle: 'How we work',
       steps: [
         { t: 'Purpose of the piece', b: 'We understand its purpose and the atmosphere it must create.' },
@@ -411,7 +411,7 @@ export const SERVICES = [
         { q: 'Do you work only in Israel?', a: 'Yes, currently.' }
       ],
       bandH2: 'Need a custom detail piece to give an event, display, or gift its identity?',
-      bandP: 'Share the concept with us — and we will come back with a direction.'
+      bandP: 'Share the concept with us, and we will come back with a direction.'
     }
   },
 
@@ -419,13 +419,13 @@ export const SERVICES = [
     slug: 'iron-look-coating',
     he: {
       title: 'ציפוי דמוי ברזל לדלתות ולקירות בישראל | White Box Studio',
-      desc: 'ציפוי דמוי ברזל לדלתות, קירות ומשטחים בישראל — גימורי פטינה עשירים עם נוכחות של ברזל מחושל, בלי המשקל של ברזל מלא.',
+      desc: 'ציפוי דמוי ברזל לדלתות, קירות ומשטחים בישראל, גימורי פטינה עשירים עם נוכחות של ברזל מחושל, בלי המשקל של ברזל מלא.',
       serviceType: 'ציפוי דמוי ברזל', crumb: 'ציפוי דמוי ברזל',
       eyebrow: '06 / ציפוי דמוי ברזל לדלתות וקירות',
       h1: 'ציפוי דמוי ברזל עם נוכחות של מתכת מחושלת',
       lead: 'ברזל. בלי הברזל.',
       intro: [
-        'יש משהו מיידי ומשכנע בברזל: האפלוליות, המשקל, הדרמה ותחושת הקביעות. אבל ברזל מלא לא תמיד הפתרון הטכני או האסתטי הנכון לכל פרויקט. ציפוי דמוי ברזל מציע את העושר החזותי של מתכת תוך גמישות רבה הרבה יותר ביישום ובשליטה על הגימור.',
+        'ברזל מושך את העין: האפלוליות, המשקל, התחושה שהוא היה שם תמיד. אבל ברזל מלא לא תמיד מעשי. ציפוי דמוי ברזל נותן את המראה של המתכת, עם הרבה יותר חופש באיפה ואיך מיישמים אותו.',
         'אנחנו מיישמים ציפוי דמוי ברזל על דלתות, קירות ומשטחים נבחרים, ובונים גימור שנראה כמו מתכת מחושלת, חלודה חמה או פלדה מעושנת. מקבלים את המשקל והעומק של ברזל לעין, בלי המשקל על הצירים.'
       ],
       ctaHero: 'קבלו את מראה הברזל',
@@ -438,7 +438,7 @@ export const SERVICES = [
       finishesTitle: 'כיווני גימור',
       finishes: ['פטינה כהה ומתכת מעושנת', 'גוונים בהשראת חלודה חמה', 'אופי פחם וברזל מחושל', 'משטחי מתכת מתיישנים ועדינים', 'גימורים שכבתיים עם תנועה ורמזי חמצון'],
       customTitle: 'היתרון',
-      custom: 'שליטה רבה יותר בגוון ובטקסטורה מאשר מוצר מתכת סטנדרטי. אפשר להביא את שפת הברזל למקומות שבהם ברזל אמיתי היה לא מעשי, כבד מדי או מגביל מדי.',
+      custom: 'שליטה הרבה יותר טובה בגוון ובטקסטורה מכל מוצר מתכת מהמדף. ואפשר להביא את מראה הברזל למקומות שבהם ברזל אמיתי כבד מדי או פשוט לא הולך, כמו דלת פנים.',
       processTitle: 'תהליך העבודה',
       steps: [
         { t: 'הגדרת המשטח', b: 'מגדירים את המשטח, האווירה וכיוון ההפניות.' },
@@ -453,18 +453,18 @@ export const SERVICES = [
         { q: 'איך מתחילים?', a: 'שולחים פרטי משטח ותמונות השראה.' },
         { q: 'אתם עובדים רק בישראל?', a: 'כן, נכון לעכשיו.' }
       ],
-      bandH2: 'צריך את העוצמה והאווירה של מתכת — בלי ברזל מלא?',
+      bandH2: 'צריך את העוצמה והאווירה של מתכת, בלי ברזל מלא?',
       bandP: 'שתפו אותנו בפרטי המשטח ובהפניות.'
     },
     en: {
       title: 'Iron-Look Coating for Doors & Walls in Israel | White Box Studio',
-      desc: 'Decorative iron-look coating for doors, walls, and surfaces in Israel — patina-rich finishes with the visual power of forged metal, without the weight of solid iron.',
+      desc: 'Decorative iron-look coating for doors, walls, and surfaces in Israel, patina-rich finishes with the visual power of forged metal, without the weight of solid iron.',
       serviceType: 'Iron-look coating', crumb: 'Iron-look coating',
       eyebrow: '06 / Iron-look coating for doors & walls',
       h1: 'Iron-look coating with the presence of forged metal',
       lead: 'Iron. Without the iron.',
       intro: [
-        'There is something instantly compelling about iron: its darkness, weight, drama, and sense of permanence. But solid iron is not always the right technical or aesthetic solution for every project. An iron-look coating offers the visual richness of metal while allowing far more flexibility in application and finish control.',
+        "Iron pulls you in: the darkness, the weight, the sense that it's been there forever. But solid iron isn't always practical. An iron-look coating gives you the look of the metal with far more freedom in how and where it goes on.",
         'We apply iron-look coatings to doors, walls, and select surfaces, building up finishes that read as forged metal, warm rust, or smoked steel. You get the weight and depth of iron on the eye, without the weight on the hinges.'
       ],
       ctaHero: 'Get the iron look',
@@ -477,7 +477,7 @@ export const SERVICES = [
       finishesTitle: 'Finish directions',
       finishes: ['Dark patina and smoked metal', 'Warm rust-inspired tones', 'Charcoal and forged-iron character', 'Subtle aged-metal surfaces', 'Layered finishes with movement and oxidation references'],
       customTitle: 'The benefit',
-      custom: 'More control over tone and texture than a standard metal product. The visual language of iron can be brought into places where real iron might be impractical, too heavy, or too limiting.',
+      custom: "You get more control over tone and texture than any off-the-shelf metal. And you can put the look of iron where real iron would be too heavy or just won't go, like an interior door.",
       processTitle: 'How we work',
       steps: [
         { t: 'Define the surface', b: 'We define the surface, atmosphere, and reference direction.' },
@@ -492,7 +492,7 @@ export const SERVICES = [
         { q: 'How do I start?', a: 'Send surface details and reference images.' },
         { q: 'Do you work only in Israel?', a: 'Yes, currently.' }
       ],
-      bandH2: 'Need the strength and atmosphere of metal — without solid iron?',
+      bandH2: 'Need the strength and atmosphere of metal, without solid iron?',
       bandP: 'Share the surface details and references with us.'
     }
   },
@@ -501,13 +501,13 @@ export const SERVICES = [
     slug: 'capitals-ornaments',
     he: {
       title: 'כותרות ועיטורים דקורטיביים מגבס בישראל | White Box Studio',
-      desc: 'כותרות עמודים דקורטיביות, עיטורי גבס ואלמנטים אדריכליים בהזמנה אישית בישראל — פרט קלאסי, עיטורים ועבודות עלה זהב.',
+      desc: 'כותרות עמודים דקורטיביות, עיטורי גבס ואלמנטים אדריכליים בהזמנה אישית בישראל, פרט קלאסי, עיטורים ועבודות עלה זהב.',
       serviceType: 'כותרות ועיטורים מגבס', crumb: 'כותרות ועיטורים',
       eyebrow: '07 / כותרות ועיטורים מגבס',
       h1: 'כותרות ועיטורים בדיוק פיסולי',
       lead: 'זהב, גבס, וקצת דרמה.',
       intro: [
-        'יש חללים שמבקשים ריסון. אחרים מבקשים פרט, פריחה וקצת טקס. כותרות ועיטורים שייכים לעולם השני — זה שבו חדר מתעלה בזכות קצב, קישוט ותחושת דרמה ממוקמת בקפידה.',
+        'יש חללים שמבקשים ריסון. אחרים מבקשים פרט וקצת טקס. כותרות ועיטורים שייכים לסוג השני, זה שבו קרניז, ראש עמוד או פס פרופיל עושים את העבודה.',
         'כותרת קורינתית, פאנל פרחוני מגולף, פס פרופיל בעלה זהב, אנחנו עושים את הפרטים העיטוריים שרוב הקבלנים מדלגים עליהם. יש חדר שמטופל מהרצפה לתקרה. יש כזה שדורש פרט זהב אחד וזהו. שניהם נכונים.'
       ],
       ctaHero: 'הוסיפו פרט קלאסי',
@@ -520,7 +520,7 @@ export const SERVICES = [
       finishesTitle: 'כיווני עיצוב',
       finishes: ['כותרות וקרניזים בהשראה קלאסית', 'מוטיבים עיטוריים מגבס', 'פרטים עם אקצנט עלה זהב', 'עיטורים משולבים במערכות תקרה או קיר', 'פריטים עיטוריים מותאמים לאדריכלות הפרויקט'],
       customTitle: 'מאופק או תיאטרלי',
-      custom: 'אקספרסיבי ותיאטרלי, או עדין ומשולב — העבודה הדקורטיבית מותאמת לחדר ולטון הרצוי.',
+      custom: 'אקספרסיבי ותיאטרלי, או עדין ומשולב, העבודה הדקורטיבית מותאמת לחדר ולטון הרצוי.',
       processTitle: 'תהליך העבודה',
       steps: [
         { t: 'לימוד האדריכלות', b: 'בוחנים את החלל, ההפניות והאיזון של החדר.' },
@@ -540,13 +540,13 @@ export const SERVICES = [
     },
     en: {
       title: 'Decorative Capitals & Gypsum Ornaments in Israel | White Box Studio',
-      desc: 'Bespoke decorative capitals, gypsum ornaments, and architectural embellishments in Israel — classical detail, ornamental features, and custom-made elements.',
+      desc: 'Bespoke decorative capitals, gypsum ornaments, and architectural embellishments in Israel, classical detail, ornamental features, and custom-made elements.',
       serviceType: 'Capitals and gypsum ornaments', crumb: 'Capitals & ornaments',
       eyebrow: '07 / Gypsum capitals & ornaments',
       h1: 'Capitals and ornaments with sculptural precision',
       lead: 'Gold, gypsum, and a little drama.',
       intro: [
-        'Some interiors ask for restraint. Others ask for detail, flourish, and a little ceremony. Capitals and ornaments belong to that second world — the one where a room is elevated by rhythm, embellishment, and a carefully placed sense of drama.',
+        'Some interiors want restraint. Others want detail and a bit of ceremony. Capitals and ornaments are for the second kind, where a cornice, a column head, or a run of moulding is doing the talking.',
         'Corinthian capitals, carved floral panels, a line of gold-leafed trim. We make the ornamental detail most builders skip. Some rooms wear it head to toe. Some want one gold accent and not a thing more. Both are right.'
       ],
       ctaHero: 'Add classical detail',
@@ -559,7 +559,7 @@ export const SERVICES = [
       finishesTitle: 'Design directions',
       finishes: ['Classical-inspired capitals and trim', 'Decorative gypsum motifs', 'Gold-leaf accented details', 'Embellishments integrated into ceiling or wall systems', 'Bespoke pieces adapted to the project architecture'],
       customTitle: 'Subtle or theatrical',
-      custom: 'Highly expressive and theatrical, or subtle and integrated — the decorative work is adapted to the room and the desired tone.',
+      custom: 'Highly expressive and theatrical, or subtle and integrated, the decorative work is adapted to the room and the desired tone.',
       processTitle: 'How we work',
       steps: [
         { t: 'Study the architecture', b: 'We study the space, references, and balance of the room.' },
@@ -583,14 +583,14 @@ export const SERVICES = [
     slug: 'wall-murals',
     he: {
       title: 'ציורי קיר בהזמנה אישית בישראל | White Box Studio',
-      desc: 'ציורי קיר בעבודת יד בהזמנה אישית לבתים, חללי אירוח, קמעונאות ומסחר בישראל — עיצוב נראטיבי, גרפי ומבוסס-דוגמה לחללים ייחודיים.',
+      desc: 'ציורי קיר בעבודת יד בהזמנה אישית לבתים, חללי אירוח, קמעונאות ומסחר בישראל, עיצוב נראטיבי, גרפי ומבוסס-דוגמה לחללים ייחודיים.',
       serviceType: 'ציורי קיר בהזמנה אישית', crumb: 'ציורי קיר',
       eyebrow: '08 / ציורי קיר בהזמנה אישית',
       h1: 'ציורי קיר בהזמנה אישית, מעוצבים לחלל שלכם',
       lead: 'כל קיר הוא סיפור שלא סופר עדיין.',
       intro: [
-        'ציור קיר יכול להפוך קיר מרקע לנראטיב. הוא יכול להכניס תנועה, אווירה, זיכרון, שובבות, סמליות או זהות חזותית — לעיתים בדרך שאף אלמנט אחר בחדר לא יכול. כשהוא מעוצב במיוחד לחלל, הוא הופך לחלק מהאדריכלות ולא לקישוט שנוסף בדיעבד.',
-        'אנחנו מציירים ביד קירות בבתים, מסעדות, חנויות וחללי אירוח — מסצנה שלמה מבוססת-סיפור ועד דוגמה חוזרת ושקטה. כל ציור מבוצע על הקיר המסוים ונותן את המענה לאוירה הדרושה.'
+        'ציור קיר הופך קיר מרקע לסיפור. הוא יכול להכניס תנועה, אווירה או קצת שובבות לחדר בדרך שאף אלמנט אחר לא יכול. כשהוא מצויר במיוחד לחלל, הוא נקרא כחלק מהאדריכלות ולא כקישוט שנוסף בדיעבד.',
+        'אנחנו מציירים ביד קירות בבתים, מסעדות, חנויות וחללי אירוח, מסצנה שלמה מבוססת-סיפור ועד דוגמה חוזרת ושקטה. כל ציור מבוצע על הקיר המסוים ונותן את המענה לאוירה הדרושה.'
       ],
       ctaHero: 'הזמינו ציור קיר',
       images: [
@@ -601,7 +601,7 @@ export const SERVICES = [
       finishesTitle: 'כיווני עיצוב',
       finishes: ['סצנות נראטיביות', 'קונספטים גרפיים ואיוריים', 'מערכות דוגמה לציורי קיר', 'מוטיבים דקורטיביים', 'קומפוזיציות ספציפיות לחלל', 'קונספטים מתוך תמונות, סקיצות או כיוון רגשי רחב'],
       customTitle: 'מעדין ועד אקספרסיבי',
-      custom: 'ציורי הקיר יכולים להיות סוחפים ודרמטיים או עדינים ומאופקים, פיגורטיביים או גרפיים — תמיד מעוצבים לפרופורציות ולקצב של החלל.',
+      custom: 'ציור קיר יכול להיות גדול ודרמטי או שקט ומאופק, פיגורטיבי או גרפי. כך או כך, הוא מצויר לפרופורציות של הקיר שעליו הוא יושב.',
       processTitle: 'תהליך העבודה',
       steps: [
         { t: 'החדר ומטרת הקיר', b: 'מתחילים בחלל, בתכלית של הקיר ובאווירה הרצויה.' },
@@ -616,19 +616,19 @@ export const SERVICES = [
         { q: 'איך מתחילים?', a: 'משתפים את הרעיון.' },
         { q: 'אתם עובדים רק בישראל?', a: 'כן, נכון לעכשיו.' }
       ],
-      bandH2: 'רוצים שקיר יישא יותר מצבע — סיפור, אווירה או זהות?',
+      bandH2: 'רוצים שקיר יישא יותר מצבע, סיפור, אווירה או זהות?',
       bandP: 'שתפו אותנו ברעיון.'
     },
     en: {
       title: 'Custom Wall Murals in Israel | Hand-Painted Murals by White Box',
-      desc: 'Hand-painted custom wall murals for homes, hospitality, retail, and commercial interiors in Israel — narrative, graphic, and pattern-based mural design.',
+      desc: 'Hand-painted custom wall murals for homes, hospitality, retail, and commercial interiors in Israel, narrative, graphic, and pattern-based mural design.',
       serviceType: 'Custom wall murals', crumb: 'Wall murals',
       eyebrow: '08 / Custom wall murals',
       h1: 'Custom wall murals designed for your space',
       lead: "Every wall is a story that hasn't been told yet.",
       intro: [
-        'A mural can transform a wall from background into narrative. It can introduce movement, atmosphere, memory, playfulness, symbolism, or visual identity — often in a way no other element in the room can. When it is designed specifically for the space, it becomes part of the architecture rather than decoration applied after the fact.',
-        'We hand-paint murals for homes, restaurants, shops, and hospitality spaces — anything from a full narrative scene (we once painted a Wild West take on the Last Supper) to a quiet repeating pattern. Each one is drawn for the specific wall and what it needs to do.'
+        'A mural turns a wall from background into a story. It can bring movement, mood, or a bit of mischief into a room in a way nothing else can. Painted for the space, it reads as part of the architecture rather than something added afterwards.',
+        'We hand-paint murals for homes, restaurants, shops, and hospitality spaces, anything from a full narrative scene (we once painted a Wild West take on the Last Supper) to a quiet repeating pattern. Each one is drawn for the specific wall and what it needs to do.'
       ],
       ctaHero: 'Commission a mural',
       images: [
@@ -639,7 +639,7 @@ export const SERVICES = [
       finishesTitle: 'Design directions',
       finishes: ['Narrative scenes', 'Graphic and illustrative concepts', 'Pattern-based mural systems', 'Decorative motifs', 'Site-specific compositions', 'Concepts from references, sketches, or a broad emotional direction'],
       customTitle: 'Subtle to expressive',
-      custom: 'Murals can be immersive and dramatic or subtle and restrained, figurative or graphic — always designed to the proportions and rhythm of the space.',
+      custom: "A mural can be big and dramatic or quiet and restrained, figurative or graphic. Either way it's drawn to the proportions of the wall it's on.",
       processTitle: 'How we work',
       steps: [
         { t: 'The room and the wall', b: "We start with the space, the wall's purpose, and the intended atmosphere." },
@@ -654,7 +654,7 @@ export const SERVICES = [
         { q: 'How do I start?', a: 'Share the idea with us.' },
         { q: 'Do you work only in Israel?', a: 'Yes, currently.' }
       ],
-      bandH2: 'Want a wall to carry more than colour — story, atmosphere, or identity?',
+      bandH2: 'Want a wall to carry more than colour, story, atmosphere, or identity?',
       bandP: 'Share the idea with us.'
     }
   },
@@ -663,13 +663,13 @@ export const SERVICES = [
     slug: 'decorative-concrete',
     he: {
       title: 'עבודות וגימורים בבטון דקורטיבי בישראל | White Box Studio',
-      desc: 'עבודות וגימורים בבטון דקורטיבי בעבודת יד בישראל — מאובייקטים פיסוליים-שימושיים ועד פאנלי קיר זורמים, לחללים מודרניים, מסחריים ולמגורים.',
+      desc: 'עבודות וגימורים בבטון דקורטיבי בעבודת יד בישראל, מאובייקטים פיסוליים-שימושיים ועד פאנלי קיר זורמים, לחללים מודרניים, מסחריים ולמגורים.',
       serviceType: 'בטון דקורטיבי', crumb: 'בטון דקורטיבי',
       eyebrow: '09 / עבודות וגימורים בבטון דקורטיבי',
       h1: 'עבודות בבטון דקורטיבי, גמורות בעבודת יד',
       lead: 'בטון יכול להיות הכי דרמטי שבחומרים.',
       intro: [
-        'בטון לא חייב להיות מינימליסטי או קר. בידיים הנכונות הוא הופך לחומר אקספרסיבי — בעל טקסטורה, תנועה ועומק פיסולי, שיכול להיות גם גולמי וגם מעודן באותו הרגע.',
+        'בטון לא חייב להיות קר או מינימליסטי. בעבודת יד הוא מקבל טקסטורה ותנועה, ויכול להיות גולמי ומעודן באותו הרגע.',
         'לבטון יצא שם של חומר קר, וזה לא מגיע לו. אנחנו מעבדים אותו ביד, מפמוטים שמרגישים כמו אבן מגולפת, ועד פאנלים שנתלים כמו בד עם קפלים. זה אותו הבטון כמו בחניון תת-קרקעי, אנחנו גורמים לו לשדר עוצמה ורוך בו-זמנית.'
       ],
       ctaHero: 'התחילו פרויקט בבטון',
@@ -682,7 +682,7 @@ export const SERVICES = [
       finishesTitle: 'כיווני גימור',
       finishes: ['משטחים גולמיים ומעודנים', 'טקסטורות זורמות בסגנון בד', 'טקסטורת אבן ומגע מינרלי', 'פריטים פיסוליים-שימושיים', 'פאנלי קיר בהתאמה אישית', 'גוונים ופטינות מותאמים'],
       customTitle: 'גולמי ומעודן',
-      custom: 'מהמשטח הגולמי ועד הפרט המעודן — צבע, טקסטורה, צורה וקנה מידה מותאמים לחלל ולכוונה.',
+      custom: 'מהמשטח הגולמי ועד הפרט המעודן, צבע, טקסטורה, צורה וקנה מידה מותאמים לחלל ולכוונה.',
       processTitle: 'תהליך העבודה',
       steps: [
         { t: 'לימוד החלל', b: 'בוחנים את החלל, ההפניות והתחושה הרצויה.' },
@@ -692,7 +692,7 @@ export const SERVICES = [
       faqTitle: 'שאלות נפוצות',
       faq: [
         { q: 'בטון דקורטיבי מתאים גם לפנים וגם לחוץ?', a: 'כן, בהתאם לפרויקט ולתשתית.' },
-        { q: 'אפשר אובייקטים פיסוליים נפרדים?', a: 'כן — מפריטים שימושיים ועד פסלים.' },
+        { q: 'אפשר אובייקטים פיסוליים נפרדים?', a: 'כן, מפריטים שימושיים ועד פסלים.' },
         { q: 'אפשר להתאים גוון וטקסטורה?', a: 'כן, באופן מלא.' },
         { q: 'איך מתחילים?', a: 'שולחים פרטי חלל ותמונות השראה.' },
         { q: 'אתם עובדים רק בישראל?', a: 'כן, נכון לעכשיו.' }
@@ -702,13 +702,13 @@ export const SERVICES = [
     },
     en: {
       title: 'Decorative Concrete Works & Finishes in Israel | White Box Studio',
-      desc: 'Handmade decorative concrete works and finishes in Israel — from sculptural-functional objects to flowing wall panels, for modern residential and commercial spaces.',
+      desc: 'Handmade decorative concrete works and finishes in Israel, from sculptural-functional objects to flowing wall panels, for modern residential and commercial spaces.',
       serviceType: 'Decorative concrete works', crumb: 'Decorative concrete',
       eyebrow: '09 / Decorative concrete works & finishes',
       h1: 'Decorative concrete works, finished by hand',
       lead: 'Concrete can be the most dramatic material in the room.',
       intro: [
-        "Concrete doesn't have to be minimalist or cold. In the right hands it becomes an expressive material — textured, with movement and sculptural depth, able to feel raw and refined at the same time.",
+        "Concrete doesn't have to be cold or minimal. Worked by hand it gets texture and movement, and can feel raw and refined at the same time.",
         "Concrete gets a cold reputation it doesn't deserve. We make it by hand, from candle holders that feel like carved stone, wall panels that hang like fabric caught mid-fold. Same material as a parking garage. Nothing like it."
       ],
       ctaHero: 'Start a concrete project',
@@ -721,7 +721,7 @@ export const SERVICES = [
       finishesTitle: 'Finish directions',
       finishes: ['Raw and refined surfaces', 'Flowing, drapery-like textures', 'Stone texture and mineral touch', 'Sculptural-functional objects', 'Bespoke wall panels', 'Custom tones and patinas'],
       customTitle: 'Raw and refined',
-      custom: 'From a raw surface to a refined detail — colour, texture, form, and scale are tailored to the space and the intent.',
+      custom: "From a raw surface to a fine detail, colour, texture, form, and scale are all set to the space and what you're going for.",
       processTitle: 'How we work',
       steps: [
         { t: 'Study the space', b: 'We study the space, references, and intended feeling.' },
@@ -731,7 +731,7 @@ export const SERVICES = [
       faqTitle: 'Frequently asked questions',
       faq: [
         { q: 'Is decorative concrete suitable for both interior and exterior?', a: 'Yes, depending on the project and substrate.' },
-        { q: 'Can you make standalone sculptural objects?', a: 'Yes — from functional pieces to sculptures.' },
+        { q: 'Can you make standalone sculptural objects?', a: 'Yes, from functional pieces to sculptures.' },
         { q: 'Can tone and texture be customized?', a: 'Yes, fully.' },
         { q: 'How do I start?', a: 'Send space details and reference images.' },
         { q: 'Do you work only in Israel?', a: 'Yes, currently.' }
@@ -745,46 +745,46 @@ export const SERVICES = [
 export const FAQ = {
   he: {
     title: 'שאלות נפוצות | White Box Studio',
-    desc: 'שאלות ותשובות על עבודה עם White Box Studio — תהליך, התאמה אישית, חומרים, אזורי שירות ואיך מתחילים פרויקט.',
+    desc: 'שאלות ותשובות על עבודה עם White Box Studio, תהליך, התאמה אישית, חומרים, אזורי שירות ואיך מתחילים פרויקט.',
     crumb: 'שאלות נפוצות',
     h1: 'שאלות נפוצות',
     lead: 'כל מה שכדאי לדעת לפני שמתחילים.',
-    intro: 'ריכזנו כאן את השאלות הנפוצות ביותר על עבודה עם הסטודיו — מהתהליך ועד אזורי השירות. לא מצאתם תשובה? דברו איתנו ונשמח לעזור.',
+    intro: 'ריכזנו כאן את השאלות הנפוצות ביותר על עבודה עם הסטודיו, מהתהליך ועד אזורי השירות. לא מצאתם תשובה? דברו איתנו ונשמח לעזור.',
     faq: [
-      { q: 'באילו שירותים אתם עוסקים?', a: 'אנחנו סטודיו לגימורים אדריכליים בעבודת יד — טיח דקורטיבי, פיסול, פאנלי גבס, ציפוי דמוי ברזל, ציורי קיר, בטון דקורטיבי, כותרות ועיטורים, שולחנות פיסוליים ואביזרי תצוגה.' },
+      { q: 'באילו שירותים אתם עוסקים?', a: 'אנחנו סטודיו לגימורים אדריכליים בעבודת יד, טיח דקורטיבי, פיסול, פאנלי גבס, ציפוי דמוי ברזל, ציורי קיר, בטון דקורטיבי, כותרות ועיטורים, שולחנות פיסוליים ואביזרי תצוגה.' },
       { q: 'העבודות בהתאמה אישית?', a: 'כן. כמעט כל מה שאנחנו עושים מעוצב ומיוצר במיוחד עבור החלל, הלקוח והכוונה.' },
       { q: 'אתם עובדים עם אדריכלים ומעצבי פנים?', a: 'בהחלט. אנחנו עובדים בעיצוב משותף לצד אדריכלים, מעצבים ולקוחות סופיים, ומבצעים את ההתקנה המלאה באתר.' },
       { q: 'איך מתחילים פרויקט?', a: 'שולחים לנו תמונות השראה, סוג הפרויקט, לוח זמנים ופרטי חלל בוואטסאפ או במייל, ואנחנו חוזרים עם כיוון והצעה.' },
       { q: 'אתם מתקינים באתר?', a: 'כן, אנחנו מבצעים התקנה מלאה באתר הלקוח.' },
-      { q: 'מאיזה שלב כדאי לשלב אתכם?', a: 'עדיף מוקדם ככל האפשר — שילוב בשלב התכנון מאפשר לוודא שכל התשתיות הנדרשות מתוכננות מראש.' },
-      { q: 'אתם עובדים בחללים מסחריים ופרטיים?', a: 'כן, שניהם — בתים, מסעדות, מלונות, חנויות ומשרדים.' },
+      { q: 'מאיזה שלב כדאי לשלב אתכם?', a: 'עדיף מוקדם ככל האפשר, שילוב בשלב התכנון מאפשר לוודא שכל התשתיות הנדרשות מתוכננות מראש.' },
+      { q: 'אתם עובדים בחללים מסחריים ופרטיים?', a: 'כן, שניהם, בתים, מסעדות, מלונות, חנויות ומשרדים.' },
       { q: 'אתם עובדים רק בישראל?', a: 'כן, נכון לעכשיו אנחנו לוקחים פרויקטים בישראל בלבד.' },
       { q: 'כמה עולה פרויקט?', a: 'כל פרויקט מתומחר בנפרד לפי היקף, חומרים ומורכבות. נספק הצעת מחיר לאחר היכרות עם הפרויקט.' },
       { q: 'מתי הסטודיו נוסד?', a: 'הסטודיו נוסד ב-2005, עם שני עשורים של גימורים אדריכליים בעבודת יד.' }
     ],
     bandH2: 'יש לכם פרויקט בראש?',
-    bandP: 'ספרו לנו עליו — ונחזור אליכם עם כיוון מתאים.'
+    bandP: 'ספרו לנו עליו, ונחזור אליכם עם כיוון מתאים.'
   },
   en: {
     title: 'Frequently Asked Questions | White Box Studio',
-    desc: 'Questions and answers about working with White Box Studio — process, customization, materials, service area, and how to start a project.',
+    desc: 'Questions and answers about working with White Box Studio, process, customization, materials, service area, and how to start a project.',
     crumb: 'FAQ',
     h1: 'Frequently asked questions',
     lead: 'Everything worth knowing before you start.',
-    intro: "We've gathered the questions we're asked most about working with the studio — from process to service area. Can't find your answer? Get in touch and we'll be glad to help.",
+    intro: "We've gathered the questions we're asked most about working with the studio, from process to service area. Can't find your answer? Get in touch and we'll be glad to help.",
     faq: [
-      { q: 'What services do you offer?', a: "We're a studio for handmade architectural finishes — decorative plaster, sculpture, gypsum panels, iron-look coating, wall murals, decorative concrete, capitals and ornaments, sculptural tables, and display accessories." },
+      { q: 'What services do you offer?', a: "We're a studio for handmade architectural finishes, decorative plaster, sculpture, gypsum panels, iron-look coating, wall murals, decorative concrete, capitals and ornaments, sculptural tables, and display accessories." },
       { q: 'Is the work bespoke?', a: 'Yes. Almost everything we make is designed and produced specifically for the space, the client, and the intent.' },
       { q: 'Do you work with architects and interior designers?', a: 'Absolutely. We co-design alongside architects, designers, and end clients, and handle full on-site installation.' },
       { q: 'How do I start a project?', a: "Send us reference images, the project type, timeline, and space details by WhatsApp or email, and we'll come back with a direction and a quote." },
       { q: 'Do you install on site?', a: "Yes, we carry out full installation at the client's site." },
-      { q: 'When should I bring you in?', a: 'As early as possible — involving us at the planning stage ensures all required infrastructure is planned in advance.' },
-      { q: 'Do you work in commercial and private spaces?', a: 'Yes, both — homes, restaurants, hotels, retail, and offices.' },
+      { q: 'When should I bring you in?', a: 'As early as possible, involving us at the planning stage ensures all required infrastructure is planned in advance.' },
+      { q: 'Do you work in commercial and private spaces?', a: 'Yes, both, homes, restaurants, hotels, retail, and offices.' },
       { q: 'Do you work only in Israel?', a: 'Yes, we currently take on projects in Israel only.' },
       { q: 'How much does a project cost?', a: 'Each project is priced individually by scope, materials, and complexity. We provide a quote once we understand the project.' },
       { q: 'When was the studio established?', a: 'The studio was founded in 2005, with two decades of handmade architectural finishes.' }
     ],
     bandH2: 'Have a project in mind?',
-    bandP: "Tell us about it — and we'll come back with a direction."
+    bandP: "Tell us about it, and we'll come back with a direction."
   }
 };
