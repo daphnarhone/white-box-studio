@@ -14,7 +14,7 @@ export const SERVICES = [
       lead: 'לא צבע. לא טפט. קיר עם נוכחות חומרית.',
       intro: [
         'קיר יכול להיות הרבה יותר מצבע. בעזרת טיח דקורטיבי בעבודת יד הוא הופך למשטח חי — בעל טקסטורה, שכבות ועומק, שמשנה את האופן שבו האור נע בחלל ואת התחושה של החדר כולו.',
-        'בסטודיו White Box אנחנו יוצרים גימורי טיח דקורטיבי בהתאמה אישית לאופי של כל חלל. יש פרויקטים שדורשים טקסטורות תבליט נועזות ועומק פיסולי; אחרים מבקשים תנועה עדינה, פטינה מתיישנת או שכבות דקות שמתגלות לאט. בכל מקרה — התוצאה ייחודית, נוצרת באתר, ישירות על הקיר.'
+        'כל גימור טיח אצלנו נעשה ביד, באתר, ישירות על הקיר. פרויקט אחד דורש תבליט עמוק בטקסטורת עור תנין; אחר דורש פטינה דקה שאת הדקויות שלה ניתן לראות רק מקרוב. אין שני קירות שנראים אותו דבר.'
       ],
       ctaHero: 'תכננו קיר טיח',
       images: [
@@ -54,7 +54,7 @@ export const SERVICES = [
       lead: 'Not paint. Not wallpaper. A wall with material presence.',
       intro: [
         'A wall can do much more than hold a colour. With hand-applied plaster it becomes tactile, layered, and expressive — something that changes the way light moves through a room and the way the room itself is experienced.',
-        'White Box creates decorative plaster wall finishes tailored to the character of the space. Some projects call for bold relief textures and sculptural depth; others need softer movement, aged patina, or delicate overlays that reveal themselves slowly. In every case, the result is custom, site-specific, and made by hand — directly on the wall.'
+        'We mix and trowel every plaster finish on site, straight onto your wall. One project wants deep, crocodile-skin relief; the next, a thin aged patina you only catch up close. No two walls leave the same.'
       ],
       ctaHero: 'Plan your plaster wall',
       images: [
@@ -98,7 +98,7 @@ export const SERVICES = [
       lead: 'לא רק שולחן. הצהרה.',
       intro: [
         'יש רהיטים שתומכים בחדר. יש כאלה שנותנים לו את מרכז הכובד. שולחן קפה פיסולי שייך לקטגוריה השנייה — פונקציונלי, כן, אבל גם אטמוספרי, אקספרסיבי ובלתי אפשרי להתעלמות.',
-        'בסטודיו White Box אנחנו יוצרים שולחנות קפה כאובייקטים פיסוליים בפני עצמם. הפרופורציות, הגימור, הצבע וצורת הבסיס נשקלים כחלק מהזהות החזותית של החלל. התוצאה היא נקודת מוקד בהתאמה אישית, לא פריט רהיט סטנדרטי.'
+        'אנחנו מתייחסים לכל שולחן כמו לפסל שבמקרה אפשר להניח עליו כוס. הפרופורציות, הגימור, הצבע וצורת הבסיס נקבעים מול החדר שבו הוא יעמוד. אנחנו מייצרים אובייקט אחד, לחדר אחד ולא משהו מהמדף.'
       ],
       ctaHero: 'הזמינו שולחן',
       images: [
@@ -137,7 +137,7 @@ export const SERVICES = [
       lead: 'Not just a table. A statement.',
       intro: [
         'Some pieces support a room. Others give it its centre of gravity. A sculptural coffee table belongs to the second category: functional, yes — but also atmospheric, expressive, and impossible to ignore.',
-        'White Box creates coffee tables as sculptural objects in their own right. The proportions, finish, colour, and base form are all considered as part of the visual identity of the space. The result is a bespoke focal point rather than a standard furniture item.'
+        "We treat each table as a sculpture that happens to be useful. Proportions, finish, colour, the shape of the base. We set them up against the room it'll sit in. You get one object made for one space, not a catalogue piece."
       ],
       ctaHero: 'Commission a table',
       images: [
@@ -180,7 +180,7 @@ export const SERVICES = [
       lead: 'אם אפשר לדמיין את זה, אפשר לפסל את זה.',
       intro: [
         'פסל בהזמנה אישית מכניס לחלל נוכחות מסוג אחר. הוא יכול לעגן כניסה, ליצור רגע מוקד, להוסיף סמליות, להכניס דרמה, או פשוט לגרום לחדר להרגיש שלם ואסוף יותר. בניגוד לאובייקטים דקורטיביים מהמדף, פסל מוזמן נוצר עבור חלל, קנה מידה וכוונה ספציפיים.',
-        'בסטודיו White Box אנחנו יוצרים עבודות פיסול בעבודת יד, מתרגמים רעיונות לצורה בעזרת מלאכת יד, פרשנות ותשומת לב לפרט. ההזמנות נעות מקלאסי ועיטורי ועד עכשווי, שובב, סמלי או ייחודי לעולם החזותי של הלקוח.'
+        'תנו לנו סקיצה, תמונה, או אפילו משפט אחד ונפסל אותם ביד. גילפנו "דוד" שלם. ייצרנו פריטים שובבים חד-פעמיים שהגיוניים רק למי שהזמין אותם. קלאסי או מוזר, עשינו את שניהם, ואוהבים אותם.'
       ],
       ctaHero: 'הזמינו פסל',
       images: [
@@ -219,7 +219,7 @@ export const SERVICES = [
       lead: 'If you can imagine it, we can sculpt it.',
       intro: [
         'Custom sculpture brings a different kind of presence into a space. It can anchor an entrance, create a focal moment, add symbolism, introduce drama, or simply make a room feel more collected and complete. Unlike off-the-shelf decorative objects, a commissioned sculpture is made for a specific setting, scale, and intention.',
-        "White Box creates bespoke sculptural work by hand, translating ideas into form with craft, interpretation, and attention to detail. Commissions range from classical and ornamental to contemporary, playful, symbolic, or highly specific to a client's visual world."
+        "We sculpt by hand, turning a brief or a rough sketch into a finished form. We've done classical and ornamental work, and we've done pieces that are contemporary, playful, or built around one client's private references, including a hand-carved David."
       ],
       ctaHero: 'Commission a sculpture',
       images: [
@@ -262,7 +262,7 @@ export const SERVICES = [
       lead: 'תקרה לא חייבת להיות שטוחה.',
       intro: [
         'חלק מרגעי העיצוב החזקים ביותר מתרחשים מעל גובה העיניים, או על משטחים גדולים ושקטים שבדרך כלל נשארים חלקים. פאנלי גבס מאפשרים למשטחים האלה להפוך לפיצ׳רים אדריכליים בפני עצמם — שכבתיים, עיטוריים, פיסוליים ומשולבים עמוק בזהות החדר.',
-        'בסטודיו White Box אנחנו יוצרים פאנלי גבס דקורטיביים לקירות ולתקרות שמוסיפים עומק, דוגמה, קצב ונוכחות חומרית. יש פאנלים גיאומטריים ומסודרים, ואחרים פיגורטיביים, קלאסיים או עשירים בטקסטורה.'
+        'אנחנו יוצקים פאנלים מגבס לקירות ולתקרות — חלקם גיאומטריים ומדויקים, חלקם פיגורטיביים או קלאסיים. פאנל אחד שיצקנו היה דיוקן של מרילין מונרו בפסיפס; אחר, דוגמה מרוקאית על פני תקרה שלמה.'
       ],
       ctaHero: 'תכננו תקרה או קיר',
       images: [
@@ -274,7 +274,7 @@ export const SERVICES = [
       finishesTitle: 'כיווני עיצוב',
       finishes: ['מערכות גיאומטריות ומבוססות-דוגמה', 'מוטיבים עיטוריים קלאסיים', 'קומפוזיציות פיגורטיביות או מבוססות-תבליט', 'טיפולי קיר מודולריים חוזרים', 'עיצובים מותאמים להשראה או לפלטת החומרים של הפרויקט'],
       customTitle: 'למה לבחור בפאנלי גבס',
-      custom: 'הם הופכים קיר חלק לאדריכלות, נותנים לתקרה זהות, ויוצרים תחושת גימור שנקראת כמכוונת, מלאכת-יד ובהתאמה אישית. הדוגמה וקנה המידה ניתנים להתאמה מלאה.',
+      custom: 'תקרה שטוחה הופכת לדבר שהחדר בנוי סביבו, ולא רק רקע. על הדוגמה וקנה המידה אתם מחליטים.',
       processTitle: 'תהליך העבודה',
       steps: [
         { t: 'לימוד החלל', b: 'בוחנים מידות, קונטקסט והפניות.' },
@@ -301,7 +301,7 @@ export const SERVICES = [
       lead: "A ceiling doesn't have to be flat.",
       intro: [
         'Some of the most powerful design moments happen above eye level, or across large quiet surfaces that are usually left plain. Gypsum panels allow those surfaces to become architectural features in their own right — layered, ornamental, sculptural, and deeply integrated into the identity of the room.',
-        'White Box creates decorative gypsum panels for walls and ceilings that add depth, pattern, rhythm, and material presence. Some panels are geometric and ordered; others are figurative, classical, or richly textured.'
+        'We cast gypsum panels for walls and ceilings — some strict and geometric, some figurative or classical. One recent panel was a Marilyn Monroe portrait built up as a mosaic; another, a Moroccan lattice across a whole ceiling.'
       ],
       ctaHero: 'Design your ceiling',
       images: [
@@ -313,7 +313,7 @@ export const SERVICES = [
       finishesTitle: 'Design directions',
       finishes: ['Geometric and pattern-based systems', 'Classical ornamental motifs', 'Figurative or relief-based compositions', 'Repeating modular wall treatments', 'Custom designs from references or the project palette'],
       customTitle: 'Why choose gypsum panels',
-      custom: 'They turn a blank wall into architecture, give a ceiling identity, and create a finished feeling that reads as intentional, crafted, and custom. Pattern and scale can be fully customized.',
+      custom: 'A flat ceiling stops being background and becomes the thing the room is built around. Pattern and scale are yours to set.',
       processTitle: 'How we work',
       steps: [
         { t: 'Study the space', b: 'We review dimensions, context, and references.' },
@@ -344,7 +344,7 @@ export const SERVICES = [
       lead: 'הפרט הקטן הוא הסיפור.',
       intro: [
         'לא כל פרויקט מתחיל בקיר או בחדר. לפעמים החלק הזכיר ביותר בחוויה הוא אובייקט קטן יותר: סטנד תצוגה, פרופ, אביזר בעבודת יד, אלמנט הגשה, או פריט דקורטיבי שמחזיק יחד את כל הטון של האירוע או הסביבה.',
-        'בסטודיו White Box אנחנו יוצרים אביזרים מותאמים אישית ואלמנטים דקורטיביים בקנה מידה קטן לתצוגות קמעונאיות, השקות, אירועים, מתנות וחוויות ממותגות. הפריטים האלה אולי צנועים בגודלם, אבל לעיתים קרובות הם נושאים את המוקד הרגשי או החזותי של הסביבה כולה.'
+        'סטנדים, פרופים, אלמנטים להגשה, מתנות ותפאורות לאירועים. אנחנו מייצרים אותם בהזמנה אישית לחנויות, להשקות ולאירועים. אולי זה לא הדבר הכי גדול בחדר אבל זה כמעט תמיד הדבר שבסוף מצלמים.'
       ],
       ctaHero: 'הזמינו פריטי תצוגה',
       images: [
@@ -383,7 +383,7 @@ export const SERVICES = [
       lead: 'The small detail is the whole story.',
       intro: [
         'Not every project begins with a wall or a room. Sometimes the most memorable part of an experience is a smaller object: a display stand, a prop, a handmade accessory, a presentation element, or a decorative piece that holds the tone of the entire event or setting together.',
-        'White Box creates custom accessories and small-scale decorative elements for retail displays, launches, events, gifts, and branded experiences. These pieces may be modest in scale, but they often carry the emotional or visual focus of the whole environment.'
+        "We make small and large custom pieces for retail displays, launches, event decorations, gifts, display stands, props and presentation details. They could be small or large, but they're usually the thing people end up photographing."
       ],
       ctaHero: 'Order display pieces',
       images: [
@@ -426,7 +426,7 @@ export const SERVICES = [
       lead: 'ברזל. בלי הברזל.',
       intro: [
         'יש משהו מיידי ומשכנע בברזל: האפלוליות, המשקל, הדרמה ותחושת הקביעות. אבל ברזל מלא לא תמיד הפתרון הטכני או האסתטי הנכון לכל פרויקט. ציפוי דמוי ברזל מציע את העושר החזותי של מתכת תוך גמישות רבה הרבה יותר ביישום ובשליטה על הגימור.',
-        'בסטודיו White Box אנחנו יוצרים ציפויים דמויי ברזל לדלתות, קירות ומשטחים נבחרים, ומפתחים גימורים שמזכירים מתכת מחושלת, פטינה מתיישנת, חלודה חמה או גוונים תעשייתיים מעושנים. התוצאה — משטח עם נוכחות ועומק, בלי המשקל הפיזי של ברזל אמיתי.'
+        'אנחנו מיישמים ציפוי דמוי ברזל על דלתות, קירות ומשטחים נבחרים, ובונים גימור שנראה כמו מתכת מחושלת, חלודה חמה או פלדה מעושנת. מקבלים את המשקל והעומק של ברזל לעין, בלי המשקל על הצירים.'
       ],
       ctaHero: 'קבלו את מראה הברזל',
       images: [
@@ -465,7 +465,7 @@ export const SERVICES = [
       lead: 'Iron. Without the iron.',
       intro: [
         'There is something instantly compelling about iron: its darkness, weight, drama, and sense of permanence. But solid iron is not always the right technical or aesthetic solution for every project. An iron-look coating offers the visual richness of metal while allowing far more flexibility in application and finish control.',
-        'White Box creates iron-look coatings for doors, walls, and selected surfaces, developing finishes that evoke forged metal, aged patina, warm rust, or smoked industrial tones. The result is a surface with presence and depth — without the physical weight of actual iron.'
+        'We apply iron-look coatings to doors, walls, and select surfaces, building up finishes that read as forged metal, warm rust, or smoked steel. You get the weight and depth of iron on the eye, without the weight on the hinges.'
       ],
       ctaHero: 'Get the iron look',
       images: [
@@ -508,7 +508,7 @@ export const SERVICES = [
       lead: 'זהב, גבס, וקצת דרמה.',
       intro: [
         'יש חללים שמבקשים ריסון. אחרים מבקשים פרט, פריחה וקצת טקס. כותרות ועיטורים שייכים לעולם השני — זה שבו חדר מתעלה בזכות קצב, קישוט ותחושת דרמה ממוקמת בקפידה.',
-        'בסטודיו White Box אנחנו יוצרים כותרות עמודים דקורטיביות, עיטורי גבס ואלמנטים אדריכליים שמכניסים לחלל עידון, עושר ואופי פיסולי. יש פרויקטים שנוטים לקלאסי ועשיר-עיטורים, ואחרים שמשתמשים בפרטים דקורטיביים בצורה סלקטיבית, כאקצנטים שמחדדים את זהות החדר.'
+        'כותרת קורינתית, פאנל פרחוני מגולף, פס פרופיל בעלה זהב, אנחנו עושים את הפרטים העיטוריים שרוב הקבלנים מדלגים עליהם. יש חדר שמטופל מהרצפה לתקרה. יש כזה שדורש פרט זהב אחד וזהו. שניהם נכונים.'
       ],
       ctaHero: 'הוסיפו פרט קלאסי',
       images: [
@@ -547,7 +547,7 @@ export const SERVICES = [
       lead: 'Gold, gypsum, and a little drama.',
       intro: [
         'Some interiors ask for restraint. Others ask for detail, flourish, and a little ceremony. Capitals and ornaments belong to that second world — the one where a room is elevated by rhythm, embellishment, and a carefully placed sense of drama.',
-        'White Box creates decorative capitals, gypsum ornaments, and architectural embellishments that bring refinement, richness, and sculptural character into a space. Some projects lean classical and ornate; others use decorative details more selectively, as accents that sharpen the identity of the room.'
+        'Corinthian capitals, carved floral panels, a line of gold-leafed trim. We make the ornamental detail most builders skip. Some rooms wear it head to toe. Some want one gold accent and not a thing more. Both are right.'
       ],
       ctaHero: 'Add classical detail',
       images: [
@@ -590,7 +590,7 @@ export const SERVICES = [
       lead: 'כל קיר הוא סיפור שלא סופר עדיין.',
       intro: [
         'ציור קיר יכול להפוך קיר מרקע לנראטיב. הוא יכול להכניס תנועה, אווירה, זיכרון, שובבות, סמליות או זהות חזותית — לעיתים בדרך שאף אלמנט אחר בחדר לא יכול. כשהוא מעוצב במיוחד לחלל, הוא הופך לחלק מהאדריכלות ולא לקישוט שנוסף בדיעבד.',
-        'בסטודיו White Box אנחנו יוצרים ציורי קיר בעבודת יד לחללי מגורים, אירוח, קמעונאות ומסחר. יש ציורים סוחפים ומבוססי-סיפור, ואחרים גרפיים, עיטוריים או מבוססי-דוגמה. כל אחד מהם מפותח ביחס לחלל, לקנה המידה שלו ולתחושה שהוא צריך ליצור.'
+        'אנחנו מציירים ביד קירות בבתים, מסעדות, חנויות וחללי אירוח — מסצנה שלמה מבוססת-סיפור ועד דוגמה חוזרת ושקטה. כל ציור מבוצע על הקיר המסוים ונותן את המענה לאוירה הדרושה.'
       ],
       ctaHero: 'הזמינו ציור קיר',
       images: [
@@ -628,7 +628,7 @@ export const SERVICES = [
       lead: "Every wall is a story that hasn't been told yet.",
       intro: [
         'A mural can transform a wall from background into narrative. It can introduce movement, atmosphere, memory, playfulness, symbolism, or visual identity — often in a way no other element in the room can. When it is designed specifically for the space, it becomes part of the architecture rather than decoration applied after the fact.',
-        'White Box creates hand-painted custom murals for residential, hospitality, retail, and commercial interiors. Some murals are immersive and story-driven; others are graphic, ornamental, or pattern-based. Each one is developed in relation to the space, its scale, and the feeling it needs to create.'
+        'We hand-paint murals for homes, restaurants, shops, and hospitality spaces — anything from a full narrative scene (we once painted a Wild West take on the Last Supper) to a quiet repeating pattern. Each one is drawn for the specific wall and what it needs to do.'
       ],
       ctaHero: 'Commission a mural',
       images: [
@@ -670,7 +670,7 @@ export const SERVICES = [
       lead: 'בטון יכול להיות הכי דרמטי שבחומרים.',
       intro: [
         'בטון לא חייב להיות מינימליסטי או קר. בידיים הנכונות הוא הופך לחומר אקספרסיבי — בעל טקסטורה, תנועה ועומק פיסולי, שיכול להיות גם גולמי וגם מעודן באותו הרגע.',
-        'בסטודיו White Box אנחנו יוצרים עבודות וגימורים בבטון דקורטיבי בעבודת יד, מאובייקטים פיסוליים-שימושיים (כמו מחזיקי נרות בטקסטורת אבן) ועד פאנלי קיר זורמים בסגנון בד. מתאים לחללים מודרניים — מסחריים ולמגורים — שמחפשים מגע גולמי ומעודן בו-זמנית.'
+        'לבטון יצא שם של חומר קר, וזה לא מגיע לו. אנחנו מעבדים אותו ביד, מפמוטים שמרגישים כמו אבן מגולפת, ועד פאנלים שנתלים כמו בד עם קפלים. זה אותו הבטון כמו בחניון תת-קרקעי, אנחנו גורמים לו לשדר עוצמה ורוך בו-זמנית.'
       ],
       ctaHero: 'התחילו פרויקט בבטון',
       images: [
@@ -709,7 +709,7 @@ export const SERVICES = [
       lead: 'Concrete can be the most dramatic material in the room.',
       intro: [
         "Concrete doesn't have to be minimalist or cold. In the right hands it becomes an expressive material — textured, with movement and sculptural depth, able to feel raw and refined at the same time.",
-        'White Box creates decorative concrete works and finishes by hand, from sculptural-functional objects (like our stone-textured candle holders) to flowing, drapery-like wall panels. It suits modern spaces — commercial and residential — that want something raw and refined at once.'
+        "Concrete gets a cold reputation it doesn't deserve. We make it by hand, from candle holders that feel like carved stone, wall panels that hang like fabric caught mid-fold. Same material as a parking garage. Nothing like it."
       ],
       ctaHero: 'Start a concrete project',
       images: [
