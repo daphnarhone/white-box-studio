@@ -1755,3 +1755,308 @@ html[dir="rtl"] .asw-menu {
   right: auto !important;
   left: 0 !important;
 }
+
+/* ════════════════════════════════════════════════════════════════════════
+   Service / SEO content pages (/services/*.html + /en/services/*.html)
+   Standalone per-language pages that reuse the home page's tokens, header,
+   footer, motion, and CTA pills. Everything here is ADDITIVE — it does not
+   touch any home-page rule. Logical properties (inline-start/end) so the
+   whole layout auto-mirrors for Hebrew RTL.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* Language toggle as <a> links (service pages navigate to the other-language
+   URL instead of swapping text in place). Mirrors the .lang-toggle button look. */
+.lang-toggle a {
+  color: inherit;
+  text-decoration: none;
+  font: inherit;
+  font-weight: inherit;
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+.lang-toggle a.active { opacity: 0.4; }       /* current language de-emphasized */
+.lang-toggle a[lang="en"] { font-family: var(--font-display); }
+.lang-toggle a[lang="he"] { font-family: var(--font-hebrew); font-size: 1.23em; }
+
+/* ── Services nav dropdown (desktop) ───────────────────────────────────────
+   Lives inside the blended header. While open/hovered we drop the header's
+   difference blend and give it a solid bar so the menu panel reads cleanly
+   (`:has()`; older browsers simply keep the blended header — links still work). */
+.nav-dropdown { position: relative; display: inline-flex; }
+.nav-dropdown-toggle {
+  background: none; border: none; color: inherit; font: inherit; font-weight: inherit;
+  letter-spacing: inherit; text-transform: inherit; cursor: pointer; padding: 0;
+  opacity: 0.85; transition: opacity 0.3s; display: inline-flex; align-items: center; gap: 6px;
+}
+.nav-dropdown-toggle::after { content: '▾'; font-size: 0.7em; opacity: 0.8; }
+.nav-dropdown-toggle:hover,
+.nav-dropdown.open .nav-dropdown-toggle { opacity: 1; }
+.nav-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 16px);
+  inset-inline-end: 0;
+  min-width: 264px;
+  background: var(--section-dark);
+  border: 1px solid rgba(242, 237, 227, 0.14);
+  border-radius: 16px;
+  padding: 10px;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.32);
+  display: flex; flex-direction: column; gap: 2px;
+  opacity: 0; visibility: hidden; transform: translateY(-6px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s linear 0.2s;
+  z-index: 200;
+}
+.nav-dropdown:hover .nav-dropdown-menu,
+.nav-dropdown:focus-within .nav-dropdown-menu,
+.nav-dropdown.open .nav-dropdown-menu {
+  opacity: 1; visibility: visible; transform: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.nav-dropdown-menu a {
+  color: var(--cream); text-decoration: none;
+  padding: 9px 14px; border-radius: 10px;
+  font-size: 13px; font-weight: 400; letter-spacing: 0.03em; text-transform: none;
+  opacity: 0.9; white-space: nowrap; transition: background 0.2s, opacity 0.2s;
+}
+.nav-dropdown-menu a:hover,
+.nav-dropdown-menu a:focus-visible { background: rgba(255, 213, 0, 0.12); opacity: 1; }
+html[lang="he"] .nav-dropdown-toggle { font-size: 1em; }
+html[lang="he"] .nav-dropdown-menu a { font-family: var(--font-hebrew); font-size: 15px; }
+/* Solid header bar whenever the menu is open or hovered, so the panel isn't blended. */
+body > header:has(.nav-dropdown:hover),
+body > header:has(.nav-dropdown:focus-within),
+body > header:has(.nav-dropdown.open) {
+  mix-blend-mode: normal;
+  background: var(--section-dark);
+  color: var(--cream);
+}
+
+/* ── Services group inside the mobile menu ─────────────────────────────────── */
+.mobile-services { text-align: center; }
+.mobile-services-title {
+  font-size: 11px; font-weight: 300; letter-spacing: var(--tracking-wide);
+  text-transform: uppercase; color: var(--accent); opacity: 0.9; margin-bottom: 16px;
+}
+html[lang="he"] .mobile-services-title { font-family: var(--font-hebrew); font-size: 13px; }
+.mobile-services-list { display: flex; flex-direction: column; gap: 12px; align-items: center; }
+.mobile-services-list a {
+  font-family: var(--font-display);
+  font-size: 16px; font-weight: 400; color: var(--cream); text-decoration: none;
+  opacity: 0.85; transition: color 0.2s, opacity 0.2s;
+}
+html[lang="he"] .mobile-services-list a { font-family: var(--font-hebrew); font-size: 18px; }
+.mobile-services-list a:hover,
+.mobile-services-list a:focus-visible { color: var(--accent); opacity: 1; }
+/* The mobile menu now holds more items — let it scroll and tighten the gaps. */
+@media (max-width: 768px) {
+  .mobile-menu { justify-content: flex-start; padding: 96px 24px 40px; gap: 32px; overflow-y: auto; }
+  .mobile-menu-nav { gap: 18px; }
+  .mobile-menu-nav a { font-size: clamp(26px, 7vw, 36px); }
+}
+
+/* Page shell — clear the fixed header. */
+.svc-main {
+  background: var(--cream);
+  color: var(--charcoal);
+  padding: clamp(120px, 16vw, 180px) 40px clamp(64px, 8vw, 96px);
+}
+.svc-inner { max-width: 940px; margin: 0 auto; }
+
+/* Breadcrumb */
+.breadcrumb {
+  font-size: 12px;
+  font-weight: 300;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: clamp(32px, 5vw, 56px);
+}
+html[lang="he"] .breadcrumb { font-family: var(--font-hebrew); font-size: 14px; }
+.breadcrumb a { color: inherit; text-decoration: none; opacity: 0.85; transition: opacity 0.25s, color 0.25s; }
+.breadcrumb a:hover { opacity: 1; color: var(--charcoal); }
+.breadcrumb-sep { margin: 0 8px; opacity: 0.5; }
+
+/* Hero block */
+.svc-hero { margin-bottom: clamp(56px, 8vw, 96px); }
+.svc-eyebrow { color: var(--charcoal); opacity: 0.7; margin-bottom: 24px; }
+.svc-h1 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(40px, 6.5vw, 84px);
+  line-height: 0.98;
+  letter-spacing: var(--tracking-tight);
+  margin-bottom: 24px;
+  max-width: 18ch;
+}
+html[lang="he"] .svc-h1,
+html[lang="he"] .svc-lead,
+html[lang="he"] .svc-body,
+html[lang="he"] .svc-h2,
+html[lang="he"] .svc-list li,
+html[lang="he"] .svc-step-body,
+html[lang="he"] .faq-q,
+html[lang="he"] .faq-a,
+html[lang="he"] .svc-cta-band h2,
+html[lang="he"] .svc-cta-band p { font-family: var(--font-hebrew); }
+html[dir="rtl"] .svc-h1 { letter-spacing: 0; }
+.svc-lead {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(20px, 2.6vw, 30px);
+  line-height: 1.3;
+  letter-spacing: var(--tracking-tight);
+  color: var(--accent-magenta);
+  margin-bottom: 36px;
+  max-width: 26ch;
+}
+html[dir="rtl"] .svc-lead { letter-spacing: 0; }
+.svc-body {
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.7;
+  opacity: 0.85;
+  max-width: 64ch;
+  margin-bottom: 22px;
+}
+.svc-hero .cta-pill { margin-top: 18px; }
+
+/* Gallery (reuses .detail-image so the glide + skew motion applies for free) */
+.svc-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin: clamp(48px, 7vw, 80px) 0;
+}
+.svc-gallery .detail-image { aspect-ratio: 4 / 5; }
+.svc-gallery .detail-image:only-child { grid-column: 1 / -1; aspect-ratio: 16 / 10; }
+/* Transparency-aware images (e.g. the cut-out David PNG) get a charcoal backdrop
+   inside the gallery so a light figure reads on the cream page, and `contain` so
+   the full piece shows without cropping. */
+.svc-gallery .detail-image--transparent { background: var(--charcoal); }
+.svc-gallery .detail-image--transparent img { object-fit: contain; }
+
+/* Content sections */
+.svc-section { margin-bottom: clamp(48px, 7vw, 80px); }
+.svc-h2 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(26px, 3.4vw, 40px);
+  line-height: 1.05;
+  letter-spacing: var(--tracking-tight);
+  margin-bottom: 28px;
+}
+html[dir="rtl"] .svc-h2 { letter-spacing: 0; }
+
+/* Two-column wrap for Applications + Finishes */
+.svc-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(36px, 5vw, 64px);
+}
+
+/* Accent-marked lists */
+.svc-list { list-style: none; }
+.svc-list li {
+  position: relative;
+  padding-inline-start: 26px;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.55;
+  margin-bottom: 14px;
+  opacity: 0.88;
+}
+.svc-list li::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0.62em;
+  width: 9px;
+  height: 9px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+/* Process — numbered steps */
+.svc-process { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(24px, 4vw, 48px); }
+.svc-step-num {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 40px;
+  line-height: 1;
+  color: var(--accent);
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1.5px var(--accent);
+  margin-bottom: 14px;
+}
+.svc-step-title { font-family: var(--font-display); font-weight: 700; font-size: 19px; letter-spacing: -0.01em; margin-bottom: 8px; }
+.svc-step-body { font-size: 15px; font-weight: 300; line-height: 1.6; opacity: 0.82; }
+
+/* FAQ accordion — native <details>, zero-JS, crawlable for FAQPage rich results */
+.faq-list { border-top: 1px solid rgba(26, 26, 26, 0.14); max-width: 760px; }
+.faq-item { border-bottom: 1px solid rgba(26, 26, 26, 0.14); }
+.faq-item summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 22px 44px 22px 0;
+  position: relative;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(17px, 1.8vw, 20px);
+  letter-spacing: -0.01em;
+  transition: color 0.2s;
+}
+html[dir="rtl"] .faq-item summary { padding: 22px 0 22px 44px; }
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary:hover { color: var(--accent-magenta); }
+.faq-item summary::after {
+  content: "+";
+  position: absolute;
+  inset-inline-end: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 1;
+  color: var(--accent-magenta);
+  transition: transform 0.25s;
+}
+.faq-item[open] summary::after { content: "\2212"; } /* minus */
+.faq-a {
+  padding: 0 44px 24px 0;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.7;
+  opacity: 0.85;
+  max-width: 64ch;
+}
+html[dir="rtl"] .faq-a { padding: 0 0 24px 44px; }
+
+/* Closing CTA band (dark, matches the contact section's energy) */
+.svc-cta-band {
+  background: var(--section-dark);
+  color: var(--cream);
+  padding: clamp(64px, 9vw, 120px) 40px;
+  text-align: center;
+}
+.svc-cta-band .svc-inner { max-width: 720px; }
+.svc-cta-band h2 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(30px, 4.6vw, 60px);
+  line-height: 1.02;
+  letter-spacing: var(--tracking-tight);
+  margin-bottom: 24px;
+}
+html[dir="rtl"] .svc-cta-band h2 { letter-spacing: 0; }
+.svc-cta-band p { font-size: 17px; font-weight: 300; line-height: 1.6; opacity: 0.82; margin-bottom: 40px; }
+.svc-cta-band .svc-cta-row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+@media (max-width: 768px) {
+  .svc-main { padding-left: 24px; padding-right: 24px; }
+  .svc-gallery,
+  .svc-cols,
+  .svc-process { grid-template-columns: 1fr; }
+  .svc-cta-band { padding-left: 24px; padding-right: 24px; }
+  .svc-cta-band .svc-cta-row { flex-direction: column; align-items: stretch; }
+  .svc-cta-band .svc-cta-row .cta-pill { justify-content: center; }
+}

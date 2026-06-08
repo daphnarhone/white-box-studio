@@ -1,0 +1,21 @@
+# ── White Box Studio — repo ignore rules ──────────────────────────────
+# Edit-time backup snapshots (e.g. index.html.bak-20260608-111242)
+*.bak
+*.bak-*
+
+# Local backup folders and deploy bundles (never commit these)
+*BACKUP*/
+*.zip
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+*~
+*.swp
+
+# Node (only if _tools/ ever pulls dependencies)
+node_modules/
+
+# Logs / temp
+*.log

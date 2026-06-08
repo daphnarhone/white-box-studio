@@ -10,7 +10,9 @@ const strings = {
   en: {
     // ── Header navigation ─────────────────────────
     nav_work: 'Work',
+    nav_services: 'Services',
     nav_studio: 'Studio',
+    nav_faq: 'FAQ',
     nav_contact: 'Contact',
     skip_to_main: 'Skip to main content',
     accessibility_link: 'Accessibility Statement',
@@ -140,7 +142,9 @@ const strings = {
   he: {
     // ── Header navigation ─────────────────────────
     nav_work: 'עבודות',
+    nav_services: 'שירותים',
     nav_studio: 'סטודיו',
+    nav_faq: 'שאלות נפוצות',
     nav_contact: 'צרו קשר',
     skip_to_main: 'דלג לתוכן הראשי',
     accessibility_link: 'הצהרת נגישות',
@@ -285,6 +289,20 @@ function updateWhatsAppLinks(lang) {
   });
 }
 
+// Point every service link (home work-cards, the Services nav dropdown) at the
+// correct language's URL: Hebrew lives at /services/<slug>.html, English at
+// /en/services/<slug>.html. The FAQ link follows the same convention. This is
+// what makes the bilingual home page link into the right-language sub-pages.
+function updateServiceLinks(lang) {
+  const base = lang === 'he' ? '/services/' : '/en/services/';
+  document.querySelectorAll('[data-svc]').forEach(a => {
+    a.setAttribute('href', base + a.getAttribute('data-svc') + '.html');
+  });
+  document.querySelectorAll('[data-faq-link]').forEach(a => {
+    a.setAttribute('href', lang === 'he' ? '/faq.html' : '/en/faq.html');
+  });
+}
+
 function applyLang(lang) {
   const html = document.documentElement;
   html.setAttribute('lang', lang);
@@ -316,6 +334,7 @@ function applyLang(lang) {
   try { localStorage.setItem(STORAGE_KEY, lang); } catch (_) {}
 
   updateWhatsAppLinks(lang);
+  updateServiceLinks(lang);
 }
 
 function setupMobileMenu() {
@@ -736,24 +755,77 @@ function setupContactForm() {
 
 function setupStickyCta() {
   const sticky = document.getElementById('sticky-cta');
-  const hero = document.querySelector('.hero');
-  const contact = document.getElementById('contact');
-  if (!sticky || !hero || !contact || !('IntersectionObserver' in window)) return;
+  if (!sticky || !('IntersectionObserver' in window)) return;
 
-  let pastHero = false;
+  // Top reference = the home hero, or (on service pages) the page hero / main.
+  const top = document.querySelector('.hero') ||
+              document.querySelector('.svc-hero') ||
+              document.querySelector('main');
+  const contact = document.getElementById('contact');  // only on the home page
+  if (!top) return;
+
+  let pastTop = false;
   let atContact = false;
   const update = () => {
-    const show = pastHero && !atContact;
+    const show = pastTop && !atContact;
     sticky.classList.toggle('visible', show);
     sticky.setAttribute('aria-hidden', show ? 'false' : 'true');
   };
 
-  new IntersectionObserver(([e]) => { pastHero = !e.isIntersecting; update(); },
-    { threshold: 0 }).observe(hero);
-  // Hide once the contact section reaches the middle of the viewport (its own
-  // CTAs take over there) — rootMargin trims the bottom half of the root.
-  new IntersectionObserver(([e]) => { atContact = e.isIntersecting; update(); },
-    { threshold: 0, rootMargin: '0px 0px -50% 0px' }).observe(contact);
+  new IntersectionObserver(([e]) => { pastTop = !e.isIntersecting; update(); },
+    { threshold: 0 }).observe(top);
+  // On the home page, hide once the contact section reaches mid-viewport (its own
+  // CTAs take over). Service pages have no #contact, so the sticky stays visible.
+  if (contact) {
+    new IntersectionObserver(([e]) => { atContact = e.isIntersecting; update(); },
+      { threshold: 0, rootMargin: '0px 0px -50% 0px' }).observe(contact);
+  }
+}
+
+// Deep-link landing: when the home page is opened with a hash (e.g. a service page's
+// "Contact" → /index.html#contact), scroll to that section AFTER load. The browser's
+// native hash jump is unreliable here — Lenis takes over scrolling and lazy images
+// shift the layout, so the native jump lands short or snaps back near the top. We
+// re-scroll via Lenis with a few corrective passes (to absorb the image shift) and
+// bail the moment the visitor scrolls themselves.
+function setupInitialHashScroll(lenis) {
+  const id = location.hash ? location.hash.slice(1) : '';
+  if (!id) return;
+  let target;
+  try { target = document.getElementById(decodeURIComponent(id)); } catch (_) { target = document.getElementById(id); }
+  if (!target) return;
+
+  let cancelled = false;
+  const cancel = () => { cancelled = true; };
+  ['wheel', 'touchstart', 'keydown'].forEach(ev =>
+    window.addEventListener(ev, cancel, { once: true, passive: true }));
+
+  const go = () => {
+    if (cancelled) return;
+    if (lenis && typeof lenis.scrollTo === 'function') {
+      lenis.scrollTo(target, { offset: -100, duration: 0.8 });
+    } else {
+      const y = target.getBoundingClientRect().top + window.pageYOffset - 100;
+      window.scrollTo(0, y);
+    }
+  };
+
+  const run = () => { let n = 0; const tick = () => { if (cancelled) return; go(); if (++n < 4) setTimeout(tick, 300); }; tick(); };
+  if (document.readyState === 'complete') requestAnimationFrame(run);
+  else window.addEventListener('load', () => requestAnimationFrame(run), { once: true });
+}
+
+// Accessible "Services" dropdown in the header nav. Hover-opens on desktop (CSS),
+// but JS adds click/keyboard control + closes on outside-click / Escape.
+function setupNavDropdown() {
+  document.querySelectorAll('.nav-dropdown').forEach(dd => {
+    const btn = dd.querySelector('.nav-dropdown-toggle');
+    if (!btn) return;
+    const open = (v) => { dd.classList.toggle('open', v); btn.setAttribute('aria-expanded', v ? 'true' : 'false'); };
+    btn.addEventListener('click', (e) => { e.preventDefault(); open(!dd.classList.contains('open')); });
+    dd.addEventListener('keydown', (e) => { if (e.key === 'Escape') { open(false); btn.focus(); } });
+    document.addEventListener('click', (e) => { if (!dd.contains(e.target)) open(false); });
+  });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -769,6 +841,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   setupMobileMenu();
+  setupNavDropdown();
   const lenis = setupSmoothScroll();  // Lenis — drives the GSAP ticker for setupGlide()
   setupHeroScroll();     // hero scroll-cue fade + parallax (top-of-page triggers first)
   setupGlide();          // GSAP ScrollTrigger — cards/images glide into place
@@ -776,4 +849,5 @@ document.addEventListener('DOMContentLoaded', () => {
   setupRevealAnimations();
   setupContactForm();
   setupStickyCta();
+  setupInitialHashScroll(lenis);  // land on #contact/#work/#studio when arriving from a sub-page
 });
