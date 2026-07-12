@@ -107,6 +107,9 @@ body > header {
 .nav-links {
   display: flex;
   gap: 28px;
+  /* The header CTA pill is taller than the text links; without centering, the
+     links stretch and the Services <button> mis-aligns against them. */
+  align-items: center;
 }
 .nav-right a {
   color: inherit;
@@ -138,7 +141,8 @@ body > header {
 /* Heebo renders ~22% shorter than Nunito at the same px (measured), so the Hebrew
    header looks smaller. Size the Hebrew nav + toggle up to match the English version. */
 html[lang="he"] .nav-right   { font-size: 18px; }   /* Hebrew header enlarged beyond Latin parity (per request) */
-html[lang="he"] .lang-toggle { font-size: 24px; }   /* toggle kept proportionally larger than the links */
+/* The toggle itself keeps ONE size in both language views (the 19px set above) —
+   the per-button 1.23em Heebo bump below is what keeps EN and עב visually equal. */
 /* Each toggle button in its own font; the Hebrew label bumped 1.23× so "EN" and "עב"
    look the same size in BOTH views (Heebo renders ~22% shorter than Nunito at equal px). */
 .lang-toggle button[lang="en"] { font-family: var(--font-display); }
@@ -405,6 +409,31 @@ html[lang="he"] .eyebrow { font-size: 16px; } /* Heebo runs ~22% shorter — mat
   max-width: 46ch;
 }
 
+/* ── Family legend (3 families, each with a 1-2 sentence intro) ──────────
+   Sits between the section header and the grid so visitors can scan the
+   grouping. Accent used as a block (the bar), never as text on cream. */
+.work-families {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(20px, 3vw, 40px);
+  margin-bottom: 48px;
+}
+.work-family {
+  border-inline-start: 3px solid var(--accent);
+  padding-inline-start: 16px;
+}
+.work-family-name {
+  font-size: 13px; font-weight: 700;
+  letter-spacing: var(--tracking-wide); text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.work-family-intro {
+  font-size: 15px; line-height: 1.55;
+  color: var(--text-muted); max-width: 44ch;
+}
+html[lang="he"] .work-family-name { font-size: 15px; }
+html[lang="he"] .work-family-intro { font-size: 17px; }
+
 .work-grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -454,6 +483,19 @@ html[lang="he"] .eyebrow { font-size: 16px; } /* Heebo runs ~22% shorter — mat
   justify-content: space-between;
   color: var(--cream);
 }
+.work-card-top {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: flex-start;
+}
+.work-card-fam {
+  font-size: 11px; font-weight: 700;
+  letter-spacing: var(--tracking-wide); text-transform: uppercase;
+  color: var(--accent);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85), 0 0 4px rgba(0, 0, 0, 0.6);
+}
+html[lang="he"] .work-card-fam { font-size: 13.5px; }
 .work-card-num {
   font-family: var(--font-display);
   font-weight: 300;
@@ -499,8 +541,10 @@ html[lang="he"] .eyebrow { font-size: 16px; } /* Heebo runs ~22% shorter — mat
 .work-card-8 .work-card-title { font-size: clamp(30px, 4.2vw, 48px); }
 .work-card-9 { grid-column: 8 / 13; grid-row: 4 / 5; }
 .work-card-9 .work-card-title { font-size: clamp(24px, 2.8vw, 36px); }
+.work-card-10 { grid-column: 1 / 13; grid-row: 5 / 6; }
+.work-card-10 .work-card-title { font-size: clamp(30px, 4.2vw, 48px); }
 
-/* ── Detail sections (categories 01-09) ─────────── */
+/* ── Detail sections (categories 01-10) ─────────── */
 .detail {
   padding: var(--section-pad) 40px;
   position: relative;
@@ -611,7 +655,7 @@ html[dir="rtl"] .cta-pill::after { content: '←'; }
 .cta-pill:hover::after { transform: translateX(7px); }
 html[dir="rtl"] .cta-pill:hover::after { transform: translateX(-7px); }
 
-/* Section CTA — outline pill that fills with accent on hover. Colour adapts to the
+/* Section CTA — outline pill that fills with accent on hover. Color adapts to the
    dark vs cream section it sits on; hover fills yellow with dark text on both. */
 .cta-pill--section {
   background: transparent;
@@ -832,6 +876,17 @@ html[dir="rtl"] .detail--a .detail-image--secondary {
 .image-pair--tr .image-pair__secondary {
   inset-block-start: -8%;
   inset-inline-end: -7%;
+}
+/* Optional third image (section 05): overlaps the corner opposite the
+   secondary so the two never collide. Landscape, slightly wider. */
+.image-pair__tertiary {
+  position: absolute;
+  z-index: 2;
+  width: 44%;
+  margin: 0;
+  aspect-ratio: 4 / 3;
+  inset-block-end: -8%;
+  inset-inline-start: -7%;
 }
 
 /* Variant A pair (sections 01, 05): primary fills the right column at 4:5 */
@@ -1388,6 +1443,7 @@ html[dir="rtl"] .work-title {
   .work-card-7 { grid-column: 1 / 7; grid-row: auto; }
   .work-card-8 { grid-column: 1 / 5; grid-row: auto; }
   .work-card-9 { grid-column: 5 / 7; grid-row: auto; }
+  .work-card-10 { grid-column: 1 / 7; grid-row: auto; }
 
   .detail--a .detail-row,
   .detail--b .detail-row--two-col,
@@ -1425,15 +1481,32 @@ html[dir="rtl"] .work-title {
   /* Switch to the hamburger only here, where the layout collapses — so the full
      nav stays usable on tablet (769–900px) instead of vanishing with no menu. */
   .nav-right .nav-links { display: none; }
+  /* Phone order: studio name first, then the hero image, then the intro text.
+     display:contents lifts .hero-text's children into the single-column grid
+     so the image can slot in right after the logo block; row-gap drops to 0
+     and the children's own margins keep the vertical rhythm. (The subtle GSAP
+     parallax on .hero-text stops painting here — no box — which is fine.) */
   .hero-inner {
     grid-template-columns: 1fr;
-    gap: 36px;
+    gap: 0;
   }
-  .hero-visual { order: -1; }
+  .hero-text { display: contents; }
+  .hero-logo-block { order: -2; margin-bottom: 36px; }
+  .hero-visual { order: -1; margin-bottom: 44px; }
   .hero-image { max-width: 420px; margin: 0 auto; }
   .hero-logo-block { text-align: center; }
-  .hero-icon { margin: 0 auto 18px; }
+  /* Larger studio mark on phones so the name block reads proportional to the
+     full-width hero image right below it. */
+  .hero-icon { margin: 0 auto 20px; width: min(52vw, 210px); }
+  .hero-wordmark { font-size: 30px; }
+  .hero-tagline { font-size: 15px; }
+  html[lang="he"] .hero-tagline { font-size: 18px; } /* Heebo renders smaller */
 
+  .work-families {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-bottom: 36px;
+  }
   .work-grid {
     grid-template-columns: 1fr;
     grid-auto-rows: auto;
@@ -1449,9 +1522,11 @@ html[dir="rtl"] .work-title {
   .work-card-7 { aspect-ratio: 5 / 4; }
   .work-card-8 { aspect-ratio: 4 / 3; }
   .work-card-9 { aspect-ratio: 4 / 3; }
+  .work-card-10 { aspect-ratio: 5 / 4; }
   .work-card-1 .work-card-title,
   .work-card-7 .work-card-title,
-  .work-card-8 .work-card-title { font-size: clamp(28px, 6vw, 38px); }
+  .work-card-8 .work-card-title,
+  .work-card-10 .work-card-title { font-size: clamp(28px, 6vw, 38px); }
 
   .detail-headline { font-size: clamp(38px, 9vw, 56px); }
   .next-teaser,
@@ -1470,7 +1545,8 @@ html[dir="rtl"] .work-title {
   }
 
   /* On mobile, stop overlapping — let the pair stack vertically. */
-  .image-pair__secondary {
+  .image-pair__secondary,
+  .image-pair__tertiary {
     position: static;
     width: 100%;
     inset: auto;
@@ -1822,6 +1898,62 @@ html[dir="rtl"] .asw-menu {
 .nav-dropdown-menu a:focus-visible { background: rgba(255, 213, 0, 0.12); opacity: 1; }
 html[lang="he"] .nav-dropdown-toggle { font-size: 1em; }
 html[lang="he"] .nav-dropdown-menu a { font-family: var(--font-hebrew); font-size: 15px; }
+
+/* ── 3-family mega-menu (on top of the dropdown panel) ─────────────────────
+   One column per family; the family name is a non-link header in the accent,
+   services beneath it at 16px. Column order follows dir (RTL mirrors free).
+   The panel is wider than the button, so it's viewport-FIXED and centered
+   under the header (edge-anchoring overflowed the screen in both LTR and RTL);
+   the translateX(-50%) centering must survive the show state, so the base
+   `transform: none` reveal is overridden below. */
+.nav-dropdown-menu.nav-mega {
+  position: fixed;
+  /* Neutralize the base panel's inset-inline-end BEFORE the physical props:
+     in RTL it maps to `left`, so declared later it would override left:50%. */
+  inset-inline-end: auto;
+  left: 50%;
+  right: auto;
+  top: 84px;
+  transform: translate(-50%, -6px);
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 30px;
+  padding: 24px 28px;
+  max-width: calc(100vw - 48px);
+}
+.nav-dropdown:hover .nav-dropdown-menu.nav-mega,
+.nav-dropdown:focus-within .nav-dropdown-menu.nav-mega,
+.nav-dropdown.open .nav-dropdown-menu.nav-mega {
+  transform: translate(-50%, 0);
+}
+/* Narrow desktops: let the long labels wrap instead of scrolling. */
+@media (max-width: 1240px) {
+  .nav-dropdown-menu.nav-mega { width: calc(100vw - 48px); }
+  .nav-dropdown-menu.nav-mega .nav-mega-col { flex: 1; min-width: 0; }
+  .nav-dropdown-menu.nav-mega a { white-space: normal; }
+}
+.nav-mega-col { display: flex; flex-direction: column; gap: 2px; }
+.nav-mega-title {
+  font-size: 11px; font-weight: 700; letter-spacing: var(--tracking-wide);
+  text-transform: uppercase; color: var(--accent);
+  margin: 0 0 8px; padding: 0 14px; white-space: nowrap;
+}
+html[lang="he"] .nav-mega-title { font-family: var(--font-hebrew); font-size: 13.5px; }
+.nav-dropdown-menu.nav-mega a { font-size: 16px; }
+html[lang="he"] .nav-dropdown-menu.nav-mega a { font-size: 18px; }
+
+/* Persistent header CTA pill. currentColor keeps it legible inside the
+   difference-blended header over any section it floats above. */
+.nav-right a.header-cta {
+  opacity: 1;
+  border: 1.5px solid currentColor;
+  border-radius: 999px;
+  padding: 9px 18px;
+  font-weight: 700;
+  transition: opacity 0.3s, transform 0.2s ease;
+}
+.nav-right a.header-cta:hover { transform: translateY(-1px); }
+
 /* Solid header bar whenever the menu is open or hovered, so the panel isn't blended. */
 body > header:has(.nav-dropdown:hover),
 body > header:has(.nav-dropdown:focus-within),
@@ -1831,18 +1963,37 @@ body > header:has(.nav-dropdown.open) {
   color: var(--cream);
 }
 
-/* ── Services group inside the mobile menu ─────────────────────────────────── */
+/* ── Services accordion inside the mobile menu (3 families) ───────────────
+   The "Services" title is a button that folds the family-grouped list open;
+   family names are non-tappable sub-headers. Every tappable row ≥ 44px. */
 .mobile-services { text-align: center; }
-.mobile-services-title {
-  font-size: 11px; font-weight: 300; letter-spacing: var(--tracking-wide);
-  text-transform: uppercase; color: var(--accent); opacity: 0.9; margin-bottom: 16px;
+.mobile-services-toggle {
+  background: none; border: none; cursor: pointer;
+  color: var(--accent); opacity: 0.9;
+  font-family: var(--font-display); font-size: 13px; font-weight: 300;
+  letter-spacing: var(--tracking-wide); text-transform: uppercase;
+  min-height: 44px; padding: 10px 16px;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: opacity 0.2s;
 }
-html[lang="he"] .mobile-services-title { font-family: var(--font-hebrew); font-size: 13px; }
-.mobile-services-list { display: flex; flex-direction: column; gap: 12px; align-items: center; }
+.mobile-services-toggle:hover,
+.mobile-services-toggle:focus-visible { opacity: 1; }
+html[lang="he"] .mobile-services-toggle { font-family: var(--font-hebrew); font-size: 15px; }
+.mobile-services-caret { transition: transform 0.2s ease; }
+.mobile-services-toggle[aria-expanded="true"] .mobile-services-caret { transform: rotate(180deg); }
+.mobile-services-panel { display: flex; flex-direction: column; gap: 18px; margin-top: 4px; }
+.mobile-fam-title {
+  font-size: 12px; font-weight: 700; letter-spacing: var(--tracking-wide);
+  text-transform: uppercase; color: var(--cream); opacity: 0.55; margin-bottom: 2px;
+}
+html[lang="he"] .mobile-fam-title { font-family: var(--font-hebrew); font-size: 14px; }
+.mobile-services-list { display: flex; flex-direction: column; align-items: center; }
 .mobile-services-list a {
   font-family: var(--font-display);
   font-size: 16px; font-weight: 400; color: var(--cream); text-decoration: none;
   opacity: 0.85; transition: color 0.2s, opacity 0.2s;
+  min-height: 44px; padding: 10px 16px;
+  display: inline-flex; align-items: center;
 }
 html[lang="he"] .mobile-services-list a { font-family: var(--font-hebrew); font-size: 18px; }
 .mobile-services-list a:hover,
@@ -1929,6 +2080,8 @@ html[dir="rtl"] .svc-lead { letter-spacing: 0; }
 }
 .svc-gallery .detail-image { aspect-ratio: 4 / 5; }
 .svc-gallery .detail-image:only-child { grid-column: 1 / -1; aspect-ratio: 16 / 10; }
+/* In a 3-image gallery the odd last image becomes a full-width landscape band. */
+.svc-gallery .detail-image:nth-child(3):last-child { grid-column: 1 / -1; aspect-ratio: 16 / 10; }
 /* Transparency-aware images (e.g. the cut-out David PNG) get a charcoal backdrop
    inside the gallery so a light figure reads on the cream page, and `contain` so
    the full piece shows without cropping. */

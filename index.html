@@ -18,15 +18,15 @@
   })();
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The White Box Studio, Architectural finishes, Tel Aviv</title>
-<meta name="description" content="Hand-applied plaster, concrete, gold leaf, iron, gypsum, and sculpture for architects, designers, and the spaces they make. Tel Aviv-based atelier.">
+<title>The White Box Studio, Art &amp; architectural finishes</title>
+<meta name="description" content="Hand-applied plaster, concrete, gold leaf, iron, gypsum, and sculpture for architects, designers, and the spaces they make. An atelier of art and architectural finishes.">
 
 <!-- Google Search Console verification (URL-prefix property) -->
 <meta name="google-site-verification" content="T9yFMRLymtrOGDcW8TFdyPZFAce2w12LNTBiwXxg4FI" />
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="The White Box Studio, Architectural finishes, Tel Aviv">
-<meta property="og:description" content="Hand-applied plaster, concrete, gold leaf, iron, gypsum, and sculpture for architects, designers, and the spaces they make.">
+<meta property="og:title" content="The White Box Studio, Art &amp; architectural finishes">
+<meta property="og:description" content="Hand-applied plaster, concrete, gold leaf, iron, gypsum, and commissioned sculpture for architects, designers, and the spaces they make.">
 <meta property="og:image" content="https://white-box.co.il/assets/images/three-horses.jpg">
 <meta property="og:url" content="https://white-box.co.il/">
 <meta name="twitter:card" content="summary_large_image">
@@ -42,7 +42,7 @@
 <!-- Fonts loaded non-render-blocking; display=swap paints text immediately in the fallback -->
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700;800&family=Heebo:wght@300;400;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700;800&family=Heebo:wght@300;400;700;800&display=swap"></noscript>
-<link rel="stylesheet" href="styles.css?v=20260608b">
+<link rel="stylesheet" href="styles.css?v=20260707d">
 
 <!-- LocalBusiness structured data (SEO / Google local results). Optional: to add an exact
      map pin, look up the studio on Google Maps, right-click it → copy the lat,long, and add a
@@ -52,7 +52,7 @@
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": "The White Box Studio",
-  "description": "Hand-applied plaster, concrete, gold leaf, iron, gypsum, and sculpture for architects, designers, and the spaces they make. Tel Aviv-based atelier of architectural finishes.",
+  "description": "Hand-applied plaster, concrete, gold leaf, iron, gypsum, and sculpture for architects, designers, and the spaces they make. An atelier of art and architectural finishes.",
   "url": "https://white-box.co.il/",
   "logo": "https://white-box.co.il/assets/logo.svg",
   "image": "https://white-box.co.il/assets/images/three-horses.jpg",
@@ -101,22 +101,37 @@
     <div class="nav-links">
       <a href="#work" data-i18n="nav_work">Work</a>
       <div class="nav-dropdown">
-        <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true" data-i18n="nav_services">Services</button>
-        <div class="nav-dropdown-menu" role="menu">
-          <a role="menuitem" data-svc="plaster-walls" href="/services/plaster-walls.html" data-i18n="sec_01_eyebrow">01 / Plaster wall finishes</a>
-          <a role="menuitem" data-svc="coffee-tables" href="/services/coffee-tables.html" data-i18n="sec_02_eyebrow">02 / Sculptural coffee tables</a>
-          <a role="menuitem" data-svc="custom-sculpture" href="/services/custom-sculpture.html" data-i18n="sec_03_eyebrow">03 / Custom sculpture</a>
-          <a role="menuitem" data-svc="gypsum-panels" href="/services/gypsum-panels.html" data-i18n="sec_04_eyebrow">04 / Gypsum panels</a>
-          <a role="menuitem" data-svc="display-accessories" href="/services/display-accessories.html" data-i18n="sec_05_eyebrow">05 / Display &amp; gift accessories</a>
-          <a role="menuitem" data-svc="iron-look-coating" href="/services/iron-look-coating.html" data-i18n="sec_06_eyebrow">06 / Iron-look coating</a>
-          <a role="menuitem" data-svc="capitals-ornaments" href="/services/capitals-ornaments.html" data-i18n="sec_07_eyebrow">07 / Gypsum capitals &amp; ornaments</a>
-          <a role="menuitem" data-svc="wall-murals" href="/services/wall-murals.html" data-i18n="sec_08_eyebrow">08 / Custom wall murals</a>
-          <a role="menuitem" data-svc="decorative-concrete" href="/services/decorative-concrete.html" data-i18n="sec_09_eyebrow">09 / Decorative concrete</a>
+        <!-- asw-text opts this button into the sienna accessibility widget's font-size
+             scaling, which targets links but not buttons — without it, "bigger text"
+             mode enlarges every nav link EXCEPT Services. -->
+        <button type="button" class="nav-dropdown-toggle asw-text" aria-expanded="false" aria-haspopup="true" data-i18n="nav_services">Services</button>
+        <!-- 3-family mega-menu (2026-07 regroup). Plain links, no menu roles:
+             family titles are non-interactive headers, links are ordinary <a>s. -->
+        <div class="nav-dropdown-menu nav-mega">
+          <div class="nav-mega-col">
+            <p class="nav-mega-title" data-i18n="fam_a_name">Walls &amp; surfaces</p>
+            <a data-svc="plaster-walls" href="/services/plaster-walls.html" data-i18n="sec_01_eyebrow">01 / Plaster wall finishes</a>
+            <a data-svc="decorative-concrete" href="/services/decorative-concrete.html" data-i18n="sec_09_eyebrow">02 / Decorative concrete</a>
+            <a data-svc="iron-look-coating" href="/services/iron-look-coating.html" data-i18n="sec_06_eyebrow">03 / Iron-look coating</a>
+            <a data-svc="wall-murals" href="/services/wall-murals.html" data-i18n="sec_08_eyebrow">04 / Commission wall murals</a>
+          </div>
+          <div class="nav-mega-col">
+            <p class="nav-mega-title" data-i18n="fam_b_name">Sculpture &amp; objects</p>
+            <a data-svc="custom-sculpture" href="/services/custom-sculpture.html" data-i18n="sec_03_eyebrow">05 / Sculpture Commission</a>
+            <a data-svc="coffee-tables" href="/services/coffee-tables.html" data-i18n="sec_02_eyebrow">06 / Sculptural coffee tables</a>
+            <a data-svc="display-accessories" href="/services/display-accessories.html" data-i18n="sec_05_eyebrow">07 / Display &amp; gift accessories</a>
+            <a data-svc="concrete-judaica" href="/services/concrete-judaica.html" data-i18n="sec_10_eyebrow">08 / Handmade concrete Judaica</a>
+          </div>
+          <div class="nav-mega-col">
+            <p class="nav-mega-title" data-i18n="fam_c_name">Ornament &amp; detail</p>
+            <a data-svc="gypsum-panels" href="/services/gypsum-panels.html" data-i18n="sec_04_eyebrow">09 / Gypsum panels</a>
+            <a data-svc="capitals-ornaments" href="/services/capitals-ornaments.html" data-i18n="sec_07_eyebrow">10 / Gypsum capitals &amp; ornaments</a>
+          </div>
         </div>
       </div>
       <a href="#studio" data-i18n="nav_studio">Studio</a>
       <a data-faq-link href="/faq.html" data-i18n="nav_faq">FAQ</a>
-      <a href="#contact" data-i18n="nav_contact">Contact</a>
+      <a href="#contact" class="header-cta" data-i18n="cta_start">Start a project</a>
     </div>
     <div class="lang-toggle" role="group" aria-label="Language">
       <button type="button" data-lang="en" lang="en" class="active">EN</button>
@@ -139,17 +154,37 @@
     <a href="#contact" data-i18n="nav_contact">Contact</a>
   </nav>
   <div class="mobile-services">
-    <p class="mobile-services-title" data-i18n="nav_services">Services</p>
-    <div class="mobile-services-list">
-      <a data-svc="plaster-walls" href="/services/plaster-walls.html" data-i18n="sec_01_eyebrow">01 / Plaster wall finishes</a>
-      <a data-svc="coffee-tables" href="/services/coffee-tables.html" data-i18n="sec_02_eyebrow">02 / Sculptural coffee tables</a>
-      <a data-svc="custom-sculpture" href="/services/custom-sculpture.html" data-i18n="sec_03_eyebrow">03 / Custom sculpture</a>
-      <a data-svc="gypsum-panels" href="/services/gypsum-panels.html" data-i18n="sec_04_eyebrow">04 / Gypsum panels</a>
-      <a data-svc="display-accessories" href="/services/display-accessories.html" data-i18n="sec_05_eyebrow">05 / Display &amp; gift accessories</a>
-      <a data-svc="iron-look-coating" href="/services/iron-look-coating.html" data-i18n="sec_06_eyebrow">06 / Iron-look coating</a>
-      <a data-svc="capitals-ornaments" href="/services/capitals-ornaments.html" data-i18n="sec_07_eyebrow">07 / Gypsum capitals &amp; ornaments</a>
-      <a data-svc="wall-murals" href="/services/wall-murals.html" data-i18n="sec_08_eyebrow">08 / Custom wall murals</a>
-      <a data-svc="decorative-concrete" href="/services/decorative-concrete.html" data-i18n="sec_09_eyebrow">09 / Decorative concrete</a>
+    <!-- Accordion: the "Services" title is the toggle; the 3 family names are
+         non-tappable sub-headers with their services indented beneath. -->
+    <button type="button" class="mobile-services-toggle asw-text" aria-expanded="false" aria-controls="mobile-services-panel">
+      <span data-i18n="nav_services">Services</span><span class="mobile-services-caret" aria-hidden="true">▾</span>
+    </button>
+    <div class="mobile-services-panel" id="mobile-services-panel" hidden>
+      <div class="mobile-fam">
+        <p class="mobile-fam-title" data-i18n="fam_a_name">Walls &amp; surfaces</p>
+        <div class="mobile-services-list">
+          <a data-svc="plaster-walls" href="/services/plaster-walls.html" data-i18n="sec_01_eyebrow">01 / Plaster wall finishes</a>
+          <a data-svc="decorative-concrete" href="/services/decorative-concrete.html" data-i18n="sec_09_eyebrow">02 / Decorative concrete</a>
+          <a data-svc="iron-look-coating" href="/services/iron-look-coating.html" data-i18n="sec_06_eyebrow">03 / Iron-look coating</a>
+          <a data-svc="wall-murals" href="/services/wall-murals.html" data-i18n="sec_08_eyebrow">04 / Commission wall murals</a>
+        </div>
+      </div>
+      <div class="mobile-fam">
+        <p class="mobile-fam-title" data-i18n="fam_b_name">Sculpture &amp; objects</p>
+        <div class="mobile-services-list">
+          <a data-svc="custom-sculpture" href="/services/custom-sculpture.html" data-i18n="sec_03_eyebrow">05 / Sculpture Commission</a>
+          <a data-svc="coffee-tables" href="/services/coffee-tables.html" data-i18n="sec_02_eyebrow">06 / Sculptural coffee tables</a>
+          <a data-svc="display-accessories" href="/services/display-accessories.html" data-i18n="sec_05_eyebrow">07 / Display &amp; gift accessories</a>
+          <a data-svc="concrete-judaica" href="/services/concrete-judaica.html" data-i18n="sec_10_eyebrow">08 / Handmade concrete Judaica</a>
+        </div>
+      </div>
+      <div class="mobile-fam">
+        <p class="mobile-fam-title" data-i18n="fam_c_name">Ornament &amp; detail</p>
+        <div class="mobile-services-list">
+          <a data-svc="gypsum-panels" href="/services/gypsum-panels.html" data-i18n="sec_04_eyebrow">09 / Gypsum panels</a>
+          <a data-svc="capitals-ornaments" href="/services/capitals-ornaments.html" data-i18n="sec_07_eyebrow">10 / Gypsum capitals &amp; ornaments</a>
+        </div>
+      </div>
     </div>
   </div>
   <div class="lang-toggle" role="group" aria-label="Language">
@@ -169,13 +204,13 @@
       <div class="hero-logo-block">
         <img class="hero-icon" src="assets/logo.svg" alt="The White Box Studio">
         <div class="hero-wordmark" data-i18n="wordmark">white box studio</div>
-        <div class="hero-tagline" data-i18n="tagline">bring the dream to life</div>
+        <div class="hero-tagline" data-i18n="tagline">art &amp; architectural finishes</div>
       </div>
-      <p class="eyebrow" data-i18n="hero_eyebrow">Tel Aviv · Atelier of architectural finishes</p>
+      <p class="eyebrow" data-i18n="hero_eyebrow">Atelier of art and architectural finishes · since 2005</p>
       <h1 class="hero-headline">
-        <span data-i18n="hero_h1_part1">Handmade </span><span class="light" data-i18n="hero_h1_light">architectural</span><span data-i18n="hero_h1_part2"> finishes.</span>
+        <span data-i18n="hero_h1_part1">Art and </span><span class="light" data-i18n="hero_h1_light">architectural</span><span data-i18n="hero_h1_part2"> finishes, by hand.</span>
       </h1>
-      <p class="hero-sub" data-i18n="hero_sub">Plaster, concrete, gold leaf, iron, gypsum, sculpture, applied directly on site, for architects, designers, and the spaces they make.</p>
+      <p class="hero-sub" data-i18n="hero_sub">Plaster, concrete, gold leaf, iron, gypsum, and sculpture. Designed in the studio and applied directly on site, alongside architects, designers, and their clients.</p>
       <div class="hero-cta">
         <a href="#contact" class="cta-pill cta-pill--filled" data-i18n="cta_start">Start a project</a>
         <a href="#work" class="cta-pill cta-pill--ghost" data-i18n="cta_view">View work</a>
@@ -200,380 +235,157 @@
 <section class="section-work" id="work">
   <div class="section-inner">
     <div class="work-header">
-      <p class="eyebrow" data-i18n="selected_work_eyebrow">Nine categories · one studio</p>
+      <p class="eyebrow" data-i18n="selected_work_eyebrow">Ten disciplines · one studio</p>
       <h2 class="work-title" data-i18n="selected_work_heading">Selected work</h2>
-      <p class="work-note" data-i18n="selected_work_note">Every piece shown here was made and installed by our own studio.</p>
+      <p class="work-note" data-i18n="selected_work_note">Every piece here was designed, made, and installed by our own studio.</p>
     </div>
 
+    <!-- Family legend: the 3 service families, each with a short intro. The grid
+         below is ordered by family; every card carries its family tag. -->
+    <div class="work-families">
+      <div class="work-family">
+        <p class="work-family-name" data-i18n="fam_a_name">Walls &amp; surfaces</p>
+        <p class="work-family-intro" data-i18n="fam_a_intro">Finishes applied straight onto the architecture: decorative plaster, decorative concrete, iron-look coating, and hand-painted murals. The wall itself becomes the work.</p>
+      </div>
+      <div class="work-family">
+        <p class="work-family-name" data-i18n="fam_b_name">Sculpture &amp; objects</p>
+        <p class="work-family-intro" data-i18n="fam_b_intro">Freestanding pieces made in the studio: commissioned sculpture, sculptural coffee tables, display and gift accessories, and concrete Judaica. One object sets the tone for a whole space.</p>
+      </div>
+      <div class="work-family">
+        <p class="work-family-name" data-i18n="fam_c_name">Ornament &amp; detail</p>
+        <p class="work-family-intro" data-i18n="fam_c_intro">Classical craft for architectural detail: gypsum panels for walls and ceilings, column capitals, and ornaments. The small elements that complete a space.</p>
+      </div>
+    </div>
+
+    <!-- Cards in family order (א 01-04, ב 05-07, ג 09-10); the Judaica card (08,
+         family ב) closes the grid as the full-width featured band. Grid slot
+         classes .work-card-1..10 define geometry only — unchanged mosaic. -->
     <div class="work-grid">
       <a data-svc="plaster-walls" href="/services/plaster-walls.html" class="work-card work-card-1">
         <div class="work-card-image" style="background-image: url('assets/images/01_plaster_1.jpg')" aria-hidden="true"></div>
         <div class="work-card-content">
-          <span class="work-card-num" data-i18n="sec_01_eyebrow">01 / Plaster wall finishes</span>
+          <div class="work-card-top">
+            <span class="work-card-fam" data-i18n="fam_a_name">Walls &amp; surfaces</span>
+            <span class="work-card-num" data-i18n="sec_01_eyebrow">01 / Plaster wall finishes</span>
+          </div>
           <span class="work-card-title" data-i18n="sec_01_headline">Not paint. Not wallpaper.</span>
         </div>
       </a>
 
-      <a data-svc="coffee-tables" href="/services/coffee-tables.html" class="work-card work-card-2">
-        <div class="work-card-image" style="background-image: url('assets/images/02_tables_1.jpg')" aria-hidden="true"></div>
+      <a data-svc="decorative-concrete" href="/services/decorative-concrete.html" class="work-card work-card-2">
+        <div class="work-card-image" style="background-image: url('assets/images/09_concrete_1.jpeg')" aria-hidden="true"></div>
         <div class="work-card-content">
-          <span class="work-card-num" data-i18n="sec_02_eyebrow">02 / Sculptural coffee tables</span>
-          <span class="work-card-title" data-i18n="sec_02_headline">Not just a table. A statement.</span>
+          <div class="work-card-top">
+            <span class="work-card-fam" data-i18n="fam_a_name">Walls &amp; surfaces</span>
+            <span class="work-card-num" data-i18n="sec_09_eyebrow">02 / Decorative concrete</span>
+          </div>
+          <span class="work-card-title" data-i18n="sec_09_headline">Concrete that flows like fabric.</span>
         </div>
       </a>
 
-      <a data-svc="custom-sculpture" href="/services/custom-sculpture.html" class="work-card work-card-3">
-        <div class="work-card-image" style="background-image: url('assets/images/03_sculpture_1.png')" aria-hidden="true"></div>
-        <div class="work-card-content">
-          <span class="work-card-num" data-i18n="sec_03_eyebrow">03 / Custom sculpture</span>
-          <span class="work-card-title" data-i18n="sec_03_headline">If you can imagine it, we can sculpt it.</span>
-        </div>
-      </a>
-
-      <a data-svc="gypsum-panels" href="/services/gypsum-panels.html" class="work-card work-card-4">
-        <div class="work-card-image" style="background-image: url('assets/images/04_gypsum_1.jpg')" aria-hidden="true"></div>
-        <div class="work-card-content">
-          <span class="work-card-num" data-i18n="sec_04_eyebrow">04 / Gypsum panels</span>
-          <span class="work-card-title" data-i18n="sec_04_headline">A ceiling doesn&rsquo;t have to be flat.</span>
-        </div>
-      </a>
-
-      <a data-svc="display-accessories" href="/services/display-accessories.html" class="work-card work-card-5">
-        <div class="work-card-image" style="background-image: url('assets/images/05_display_1.jpg')" aria-hidden="true"></div>
-        <div class="work-card-content">
-          <span class="work-card-num" data-i18n="sec_05_eyebrow">05 / Display &amp; gift accessories</span>
-          <span class="work-card-title" data-i18n="sec_05_headline">The small detail is the whole story.</span>
-        </div>
-      </a>
-
-      <a data-svc="iron-look-coating" href="/services/iron-look-coating.html" class="work-card work-card-6">
+      <a data-svc="iron-look-coating" href="/services/iron-look-coating.html" class="work-card work-card-3">
         <div class="work-card-image" style="background-image: url('assets/images/06_iron_1.jpg')" aria-hidden="true"></div>
         <div class="work-card-content">
-          <span class="work-card-num" data-i18n="sec_06_eyebrow">06 / Iron-look coating</span>
+          <div class="work-card-top">
+            <span class="work-card-fam" data-i18n="fam_a_name">Walls &amp; surfaces</span>
+            <span class="work-card-num" data-i18n="sec_06_eyebrow">03 / Iron-look coating</span>
+          </div>
           <span class="work-card-title" data-i18n="sec_06_headline">Iron. Without the iron.</span>
         </div>
       </a>
 
-      <a data-svc="capitals-ornaments" href="/services/capitals-ornaments.html" class="work-card work-card-7">
+      <a data-svc="wall-murals" href="/services/wall-murals.html" class="work-card work-card-4">
+        <div class="work-card-image" style="background-image: url('assets/images/08_murals_1.jpg')" aria-hidden="true"></div>
+        <div class="work-card-content">
+          <div class="work-card-top">
+            <span class="work-card-fam" data-i18n="fam_a_name">Walls &amp; surfaces</span>
+            <span class="work-card-num" data-i18n="sec_08_eyebrow">04 / Commission wall murals</span>
+          </div>
+          <span class="work-card-title" data-i18n="sec_08_headline">Every wall is a story.</span>
+        </div>
+      </a>
+
+      <a data-svc="custom-sculpture" href="/services/custom-sculpture.html" class="work-card work-card-5">
+        <div class="work-card-image" style="background-image: url('assets/images/03_sculpture_1.png')" aria-hidden="true"></div>
+        <div class="work-card-content">
+          <div class="work-card-top">
+            <span class="work-card-fam" data-i18n="fam_b_name">Sculpture &amp; objects</span>
+            <span class="work-card-num" data-i18n="sec_03_eyebrow">05 / Sculpture Commission</span>
+          </div>
+          <span class="work-card-title" data-i18n="sec_03_headline">If you can imagine it, we can sculpt it.</span>
+        </div>
+      </a>
+
+      <a data-svc="coffee-tables" href="/services/coffee-tables.html" class="work-card work-card-6">
+        <div class="work-card-image" style="background-image: url('assets/images/02_tables_1.jpg')" aria-hidden="true"></div>
+        <div class="work-card-content">
+          <div class="work-card-top">
+            <span class="work-card-fam" data-i18n="fam_b_name">Sculpture &amp; objects</span>
+            <span class="work-card-num" data-i18n="sec_02_eyebrow">06 / Sculptural coffee tables</span>
+          </div>
+          <span class="work-card-title" data-i18n="sec_02_headline">One piece sets the tone for the whole room.</span>
+        </div>
+      </a>
+
+      <a data-svc="display-accessories" href="/services/display-accessories.html" class="work-card work-card-7">
+        <div class="work-card-image" style="background-image: url('assets/images/05_display_tables.jpg')" aria-hidden="true"></div>
+        <div class="work-card-content">
+          <div class="work-card-top">
+            <span class="work-card-fam" data-i18n="fam_b_name">Sculpture &amp; objects</span>
+            <span class="work-card-num" data-i18n="sec_05_eyebrow">07 / Display &amp; gift accessories</span>
+          </div>
+          <span class="work-card-title" data-i18n="sec_05_headline">The small detail is the whole story.</span>
+        </div>
+      </a>
+
+      <a data-svc="gypsum-panels" href="/services/gypsum-panels.html" class="work-card work-card-8">
+        <div class="work-card-image" style="background-image: url('assets/images/04_gypsum_1.jpg')" aria-hidden="true"></div>
+        <div class="work-card-content">
+          <div class="work-card-top">
+            <span class="work-card-fam" data-i18n="fam_c_name">Ornament &amp; detail</span>
+            <span class="work-card-num" data-i18n="sec_04_eyebrow">09 / Gypsum panels</span>
+          </div>
+          <span class="work-card-title" data-i18n="sec_04_headline">A ceiling doesn&rsquo;t have to be flat.</span>
+        </div>
+      </a>
+
+      <a data-svc="capitals-ornaments" href="/services/capitals-ornaments.html" class="work-card work-card-9">
         <div class="work-card-image" style="background-image: url('assets/images/07_capitals_2.jpg')" aria-hidden="true"></div>
         <div class="work-card-content">
-          <span class="work-card-num" data-i18n="sec_07_eyebrow">07 / Gypsum capitals &amp; ornaments</span>
+          <div class="work-card-top">
+            <span class="work-card-fam" data-i18n="fam_c_name">Ornament &amp; detail</span>
+            <span class="work-card-num" data-i18n="sec_07_eyebrow">10 / Gypsum capitals &amp; ornaments</span>
+          </div>
           <span class="work-card-title" data-i18n="sec_07_headline">Gold, gypsum, and a little drama.</span>
         </div>
       </a>
 
-      <a data-svc="wall-murals" href="/services/wall-murals.html" class="work-card work-card-8">
-        <div class="work-card-image" style="background-image: url('assets/images/08_murals_1.jpg')" aria-hidden="true"></div>
+      <a data-svc="concrete-judaica" href="/services/concrete-judaica.html" class="work-card work-card-10">
+        <div class="work-card-image" style="background-image: url('assets/images/10_judaica_1.jpg')" aria-hidden="true"></div>
         <div class="work-card-content">
-          <span class="work-card-num" data-i18n="sec_08_eyebrow">08 / Custom wall murals</span>
-          <span class="work-card-title" data-i18n="sec_08_headline">Every wall is a story that hasn&rsquo;t been told yet.</span>
-        </div>
-      </a>
-
-      <a data-svc="decorative-concrete" href="/services/decorative-concrete.html" class="work-card work-card-9">
-        <div class="work-card-image" style="background-image: url('assets/images/09_concrete_1.jpeg')" aria-hidden="true"></div>
-        <div class="work-card-content">
-          <span class="work-card-num" data-i18n="sec_09_eyebrow">09 / Decorative concrete</span>
-          <span class="work-card-title" data-i18n="sec_09_headline">Concrete can be the most dramatic material in the room.</span>
+          <div class="work-card-top">
+            <span class="work-card-fam" data-i18n="fam_b_name">Sculpture &amp; objects</span>
+            <span class="work-card-num" data-i18n="sec_10_eyebrow">08 / Handmade concrete Judaica</span>
+          </div>
+          <span class="work-card-title" data-i18n="sec_10_headline">Ritual you can hold.</span>
         </div>
       </a>
     </div>
-  </div>
-</section>
-
-<!-- ════════════════════ Section 01 — Plaster (dark, variant A) ═════════════════ -->
-<svg class="curve curve-to-dark" viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-  <path d="M0,0 C320,90 1120,90 1440,0 L1440,90 L0,90 Z" fill="#0F0F0F"/>
-</svg>
-
-<section class="detail detail--dark detail--a" id="section-01">
-  <div class="detail-mark" aria-hidden="true">01</div>
-  <div class="detail-inner">
-    <div class="detail-row">
-      <div class="detail-text">
-        <p class="eyebrow detail-eyebrow" data-i18n="sec_01_eyebrow">01 / Plaster wall finishes</p>
-        <h2 class="detail-headline" data-i18n="sec_01_headline">Not paint. Not wallpaper.</h2>
-        <p class="detail-body" data-i18n="sec_01_body">Every wall can become a canvas. Hand-applied plaster finishes with custom patterns, from bold relief textures like crocodile skin to aged surfaces with delicate decorative overlays.</p>
-        <a href="#contact" class="cta-pill cta-pill--section" data-project="sec_01_eyebrow" data-i18n="cta_sec_01">Plan your plaster wall</a>
-      </div>
-      <div class="image-pair image-pair--bl">
-        <figure class="detail-image image-pair__primary">
-          <img src="assets/images/01_plaster_1.jpg" alt="Decorative stencil pattern over patinated blue plaster wall" loading="lazy">
-        </figure>
-        <figure class="detail-image image-pair__secondary">
-          <img src="assets/images/01_plaster_2.jpg" alt="Crocodile-skin textured plaster relief detail" loading="lazy">
-        </figure>
-      </div>
-    </div>
-    <a class="next-teaser" href="#section-02">
-      <span class="next-pre" data-i18n="next_label">Next —</span>
-      <span class="next-target" data-i18n="sec_02_eyebrow">02 / Sculptural coffee tables</span>
-    </a>
-  </div>
-</section>
-
-<!-- ════════════════════ Section 02 — Tables (cream, variant B) ═════════════════ -->
-<svg class="curve curve-to-cream" viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-  <path d="M0,90 C320,0 1120,0 1440,90 L1440,90 L0,90 Z" fill="#F2EDE3"/>
-</svg>
-
-<section class="detail detail--cream detail--d" id="section-02">
-  <div class="detail-mark" aria-hidden="true">02</div>
-  <div class="detail-inner">
-    <div class="detail-image-row split-50-50">
-      <figure class="detail-image">
-        <img src="assets/images/02_tables_1.jpg" alt="Rose-gold sculptural horse-head coffee table" loading="lazy">
-      </figure>
-      <figure class="detail-image">
-        <img src="assets/images/02_tables_2.jpeg" alt="Iridescent blue coffee table styled with coffee beans" loading="lazy">
-      </figure>
-    </div>
-    <div class="detail-text detail-text--centered">
-      <p class="eyebrow detail-eyebrow" data-i18n="sec_02_eyebrow">02 / Sculptural coffee tables</p>
-      <h2 class="detail-headline" data-i18n="sec_02_headline">Not just a table. A statement.</h2>
-      <p class="detail-body" data-i18n="sec_02_body">One piece, the whole character of the room. Sculptural coffee tables with custom-cast bases and signature finishes, from deep iridescent blue to soft rose-gold metallic.</p>
-      <a href="#contact" class="cta-pill cta-pill--section" data-project="sec_02_eyebrow" data-i18n="cta_sec_02">Commission a table</a>
-    </div>
-    <a class="next-teaser" href="#section-03">
-      <span class="next-pre" data-i18n="next_label">Next —</span>
-      <span class="next-target" data-i18n="sec_03_eyebrow">03 / Custom sculpture</span>
-    </a>
-  </div>
-</section>
-
-<!-- ════════════════════ Section 03 — Sculpture (dark, variant C) ═══════════════ -->
-<svg class="curve curve-to-dark" viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-  <path d="M0,0 C320,90 1120,90 1440,0 L1440,90 L0,90 Z" fill="#0F0F0F"/>
-</svg>
-
-<section class="detail detail--dark detail--c" id="section-03">
-  <div class="detail-mark" aria-hidden="true">03</div>
-  <div class="detail-inner">
-    <div class="detail-row">
-      <div class="image-pair image-pair--br">
-        <figure class="detail-image image-pair__primary detail-image--transparent">
-          <img src="assets/images/03_sculpture_1.png" alt="Hand-carved replica of Michelangelo&rsquo;s David" loading="lazy">
-        </figure>
-        <figure class="detail-image image-pair__secondary">
-          <img src="assets/images/03_sculpture_2.jpeg" alt="Large sculptural lion head detail" loading="lazy">
-        </figure>
-      </div>
-      <div class="detail-text">
-        <p class="eyebrow detail-eyebrow" data-i18n="sec_03_eyebrow">03 / Custom sculpture</p>
-        <h2 class="detail-headline" data-i18n="sec_03_headline">If you can imagine it, we can sculpt it.</h2>
-        <p class="detail-body" data-i18n="sec_03_body">Bespoke sculpture, made by hand. From classical figures (yes, even Michelangelo&rsquo;s David) to contemporary pieces, animal busts, and richly carved relief panels.</p>
-        <a href="#contact" class="cta-pill cta-pill--section" data-project="sec_03_eyebrow" data-i18n="cta_sec_03">Commission a sculpture</a>
-      </div>
-    </div>
-    <a class="next-teaser" href="#section-04">
-      <span class="next-pre" data-i18n="next_label">Next —</span>
-      <span class="next-target" data-i18n="sec_04_eyebrow">04 / Gypsum panels</span>
-    </a>
-  </div>
-</section>
-
-<!-- ════════════════════ Section 04 — Gypsum (cream, variant D) ═════════════════ -->
-<svg class="curve curve-to-cream" viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-  <path d="M0,90 C320,0 1120,0 1440,90 L1440,90 L0,90 Z" fill="#F2EDE3"/>
-</svg>
-
-<section class="detail detail--cream detail--d" id="section-04">
-  <div class="detail-mark" aria-hidden="true">04</div>
-  <div class="detail-inner">
-    <div class="detail-image-row split-50-50">
-      <figure class="detail-image">
-        <img src="assets/images/04_gypsum_1.jpg" alt="Marilyn Monroe portrait, hand-cast gypsum wall mosaic" loading="lazy">
-      </figure>
-      <figure class="detail-image">
-        <img src="assets/images/04_gypsum_2.jpg" alt="Moroccan-pattern decorative gypsum ceiling, hand-cast 3D panels" loading="lazy">
-      </figure>
-    </div>
-    <div class="detail-text detail-text--centered">
-      <p class="eyebrow detail-eyebrow" data-i18n="sec_04_eyebrow">04 / Gypsum panels for walls &amp; ceilings</p>
-      <h2 class="detail-headline" data-i18n="sec_04_headline">A ceiling doesn&rsquo;t have to be flat.</h2>
-      <p class="detail-body" data-i18n="sec_04_body">Our spaces deserve more than paint. Hand-cast gypsum panels with intricate patterns, from Moroccan geometry overhead to figurative wall mosaics.</p>
-      <a href="#contact" class="cta-pill cta-pill--section" data-project="sec_04_eyebrow" data-i18n="cta_sec_04">Design your ceiling</a>
-    </div>
-    <a class="next-teaser" href="#section-05">
-      <span class="next-pre" data-i18n="next_label">Next —</span>
-      <span class="next-target" data-i18n="sec_05_eyebrow">05 / Display, event &amp; gift accessories</span>
-    </a>
-  </div>
-</section>
-
-<!-- ════════════════════ Section 05 — Display (dark, variant A) ═════════════════ -->
-<svg class="curve curve-to-dark" viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-  <path d="M0,0 C320,90 1120,90 1440,0 L1440,90 L0,90 Z" fill="#0F0F0F"/>
-</svg>
-
-<section class="detail detail--dark detail--a" id="section-05">
-  <div class="detail-mark" aria-hidden="true">05</div>
-  <div class="detail-inner">
-    <div class="detail-row">
-      <div class="detail-text">
-        <p class="eyebrow detail-eyebrow" data-i18n="sec_05_eyebrow">05 / Display, event &amp; gift accessories</p>
-        <h2 class="detail-headline" data-i18n="sec_05_headline">The small detail is the whole story.</h2>
-        <p class="detail-body" data-i18n="sec_05_body">Sometimes it&rsquo;s the small details that leave the strongest impression. Artistic hand-made hair pins, display stands, and event props for retail, parties, and brand launches.</p>
-        <a href="#contact" class="cta-pill cta-pill--section" data-project="sec_05_eyebrow" data-i18n="cta_sec_05">Order display pieces</a>
-      </div>
-      <div class="image-pair image-pair--tl">
-        <figure class="detail-image image-pair__primary">
-          <img src="assets/images/05_display_1.jpg" alt="Gold artisan display stands" loading="lazy">
-        </figure>
-        <figure class="detail-image image-pair__secondary">
-          <img src="assets/images/05_display_2.jpg" alt="Hand-made artisan gold hair pins and combs" loading="lazy">
-        </figure>
-      </div>
-    </div>
-    <a class="next-teaser" href="#section-06">
-      <span class="next-pre" data-i18n="next_label">Next —</span>
-      <span class="next-target" data-i18n="sec_06_eyebrow">06 / Iron-look coating</span>
-    </a>
-  </div>
-</section>
-
-<!-- ════════════════════ Section 06 — Iron-look (cream, variant B) ══════════════ -->
-<svg class="curve curve-to-cream" viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-  <path d="M0,90 C320,0 1120,0 1440,90 L1440,90 L0,90 Z" fill="#F2EDE3"/>
-</svg>
-
-<section class="detail detail--cream detail--b" id="section-06">
-  <div class="detail-mark" aria-hidden="true">06</div>
-  <div class="detail-hero-pair image-pair image-pair--br">
-    <figure class="detail-image detail-hero image-pair__primary">
-      <img src="assets/images/06_iron_1.jpg" alt="Rusted iron-look coated entry door" loading="lazy">
-    </figure>
-    <figure class="detail-image image-pair__secondary">
-      <img src="assets/images/06_iron_2.jpg" alt="Iron-look texture sample grid" loading="lazy">
-    </figure>
-  </div>
-  <div class="detail-inner">
-    <div class="detail-row--two-col">
-      <div class="detail-text-left">
-        <p class="eyebrow detail-eyebrow" data-i18n="sec_06_eyebrow">06 / Iron-look coating for doors &amp; walls</p>
-        <h2 class="detail-headline" data-i18n="sec_06_headline">Iron. Without the iron.</h2>
-      </div>
-      <div class="detail-text-right">
-        <p class="detail-body" data-i18n="sec_06_body">All the presence of forged iron, without the weight or the actual rust. Iron-look coating for doors, walls, and surfaces, in tones of dark patina, warm rust, and smoked metal.</p>
-        <a href="#contact" class="cta-pill cta-pill--section" data-project="sec_06_eyebrow" data-i18n="cta_sec_06">Get the iron look</a>
-      </div>
-    </div>
-    <a class="next-teaser" href="#section-07">
-      <span class="next-pre" data-i18n="next_label">Next —</span>
-      <span class="next-target" data-i18n="sec_07_eyebrow">07 / Capitals &amp; ornaments</span>
-    </a>
-  </div>
-</section>
-
-<!-- ════════════════════ Section 07 — Capitals (dark, variant C) ════════════════ -->
-<svg class="curve curve-to-dark" viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-  <path d="M0,0 C320,90 1120,90 1440,0 L1440,90 L0,90 Z" fill="#0F0F0F"/>
-</svg>
-
-<section class="detail detail--dark" id="section-07">
-  <div class="detail-mark" aria-hidden="true">07</div>
-  <div class="detail-inner">
-    <header class="detail-header detail-header--centered">
-      <p class="eyebrow detail-eyebrow" data-i18n="sec_07_eyebrow">07 / Gypsum capitals &amp; architectural ornaments</p>
-      <h2 class="detail-headline" data-i18n="sec_07_headline">Gold, gypsum, and a little drama.</h2>
-      <p class="detail-body" data-i18n="sec_07_body">Classical detail never goes out of style. Corinthian column capitals, baroque scroll wall ornaments, and gold-leaf accents, all made in-house at the studio.</p>
-      <a href="#contact" class="cta-pill cta-pill--section" data-project="sec_07_eyebrow" data-i18n="cta_sec_07">Add classical detail</a>
-    </header>
-
-    <div class="detail-collage">
-      <figure class="collage-item collage-item--primary">
-        <img src="assets/images/07_capitals_2.jpg" alt="Corinthian-style gypsum column capital" loading="lazy">
-      </figure>
-      <figure class="collage-item collage-item--relief">
-        <img src="assets/images/07_capitals_1.jpeg" alt="Hand-carved floral relief panel detail" loading="lazy">
-      </figure>
-      <figure class="collage-item collage-item--corner">
-        <img src="assets/images/07_capitals_3.png" alt="Gold-leaf baroque corner ornament" loading="lazy">
-      </figure>
-    </div>
-
-    <a class="next-teaser" href="#section-08">
-      <span class="next-pre" data-i18n="next_label">Next —</span>
-      <span class="next-target" data-i18n="sec_08_eyebrow">08 / Custom wall murals</span>
-    </a>
-  </div>
-</section>
-
-<!-- ════════════════════ Section 08 — Murals (cream, variant D) ═════════════════ -->
-<svg class="curve curve-to-cream" viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-  <path d="M0,90 C320,0 1120,0 1440,90 L1440,90 L0,90 Z" fill="#F2EDE3"/>
-</svg>
-
-<section class="detail detail--cream detail--d" id="section-08">
-  <div class="detail-mark" aria-hidden="true">08</div>
-  <div class="detail-inner">
-    <div class="detail-image-row">
-      <figure class="detail-image detail-image--panoramic">
-        <img src="assets/images/08_murals_1.jpg" alt="Hand-painted &lsquo;Wild West Last Supper&rsquo; mural" loading="lazy">
-      </figure>
-    </div>
-    <div class="detail-text detail-text--centered">
-      <p class="eyebrow detail-eyebrow" data-i18n="sec_08_eyebrow">08 / Custom wall murals</p>
-      <h2 class="detail-headline" data-i18n="sec_08_headline">Every wall is a story that hasn&rsquo;t been told yet.</h2>
-      <p class="detail-body" data-i18n="sec_08_body">A wall can tell a story. Hand-painted custom murals, designed specifically for your space, from full narrative scenes to graphic and pattern-based designs.</p>
-      <a href="#contact" class="cta-pill cta-pill--section" data-project="sec_08_eyebrow" data-i18n="cta_sec_08">Commission a mural</a>
-    </div>
-    <a class="next-teaser" href="#section-09">
-      <span class="next-pre" data-i18n="next_label">Next —</span>
-      <span class="next-target" data-i18n="sec_09_eyebrow">09 / Decorative concrete</span>
-    </a>
-  </div>
-</section>
-
-<!-- ════════════════════ Section 09 — Concrete (dark, variant B) ════════════════ -->
-<svg class="curve curve-to-dark" viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-  <path d="M0,0 C320,90 1120,90 1440,0 L1440,90 L0,90 Z" fill="#0F0F0F"/>
-</svg>
-
-<section class="detail detail--dark detail--b" id="section-09">
-  <div class="detail-mark" aria-hidden="true">09</div>
-  <div class="detail-hero-pair image-pair image-pair--bl">
-    <figure class="detail-image detail-hero image-pair__primary">
-      <img src="assets/images/09_concrete_1.jpeg" alt="Drapery-flow textured decorative concrete wall" loading="lazy">
-    </figure>
-    <figure class="detail-image image-pair__secondary">
-      <img src="assets/images/09_concrete_2.jpeg" alt="Decorative concrete wall with sculptural menorah" loading="lazy">
-    </figure>
-  </div>
-  <div class="detail-inner">
-    <div class="detail-row--two-col">
-      <div class="detail-text-left">
-        <p class="eyebrow detail-eyebrow" data-i18n="sec_09_eyebrow">09 / Decorative concrete works &amp; finishes</p>
-        <h2 class="detail-headline" data-i18n="sec_09_headline">Concrete can be the most dramatic material in the room.</h2>
-      </div>
-      <div class="detail-text-right">
-        <p class="detail-body" data-i18n="sec_09_body">Concrete doesn&rsquo;t have to be minimalist. Hand-finished decorative concrete works, from sculptural-functional objects to flowing, drapery-like wall panels.</p>
-        <a href="#contact" class="cta-pill cta-pill--section" data-project="sec_09_eyebrow" data-i18n="cta_sec_09">Start a concrete project</a>
-      </div>
-    </div>
-    <a class="next-teaser" href="#contact">
-      <span class="next-pre" data-i18n="next_label">Next —</span>
-      <span class="next-target" data-i18n="contact_heading">Start a project</span>
-    </a>
   </div>
 </section>
 
 <!-- ════════════════════ Studio (cream) ═════════════════════════════════════════ -->
-<svg class="curve curve-to-cream" viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-  <path d="M0,90 C320,0 1120,0 1440,90 L1440,90 L0,90 Z" fill="#F2EDE3"/>
-</svg>
-
 <section id="studio" class="section-studio">
   <div class="section-inner">
     <p class="eyebrow studio-eyebrow" data-i18n="studio_eyebrow">THE STUDIO</p>
-    <h2 class="studio-headline" data-i18n="studio_headline">Tailored by hand, in our studio.</h2>
+    <h2 class="studio-headline" data-i18n="studio_headline">Everything by hand. Everything made here.</h2>
     <p class="studio-established" data-i18n="studio_established">Established 2005 · two decades of handmade architectural finishes, made and installed across Israel.</p>
 
     <div class="studio-grid">
       <div class="studio-text">
-        <p class="studio-philosophy" data-i18n="studio_philosophy">Built for experts and connoisseurs, The White Box Studio redefines the traditional creative space. We are a true artist&rsquo;s atelier with the unique ability to manifest any concept you can imagine.</p>
+        <p class="studio-philosophy" data-i18n="studio_philosophy">The White Box Studio is an artist&rsquo;s atelier in the full sense of the word. Through a deep understanding of materials, how they behave, where they come from, how they age well, we design and execute one-off pieces and finishes.</p>
         <p class="eyebrow studio-howwework-eyebrow" data-i18n="studio_howwework_eyebrow">How we work</p>
-        <p class="studio-howwework-body" data-i18n="studio_howwework_body">We co-design alongside architects, designers, or end clients, then handle full on-site installation. We currently take on projects exclusively in Israel.</p>
+        <p class="studio-howwework-body" data-i18n="studio_howwework_body">We co-design alongside architects, designers, or end clients, then handle full on-site installation. Installation is carried out by the studio&rsquo;s own team. We currently take on projects exclusively in Israel.</p>
       </div>
       <figure class="studio-image" aria-hidden="true">
         <!-- Placeholder gradient until assets/images/studio_1.jpg is added; replace the file to swap. -->
@@ -582,7 +394,7 @@
     </div>
 
     <blockquote class="studio-pullquote">
-      <p data-i18n="studio_pullquote">The gaze meets the work, the breath is taken.</p>
+      <p data-i18n="studio_pullquote">The gaze meets the work, and breath catches.</p>
     </blockquote>
   </div>
 </section>
@@ -595,14 +407,23 @@
 <section id="contact" class="section-contact">
   <div class="section-inner">
     <p class="eyebrow contact-eyebrow" data-i18n="contact_eyebrow">START A PROJECT</p>
-    <h2 class="contact-headline" data-i18n="contact_headline">Let&rsquo;s make a dream come true.</h2>
-    <p class="contact-body" data-i18n="contact_body">Ready to turn your concept into visual reality? Call or WhatsApp us with your ideas, project needs, and any reference imagery that inspires you.</p>
+    <h2 class="contact-headline" data-i18n="contact_headline">Have a wall waiting for something?</h2>
+    <p class="contact-body" data-i18n="contact_body">Tell us about the idea, the space, and any reference images you have, by WhatsApp, phone, or the form below. We&rsquo;ll get back to you right away with an initial direction to discuss.</p>
 
     <form class="contact-form" id="contact-form" novalidate>
       <input type="hidden" name="access_key" value="3b704e8b-3512-4328-a85d-491ec93ee40c">
       <input type="hidden" name="subject" value="New project inquiry, white-box.co.il">
       <input type="hidden" name="from_name" value="White Box website">
       <input type="hidden" name="cc" value="info@white-box.co.il,daphna@white-box.co.il">
+      <!-- lead attribution: filled by setupAttribution() in script.js -->
+      <input type="hidden" name="utm_source" value="">
+      <input type="hidden" name="utm_medium" value="">
+      <input type="hidden" name="utm_campaign" value="">
+      <input type="hidden" name="utm_term" value="">
+      <input type="hidden" name="utm_content" value="">
+      <input type="hidden" name="click_id" value="">
+      <input type="hidden" name="landing_page" value="">
+      <input type="hidden" name="referrer" value="">
       <!-- honeypot: bots fill this, humans never see it -->
       <input type="checkbox" name="botcheck" class="contact-form-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
 
@@ -622,21 +443,22 @@
           <select id="cf-type" name="project_type">
             <option value="" data-i18n="form_type_default">Select a category</option>
             <option data-i18n="sec_01_eyebrow">01 / Plaster wall finishes</option>
-            <option data-i18n="sec_02_eyebrow">02 / Sculptural coffee tables</option>
-            <option data-i18n="sec_03_eyebrow">03 / Custom sculpture</option>
-            <option data-i18n="sec_04_eyebrow">04 / Gypsum panels for walls &amp; ceilings</option>
-            <option data-i18n="sec_05_eyebrow">05 / Display, event &amp; gift accessories</option>
-            <option data-i18n="sec_06_eyebrow">06 / Iron-look coating for doors &amp; walls</option>
-            <option data-i18n="sec_07_eyebrow">07 / Gypsum capitals &amp; architectural ornaments</option>
-            <option data-i18n="sec_08_eyebrow">08 / Custom wall murals</option>
-            <option data-i18n="sec_09_eyebrow">09 / Decorative concrete works &amp; finishes</option>
+            <option data-i18n="sec_09_eyebrow">02 / Decorative concrete works &amp; finishes</option>
+            <option data-i18n="sec_06_eyebrow">03 / Iron-look coating for doors &amp; walls</option>
+            <option data-i18n="sec_08_eyebrow">04 / Commission wall murals</option>
+            <option data-i18n="sec_03_eyebrow">05 / Sculpture Commission</option>
+            <option data-i18n="sec_02_eyebrow">06 / Sculptural coffee tables</option>
+            <option data-i18n="sec_05_eyebrow">07 / Display, event &amp; gift accessories</option>
+            <option data-i18n="sec_10_eyebrow">08 / Handmade concrete Judaica</option>
+            <option data-i18n="sec_04_eyebrow">09 / Gypsum panels for walls &amp; ceilings</option>
+            <option data-i18n="sec_07_eyebrow">10 / Gypsum capitals &amp; architectural ornaments</option>
             <option data-i18n="form_type_other">Not sure / other</option>
           </select>
         </div>
         <div class="contact-field contact-field--full">
           <label for="cf-message" data-i18n="form_message_label">Message</label>
           <textarea id="cf-message" name="message" rows="4"
-                    data-i18n-placeholder="form_message_ph" placeholder="Tell us about your space, ideas, timeline, or any reference images that inspire you."></textarea>
+                    data-i18n-placeholder="form_message_ph" placeholder="Tell us about your space, ideas, inspiration images, and timeline."></textarea>
         </div>
       </div>
 
@@ -704,7 +526,7 @@
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
-<script src="script.js?v=20260608b" defer></script>
+<script src="script.js?v=20260707d" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/sienna-accessibility/dist/sienna-accessibility.umd.js" async></script>
 </body>
 </html>

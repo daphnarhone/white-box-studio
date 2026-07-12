@@ -10,7 +10,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const VER = '20260608b';
+const VER = '20260707d';
 const ORIGIN = 'https://white-box.co.il';
 const WA = '972545216416';
 
@@ -18,7 +18,7 @@ const WA = '972545216416';
 const UI = {
   he: {
     skip: 'דלג לתוכן הראשי', work: 'עבודות', studio: 'סטודיו', contact: 'צרו קשר',
-    home: 'בית', services: 'שירותים', faq: 'שאלות נפוצות', start: 'התחילו פרויקט', whatsapp: 'וואטסאפ',
+    home: 'בית', services: 'תחומי עשייה', faq: 'שאלות נפוצות', start: 'התחילו פרויקט', whatsapp: 'וואטסאפ',
     a11y: 'הצהרת נגישות', menu: 'פתח תפריט', mobileNav: 'ניווט נייד', bcAria: 'מסלול ניווט',
     waText: 'שלום, אשמח לדבר על פרויקט'
   },
@@ -89,10 +89,26 @@ function chrome({ lang, hrefHe, hrefEn }) {
       <span class="lang-divider" aria-hidden="true">·</span>
       <a href="${hrefHe}" lang="he" hreflang="he"${heActive}>עב</a>
     </div>`;
-  const dropdownItems = SERVICES.map(s =>
-    `          <a role="menuitem" data-svc="${s.slug}" href="${svcHref(s.slug, lang)}">${s[lang].eyebrow}</a>`).join('\n');
-  const mobileItems = SERVICES.map(s =>
-    `      <a data-svc="${s.slug}" href="${svcHref(s.slug, lang)}">${s[lang].eyebrow}</a>`).join('\n');
+  // Family-grouped nav (3 families, services sorted by their 01-10 order).
+  const ordered = [...SERVICES].sort((x, y) => x.order - y.order);
+  const megaCols = FAMILIES.map(f => {
+    const links = ordered.filter(s => s.family === f.key).map(s =>
+      `            <a data-svc="${s.slug}" href="${svcHref(s.slug, lang)}">${s[lang].eyebrow}</a>`).join('\n');
+    return `          <div class="nav-mega-col">
+            <p class="nav-mega-title" data-i18n="fam_${f.key}_name">${f[lang]}</p>
+${links}
+          </div>`;
+  }).join('\n');
+  const mobileFams = FAMILIES.map(f => {
+    const links = ordered.filter(s => s.family === f.key).map(s =>
+      `          <a data-svc="${s.slug}" href="${svcHref(s.slug, lang)}">${s[lang].eyebrow}</a>`).join('\n');
+    return `      <div class="mobile-fam">
+        <p class="mobile-fam-title" data-i18n="fam_${f.key}_name">${f[lang]}</p>
+        <div class="mobile-services-list">
+${links}
+        </div>
+      </div>`;
+  }).join('\n');
 
   return `<body>
 
@@ -106,14 +122,14 @@ function chrome({ lang, hrefHe, hrefEn }) {
     <div class="nav-links">
       <a href="/index.html#work" data-i18n="nav_work">${u.work}</a>
       <div class="nav-dropdown">
-        <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true" data-i18n="nav_services">${u.services}</button>
-        <div class="nav-dropdown-menu" role="menu">
-${dropdownItems}
+        <button type="button" class="nav-dropdown-toggle asw-text" aria-expanded="false" aria-haspopup="true" data-i18n="nav_services">${u.services}</button>
+        <div class="nav-dropdown-menu nav-mega">
+${megaCols}
         </div>
       </div>
       <a href="/index.html#studio" data-i18n="nav_studio">${u.studio}</a>
       <a data-faq-link href="${faqHref(lang)}" data-i18n="nav_faq">${UI[lang].faq || 'FAQ'}</a>
-      <a href="/index.html#contact" data-i18n="nav_contact">${u.contact}</a>
+      <a href="/index.html#contact" class="header-cta" data-i18n="cta_start">${u.start}</a>
     </div>
     ${toggle}
     <button class="menu-toggle" type="button" aria-label="${u.menu}" aria-expanded="false" aria-controls="mobile-menu">
@@ -130,9 +146,11 @@ ${dropdownItems}
     <a href="/index.html#contact" data-i18n="nav_contact">${u.contact}</a>
   </nav>
   <div class="mobile-services">
-    <p class="mobile-services-title" data-i18n="nav_services">${u.services}</p>
-    <div class="mobile-services-list">
-${mobileItems}
+    <button type="button" class="mobile-services-toggle asw-text" aria-expanded="false" aria-controls="mobile-services-panel">
+      <span data-i18n="nav_services">${u.services}</span><span class="mobile-services-caret" aria-hidden="true">▾</span>
+    </button>
+    <div class="mobile-services-panel" id="mobile-services-panel" hidden>
+${mobileFams}
     </div>
   </div>
   ${toggle}
@@ -212,7 +230,7 @@ function renderService(s, lang) {
       <h1 class="svc-h1">${d.h1}</h1>
       <p class="svc-lead">${d.lead}</p>
 ${d.intro.map(p => `      <p class="svc-body">${p}</p>`).join('\n')}
-      <a href="/index.html#contact" class="cta-pill cta-pill--filled">${d.ctaHero}</a>
+      <a href="${s.ctaHref || '/index.html#contact'}"${s.ctaHref ? ' target="_blank" rel="noopener"' : ''} class="cta-pill cta-pill--filled">${d.ctaHero}</a>
     </div>
 
     <div class="svc-gallery">
@@ -329,7 +347,7 @@ ${footer(lang)}`;
 }
 
 // ──────────────────────────────────────────────────────────────────────────
-import { SERVICES, FAQ } from './services-data.mjs';
+import { SERVICES, FAMILIES, FAQ } from './services-data.mjs';
 
 mkdirSync(resolve(ROOT, 'services'), { recursive: true });
 mkdirSync(resolve(ROOT, 'en/services'), { recursive: true });
@@ -345,7 +363,7 @@ writeFileSync(resolve(ROOT, 'en/faq.html'), renderFaq(FAQ, 'en'));
 n += 2;
 
 // ── sitemap.xml (with hreflang alternates) + robots.txt ────────────────────
-const today = '2026-06-07';
+const today = '2026-07-07';
 // A bilingual pair → two <url> entries, each carrying the same set of xhtml:link
 // alternates (he, en, x-default→he). Single-URL pages (home, accessibility) stand alone.
 const pair = (he, en) => [he, en].map(loc => `  <url>

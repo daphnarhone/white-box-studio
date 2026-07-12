@@ -5,6 +5,12 @@ const STORAGE_KEY = 'wbs-lang';
 const GA_MEASUREMENT_ID = 'G-ZYK627NZFG';
 const CONSENT_KEY = 'wbs-consent';
 
+// Lead attribution + webhook fan-out (see setupAttribution / sendLeadWebhook).
+const WBS_LEADS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwgmKWxc0LC9GQdMbvXc0N3MOWPL9r4gqh31BwYnb-1JobqSbWK3SAqa7iHJDmboC0g/exec'; // Apps Script web app /exec URL, filled after deployment
+const WBS_LEADS_TOKEN = 'wbx-lead-8451-kepler';
+const ATTRIB_KEY = 'wbs-attrib';
+const ATTRIB_FIELDS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'click_id', 'landing_page', 'referrer'];
+
 const whatsappNumber = '972545216416';
 const whatsappPrefills = {
   en: "Hi, I'd like to discuss a project",
@@ -24,33 +30,42 @@ const strings = {
 
     // ── Logo lockup (stays in EN in both languages) ──
     wordmark: 'white box studio',
-    tagline: 'bring the dream to life',
+    tagline: 'art & architectural finishes',
 
     // ── Hero ──────────────────────────────────────
-    hero_eyebrow: 'Atelier of architectural finishes',
-    hero_h1_part1: 'Handmade ',
+    hero_eyebrow: 'Atelier of art and architectural finishes · since 2005',
+    hero_h1_part1: 'Art and ',
     hero_h1_light: 'architectural',
-    hero_h1_part2: ' finishes.',
-    hero_sub: 'Plaster, concrete, gold leaf, iron, gypsum, sculpture, applied directly on site, for architects, designers, and the spaces they make.',
+    hero_h1_part2: ' finishes, by hand.',
+    hero_sub: 'Plaster, concrete, gold leaf, iron, gypsum, and sculpture. Designed in the studio and applied directly on site, alongside architects, designers, and their clients.',
     scroll_cue: 'Scroll',
 
     // ── Selected work section ─────────────────────
-    selected_work_eyebrow: 'Nine categories · one studio',
+    selected_work_eyebrow: 'Ten disciplines · one studio',
     selected_work_heading: 'Selected work',
-    selected_work_note: 'Every piece shown here was made and installed by our own studio.',
+    selected_work_note: 'Every piece here was designed, made, and installed by our own studio.',
+
+    // ── Service families (2026-07 regroup) ────────
+    fam_a_name: 'Walls & surfaces',
+    fam_b_name: 'Sculpture & objects',
+    fam_c_name: 'Ornament & detail',
+    fam_a_intro: 'Finishes applied straight onto the architecture: decorative plaster, decorative concrete, iron-look coating, and hand-painted murals. The wall itself becomes the work.',
+    fam_b_intro: 'Freestanding pieces made in the studio: commissioned sculpture, sculptural coffee tables, display and gift accessories, and concrete Judaica. One object sets the tone for a whole space.',
+    fam_c_intro: 'Classical craft for architectural detail: gypsum panels for walls and ceilings, column capitals, and ornaments. The small elements that complete a space.',
 
     // ── Recurring UI ──────────────────────────────
     cta_start: 'Start a project',
     cta_view: 'View work',
-    cta_sec_01: 'Plan your plaster wall',
-    cta_sec_02: 'Commission a table',
-    cta_sec_03: 'Commission a sculpture',
-    cta_sec_04: 'Design your ceiling',
-    cta_sec_05: 'Order display pieces',
-    cta_sec_06: 'Get the iron look',
-    cta_sec_07: 'Add classical detail',
-    cta_sec_08: 'Commission a mural',
-    cta_sec_09: 'Start a concrete project',
+    cta_sec_01: 'Start a project',
+    cta_sec_02: 'Start a project',
+    cta_sec_03: 'Start a project',
+    cta_sec_04: 'Start a project',
+    cta_sec_05: 'Start a project',
+    cta_sec_06: 'Start a project',
+    cta_sec_07: 'Start a project',
+    cta_sec_08: 'Start a project',
+    cta_sec_09: 'Start a project',
+    cta_sec_10: 'Shop the Holy collection',
     next_label: 'Next —',
     contact_heading: 'Start a project',
 
@@ -60,58 +75,63 @@ const strings = {
     sec_01_body: 'Every wall can become a canvas. Hand-applied plaster finishes with custom patterns, from bold relief textures like crocodile skin to aged surfaces with delicate decorative overlays. Suited to interiors and exteriors, private homes, restaurants, boutique hotels. Each finish is created on site, directly on the wall.',
 
     // ── Section 02 — Tables ───────────────────────
-    sec_02_eyebrow: '02 / Sculptural coffee tables',
-    sec_02_headline: 'Not just a table. A statement.',
+    sec_02_eyebrow: '06 / Sculptural coffee tables',
+    sec_02_headline: 'One piece sets the tone for the whole room.',
     sec_02_body: 'One piece, the whole character of the room. Sculptural coffee tables with custom-cast bases (horse heads, organic forms) and signature finishes, from deep iridescent blue to soft rose-gold metallic. Each table is co-designed in form and finish. Made for hotel lobbies, living rooms, and concept spaces.',
 
     // ── Section 03 — Sculpture ────────────────────
-    sec_03_eyebrow: '03 / Custom sculpture',
+    sec_03_eyebrow: '05 / Sculpture Commission',
     sec_03_headline: 'If you can imagine it, we can sculpt it.',
     sec_03_body: 'Bespoke sculpture, made by hand. From classical figures (yes, even Michelangelo’s David) to contemporary pieces, animal busts, and richly carved relief panels. Any scale, any finish, any material. Made for homes, hotels, retail, and public spaces.',
 
     // ── Section 04 — Gypsum panels ────────────────
-    sec_04_eyebrow: '04 / Gypsum panels for walls & ceilings',
+    sec_04_eyebrow: '09 / Gypsum panels for walls & ceilings',
     sec_04_headline: 'A ceiling doesn’t have to be flat.',
     sec_04_body: 'Our spaces deserve more than paint. Hand-cast gypsum panels with intricate patterns, from Moroccan geometry overhead to figurative wall mosaics. Designed for living rooms, bedrooms, hotel lobbies, and executive offices. Adds depth, volume, and character to any space.',
 
     // ── Section 05 — Display & gift ───────────────
-    sec_05_eyebrow: '05 / Display, event & gift accessories',
+    sec_05_eyebrow: '07 / Display, event & gift accessories',
     sec_05_headline: 'The small detail is the whole story.',
-    sec_05_body: 'Sometimes it’s the small details that leave the strongest impression. Artistic hand-made hair pins, display stands, and event props for retail, parties, and brand launches. Every piece is designed and produced specifically for your brand, your event, or the person receiving it.',
+    sec_05_body: 'Sometimes it’s the small details that leave the strongest impression. Hand-made decorative flower fixtures, hair pins, display tables and stands, and event props for retail, parties, and brand launches. Every piece is designed and produced specifically for your brand, your event, or the person receiving it.',
 
     // ── Section 06 — Iron-look ────────────────────
-    sec_06_eyebrow: '06 / Iron-look coating for doors & walls',
+    sec_06_eyebrow: '03 / Iron-look coating for doors & walls',
     sec_06_headline: 'Iron. Without the iron.',
     sec_06_body: 'All the presence of forged iron, without the weight or the actual rust. Iron-look coating for doors, walls, and surfaces, in tones of dark patina, warm rust, and smoked metal. Ideal for statement entry doors, accent walls, and spaces with an industrial-luxe edge.',
 
     // ── Section 07 — Capitals & ornaments ─────────
-    sec_07_eyebrow: '07 / Gypsum capitals & architectural ornaments',
+    sec_07_eyebrow: '10 / Gypsum capitals & architectural ornaments',
     sec_07_headline: 'Gold, gypsum, and a little drama.',
     sec_07_body: 'Classical detail never goes out of style. Corinthian column capitals, baroque scroll wall ornaments, and gold-leaf accents, all made in-house at the studio. Designed for classical and neo-classical spaces, luxury residences, event venues, and commercial facades.',
 
     // ── Section 08 — Murals ───────────────────────
-    sec_08_eyebrow: '08 / Custom wall murals',
-    sec_08_headline: 'Every wall is a story that hasn’t been told yet.',
+    sec_08_eyebrow: '04 / Commission wall murals',
+    sec_08_headline: 'Every wall is a story.',
     sec_08_body: 'A wall can tell a story. Hand-painted custom murals, designed specifically for your space, from full narrative scenes (like our “Wild West Last Supper”) to graphic and pattern-based designs. Made for restaurants, bars, boutique hotels, retail, and any private space ready for character.',
 
     // ── Section 09 — Concrete ─────────────────────
-    sec_09_eyebrow: '09 / Decorative concrete works & finishes',
-    sec_09_headline: 'Concrete can be the most dramatic material in the room.',
-    sec_09_body: 'Concrete doesn’t have to be minimalist. Hand-finished decorative concrete works, from sculptural-functional objects (like our stone-textured candle holders) to flowing, drapery-like wall panels. Made for modern spaces, commercial and residential, that want something raw and refined at once.',
+    sec_09_eyebrow: '02 / Decorative concrete works & finishes',
+    sec_09_headline: 'Concrete that flows like fabric.',
+    sec_09_body: 'Concrete doesn’t have to be minimalist. Hand-finished decorative concrete works, from sculptural-functional objects to flowing, drapery-like wall panels. Made for modern spaces, commercial and residential, that want something raw and refined at once.',
+
+    // ── Section 10 — Concrete Judaica ─────────────
+    sec_10_eyebrow: '08 / Handmade concrete Judaica',
+    sec_10_headline: 'Ritual you can hold.',
+    sec_10_body: 'Sacred objects, cast by hand in concrete. Kiddush goblets with brass, Netalah, mezuzah cases, Havdalah sets, blessing and prayer plaques, each with a weight that carries a sense of calm, stability, and longevity. These pieces live in our Holy collection.',
 
     // ── Studio section ────────────────────────────
     studio_eyebrow: 'THE STUDIO',
-    studio_headline: 'Tailored by hand, in our studio.',
+    studio_headline: 'Everything by hand. Everything made here.',
     studio_established: 'Established 2005 · two decades of handmade architectural finishes, made and installed across Israel.',
-    studio_philosophy: "Built for experts and connoisseurs, The White Box Studio redefines the traditional creative space. We are a true artist's atelier with the unique ability to manifest any concept you can imagine. Through an advanced understanding of material behaviors, history, and aesthetics, we engineer tailored solutions to bring your visions to life.",
+    studio_philosophy: "The White Box Studio is an artist's atelier in the full sense of the word. Through a deep understanding of materials, how they behave, where they come from, how they age well, we design and execute one-off pieces and finishes for architects, interior designers, and anyone after a look no one else has.",
     studio_howwework_eyebrow: 'How we work',
-    studio_howwework_body: 'We co-design alongside architects, designers, or end clients, then handle full on-site installation. We currently take on projects exclusively in Israel. We strongly prefer early-stage collaboration to guarantee that all required infrastructure is seamlessly planned and executed.',
-    studio_pullquote: 'The gaze meets the work, the breath is taken.',
+    studio_howwework_body: "We co-design alongside architects, designers, or end clients, then handle full on-site installation. Installation is carried out by the studio's own team. We currently take on projects exclusively in Israel. We strongly prefer early-stage collaboration to guarantee that all required infrastructure is seamlessly planned and executed.",
+    studio_pullquote: 'The gaze meets the work, and breath catches.',
 
     // ── Contact section ───────────────────────────
     contact_eyebrow: 'START A PROJECT',
-    contact_headline: "Let's make a dream come true.",
-    contact_body: "Ready to turn your concept into visual reality? Call or WhatsApp us with your ideas, project needs, and any reference imagery that inspires you. We'll instantly decode your vision, determine the optimal structural approach, and select the finest materials and artisanal crafts to bring your dream to life.",
+    contact_headline: "Have a wall waiting for something?",
+    contact_body: "Tell us about the idea, the space, and any reference images you have, by WhatsApp, phone, or the form below. We'll get back to you right away with an initial direction to discuss.",
     contact_whatsapp_label: 'WhatsApp',
     contact_email_label: 'Email',
     contact_phone_label: 'Phone',
@@ -133,7 +153,7 @@ const strings = {
     form_type_default: 'Select a category',
     form_type_other: 'Not sure / other',
     form_message_label: 'Message',
-    form_message_ph: 'Tell us about your space, ideas, timeline, or any reference images that inspire you.',
+    form_message_ph: 'Tell us about your space, ideas, inspiration images, and timeline.',
     form_submit_email: 'Send via email',
     form_submit_whatsapp: 'Send via WhatsApp',
     form_alt_label: 'Or reach us directly',
@@ -147,7 +167,7 @@ const strings = {
   he: {
     // ── Header navigation ─────────────────────────
     nav_work: 'עבודות',
-    nav_services: 'שירותים',
+    nav_services: 'תחומי עשייה',
     nav_studio: 'סטודיו',
     nav_faq: 'שאלות נפוצות',
     nav_contact: 'צרו קשר',
@@ -156,35 +176,44 @@ const strings = {
 
     // ── Logo lockup ───────────────────────────────
     wordmark: 'white box studio',
-    tagline: 'להחיות את החלום',
+    tagline: 'אמנות וגימורים אדריכליים',
 
     // ── Hero ──────────────────────────────────────
-    hero_eyebrow: 'סטודיו לעיצוב אומנותי אדריכלי',
-    hero_h1_part1: 'עיצוב וגימור ',
+    hero_eyebrow: 'סטודיו לאמנות וגימורים אדריכליים · מאז 2005',
+    hero_h1_part1: 'אמנות וגימורים אדריכליים, ',
     hero_h1_light: 'בעבודת יד',
     hero_h1_part2: '',
-    hero_sub: 'עבודה בגבס, טיח דקורטיבי, צמנט, ברזל, אפוקסי, אקריל ועוד. מותקן באתר הלקוח, למען אדריכלים, מעצבי פנים והחללים הייחודיים שלהם.',
+    hero_sub: 'טיח, בטון, עלה זהב, ברזל, גבס ופיסול. מעוצבים בסטודיו ומיושמים ישירות באתר, לצד אדריכלים, מעצבי פנים והלקוחות שלהם.',
     scroll_cue: 'גלילה',
 
     // ── Selected work section ─────────────────────
-    selected_work_eyebrow: 'תשע קטגוריות · סטודיו אחד',
+    selected_work_eyebrow: 'עשרה תחומים · סטודיו אחד',
     selected_work_heading: 'עבודות נבחרות',
-    selected_work_note: 'כל יצירה המוצגת כאן נוצרה והותקנה על ידי הסטודיו שלנו.',
+    selected_work_note: 'כל יצירה כאן עוצבה, נוצרה והותקנה על ידי הסטודיו.',
+
+    // ── Service families (2026-07 regroup) ────────
+    fam_a_name: 'קירות ומשטחים',
+    fam_b_name: 'פיסול ואובייקטים',
+    fam_c_name: 'עיטור ופרטים',
+    fam_a_intro: 'גימורים שמיושמים ישירות על האדריכלות: טיח דקורטיבי, בטון דקורטיבי, ציפוי דמוי ברזל וציורי קיר. הקיר עצמו הופך ליצירה.',
+    fam_b_intro: 'יצירות עצמאיות שנוצרות בסטודיו: פיסול בהזמנה, שולחנות קפה פיסוליים, אביזרי תצוגה ומתנה ותשמישי קדושה מבטון. אובייקט אחד קובע את האופי של חלל שלם.',
+    fam_c_intro: 'מלאכה קלאסית לפרטים אדריכליים: פאנלים מגבס לקירות ולתקרות, כותרות עמודים ועיטורים. הפרטים הקטנים שמשלימים את החלל.',
 
     // ── Recurring UI ──────────────────────────────
-    cta_start: 'הזמינו פרוייקט',
+    cta_start: 'התחילו פרויקט',
     cta_view: 'צפו בעבודות',
-    cta_sec_01: 'תכננו גימור לקירות',
-    cta_sec_02: 'הזמינו פרטי ריהוט',
-    cta_sec_03: 'הזמינו עבודת פיסול',
-    cta_sec_04: 'תכננו גימור תקרה',
-    cta_sec_05: 'הזמינו אביזרי תצוגה/אירועים',
-    cta_sec_06: 'הזמינו גימור דמוי ברזל/בטון',
-    cta_sec_07: 'הוסיפו עיטורים',
-    cta_sec_08: 'הזמינו ציור קיר',
-    cta_sec_09: 'הזמינו פרוייקט בבטון',
+    cta_sec_01: 'התחילו פרויקט',
+    cta_sec_02: 'התחילו פרויקט',
+    cta_sec_03: 'התחילו פרויקט',
+    cta_sec_04: 'התחילו פרויקט',
+    cta_sec_05: 'התחילו פרויקט',
+    cta_sec_06: 'התחילו פרויקט',
+    cta_sec_07: 'התחילו פרויקט',
+    cta_sec_08: 'התחילו פרויקט',
+    cta_sec_09: 'התחילו פרויקט',
+    cta_sec_10: 'לרכישה בחנות Holy',
     next_label: 'הבא —',
-    contact_heading: 'הזמינו פרוייקט',
+    contact_heading: 'התחילו פרויקט',
 
     // ── Section 01 — Plaster ──────────────────────
     sec_01_eyebrow: '01 / גימור קירות בטיח דקורטיבי',
@@ -192,58 +221,63 @@ const strings = {
     sec_01_body: 'כל קיר יכול להפוך לקנבס. גימורי טיח בעבודת יד עם דוגמאות מותאמות אישית, מטקסטורות נועזות בסגנון עור תנין ועד ציפויים עתיקים עם דוגמאות עיצוביות עדינות. מתאים לפנים ולחוץ, לבתים פרטיים, מסעדות ומלונות בוטיק. כל גימור מבוצע אצלכם, ישירות על הקיר.',
 
     // ── Section 02 — Tables ───────────────────────
-    sec_02_eyebrow: '02 / שולחנות קפה פיסוליים',
-    sec_02_headline: 'לא רק שולחן. הצהרה.',
-    sec_02_body: 'רהיט אחד, מוסיף אופי לחלל. שולחנות קפה בעיצוב פיסולי עם בסיסים מעוצבים (ראש סוס, צורות אורגניות) וגימורים ייחודיים בגוונים של כחול אירידיסנטי, רוז’-גולד מטאלי ועוד. כל שולחן מותאם אישית בצורה ובגימור. מושלם ללובאים, סלון או חללי קונספט.',
+    sec_02_eyebrow: '06 / שולחנות קפה פיסוליים',
+    sec_02_headline: 'פריט אחד קובע את האופי של החדר.',
+    sec_02_body: 'רהיט אחד ייחודי, וכל האופי של החלל משתנה. שולחנות קפה בעיצוב פיסולי עם בסיסים מעוצבים (ראש סוס, צורות אורגניות) וגימורים ייחודיים בגוונים של כחול אירידיסנטי, רוז’-גולד מטאלי ועוד. כל שולחן מותאם אישית בצורה ובגימור. מושלם ללובי מלון, לסלון או לחללי קונספט.',
 
     // ── Section 03 — Sculpture ────────────────────
-    sec_03_eyebrow: '03 / פיסול על פי דרישה',
+    sec_03_eyebrow: '05 / פיסול בהזמנה אישית',
     sec_03_headline: 'אם אפשר לדמיין את זה, אפשר לפסל את זה.',
-    sec_03_body: 'פיסול בעבודת יד לפי דרישה. מדמויות קלאסיות (כן, אפילו דוד של מיכלאנג’לו) ועד עבודות פיסול מודרניות, ראשי חיות ופאנלי קיר עשירים ודקורטיביים. ניתן להזמין בכל גודל, גימור וחומר. מתאים לבית, מלון, חנות ומרחב מסחרי או ציבורי.',
+    sec_03_body: 'פיסול בעבודת יד לפי דרישה. מדמויות קלאסיות (כן, אפילו דוד של מיכלאנג’לו) ועד עבודות פיסול מודרניות, ראשי חיות ופאנלי קיר עשירים ודקורטיביים. ניתן להזמין בכל גודל, גימור וחומר. מתאים לבית, לבתי מלון, חנויות ומרחבים מסחריים או ציבוריים.',
 
     // ── Section 04 — Gypsum panels ────────────────
-    sec_04_eyebrow: '04 / פאנלים מגבס לקירות ולתקרות',
-    sec_04_headline: 'התקרה לא חייבת להיות שטוחה.',
-    sec_04_body: 'החללים שלנו ראויים ליותר מצבע. פאנלי גבס בעבודת יד עם תבניות מורכבות, מגיאומטריה מרוקאית בתקרה לפסיפסי דמויות על הקיר. מתאים לסלון, חדר שינה, לובאי מלון ומשרדי הנהלה. מוסיפים לחלל עומק, נפח ואופי.',
+    sec_04_eyebrow: '09 / פאנלים מגבס לקירות ולתקרות',
+    sec_04_headline: 'התקרה לא חייבת להיות חלקה.',
+    sec_04_body: 'החללים שלנו ראויים ליותר מצבע. פאנלי גבס בעבודת יד עם דפוסים מורכבים, מגיאומטריה מרוקאית בתקרה עד לפסיפס דמויות על הקיר. מתאים לסלון, חדר שינה, לובי מלון ומשרדי הנהלה. מוסיפים לחלל אופי, נפח ועומק.',
 
     // ── Section 05 — Display & gift ───────────────
-    sec_05_eyebrow: '05 / אביזרי תצוגה ומתנה',
+    sec_05_eyebrow: '07 / אביזרי תצוגה ומתנה',
     sec_05_headline: 'הפרט הקטן הוא הסיפור.',
-    sec_05_body: 'לפעמים הפרט הקטן הוא זה שמשאיר את הרושם. סיכות שיער אומנותיות בעבודת יד, סטנדים ואביזרי תצוגה לחנויות, אירועים, מסיבות והשקות מותג. כל פריט מעוצב ומיוצר במיוחד עבור המותג, האירוע או האדם שמקבל אותו.',
+    sec_05_body: 'לפעמים הפרט הקטן הוא זה שמשאיר את הרושם. קישוטי פרחים דקורטיביים בעבודת יד, סיכות ראש, שולחנות וסטנדים לתצוגה ואביזרי אירועים לחנויות, אירועים, מסיבות והשקות מותג. כל פריט מעוצב ומיוצר במיוחד עבור המותג, האירוע או האדם שמקבל אותו.',
 
     // ── Section 06 — Iron-look ────────────────────
-    sec_06_eyebrow: '06 / ציפוי דמוי ברזל לדלתות וקירות',
+    sec_06_eyebrow: '03 / ציפוי דמוי ברזל לדלתות וקירות',
     sec_06_headline: 'ברזל. בלי הברזל.',
     sec_06_body: 'כל הנוכחות של ברזל מחושל, בלי המשקל ובלי החלודה האמיתית. ציפוי דמוי ברזל לדלתות, קירות ומשטחים, בגוונים של פטינה כהה, חלודה חמה ומתכת מעושנת. מתאים לדלתות כניסה דרמטיות, קירות בולטים וחללים עם אופי תעשייתי-יוקרתי.',
 
     // ── Section 07 — Capitals & ornaments ─────────
-    sec_07_eyebrow: '07 / כותרות ועיטורים מגבס',
+    sec_07_eyebrow: '10 / כותרות ועיטורים מגבס',
     sec_07_headline: 'זהב, גבס, וקצת דרמה.',
-    sec_07_body: 'קלאסיקה לא יוצאת מהאופנה. כותרות עמודים בסגנון קורינתי, עיטורי קיר ברוקיים ועבודות עלה זהב, כולם מיוצרים בייצור עצמי בסטודיו. מתאים לחללים בסגנון קלאסי וניאו-קלאסי, בתי לוקס פרטיים, אולמות אירועים וחזיתות מסחריות.',
+    sec_07_body: 'קלאסיקה לא יוצאת מהאופנה. כותרות עמודים בסגנון קורינתי, עיטורי קיר בארוקיים ועבודות עלה זהב, כולם מיוצרים בייצור עצמי בסטודיו. מתאים לחללים בסגנון קלאסי וניאו-קלאסי, בתי מגורים מפוארים, אולמות אירועים וחזיתות מסחריות.',
 
     // ── Section 08 — Murals ───────────────────────
-    sec_08_eyebrow: '08 / ציורי קיר על פי דרישה',
-    sec_08_headline: 'כל קיר הוא סיפור שלא סופר עדיין.',
-    sec_08_body: 'קיר יכול לספר סיפור. ציורי קיר בעבודת יד, מאוירים במיוחד עבור החלל שלכם. מסצנות נראטיביות שלמות (כמו “הסעודה האחרונה” שלנו בנוסח המערב הפרוע) ועד דוגמאות גרפיות ועיצוביות. מתאים למסעדות, ברים, מלונות בוטיק, חנויות ומרחבים פרטיים שרוצים אופי.',
+    sec_08_eyebrow: '04 / ציורי קיר על פי דרישה',
+    sec_08_headline: 'כל קיר הוא סיפור.',
+    sec_08_body: 'קיר יכול לספר סיפור. ציורי קיר בעבודת יד, מאוירים במיוחד עבור החלל שלכם. מסצנות נרטיביות שלמות (כמו “הסעודה האחרונה” שלנו בנוסח המערב הפרוע) ועד דוגמאות גרפיות ועיצוביות. מתאים למסעדות, ברים, מלונות בוטיק, חנויות ומרחבים פרטיים שרוצים אופי.',
 
     // ── Section 09 — Concrete ─────────────────────
-    sec_09_eyebrow: '09 / עבודות וגימורים בבטון דקורטיבי',
-    sec_09_headline: 'בטון יכול להיות הכי דרמטי שבחומרים.',
-    sec_09_body: 'בטון לא חייב להיות מינימליסטי. עבודות וגימורים מבטון דקורטיב בעבודת יד, מאובייקטים שימושיים-פיסוליים (כמו מחזיק נרות בטקסטורת אבן) ועד פאנלי קיר זורמים בסגנון פיסולי. מתאים לחללים מודרניים, מסחריים ומגורים, שמחפשים מגע גולמי ומעודן בו זמנית.',
+    sec_09_eyebrow: '02 / עבודות וגימורים בבטון דקורטיבי',
+    sec_09_headline: 'בטון שזורם כמו בד.',
+    sec_09_body: 'בטון לא חייב להיות מינימליסטי. עבודות וגימורים מבטון דקורטיב בעבודת יד, מאובייקטים שימושיים-פיסוליים בטקסטורת אבן ועד פאנלי קיר זורמים בסגנון פיסולי. מתאים לחללים מודרניים, מסחריים ומגורים, שמחפשים מגע גולמי ומעודן בו זמנית.',
+
+    // ── Section 10 — Concrete Judaica ─────────────
+    sec_10_eyebrow: '08 / תשמישי קדושה מבטון',
+    sec_10_headline: 'מנהג שאפשר להחזיק ביד.',
+    sec_10_body: 'תשמישי קדושה, יצוקים ביד מבטון. גביעי קידוש עם פליז, נטלות, בתי מזוזות, כלי הבדלה ולוחות ברכה ותפילה, כל אחד עם משקל שנותן תחושה של שקט, יציבות ואריכות ימים. הפריטים האלה נמצאים באוסף Holy שלנו.',
 
     // ── Studio section ────────────────────────────
     studio_eyebrow: 'הסטודיו',
-    studio_headline: 'רוקמים חלומות, בסטודיו שלנו',
+    studio_headline: 'הכול נעשה ביד. הכול נוצר כאן.',
     studio_established: 'נוסד ב-2005 · שני עשורים של גימורים אדריכליים בעבודת יד, ביצוע והתקנה ברחבי ישראל.',
-    studio_philosophy: 'סטודיו The White Box מגדיר מחדש את אפשרויות העיצוב והיצירתיות עבור מעצבי פנים, אדריכלים ולמחפשים נראות מיוחדת. כסטודיו אומנים אמיתי יש לנו יכולת ייחודית להגשים כל קונספט שתוכלו לדמיין. באמצעות הבנה מתקדמת של התנהגויות חומרים, ההיסטוריה שלהם והאסתטיקה, אנו מתכננים פתרונות מותאמים אישית כדי להגשים את החזונות שלכם.',
+    studio_philosophy: 'סטודיו The White Box הוא סטודיו של אמנים במלוא מובן המילה. מתוך הבנה עמוקה של חומרים, איך הם מתנהגים, מאיפה הם באים ואיך הם מזדקנים יפה, אנחנו מעצבים ומבצעים פתרונות מותאמים אישית לאדריכלים, למעצבי פנים ולכל מי שמחפש נראות שאין לאף אחד אחר.',
     studio_howwework_eyebrow: 'איך אנחנו עובדים',
-    studio_howwework_body: 'אנחנו עובדים ישירות עם אדריכלים, מעצבים ולקוחות סופיים, החל משלב התכנון המשותף ועד להתקנה באתר. כיום אנו מתמקדים בפרויקטים בתוך ישראל. נשמח להתחיל את התכנון בשלבים הראשונים של הפרויקט כדי להבטיח שכל התשתיות הנדרשות מתוכננות ומשולבות בצורה מושלמת.',
+    studio_howwework_body: 'אנחנו עובדים ישירות עם אדריכלים, מעצבים ולקוחות סופיים, החל משלב התכנון המשותף ועד להתקנה באתר. את ההתקנה מבצע צוות הסטודיו עצמו. כיום אנו מתמקדים בפרויקטים בתוך ישראל. נשמח להתחיל את התכנון בשלבים הראשונים של הפרויקט כדי להבטיח שכל התשתיות הנדרשות מתוכננות ומשולבות בצורה מושלמת.',
     studio_pullquote: 'המבט פוגש ביצירה - הנשימה נעתקת',
 
     // ── Contact section ───────────────────────────
-    contact_eyebrow: 'הזמינו פרוייקט',
-    contact_headline: 'בואו נתחיל לייצר את החלום',
-    contact_body: 'מוכנים להפוך את החלום למציאות חזותית? התקשרו או שלחו לנו וואטסאפ עם הרעיונות, צרכי הפרויקט וכל תמונה שמעוררת בכם השראה. בשאר אנחנו נטפל. ניצור צורה, צבע וטקסטורה לפי החזון שלכם, נוודא מבניות אופטימלית, ונבחר וניישם עם החומרים הטובים ביותר כדי להחיות את החלום',
+    contact_eyebrow: 'התחילו פרויקט',
+    contact_headline: 'יש לכם קיר שמחכה למשהו?',
+    contact_body: 'ספרו לנו על הרעיון, על החלל ועל תמונת השראה שיש לכם, בוואטסאפ, בטלפון או בטופס. נחזור אליכם מיידית עם כיוון ראשוני.',
     contact_whatsapp_label: 'וואטסאפ',
     contact_email_label: 'אימייל',
     contact_phone_label: 'טלפון',
@@ -265,7 +299,7 @@ const strings = {
     form_type_default: 'בחרו קטגוריה',
     form_type_other: 'לא בטוח/ה / אחר',
     form_message_label: 'הודעה',
-    form_message_ph: 'ספרו לנו על החלל, הרעיונות, לוח הזמנים או כל תמונת השראה.',
+    form_message_ph: 'ספרו לנו על החלל שלכם, הרעיונות, תמונות השראה ולוח הזמנים.',
     form_submit_email: 'שליחה במייל',
     form_submit_whatsapp: 'שליחה בוואטסאפ',
     form_alt_label: 'או צרו קשר ישירות',
@@ -674,6 +708,80 @@ function setupRevealAnimations() {
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 }
 
+// Read the persisted attribution snapshot; null when absent or storage is blocked.
+function getStoredAttribution() {
+  try {
+    const raw = localStorage.getItem(ATTRIB_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch (_) {
+    return null;
+  }
+}
+
+// Capture UTM params + ad click ids on arrival and persist them so a lead
+// submitted days later still carries its original campaign. Latest campaign
+// wins; a plain visit only records landing page + referrer the first time.
+function setupAttribution() {
+  const params = new URLSearchParams(location.search);
+  const utm = {};
+  ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'].forEach(name => {
+    utm[name] = params.get(name) || '';
+  });
+  const clickId = params.get('gclid') || params.get('fbclid') || '';
+  const hasCampaign = clickId !== '' || Object.keys(utm).some(name => utm[name] !== '');
+
+  let attrib = getStoredAttribution();
+  if (hasCampaign) {
+    attrib = Object.assign({}, utm, {
+      click_id: clickId,
+      landing_page: location.pathname,
+      referrer: document.referrer,
+      ts: Date.now()
+    });
+    try { localStorage.setItem(ATTRIB_KEY, JSON.stringify(attrib)); } catch (_) {}
+  } else if (!attrib) {
+    attrib = {
+      landing_page: location.pathname,
+      referrer: document.referrer,
+      ts: Date.now()
+    };
+    try { localStorage.setItem(ATTRIB_KEY, JSON.stringify(attrib)); } catch (_) {}
+  }
+
+  // Mirror the stored attribution into the form's hidden inputs so it rides
+  // along with the Web3Forms email as well.
+  const form = document.getElementById('contact-form');
+  if (!form || !attrib) return;
+  ATTRIB_FIELDS.forEach(name => {
+    const input = form.querySelector(`input[name="${name}"]`);
+    if (input) input.value = attrib[name] || '';
+  });
+}
+
+// Fire-and-forget copy of each lead to the webhook (skipped until the /exec
+// URL is pasted in). Never gates the UI; all errors are swallowed.
+function sendLeadWebhook(fields) {
+  if (WBS_LEADS_ENDPOINT.indexOf('PASTE') !== -1) return;
+  const attrib = getStoredAttribution() || {};
+  const body = new URLSearchParams();
+  body.set('token', WBS_LEADS_TOKEN);
+  body.set('type', 'lead');
+  body.set('source_system', 'web3forms-landing');
+  body.set('site', 'white-box.co.il');
+  body.set('form', 'contact');
+  body.set('name', fields.name);
+  body.set('contact_raw', fields.contact);
+  body.set('topic', fields.type);
+  body.set('message', fields.message);
+  ATTRIB_FIELDS.forEach(name => body.set(name, attrib[name] || ''));
+  body.set('lang', document.documentElement.getAttribute('lang') || '');
+  try {
+    // URLSearchParams body sends urlencoded content-type, safe under no-cors.
+    fetch(WBS_LEADS_ENDPOINT, { method: 'POST', mode: 'no-cors', keepalive: true, body })
+      .catch(() => {});
+  } catch (_) {}
+}
+
 function setupContactForm() {
   const form = document.getElementById('contact-form');
   if (!form) return;
@@ -723,6 +831,8 @@ function setupContactForm() {
   // Email (primary) — Web3Forms AJAX submit, visitor stays on the page.
   form.addEventListener('submit', (e) => {
     e.preventDefault();
+    // f is captured BEFORE the fetch: form.reset() in the success branch
+    // wipes the inputs, and the webhook below still needs these values.
     const f = getFields();
     if (!f.name || !f.contact) {
       setStatus('form_status_required', 'error');
@@ -738,6 +848,7 @@ function setupContactForm() {
       .then(data => {
         if (data.success) {
           setStatus('form_status_success', 'success');
+          sendLeadWebhook(f);
           form.reset();
         } else {
           setStatus('form_status_error', 'error');
@@ -830,6 +941,23 @@ function setupNavDropdown() {
     btn.addEventListener('click', (e) => { e.preventDefault(); open(!dd.classList.contains('open')); });
     dd.addEventListener('keydown', (e) => { if (e.key === 'Escape') { open(false); btn.focus(); } });
     document.addEventListener('click', (e) => { if (!dd.contains(e.target)) open(false); });
+    // Tabbing out of the menu closes it (rAF: wait for focus to land first).
+    dd.addEventListener('focusout', () => {
+      requestAnimationFrame(() => { if (!dd.contains(document.activeElement)) open(false); });
+    });
+  });
+}
+
+// Mobile "Services" accordion: the group title is a button that folds the
+// family-grouped service list open/closed inside the burger menu.
+function setupMobileServicesAccordion() {
+  const toggle = document.querySelector('.mobile-services-toggle');
+  const panel = document.getElementById('mobile-services-panel');
+  if (!toggle || !panel) return;
+  toggle.addEventListener('click', () => {
+    const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+    panel.hidden = isOpen;
   });
 }
 
@@ -935,12 +1063,14 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   setupMobileMenu();
+  setupMobileServicesAccordion();
   setupNavDropdown();
   const lenis = setupSmoothScroll();  // Lenis — drives the GSAP ticker for setupGlide()
   setupHeroScroll();     // hero scroll-cue fade + parallax (top-of-page triggers first)
   setupGlide();          // GSAP ScrollTrigger — cards/images glide into place
   setupVelocitySkew(lenis);  // images lean with scroll velocity, settle at rest
   setupRevealAnimations();
+  setupAttribution();    // persist UTM/click ids + fill hidden lead-attribution inputs
   setupContactForm();
   setupStickyCta();
   setupInitialHashScroll(lenis);  // land on #contact/#work/#studio when arriving from a sub-page
