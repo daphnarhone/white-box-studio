@@ -16,6 +16,12 @@ const whatsappPrefills = {
   en: "Hi, I'd like to discuss a project",
   he: "שלום, אשמח לדבר על פרויקט"
 };
+// Hero CTA promises "send a photo, get an initial direction" — its prefill
+// matches that promise instead of the generic project opener.
+const whatsappHeroPrefills = {
+  en: "Hi, I'd like to send a photo of my wall and get a design direction",
+  he: "שלום, אשמח לשלוח תמונה של הקיר ולקבל כיוון עיצובי"
+};
 
 const strings = {
   en: {
@@ -34,10 +40,10 @@ const strings = {
 
     // ── Hero ──────────────────────────────────────
     hero_eyebrow: 'Atelier of art and architectural finishes · since 2005',
-    hero_h1_part1: 'Art and ',
-    hero_h1_light: 'architectural',
-    hero_h1_part2: ' finishes, by hand.',
-    hero_sub: 'Plaster, concrete, gold leaf, iron, gypsum, and sculpture. Designed in the studio and applied directly on site, alongside architects, designers, and their clients.',
+    hero_h1_part1: '',
+    hero_h1_light: 'Walls, sculpture, and detail ',
+    hero_h1_part2: 'no one else has.',
+    hero_sub: 'Plaster, concrete, gold leaf, iron, gypsum, and sculpture. Every piece designed, made, and installed by our own team, since 2005.',
     scroll_cue: 'Scroll',
 
     // ── Selected work section ─────────────────────
@@ -56,6 +62,7 @@ const strings = {
     // ── Recurring UI ──────────────────────────────
     cta_start: 'Start a project',
     cta_view: 'View work',
+    cta_whatsapp_hero: 'Send a photo and get a design direction today',
     cta_sec_01: 'Start a project',
     cta_sec_02: 'Start a project',
     cta_sec_03: 'Start a project',
@@ -180,10 +187,10 @@ const strings = {
 
     // ── Hero ──────────────────────────────────────
     hero_eyebrow: 'סטודיו לאמנות וגימורים אדריכליים · מאז 2005',
-    hero_h1_part1: 'אמנות וגימורים אדריכליים, ',
-    hero_h1_light: 'בעבודת יד',
-    hero_h1_part2: '',
-    hero_sub: 'טיח, בטון, עלה זהב, ברזל, גבס ופיסול. מעוצבים בסטודיו ומיושמים ישירות באתר, לצד אדריכלים, מעצבי פנים והלקוחות שלהם.',
+    hero_h1_part1: '',
+    hero_h1_light: 'קירות, פיסול ופרטים ',
+    hero_h1_part2: 'שאין לאף אחד אחר.',
+    hero_sub: 'טיח, בטון, עלה זהב, ברזל, גבס ופיסול. כל יצירה מעוצבת, נוצרת ומותקנת על ידי הצוות שלנו, מאז 2005.',
     scroll_cue: 'גלילה',
 
     // ── Selected work section ─────────────────────
@@ -202,6 +209,7 @@ const strings = {
     // ── Recurring UI ──────────────────────────────
     cta_start: 'התחילו פרויקט',
     cta_view: 'צפו בעבודות',
+    cta_whatsapp_hero: 'שלחו תמונה וקבלו כיוון עיצובי עוד היום',
     cta_sec_01: 'התחילו פרויקט',
     cta_sec_02: 'התחילו פרויקט',
     cta_sec_03: 'התחילו פרויקט',
@@ -321,10 +329,11 @@ function getSavedLang() {
 }
 
 function updateWhatsAppLinks(lang) {
-  const text = encodeURIComponent(whatsappPrefills[lang] || whatsappPrefills.en);
-  const url = `https://wa.me/${whatsappNumber}?text=${text}`;
+  const generic = encodeURIComponent(whatsappPrefills[lang] || whatsappPrefills.en);
+  const hero = encodeURIComponent(whatsappHeroPrefills[lang] || whatsappHeroPrefills.en);
   document.querySelectorAll('[data-whatsapp-link]').forEach(el => {
-    el.setAttribute('href', url);
+    const text = el.hasAttribute('data-whatsapp-hero') ? hero : generic;
+    el.setAttribute('href', `https://wa.me/${whatsappNumber}?text=${text}`);
   });
 }
 
@@ -1032,6 +1041,7 @@ function setupConsentBanner() {
   });
 
   const close = () => {
+    document.body.classList.remove('consent-open');
     banner.classList.remove('is-visible');
     setTimeout(() => banner.remove(), 350);
   };
@@ -1046,8 +1056,23 @@ function setupConsentBanner() {
     close();
   });
 
-  document.body.appendChild(banner);
-  requestAnimationFrame(() => banner.classList.add('is-visible'));
+  // Don't cover the hero CTAs on first paint: reveal the banner on the first
+  // scroll (an 8s timer catches visitors who never scroll). GA4 loses nothing,
+  // it only ever loads after Accept. While the banner is open, body gets
+  // .consent-open so the sticky CTA hides instead of stacking under it.
+  const reveal = () => {
+    if (banner.isConnected) return;
+    window.removeEventListener('scroll', onScroll);
+    clearTimeout(revealTimer);
+    document.body.appendChild(banner);
+    document.body.classList.add('consent-open');
+    requestAnimationFrame(() => banner.classList.add('is-visible'));
+  };
+  // Guard against scroll events fired at position 0 (Lenis init, scroll
+  // restoration) so a spurious event can't reveal the banner on first paint.
+  const onScroll = () => { if (window.scrollY > 30) reveal(); };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  const revealTimer = setTimeout(reveal, 8000);
 }
 
 document.addEventListener('DOMContentLoaded', () => {

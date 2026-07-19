@@ -245,11 +245,13 @@ html[lang="he"] .eyebrow { font-size: 16px; } /* Heebo runs ~22% shorter — mat
 .hero-headline {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(54px, 9.5vw, 144px);
-  line-height: 0.95;
+  /* Sized for the benefit-led headline (2026-07): longer copy than the old
+     category line, so smaller than the original 9.5vw/144px display scale. */
+  font-size: clamp(44px, 6vw, 88px);
+  line-height: 1;
   letter-spacing: var(--tracking-tight);
   margin-bottom: 40px;
-  max-width: 14ch;
+  max-width: 18ch;
 }
 .hero-headline .light {
   font-weight: 300;
@@ -713,10 +715,23 @@ html[dir="rtl"] .sticky-cta { right: auto; left: 24px; }
 }
 .sticky-cta-wa:hover { transform: translateY(-2px); }
 .sticky-cta-wa svg { width: 28px; height: 28px; }
+/* Mobile: the bar leaves an 88px lane on the side where the Sienna
+   accessibility widget floats (right in LTR, left in RTL). The widget's
+   position is regulated and must not be moved — the CTA yields instead. */
 @media (max-width: 768px) {
-  .sticky-cta { left: 16px; right: 16px; bottom: 16px; justify-content: center; }
-  html[dir="rtl"] .sticky-cta { left: 16px; right: 16px; }
-  .sticky-cta .cta-pill { flex: 1; justify-content: center; }
+  .sticky-cta { left: 16px; right: 88px; bottom: 16px; justify-content: center; }
+  html[dir="rtl"] .sticky-cta { left: 88px; right: 16px; }
+  /* Tighter padding/tracking, and no arrow glyph, so the label stays on one
+     line in the narrower lane (both dir selectors needed to beat the RTL
+     arrow rule's specificity). */
+  .sticky-cta .cta-pill { flex: 1; justify-content: center; padding: 15px 18px; letter-spacing: 0.12em; }
+  .sticky-cta .cta-pill::after,
+  html[dir="rtl"] .sticky-cta .cta-pill::after { content: none; }
+}
+/* Tablet: corner layout like desktop, inset past the Sienna widget. */
+@media (min-width: 769px) and (max-width: 1023px) {
+  .sticky-cta { right: 96px; }
+  html[dir="rtl"] .sticky-cta { right: auto; left: 96px; }
 }
 
 /* Image wrapper used by all variants */
@@ -1294,6 +1309,29 @@ a.contact-card-value:hover { color: var(--accent); }
   background: rgba(26, 26, 26, 0.05);
   box-shadow: inset 0 0 0 1.5px var(--charcoal);
 }
+/* Hero WhatsApp pill — the primary conversion path, so it outweighs every other
+   pill: brand-green fill, larger padding, and its own icon instead of the arrow.
+   Dark text on WhatsApp green keeps AA contrast (white text there fails). */
+.cta-pill--whatsapp {
+  background: #25D366;
+  color: #0F0F0F;
+  padding: 18px 30px;
+  font-size: 13px;
+  box-shadow: 0 12px 28px rgba(37, 211, 102, 0.38);
+}
+html[lang="he"] .cta-pill--whatsapp { font-size: 16px; }
+/* The WA icon replaces the arrow; the RTL selector below must be repeated here
+   because html[dir="rtl"] .cta-pill::after outranks a lone class selector. */
+.cta-pill--whatsapp::after,
+html[dir="rtl"] .cta-pill--whatsapp::after { content: none; }
+.cta-pill--whatsapp:hover {
+  box-shadow: 0 18px 38px rgba(37, 211, 102, 0.5);
+}
+.cta-wa-icon {
+  width: 19px;
+  height: 19px;
+  flex-shrink: 0;
+}
 
 /* ── Contact form ───────────────────────────────── */
 .contact-form {
@@ -1497,10 +1535,30 @@ html[dir="rtl"] .work-title {
   .hero-logo-block { text-align: center; }
   /* Larger studio mark on phones so the name block reads proportional to the
      full-width hero image right below it. */
-  .hero-icon { margin: 0 auto 20px; width: min(52vw, 210px); }
-  .hero-wordmark { font-size: 30px; }
-  .hero-tagline { font-size: 15px; }
-  html[lang="he"] .hero-tagline { font-size: 18px; } /* Heebo renders smaller */
+  .hero-icon { margin: 0 auto 12px; width: min(30vw, 118px); }
+  .hero-wordmark { font-size: 24px; }
+  .hero-tagline { font-size: 13px; }
+  html[lang="he"] .hero-tagline { font-size: 16px; } /* Heebo renders smaller */
+
+  /* Above-the-fold budget at 375px: tighten every vertical gap in the hero
+     stack, and pull the CTAs directly under the H1 (the sub reorders after
+     them) so the WhatsApp button lands inside the first viewport on
+     812px-tall phones. Measured: tightening alone leaves the CTAs ~280px
+     below the fold — the order swap is what closes the gap. */
+  .hero { padding: 80px 24px 64px; }
+  .hero-logo-block { margin-bottom: 16px; }
+  .hero-visual { margin-bottom: 20px; }
+  .hero-image { max-width: 210px; }
+  .hero .eyebrow { margin-bottom: 14px; font-size: 11px; letter-spacing: 0.14em; }
+  html[lang="he"] .hero .eyebrow { font-size: 13px; letter-spacing: 0.1em; }
+  .hero-headline { font-size: clamp(38px, 10.5vw, 54px); margin-bottom: 20px; max-width: none; }
+  .hero-cta { margin-top: 0; gap: 12px; flex-direction: column; align-items: stretch; }
+  .hero-cta .cta-pill { justify-content: center; text-align: center; }
+  /* Long promise label: tighter tracking + softer radius so it sits in 2 lines
+     instead of a 4-line blob inside the fully-round pill. */
+  .cta-pill--whatsapp { font-size: 12px; letter-spacing: 0.08em; padding: 14px 24px; border-radius: 32px; }
+  html[lang="he"] .cta-pill--whatsapp { font-size: 15px; letter-spacing: 0.02em; }
+  .hero-sub { order: 1; font-size: 16px; margin-top: 20px; }
 
   .work-families {
     grid-template-columns: 1fr;
@@ -2278,13 +2336,24 @@ html[dir="rtl"] .svc-cta-band h2 { letter-spacing: 0; }
 html[lang="he"] .wbs-consent__text { font-size: 1.17rem; }
 html[lang="he"] .wbs-consent__btn { font-size: 1.1rem; }
 
+/* One decision at a time: while the consent banner is open, the sticky CTA
+   hides instead of stacking underneath it (both are bottom-fixed). */
+body.consent-open .sticky-cta {
+  opacity: 0;
+  transform: translateY(16px);
+  pointer-events: none;
+}
+
 @media (max-width: 560px) {
   .wbs-consent {
     flex-direction: column;
     align-items: stretch;
-    gap: 14px;
+    gap: 10px;
     text-align: center;
   }
+  .wbs-consent__text { font-size: 0.85rem; }
+  html[lang="he"] .wbs-consent__text { font-size: 1.05rem; }
+  .wbs-consent__btn { padding: 8px 18px; }
   .wbs-consent__actions { justify-content: center; }
 }
 
