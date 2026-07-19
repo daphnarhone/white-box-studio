@@ -36,6 +36,11 @@ const whatsappSectionPrefills = {
   ornament: {
     en: "Hi, I'm working on a project and considering a decorative element.",
     he: "היי, אני עובד/ת על פרויקט ושוקל/ת להוסיף אלמנט דקורטיבי."
+  },
+  // Shared by the two standalone section-transition CTAs (work→studio, studio→contact).
+  standalone: {
+    en: "Hi, I'd like to talk to your team about a project.",
+    he: "היי, אשמח לדבר עם הצוות שלכם על פרויקט."
   }
 };
 
@@ -85,6 +90,7 @@ const strings = {
     cta_sculpture_button: 'Ask about a piece',
     cta_ornament_micro: 'One detail or a whole surface, every project starts with a conversation.',
     cta_ornament_button: 'WhatsApp us',
+    cta_standalone_button: 'WhatsApp us',
     cta_sec_01: 'Start a project',
     cta_sec_02: 'Start a project',
     cta_sec_03: 'Start a project',
@@ -238,6 +244,7 @@ const strings = {
     cta_sculpture_button: 'שאלו על יצירה',
     cta_ornament_micro: 'פרט אחד או משטח שלם, כל פרויקט מתחיל בשיחה.',
     cta_ornament_button: 'כתבו לנו בוואטסאפ',
+    cta_standalone_button: 'דברו איתנו בוואטסאפ',
     cta_sec_01: 'התחילו פרויקט',
     cta_sec_02: 'התחילו פרויקט',
     cta_sec_03: 'התחילו פרויקט',

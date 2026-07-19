@@ -477,6 +477,14 @@ html[lang="he"] .cta-quiet { font-family: var(--font-hebrew); font-size: 14px; }
 }
 .cta-quiet .cta-wa-icon { width: 15px; height: 15px; }
 
+/* Standalone section-transition CTA bands (work→studio, studio→contact):
+   a centered .cta-quiet in the cream whitespace between sections. */
+.standalone-cta {
+  text-align: center;
+  padding: clamp(32px, 6vw, 64px) 40px;
+  background: var(--cream);
+}
+
 .work-grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
