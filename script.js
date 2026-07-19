@@ -22,6 +22,22 @@ const whatsappHeroPrefills = {
   en: "Hi, I'd like to send a photo of my wall and get a design direction",
   he: "שלום, אשמח לשלוח תמונה של הקיר ולקבל כיוון עיצובי"
 };
+// Per-family prefills for the mid-page CTAs under the work-family intros.
+// Keyed by the data-whatsapp-prefill attribute on each link.
+const whatsappSectionPrefills = {
+  walls: {
+    en: "Hi, I'd like to book a site visit for a wall/surface project.",
+    he: "היי, אשמח לקבוע ביקור באתר לפרויקט של קיר או משטח."
+  },
+  sculpture: {
+    en: "Hi, I'm interested in a sculpture piece I saw on your site.",
+    he: "היי, אני מתעניין/נת ביצירה שראיתי באתר שלכם."
+  },
+  ornament: {
+    en: "Hi, I'm working on a project and considering a decorative element.",
+    he: "היי, אני עובד/ת על פרויקט ושוקל/ת להוסיף אלמנט דקורטיבי."
+  }
+};
 
 const strings = {
   en: {
@@ -63,6 +79,12 @@ const strings = {
     cta_start: 'Start a project',
     cta_view: 'View work',
     cta_whatsapp_hero: 'Send a photo and get a design direction today',
+    cta_walls_micro: "Have a specific wall in mind? We'll come see it.",
+    cta_walls_button: 'Book a site visit',
+    cta_sculpture_micro: "See a piece you love? It's for sale, or we'll commission something similar.",
+    cta_sculpture_button: 'Ask about a piece',
+    cta_ornament_micro: 'One detail or a whole surface, every project starts with a conversation.',
+    cta_ornament_button: 'WhatsApp us',
     cta_sec_01: 'Start a project',
     cta_sec_02: 'Start a project',
     cta_sec_03: 'Start a project',
@@ -210,6 +232,12 @@ const strings = {
     cta_start: 'התחילו פרויקט',
     cta_view: 'צפו בעבודות',
     cta_whatsapp_hero: 'שלחו תמונה וקבלו כיוון עיצובי עוד היום',
+    cta_walls_micro: 'יש לכם קיר ספציפי? נגיע לראות אותו.',
+    cta_walls_button: 'קבעו ביקור באתר',
+    cta_sculpture_micro: 'ראיתם יצירה שאהבתם? היא למכירה, או שנצור עבורכם משהו דומה.',
+    cta_sculpture_button: 'שאלו על יצירה',
+    cta_ornament_micro: 'פרט אחד או משטח שלם, כל פרויקט מתחיל בשיחה.',
+    cta_ornament_button: 'כתבו לנו בוואטסאפ',
     cta_sec_01: 'התחילו פרויקט',
     cta_sec_02: 'התחילו פרויקט',
     cta_sec_03: 'התחילו פרויקט',
@@ -329,11 +357,13 @@ function getSavedLang() {
 }
 
 function updateWhatsAppLinks(lang) {
-  const generic = encodeURIComponent(whatsappPrefills[lang] || whatsappPrefills.en);
-  const hero = encodeURIComponent(whatsappHeroPrefills[lang] || whatsappHeroPrefills.en);
+  const pick = (map) => map[lang] || map.en;
   document.querySelectorAll('[data-whatsapp-link]').forEach(el => {
-    const text = el.hasAttribute('data-whatsapp-hero') ? hero : generic;
-    el.setAttribute('href', `https://wa.me/${whatsappNumber}?text=${text}`);
+    let map = whatsappPrefills;
+    if (el.hasAttribute('data-whatsapp-hero')) map = whatsappHeroPrefills;
+    const key = el.getAttribute('data-whatsapp-prefill');
+    if (key && whatsappSectionPrefills[key]) map = whatsappSectionPrefills[key];
+    el.setAttribute('href', `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(pick(map))}`);
   });
 }
 

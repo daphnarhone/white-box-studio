@@ -436,6 +436,47 @@ html[lang="he"] .eyebrow { font-size: 16px; } /* Heebo runs ~22% shorter — mat
 html[lang="he"] .work-family-name { font-size: 15px; }
 html[lang="he"] .work-family-intro { font-size: 17px; }
 
+/* Mid-page family CTAs (2026-07): micro-copy + the hero's green WhatsApp pill
+   under each family intro. The columns flex so all three buttons sit on the
+   same line regardless of intro length; grid items stretch to equal height. */
+.work-family { display: flex; flex-direction: column; }
+.mid-cta { margin-top: auto; padding-top: clamp(20px, 2.4vw, 28px); }
+.mid-cta-micro {
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--text-muted);
+  max-width: 44ch;
+  margin-bottom: 14px;
+}
+html[lang="he"] .mid-cta-micro { font-size: 17px; }
+
+/* Quiet outline CTA for the mid-page family blocks: charcoal ghost with 8px
+   corners — deliberately calmer than the pill CTAs. No arrow, no hover lift,
+   no shadow; those stay exclusive to the loud conversion pills. */
+.cta-quiet {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 24px;
+  background: transparent;
+  border: 1.5px solid rgba(26, 26, 26, 0.42);
+  border-radius: 8px;
+  color: var(--charcoal);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+html[lang="he"] .cta-quiet { font-family: var(--font-hebrew); font-size: 14px; }
+.cta-quiet:hover {
+  background: rgba(26, 26, 26, 0.06);
+  border-color: var(--charcoal);
+}
+.cta-quiet .cta-wa-icon { width: 15px; height: 15px; }
+
 .work-grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
