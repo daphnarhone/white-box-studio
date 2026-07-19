@@ -460,7 +460,7 @@ html[lang="he"] .mid-cta-micro { font-size: 17px; }
   padding: 13px 24px;
   background: transparent;
   border: 1.5px solid rgba(26, 26, 26, 0.42);
-  border-radius: 8px;
+  border-radius: 999px; /* pill geometry — matches the site's button language (.cta-pill--ghost) */
   color: var(--charcoal);
   font-family: var(--font-display);
   font-weight: 800;
