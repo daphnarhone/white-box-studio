@@ -19,8 +19,8 @@ const whatsappPrefills = {
 // Hero CTA promises "send a photo, get an initial direction" — its prefill
 // matches that promise instead of the generic project opener.
 const whatsappHeroPrefills = {
-  en: "Hi, I'd like to send a photo of my wall and get a design direction",
-  he: "שלום, אשמח לשלוח תמונה של הקיר ולקבל כיוון עיצובי"
+  en: "Hi, I'd like to send a photo of my wall and get a design idea",
+  he: "שלום, אשמח לשלוח תמונה של הקיר ולקבל רעיון עיצובי"
 };
 // Per-family prefills for the mid-page CTAs under the work-family intros.
 // Keyed by the data-whatsapp-prefill attribute on each link.
@@ -64,7 +64,7 @@ const strings = {
     hero_h1_part1: '',
     hero_h1_light: 'Walls, sculpture, and detail ',
     hero_h1_part2: 'no one else has.',
-    hero_sub: 'Plaster, concrete, gold leaf, iron, gypsum, and sculpture. Every piece designed, made, and installed by our own team, since 2005.',
+    hero_sub: 'Plaster, concrete, gold leaves, iron, gypsum and sculpture. Every piece designed, made and installed by our own team, since 2005.',
     scroll_cue: 'Scroll',
 
     // ── Selected work section ─────────────────────
@@ -78,15 +78,15 @@ const strings = {
     fam_c_name: 'Ornament & detail',
     fam_a_intro: 'Finishes applied straight onto the architecture: decorative plaster, decorative concrete, iron-look coating, and hand-painted murals. The wall itself becomes the work.',
     fam_b_intro: 'Freestanding pieces made in the studio: commissioned sculpture, sculptural coffee tables, display and gift accessories, and concrete Judaica. One object sets the tone for a whole space.',
-    fam_c_intro: 'Classical craft for architectural detail: gypsum panels for walls and ceilings, column capitals, and ornaments. The small elements that complete a space.',
+    fam_c_intro: 'Classical art for architectural design, including Greek Neoclassical: gypsum panels for walls and ceilings, capitals, columns and ornaments. The small elements that complete a space.',
 
     // ── Recurring UI ──────────────────────────────
     cta_start: 'Start a project',
     cta_view: 'View work',
-    cta_whatsapp_hero: 'Send a photo and get a design direction today',
+    cta_whatsapp_hero: 'Send a photo and get a design idea today',
     cta_walls_micro: "Have a specific wall in mind? We'll come see it.",
     cta_walls_button: 'Book a site visit',
-    cta_sculpture_micro: "See a piece you love? It's for sale, or we'll commission something similar.",
+    cta_sculpture_micro: "See a piece you like? It's for sale, or we'll commission a similar work for you.",
     cta_sculpture_button: 'Ask about a piece',
     cta_ornament_micro: 'One detail or a whole surface, every project starts with a conversation.',
     cta_ornament_button: 'WhatsApp us',
@@ -158,7 +158,7 @@ const strings = {
     studio_eyebrow: 'THE STUDIO',
     studio_headline: 'Everything by hand. Everything made here.',
     studio_established: 'Established 2005 · two decades of handmade architectural finishes, made and installed across Israel.',
-    studio_philosophy: "The White Box Studio is an artist's atelier in the full sense of the word. Through a deep understanding of materials, how they behave, where they come from, how they age well, we design and execute one-off pieces and finishes for architects, interior designers, and anyone after a look no one else has.",
+    studio_philosophy: "The White Box Studio is an artist's atelier in the full sense of the word. We deeply understand our materials: how they behave, where they come from, and how they age. With this expertise, we design and execute one-off pieces and finishes for architects, interior designers, and anyone seeking a look no one else has.",
     studio_howwework_eyebrow: 'How we work',
     studio_howwework_body: "We co-design alongside architects, designers, or end clients, then handle full on-site installation. Installation is carried out by the studio's own team. We currently take on projects exclusively in Israel. We strongly prefer early-stage collaboration to guarantee that all required infrastructure is seamlessly planned and executed.",
     studio_pullquote: 'The gaze meets the work, and breath catches.',
@@ -230,14 +230,14 @@ const strings = {
     fam_a_name: 'קירות ומשטחים',
     fam_b_name: 'פיסול ואובייקטים',
     fam_c_name: 'עיטור ופרטים',
-    fam_a_intro: 'גימורים שמיושמים ישירות על האדריכלות: טיח דקורטיבי, בטון דקורטיבי, ציפוי דמוי ברזל וציורי קיר. הקיר עצמו הופך ליצירה.',
+    fam_a_intro: 'גימורים שמיושמים ישירות על המבנה: טיח דקורטיבי, בטון דקורטיבי, ציפוי דמוי ברזל וציורי קיר. הקיר עצמו הופך ליצירה.',
     fam_b_intro: 'יצירות עצמאיות שנוצרות בסטודיו: פיסול בהזמנה, שולחנות קפה פיסוליים, אביזרי תצוגה ומתנה ותשמישי קדושה מבטון. אובייקט אחד קובע את האופי של חלל שלם.',
-    fam_c_intro: 'מלאכה קלאסית לפרטים אדריכליים: פאנלים מגבס לקירות ולתקרות, כותרות עמודים ועיטורים. הפרטים הקטנים שמשלימים את החלל.',
+    fam_c_intro: 'אומנות קלאסית לעיצוב אדריכלי, כולל סגנון יווני-קלאסי: פאנלים מגבס לקירות ולתקרות, כותרות, עמודים ועיטורים. הפרטים הקטנים שמשלימים חלל.',
 
     // ── Recurring UI ──────────────────────────────
     cta_start: 'התחילו פרויקט',
     cta_view: 'צפו בעבודות',
-    cta_whatsapp_hero: 'שלחו תמונה וקבלו כיוון עיצובי עוד היום',
+    cta_whatsapp_hero: 'שלחו תמונה וקבלו רעיון עיצובי עוד היום',
     cta_walls_micro: 'יש לכם קיר ספציפי? נגיע לראות אותו.',
     cta_walls_button: 'קבעו ביקור באתר',
     cta_sculpture_micro: 'ראיתם יצירה שאהבתם? היא למכירה, או שנצור עבורכם משהו דומה.',
