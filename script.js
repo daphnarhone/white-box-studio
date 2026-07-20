@@ -83,7 +83,9 @@ const strings = {
     // ── Recurring UI ──────────────────────────────
     cta_start: 'Start a project',
     cta_view: 'View work',
-    cta_whatsapp_hero: 'Send a photo and get a design idea today',
+    cta_whatsapp_hero: 'Send a photo and get a design idea',
+    cta_whatsapp_hero_full: 'Send a photo and get a design idea',
+    cta_whatsapp_hero_short: 'Send a photo, get an idea',
     cta_walls_micro: "Have a specific wall in mind? We'll come see it.",
     cta_walls_button: 'Book a site visit',
     cta_sculpture_micro: "See a piece you like? It's for sale, or we'll commission a similar work for you.",
@@ -237,7 +239,9 @@ const strings = {
     // ── Recurring UI ──────────────────────────────
     cta_start: 'התחילו פרויקט',
     cta_view: 'צפו בעבודות',
-    cta_whatsapp_hero: 'שלחו תמונה וקבלו רעיון עיצובי עוד היום',
+    cta_whatsapp_hero: 'שלחו תמונה וקבלו רעיון עיצובי',
+    cta_whatsapp_hero_full: 'שלחו תמונה וקבלו רעיון עיצובי',
+    cta_whatsapp_hero_short: 'שלחו תמונה לרעיון עיצובי',
     cta_walls_micro: 'יש לכם קיר ספציפי? נגיע לראות אותו.',
     cta_walls_button: 'קבעו ביקור באתר',
     cta_sculpture_micro: 'ראיתם יצירה שאהבתם? היא למכירה, או שנצור עבורכם משהו דומה.',
@@ -388,6 +392,16 @@ function updateServiceLinks(lang) {
   });
 }
 
+// Hero WhatsApp label is viewport-aware: shorter copy under 640px so the
+// pill stays one line on phones. matchMedia (not innerWidth) so the boundary
+// agrees with CSS breakpoints regardless of scrollbar/browser-chrome quirks.
+// The WhatsApp prefill is shared across viewports and is not affected.
+function getHeroLabel(lang) {
+  const isMobile = window.matchMedia('(max-width: 639px)').matches;
+  const key = isMobile ? 'cta_whatsapp_hero_short' : 'cta_whatsapp_hero_full';
+  return strings[lang] && strings[lang][key] ? strings[lang][key] : strings.en[key];
+}
+
 function applyLang(lang) {
   const html = document.documentElement;
   html.setAttribute('lang', lang);
@@ -405,6 +419,10 @@ function applyLang(lang) {
       el.textContent = fallback[key];
     }
   });
+
+  // The hero label is viewport-aware; override the generic pass above.
+  const heroBtn = document.querySelector('[data-i18n="cta_whatsapp_hero"]');
+  if (heroBtn) heroBtn.textContent = getHeroLabel(lang);
 
   document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
     const key = el.getAttribute('data-i18n-placeholder');
@@ -1122,6 +1140,19 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.addEventListener('click', () => {
       applyLang(btn.dataset.lang);
     });
+  });
+
+  // Re-pick the short/full hero label when the viewport crosses 640px.
+  let heroLabelResizeTimer = null;
+  window.addEventListener('resize', () => {
+    clearTimeout(heroLabelResizeTimer);
+    heroLabelResizeTimer = setTimeout(() => {
+      const heroBtn = document.querySelector('[data-i18n="cta_whatsapp_hero"]');
+      if (heroBtn) {
+        const currentLang = document.documentElement.lang || 'en';
+        heroBtn.textContent = getHeroLabel(currentLang);
+      }
+    }, 150);
   });
 
   setupMobileMenu();
