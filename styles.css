@@ -475,7 +475,7 @@ html[lang="he"] .cta-quiet { font-family: var(--font-hebrew); font-size: 14px; }
   background: rgba(26, 26, 26, 0.06);
   border-color: var(--charcoal);
 }
-.cta-quiet .cta-wa-icon { width: 15px; height: 15px; }
+.cta-quiet .cta-wa-icon { width: 15px; height: 15px; fill: var(--charcoal); }
 
 /* Standalone section-transition CTA bands (work→studio, studio→contact):
    a centered .cta-quiet in the cream whitespace between sections. */
@@ -1359,14 +1359,15 @@ a.contact-card-value:hover { color: var(--accent); }
   box-shadow: inset 0 0 0 1.5px var(--charcoal);
 }
 /* Hero WhatsApp pill — the primary conversion path, so it outweighs every other
-   pill: brand-green fill, larger padding, and its own icon instead of the arrow.
-   Dark text on WhatsApp green keeps AA contrast (white text there fails). */
+   pill: accent fill with extra padding, a yellow glow, and its own icon instead
+   of the arrow. Same yellow family as .cta-pill--filled; hero prominence comes
+   from size + glow + the white-circle WhatsApp badge. */
 .cta-pill--whatsapp {
-  background: #25D366;
-  color: #0F0F0F;
-  padding: 18px 30px;
-  font-size: 13px;
-  box-shadow: 0 12px 28px rgba(37, 211, 102, 0.38);
+  background: var(--accent);
+  color: var(--charcoal);
+  padding: 22px 36px;
+  font-size: 14px;
+  box-shadow: 0 12px 32px rgba(255, 213, 0, 0.45);
 }
 html[lang="he"] .cta-pill--whatsapp { font-size: 16px; }
 /* The WA icon replaces the arrow; the RTL selector below must be repeated here
@@ -1374,12 +1375,27 @@ html[lang="he"] .cta-pill--whatsapp { font-size: 16px; }
 .cta-pill--whatsapp::after,
 html[dir="rtl"] .cta-pill--whatsapp::after { content: none; }
 .cta-pill--whatsapp:hover {
-  box-shadow: 0 18px 38px rgba(37, 211, 102, 0.5);
+  background: #E8BE00;
+  box-shadow: 0 16px 44px rgba(255, 213, 0, 0.58);
 }
-.cta-wa-icon {
-  width: 19px;
-  height: 19px;
-  flex-shrink: 0;
+/* Global :focus-visible ring is accent-yellow — invisible on the yellow pill. */
+.cta-pill--whatsapp:focus-visible {
+  outline: 2px solid var(--charcoal);
+  outline-offset: 3px;
+}
+/* The icon class is shared by the hero pill and the quiet CTAs, so the bare
+   class stays structural-only. The badge treatment (WhatsApp's official
+   inverted mark: green disc, white contour glyph) is scoped to the hero pill;
+   28px border-box → the glyph renders at 18px. CSS fill outranks the SVG's
+   fill="currentColor" presentation attribute. */
+.cta-wa-icon { flex-shrink: 0; }
+.cta-pill--whatsapp .cta-wa-icon {
+  width: 28px;
+  height: 28px;
+  padding: 5px;
+  background: #25D366;
+  border-radius: 50%;
+  fill: #FFFFFF;
 }
 
 /* ── Contact form ───────────────────────────────── */
@@ -1605,8 +1621,9 @@ html[dir="rtl"] .work-title {
   .hero-cta .cta-pill { justify-content: center; text-align: center; }
   /* Long promise label: tighter tracking + softer radius so it sits in 2 lines
      instead of a 4-line blob inside the fully-round pill. */
-  .cta-pill--whatsapp { font-size: 12px; letter-spacing: 0.08em; padding: 14px 24px; border-radius: 32px; }
+  .cta-pill--whatsapp { font-size: 12px; letter-spacing: 0.08em; padding: 14px 24px; border-radius: 32px; box-shadow: 0 8px 20px rgba(255, 213, 0, 0.4); }
   html[lang="he"] .cta-pill--whatsapp { font-size: 15px; letter-spacing: 0.02em; }
+  .cta-pill--whatsapp .cta-wa-icon { width: 22px; height: 22px; padding: 4px; }
   .hero-sub { order: 1; font-size: 16px; margin-top: 20px; }
 
   .work-families {
