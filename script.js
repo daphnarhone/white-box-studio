@@ -361,7 +361,13 @@ const strings = {
 function getSavedLang() {
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
-    return saved === 'he' ? 'he' : 'en';
+    if (saved === 'he' || saved === 'en') return saved;
+  } catch (_) {}
+
+  // No saved preference — detect from browser
+  try {
+    const browserLang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+    return browserLang.startsWith('he') ? 'he' : 'en';
   } catch (_) {
     return 'en';
   }
