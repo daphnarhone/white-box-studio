@@ -1999,6 +1999,23 @@ html[dir="rtl"] .asw-menu {
 .nav-dropdown-toggle::after { content: '▾'; font-size: 0.7em; opacity: 0.8; }
 .nav-dropdown-toggle:hover,
 .nav-dropdown.open .nav-dropdown-toggle { opacity: 1; }
+/* Same reason as .nav-dropdown-toggle above: Sienna injects inline
+   font-size:16px on every .nav-links <a> at runtime via its opt-in
+   scaling. Without these !important pins, the anchors grow while
+   the button stays 13.5px, producing a visible size mismatch across
+   the nav row. Pinning to inherit locks the anchors to the
+   stylesheet's designed size (13.5px EN / 18px HE). Trade-off:
+   Sienna's font-scale mode won't grow these anchors. Body content,
+   hero, and CTAs still scale. Removing these !important flags will
+   re-break the header. .header-cta is excluded: it is ALSO a direct
+   child of .nav-links, and font-weight:inherit !important would
+   flatten the pill's 700 weight to the nav's 300. */
+.nav-links > a:not(.header-cta) {
+  font: inherit !important;
+  font-weight: inherit !important;
+  letter-spacing: inherit !important;
+  text-transform: inherit !important;
+}
 .nav-dropdown-menu {
   position: absolute;
   top: calc(100% + 16px);
