@@ -97,8 +97,11 @@ body > header {
 .nav-right {
   display: flex;
   gap: 36px;
-  align-items: center;
-  line-height: 1; /* tight boxes so the larger toggle stays optically centered with the links */
+  /* baseline align, not center: .lang-toggle is intentionally larger
+     (19px vs 13.5px nav links) — centering drops its text below the
+     nav baseline. baseline aligns text baselines directly. */
+  align-items: baseline;
+  line-height: 1;
   font-size: 13.5px; /* was 11px — bumped ~2pt for legibility */
   font-weight: 300;
   letter-spacing: var(--tracking-wide);
@@ -1706,6 +1709,7 @@ html[dir="rtl"] .work-title {
 /* ── Mobile menu toggle (hamburger) ─────────────── */
 .menu-toggle {
   display: none;
+  align-self: center; /* opt out of .nav-right's baseline alignment — no text, so baseline = bottom edge */
   background: none;
   border: none;
   padding: 0;
@@ -1983,9 +1987,13 @@ html[dir="rtl"] .asw-menu {
    difference blend and give it a solid bar so the menu panel reads cleanly
    (`:has()`; older browsers simply keep the blended header — links still work). */
 .nav-dropdown { position: relative; display: inline-flex; }
+/* !important on font/font-weight/letter-spacing/text-transform overrides
+   Sienna's inline element.style.fontSize = "13px" injected at runtime on
+   .asw-text opt-in buttons. Removing these !important flags will re-break
+   Bug 1 (Services button renders smaller than sibling nav anchors). */
 .nav-dropdown-toggle {
-  background: none; border: none; color: inherit; font: inherit; font-weight: inherit;
-  letter-spacing: inherit; text-transform: inherit; cursor: pointer; padding: 0;
+  background: none; border: none; color: inherit; font: inherit !important; font-weight: inherit !important;
+  letter-spacing: inherit !important; text-transform: inherit !important; cursor: pointer; padding: 0;
   opacity: 0.85; transition: opacity 0.3s; display: inline-flex; align-items: center; gap: 6px;
 }
 .nav-dropdown-toggle::after { content: '▾'; font-size: 0.7em; opacity: 0.8; }
@@ -2020,7 +2028,6 @@ html[dir="rtl"] .asw-menu {
 }
 .nav-dropdown-menu a:hover,
 .nav-dropdown-menu a:focus-visible { background: rgba(255, 213, 0, 0.12); opacity: 1; }
-html[lang="he"] .nav-dropdown-toggle { font-size: 1em; }
 html[lang="he"] .nav-dropdown-menu a { font-family: var(--font-hebrew); font-size: 15px; }
 
 /* ── 3-family mega-menu (on top of the dropdown panel) ─────────────────────
