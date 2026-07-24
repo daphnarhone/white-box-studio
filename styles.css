@@ -1970,17 +1970,29 @@ html[dir="rtl"] .asw-menu {
 
 /* Language toggle as <a> links (service pages navigate to the other-language
    URL instead of swapping text in place). Mirrors the .lang-toggle button look. */
+/* Anti-Sienna pin — see .nav-dropdown-toggle and .nav-links > a
+   below for full explanation. Sienna's accessibility widget
+   injects inline style="font-size: 16px" on both lang-toggle
+   anchors at runtime, which flattens the designed 19px EN /
+   ~23.4px HE sizes and kills the 1.23em Hebrew glyph-weight
+   compensation, making עב visually smaller than EN instead of
+   larger. These !important flags reject Sienna's inline
+   override so the toggle renders at its designed sizes. HE
+   size specifically preserved on the a[lang="he"] rule below.
+   Removing these !important flags will re-break the toggle. */
 .lang-toggle a {
   color: inherit;
   text-decoration: none;
-  font: inherit;
-  font-weight: inherit;
+  font: inherit !important;
+  font-weight: inherit !important;
+  letter-spacing: inherit !important;
+  text-transform: inherit !important;
   opacity: 1;
   transition: opacity 0.3s;
 }
 .lang-toggle a.active { opacity: 0.4; }       /* current language de-emphasized */
-.lang-toggle a[lang="en"] { font-family: var(--font-display); }
-.lang-toggle a[lang="he"] { font-family: var(--font-hebrew); font-size: 1.23em; }
+.lang-toggle a[lang="en"] { font-family: var(--font-display) !important; }
+.lang-toggle a[lang="he"] { font-family: var(--font-hebrew) !important; font-size: 1.23em !important; }
 
 /* ── Services nav dropdown (desktop) ───────────────────────────────────────
    Lives inside the blended header. While open/hovered we drop the header's
