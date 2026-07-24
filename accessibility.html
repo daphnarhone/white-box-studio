@@ -1,35 +1,40 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="he" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <script>
-    (function() {
-      try {
-        var KEY = 'wbs-lang';
-        var lang = null;
-        try { lang = localStorage.getItem(KEY); } catch (_) {}
-        if (lang !== 'en' && lang !== 'he') {
-          var browserLang = 'en';
-          try { browserLang = (navigator.language || navigator.userLanguage || 'en').toLowerCase(); } catch (_) {}
-          lang = browserLang.indexOf('he') === 0 ? 'he' : 'en';
-          try { localStorage.setItem(KEY, lang); } catch (_) {}
-        }
-        document.documentElement.lang = lang;
-        document.documentElement.dir = (lang === 'he') ? 'rtl' : 'ltr';
-      } catch(e) {}
-    })();
-  </script>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Accessibility Statement, The White Box Studio</title>
-  <link rel="canonical" href="https://white-box.co.il/accessibility">
-  <link rel="alternate" hreflang="en" href="https://white-box.co.il/en/accessibility">
-  <link rel="alternate" hreflang="he" href="https://white-box.co.il/accessibility">
-  <link rel="alternate" hreflang="x-default" href="https://white-box.co.il/accessibility">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200..1000&family=Heebo:wght@300..900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260723a">
-  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+<meta charset="UTF-8">
+<script>
+  /* Service pages are language-specific files. Force THIS page's language so the
+     shared chrome and RTL/LTR always match the static content, regardless of a
+     visitor's previously-saved preference. */
+  (function(){ try { localStorage.setItem('wbs-lang','he');
+    document.documentElement.lang='he'; document.documentElement.dir='rtl'; } catch(e){} })();
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>הצהרת נגישות | White Box Studio</title>
+<meta name="description" content="הצהרת הנגישות של The White Box Studio — עמידה בתקן הישראלי ת״י 5568 והנחיות WCAG 2.0 רמה AA. פרטי רכזת הנגישות דפנה רון.">
+
+<link rel="canonical" href="https://white-box.co.il/accessibility">
+<link rel="alternate" hreflang="he" href="https://white-box.co.il/accessibility">
+<link rel="alternate" hreflang="en" href="https://white-box.co.il/en/accessibility">
+<link rel="alternate" hreflang="x-default" href="https://white-box.co.il/accessibility">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="הצהרת נגישות | White Box Studio">
+<meta property="og:description" content="הצהרת הנגישות של The White Box Studio — עמידה בתקן הישראלי ת״י 5568 והנחיות WCAG 2.0 רמה AA. פרטי רכזת הנגישות דפנה רון.">
+<meta property="og:image" content="https://white-box.co.il/assets/images/three-horses.jpg">
+<meta property="og:url" content="https://white-box.co.il/accessibility">
+<meta property="og:locale" content="he_IL">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#F2EDE3">
+
+<link rel="icon" type="image/svg+xml" href="/assets/logo.svg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700;800&family=Heebo:wght@300;400;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700;800&family=Heebo:wght@300;400;700;800&display=swap"></noscript>
+<link rel="stylesheet" href="/styles.css?v=20260723a">
 </head>
 <body>
   <a class="skip-link" href="#main" data-i18n="skip_to_main">דלג לתוכן הראשי</a>
@@ -127,80 +132,6 @@
 </div>
 
   <main id="main" tabindex="-1" class="accessibility-page">
-    <article class="accessibility-content accessibility-content--en" lang="en" dir="ltr">
-      <h1>Accessibility Statement</h1>
-      <p class="date-updated">Last updated: July 24, 2026</p>
-
-      <h2>Our commitment</h2>
-      <p>The White Box Studio is committed to making this website accessible to everyone, including people with disabilities. We treat accessibility as both a legal requirement under Israeli law and a fundamental matter of respect for everyone who visits the site.</p>
-
-      <h2>Standards and compliance</h2>
-      <p>This website is designed to meet the <strong>Israeli Standard ת"י 5568</strong> for web accessibility, which is based on the <strong>Web Content Accessibility Guidelines (WCAG) 2.0 Level AA</strong> published by the W3C. The relevant Israeli regulation is <strong>תקנות שוויון זכויות לאנשים עם מוגבלות (התאמות נגישות לשירות), התשע"ג–2013</strong>, regulation 35, which governs services provided to the public via the internet.</p>
-
-      <h2>Scope</h2>
-      <p>This statement applies to the entire White Box Studio website at <a href="https://www.white-box.co.il">https://www.white-box.co.il</a>, including:</p>
-      <ul>
-        <li>The homepage at <a href="https://white-box.co.il">https://white-box.co.il</a> (bilingual)</li>
-        <li>All service pages under /services/ (Hebrew) and /en/services/ (English)</li>
-        <li>The FAQ at /faq (Hebrew) and /en/faq (English)</li>
-        <li>This accessibility statement page and its English counterpart at /en/accessibility</li>
-      </ul>
-
-      <h2>Accessibility features</h2>
-      <p>The site includes the following accessibility features:</p>
-      <ul>
-        <li><strong>Semantic HTML structure</strong> with proper landmarks (<code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;footer&gt;</code>) and a single, logically-ordered heading hierarchy.</li>
-        <li><strong>Skip-to-content link</strong> at the top of the page, visible on keyboard focus, allowing users to bypass the navigation and jump directly to the main content.</li>
-        <li><strong>Full keyboard operability</strong>: every interactive element &mdash; navigation links, language toggle, mobile menu, and contact CTAs &mdash; is reachable and operable by keyboard alone, with a clearly visible focus indicator.</li>
-        <li><strong>Mobile menu focus management</strong>: when the menu opens, focus moves into the menu and is contained within it via the <code>inert</code> attribute on the rest of the page; when it closes, focus returns to the trigger button. Closing is available via the X button, the Escape key, or by tapping any nav link.</li>
-        <li><strong>Color contrast</strong>: text content meets or exceeds the WCAG AA contrast ratio of 4.5:1 (or 3:1 for large text). Decorative atmospheric elements (described below) are explicitly outside this requirement under the WCAG 1.4.3 exception for purely decorative text.</li>
-        <li><strong>Bilingual support with proper language tagging</strong>: every element with translatable content uses the appropriate <code>lang</code> attribute, so that screen readers switch pronunciation correctly between Hebrew and English. RTL document direction is handled at the document level.</li>
-        <li><strong>Image alt text</strong>: every non-decorative image has descriptive alt text; purely decorative images use <code>alt=""</code>.</li>
-        <li><strong>Bidirectional text handling</strong>: phone numbers and other Latin-script content embedded in Hebrew text are wrapped in <code>&lt;bdi&gt;</code> and isolated via CSS, ensuring correct visual rendering and screen-reader announcement.</li>
-        <li><strong>Responsive layout</strong>: the site is fully usable at 200% browser zoom and on mobile viewports as narrow as 375px, with no horizontal scrolling or content loss.</li>
-        <li><strong>Animation discipline</strong>: all animations are short (&le;1.2 seconds), based only on opacity and transform, and do not flash.</li>
-      </ul>
-
-      <h2>Decorative atmospheric elements</h2>
-      <p>The site uses large decorative numerals ("01" through "09") at the corners of section panels as part of the brand's visual identity. These elements are deliberately rendered at low contrast as atmospheric texture and are marked <code>aria-hidden="true"</code> so that screen readers do not announce them. They are not part of the page's informational content &mdash; the section number is also presented at standard contrast in the section eyebrow ("01 / Plaster wall finishes", etc.). Per WCAG 2.0 Success Criterion 1.4.3, purely decorative text is exempt from the minimum contrast requirement.</p>
-
-      <h2>Tested assistive technologies and browsers</h2>
-      <p>The site has been tested with:</p>
-      <ul>
-        <li><strong>Screen readers</strong>: VoiceOver (macOS, iOS)</li>
-        <li><strong>Browsers</strong>: Chrome, Safari, Firefox, Edge &mdash; current versions</li>
-        <li><strong>Mobile</strong>: Safari on iOS, Chrome on Android</li>
-        <li><strong>Keyboard-only navigation</strong>: full traversal verified</li>
-        <li><strong>Automated audits</strong>: axe-core 4.10 and Lighthouse Accessibility</li>
-      </ul>
-
-      <h2>Known limitations</h2>
-      <ul>
-        <li><strong>Focus containment on legacy browsers</strong>: the mobile menu uses the modern <code>inert</code> attribute to keep keyboard focus within the menu while it is open. This is supported in Chrome 102+, Safari 15.5+, and Firefox 112+. Users on significantly older browsers may experience focus reaching content behind the overlay, although that content remains visually hidden.</li>
-        <li><strong>Future content</strong>: when new images or copy are added to the site, the studio is committed to maintaining the same accessibility standards (alt text, heading order, contrast).</li>
-      </ul>
-
-      <h2>Physical accessibility &mdash; the studio</h2>
-      <p>The White Box Studio's physical premises are at <strong>Leibovitz 7, Rishon LeZion</strong>.</p>
-      <p>Accessible parking is available; there is one step at the entrance to the studio.</p>
-      <p>For specific arrangements or to request adjustments for a visit, please contact us using the details below &mdash; we are happy to make individual arrangements.</p>
-
-      <h2>Reporting an accessibility issue</h2>
-      <p>If you encounter an accessibility barrier on this website, please contact our accessibility coordinator using the details below. We aim to respond to all accessibility reports within <strong>5 business days</strong> and to resolve issues within <strong>30 days</strong> where reasonably possible. If a fix cannot be made within that timeframe, we will provide alternative means of accessing the information or service.</p>
-
-      <h2>Accessibility coordinator (רכז נגישות)</h2>
-      <ul>
-        <li><strong>Name:</strong> Daphna Rhone</li>
-        <li><strong>Role:</strong> Studio Partner</li>
-        <li><strong>Phone:</strong> <a href="tel:+972545216416" class="always-ltr"><bdi>+972 54 521 6416</bdi></a></li>
-        <li><strong>Email:</strong> <a href="mailto:daphna@white-box.co.il">daphna@white-box.co.il</a></li>
-        <li><strong>Hours:</strong> Sunday&ndash;Thursday 10:00&ndash;17:00 &middot; Friday 10:00&ndash;14:00</li>
-      </ul>
-
-      <h2>Statement details</h2>
-      <p>This statement was first published on June 1, 2026 and last reviewed on July 24, 2026. It is reviewed at minimum annually and updated whenever significant changes are made to the site.</p>
-    </article>
-
     <article class="accessibility-content accessibility-content--he" lang="he" dir="rtl">
       <h1>הצהרת נגישות</h1>
       <p class="date-updated">עודכנה לאחרונה: 24 ביולי 2026</p>
@@ -279,7 +210,7 @@
   <footer class="site-footer">
     <span class="site-footer-copy">© <span id="contact-footer-year">2026</span> White Box Studio</span>
     <span class="site-footer-sep" aria-hidden="true">·</span>
-    <a href="accessibility.html" class="site-footer-link" aria-current="page" data-i18n="accessibility_link">Accessibility Statement</a>
+    <a href="/accessibility.html" class="site-footer-link" aria-current="page" data-i18n="accessibility_link">Accessibility Statement</a>
   </footer>
 
   <script src="/script.js?v=20260723a" defer></script>
