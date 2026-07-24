@@ -32,43 +32,99 @@
   <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
 </head>
 <body>
-  <a class="skip-link" href="#main" data-i18n="skip_to_main">Skip to main content</a>
+  <a class="skip-link" href="#main" data-i18n="skip_to_main">דלג לתוכן הראשי</a>
 
-  <header>
-    <a href="index.html" aria-label="The White Box Studio, home">
-      <img class="header-icon" src="assets/logo.svg" alt="">
-    </a>
-    <nav class="nav-right">
-      <div class="nav-links">
-        <a href="index.html#work" data-i18n="nav_work">Work</a>
-        <a href="index.html#studio" data-i18n="nav_studio">Studio</a>
-        <a href="index.html#contact" data-i18n="nav_contact">Contact</a>
+<header>
+  <a href="/index.html" aria-label="The White Box Studio, בית">
+    <img class="header-icon" src="/assets/logo.svg" alt="">
+  </a>
+  <nav class="nav-right">
+    <div class="nav-links">
+      <a href="/index.html#work" data-i18n="nav_work">עבודות</a>
+      <div class="nav-dropdown">
+        <button type="button" class="nav-dropdown-toggle asw-text" aria-expanded="false" aria-haspopup="true" data-i18n="nav_services">תחומי עשייה</button>
+        <div class="nav-dropdown-menu nav-mega">
+          <div class="nav-mega-col">
+            <p class="nav-mega-title" data-i18n="fam_a_name">קירות ומשטחים</p>
+            <a data-svc="plaster-walls" href="/services/plaster-walls.html">01 / טיח דקורטיבי לקירות</a>
+            <a data-svc="decorative-concrete" href="/services/decorative-concrete.html">02 / עבודות וגימורים בבטון דקורטיבי</a>
+            <a data-svc="iron-look-coating" href="/services/iron-look-coating.html">03 / ציפוי דמוי ברזל לדלתות וקירות</a>
+            <a data-svc="wall-murals" href="/services/wall-murals.html">04 / ציורי קיר בהזמנה אישית</a>
+          </div>
+          <div class="nav-mega-col">
+            <p class="nav-mega-title" data-i18n="fam_b_name">פיסול ואובייקטים</p>
+            <a data-svc="custom-sculpture" href="/services/custom-sculpture.html">05 / פיסול בהזמנה אישית</a>
+            <a data-svc="coffee-tables" href="/services/coffee-tables.html">06 / שולחנות קפה פיסוליים</a>
+            <a data-svc="display-accessories" href="/services/display-accessories.html">07 / אביזרי תצוגה, אירועים ומתנה</a>
+            <a data-svc="concrete-judaica" href="/services/concrete-judaica.html">08 / תשמישי קדושה מבטון</a>
+          </div>
+          <div class="nav-mega-col">
+            <p class="nav-mega-title" data-i18n="fam_c_name">עיטור ופרטים</p>
+            <a data-svc="gypsum-panels" href="/services/gypsum-panels.html">09 / פאנלים מגבס לקירות ולתקרות</a>
+            <a data-svc="capitals-ornaments" href="/services/capitals-ornaments.html">10 / כותרות ועיטורים מגבס</a>
+          </div>
+        </div>
       </div>
-      <div class="lang-toggle" role="group" aria-label="Language">
-        <button type="button" data-lang="en" lang="en" class="active">EN</button>
-        <span class="lang-divider" aria-hidden="true">·</span>
-        <button type="button" data-lang="he" lang="he">עב</button>
-      </div>
-      <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-    </nav>
-  </header>
-
-  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
-    <nav class="mobile-menu-nav" aria-label="Mobile navigation">
-      <a href="index.html#work" data-i18n="nav_work">Work</a>
-      <a href="index.html#studio" data-i18n="nav_studio">Studio</a>
-      <a href="index.html#contact" data-i18n="nav_contact">Contact</a>
-    </nav>
+      <a href="/index.html#studio" data-i18n="nav_studio">סטודיו</a>
+      <a data-faq-link href="/faq.html" data-i18n="nav_faq">שאלות נפוצות</a>
+      <a href="/index.html#contact" class="header-cta" data-i18n="cta_start">התחילו פרויקט</a>
+    </div>
     <div class="lang-toggle" role="group" aria-label="Language">
-      <button type="button" data-lang="en" lang="en" class="active">EN</button>
+      <a href="/en/accessibility.html" lang="en" hreflang="en">EN</a>
       <span class="lang-divider" aria-hidden="true">·</span>
-      <button type="button" data-lang="he" lang="he">עב</button>
+      <a href="/accessibility.html" lang="he" hreflang="he" class="active" aria-current="page">עב</a>
+    </div>
+    <button class="menu-toggle" type="button" aria-label="פתח תפריט" aria-expanded="false" aria-controls="mobile-menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+  <nav class="mobile-menu-nav" aria-label="ניווט נייד">
+    <a href="/index.html#work" data-i18n="nav_work">עבודות</a>
+    <a href="/index.html#studio" data-i18n="nav_studio">סטודיו</a>
+    <a data-faq-link href="/faq.html" data-i18n="nav_faq">שאלות נפוצות</a>
+    <a href="/index.html#contact" data-i18n="nav_contact">צרו קשר</a>
+  </nav>
+  <div class="mobile-services">
+    <button type="button" class="mobile-services-toggle asw-text" aria-expanded="false" aria-controls="mobile-services-panel">
+      <span data-i18n="nav_services">תחומי עשייה</span><span class="mobile-services-caret" aria-hidden="true">▾</span>
+    </button>
+    <div class="mobile-services-panel" id="mobile-services-panel" hidden>
+      <div class="mobile-fam">
+        <p class="mobile-fam-title" data-i18n="fam_a_name">קירות ומשטחים</p>
+        <div class="mobile-services-list">
+          <a data-svc="plaster-walls" href="/services/plaster-walls.html">01 / טיח דקורטיבי לקירות</a>
+          <a data-svc="decorative-concrete" href="/services/decorative-concrete.html">02 / עבודות וגימורים בבטון דקורטיבי</a>
+          <a data-svc="iron-look-coating" href="/services/iron-look-coating.html">03 / ציפוי דמוי ברזל לדלתות וקירות</a>
+          <a data-svc="wall-murals" href="/services/wall-murals.html">04 / ציורי קיר בהזמנה אישית</a>
+        </div>
+      </div>
+      <div class="mobile-fam">
+        <p class="mobile-fam-title" data-i18n="fam_b_name">פיסול ואובייקטים</p>
+        <div class="mobile-services-list">
+          <a data-svc="custom-sculpture" href="/services/custom-sculpture.html">05 / פיסול בהזמנה אישית</a>
+          <a data-svc="coffee-tables" href="/services/coffee-tables.html">06 / שולחנות קפה פיסוליים</a>
+          <a data-svc="display-accessories" href="/services/display-accessories.html">07 / אביזרי תצוגה, אירועים ומתנה</a>
+          <a data-svc="concrete-judaica" href="/services/concrete-judaica.html">08 / תשמישי קדושה מבטון</a>
+        </div>
+      </div>
+      <div class="mobile-fam">
+        <p class="mobile-fam-title" data-i18n="fam_c_name">עיטור ופרטים</p>
+        <div class="mobile-services-list">
+          <a data-svc="gypsum-panels" href="/services/gypsum-panels.html">09 / פאנלים מגבס לקירות ולתקרות</a>
+          <a data-svc="capitals-ornaments" href="/services/capitals-ornaments.html">10 / כותרות ועיטורים מגבס</a>
+        </div>
+      </div>
     </div>
   </div>
+  <div class="lang-toggle" role="group" aria-label="Language">
+      <a href="/en/accessibility.html" lang="en" hreflang="en">EN</a>
+      <span class="lang-divider" aria-hidden="true">·</span>
+      <a href="/accessibility.html" lang="he" hreflang="he" class="active" aria-current="page">עב</a>
+    </div>
+</div>
 
   <main id="main" tabindex="-1" class="accessibility-page">
     <article class="accessibility-content accessibility-content--en" lang="en" dir="ltr">
@@ -226,7 +282,7 @@
     <a href="accessibility.html" class="site-footer-link" aria-current="page" data-i18n="accessibility_link">Accessibility Statement</a>
   </footer>
 
-  <script src="script.js?v=20260723a"></script>
+  <script src="/script.js?v=20260723a" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/sienna-accessibility/dist/sienna-accessibility.umd.js" async></script>
 </body>
 </html>
