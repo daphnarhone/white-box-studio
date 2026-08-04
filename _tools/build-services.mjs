@@ -10,9 +10,10 @@ import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const VER = '20260725a';
+const VER = '20260804a';
 const ORIGIN = 'https://white-box.co.il';
-const WA = '972545216416';
+const WA = '972546855568';
+const INSTAGRAM = 'https://instagram.com/whiteboxstudio.il';
 
 // Per-language shared chrome strings.
 const UI = {
@@ -204,7 +205,8 @@ function renderService(s, lang) {
       description: d.desc, areaServed: { '@type': 'Country', name: 'Israel' },
       provider: { '@type': 'LocalBusiness', name: 'The White Box Studio', url: `${ORIGIN}/`,
         telephone: '+972-3-509-9959',
-        address: { '@type': 'PostalAddress', streetAddress: 'Leibovitz 7', addressLocality: 'Rishon LeZion', addressCountry: 'IL' } },
+        address: { '@type': 'PostalAddress', streetAddress: 'Leibovitz 7', addressLocality: 'Rishon LeZion', addressCountry: 'IL' },
+        sameAs: [INSTAGRAM] },
       url: canonical },
     { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
       { '@type': 'ListItem', position: 1, name: u.home, item: `${ORIGIN}/` },
@@ -379,6 +381,8 @@ const urls = [
   solo(`${ORIGIN}/`),
   ...SERVICES.map(s => pair(heUrl(s.slug), enUrl(s.slug))),
   pair(`${ORIGIN}/faq.html`, `${ORIGIN}/en/faq.html`),
+  // Accessibility is a HE/EN pair on extensionless URLs; its own lastmod tracks the
+  // 2026-07-24 rewrite, not this build.
   pair(`${ORIGIN}/accessibility`, `${ORIGIN}/en/accessibility`, '2026-07-24')
 ];
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>

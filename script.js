@@ -11,7 +11,7 @@ const WBS_LEADS_TOKEN = 'wbx-lead-8451-kepler';
 const ATTRIB_KEY = 'wbs-attrib';
 const ATTRIB_FIELDS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'click_id', 'landing_page', 'referrer'];
 
-const whatsappNumber = '972545216416';
+const whatsappNumber = '972546855568';
 const whatsappPrefills = {
   en: "Hi, I'd like to discuss a project",
   he: "שלום, אשמח לדבר על פרויקט"
@@ -178,7 +178,7 @@ const strings = {
     contact_hours_value: 'Sunday–Thursday 10:00–17:00 · Friday 10:00–14:00',
     contact_whatsapp_cta: 'WhatsApp us',
     contact_email_cta: 'Email us',
-    contact_instagram_cta: '@whiteboxstudio9',
+    contact_instagram_cta: '@whiteboxstudio.il',
     contact_instagram_label: 'Instagram',
 
     // ── Contact form ──────────────────────────────
@@ -334,7 +334,7 @@ const strings = {
     contact_hours_value: 'ראשון–חמישי 10:00–17:00 · שישי 10:00–14:00',
     contact_whatsapp_cta: 'שלחו וואטסאפ',
     contact_email_cta: 'שלחו אימייל',
-    contact_instagram_cta: '@whiteboxstudio9',
+    contact_instagram_cta: '@whiteboxstudio.il',
     contact_instagram_label: 'אינסטגרם',
 
     // ── Contact form ──────────────────────────────
