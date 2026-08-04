@@ -162,7 +162,7 @@ function footer(lang) {
   return `<footer class="site-footer">
   <span class="site-footer-copy">© <span id="contact-footer-year">2026</span> White Box Studio</span>
   <span class="site-footer-sep" aria-hidden="true">·</span>
-  <a href="/accessibility.html" class="site-footer-link" data-i18n="accessibility_link">${u.a11y}</a>
+  <a href="${lang === 'he' ? '/accessibility' : '/en/accessibility'}" class="site-footer-link" data-i18n="accessibility_link">${u.a11y}</a>
 </footer>
 
 <div class="sticky-cta" id="sticky-cta" aria-hidden="true">
@@ -366,12 +366,12 @@ n += 2;
 const today = '2026-07-07';
 // A bilingual pair → two <url> entries, each carrying the same set of xhtml:link
 // alternates (he, en, x-default→he). Single-URL pages (home, accessibility) stand alone.
-const pair = (he, en) => [he, en].map(loc => `  <url>
+const pair = (he, en, lastmod = today) => [he, en].map(loc => `  <url>
     <loc>${loc}</loc>
     <xhtml:link rel="alternate" hreflang="he" href="${he}"/>
     <xhtml:link rel="alternate" hreflang="en" href="${en}"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="${he}"/>
-    <lastmod>${today}</lastmod>
+    <lastmod>${lastmod}</lastmod>
   </url>`).join('\n');
 const solo = loc => `  <url>\n    <loc>${loc}</loc>\n    <lastmod>${today}</lastmod>\n  </url>`;
 
@@ -379,7 +379,7 @@ const urls = [
   solo(`${ORIGIN}/`),
   ...SERVICES.map(s => pair(heUrl(s.slug), enUrl(s.slug))),
   pair(`${ORIGIN}/faq.html`, `${ORIGIN}/en/faq.html`),
-  solo(`${ORIGIN}/accessibility.html`)
+  pair(`${ORIGIN}/accessibility`, `${ORIGIN}/en/accessibility`, '2026-07-24')
 ];
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
