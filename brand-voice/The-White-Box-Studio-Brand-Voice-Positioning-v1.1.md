@@ -52,7 +52,7 @@ This document is the brand voice reference for The White Box Studio. It compleme
 **Studio:** The White Box Studio
 **Founded:** 2005
 **Location:** Tsvi Leibowits St 7, Rishon LeZion, Israel · Serving Israel
-**Contact:** [WhatsApp +972 54 521 6416](https://wa.me/972545216416) · [white-box.co.il](https://white-box.co.il)
+**Contact:** [WhatsApp +972 54 685 5568](https://wa.me/972546855568) · [white-box.co.il](https://white-box.co.il)
 **Positioning:** Atelier of hand-applied architectural finishes.
 **Customer-facing tagline (on site):** art & architectural finishes.
 
@@ -239,7 +239,7 @@ Five pillars. Aim for the mix shown when planning a batch of 10 posts.
 
 **CTA lines:**
 
-- "WhatsApp the studio: [+972 54 521 6416](https://wa.me/972545216416)."
+- "WhatsApp the studio: [+972 54 685 5568](https://wa.me/972546855568)."
 - "DM us the room. We will tell you what is possible."
 - "Start a project."
 
@@ -297,7 +297,7 @@ Keep voice. No 🙏 emoji spam. No "amazing!!!" responses.
 **סטודיו:** The White Box Studio
 **נוסד:** 2005
 **מיקום:** רחוב צבי ליבוביץ' 7, ראשון לציון · פועל בכל הארץ
-**קשר:** [וואטסאפ +972 54 521 6416](https://wa.me/972545216416) · [white-box.co.il](https://white-box.co.il)
+**קשר:** [וואטסאפ +972 54 685 5568](https://wa.me/972546855568) · [white-box.co.il](https://white-box.co.il)
 **מיצוב:** סטודיו לגימורים אדריכליים בעבודת יד.
 **תגית שיווקית באתר:** אמנות וגימורים אדריכליים.
 
@@ -484,7 +484,7 @@ The White Box Studio הוא סטודיו של אמן, המפיק גימורים 
 
 **שורות קריאה לפעולה:**
 
-- "וואטסאפ לסטודיו: [+972 54 521 6416](https://wa.me/972545216416)."
+- "וואטסאפ לסטודיו: [+972 54 685 5568](https://wa.me/972546855568)."
 - "שלחו לנו את החדר. נגיד לכם מה אפשרי."
 - "התחילו פרויקט."
 

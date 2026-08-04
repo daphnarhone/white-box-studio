@@ -96,8 +96,8 @@ Run through this before every push that changes user-facing content:
 - [ ] If copy changed, brand voice doc rules were checked (no banned words: "live your dreams", "stunning", "luxurious", "jaw-dropping")
 - [ ] If service list changed, all 10 service names are consistent across nav, mega-menu, work cards, and JSON-LD
 - [ ] If Hebrew changed, "עבודת יד" phrasing is preserved (this is the core live Hebrew tagline)
-- [ ] If phone changed, it's in international format: `+972 54 521 6416`
-- [ ] Cache-bust bumped on all 14 HTML pages (not just homepage) if CSS or JS touched
+- [ ] If phone changed, it's in international format: `+972 54 685 5568`
+- [ ] Cache-bust bumped on all 25 HTML pages (not just homepage) if CSS or JS touched — and on `const VER` in `_tools/build-services.mjs`, or the next rebuild silently reverts the 22 generated pages (grepping `v=NNNN` never finds it; it templates `v=${VER}`)
 - [ ] Commit message uses the right prefix
 - [ ] After push, verified in incognito that changes render on both homepage AND a service page
 
