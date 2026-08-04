@@ -1,0 +1,41 @@
+# Netlify configuration — white-box.co.il
+#
+# Deliberately contains redirects ONLY. There is no [build] section, so the
+# build command and publish directory stay under Netlify UI control exactly as
+# they are today; adding them here would silently override those settings.
+#
+# ── Why these rules exist ────────────────────────────────────────────────────
+# The two accessibility pages are the only pages on the site addressed by
+# extensionless URLs. Their <link rel="canonical">, their hreflang alternates,
+# sitemap.xml, and all 33 internal links point at /accessibility and
+# /en/accessibility — while the files on disk are accessibility.html and
+# en/accessibility.html. (Every other page — faq, the 20 service pages — is
+# linked with its .html extension and needs no rule.)
+#
+# Until now that mapping worked only because Netlify strips .html by default.
+# That is implicit, host-specific behaviour: nothing in the repo recorded the
+# dependency, so moving hosts — or a change to that default — would 404 the
+# legally-required accessibility statement (IS 5568) with no warning, and a
+# plain static server already 404s it locally.
+#
+# These rules pin the behaviour explicitly.
+#
+# ── Why status = 200 and not 301 ─────────────────────────────────────────────
+# 200 rewrites the response in place, so the address bar keeps the extensionless
+# URL that the canonical tag and sitemap declare. A 301 to the .html file would
+# send visitors to a URL that contradicts its own canonical.
+#
+# ── Why no force = true ──────────────────────────────────────────────────────
+# Without force, a rule fires only when no static file matches the path, so
+# these can never shadow a real file. Rules are evaluated top-to-bottom;
+# the more specific /en/ rule is listed first.
+
+[[redirects]]
+  from = "/en/accessibility"
+  to = "/en/accessibility.html"
+  status = 200
+
+[[redirects]]
+  from = "/accessibility"
+  to = "/accessibility.html"
+  status = 200
