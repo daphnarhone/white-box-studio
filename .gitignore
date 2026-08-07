@@ -19,3 +19,9 @@ node_modules/
 
 # Logs / temp
 *.log
+
+# Pomelli source material — brand-book PDF revisions and generated creative
+# images. Kept locally as reference; large binaries with no build role, and the
+# PDFs supersede each other by revision rather than being worth versioning.
+pomelli/
+docs/*pomelli*.pdf
