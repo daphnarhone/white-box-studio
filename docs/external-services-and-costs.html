@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>External Services &amp; Costs — White Box Studio</title>
+<!--
+  ── SOURCE OF external-services-and-costs.pdf — edit here, never the PDF ──────
+  This file is the ONLY source. The .pdf beside it is generated output; editing
+  the PDF (or expecting the .md files in this folder to drive it) loses the change.
+
+  Regenerate after editing, from the repo root:
+
+    & "C:\Program Files\Google\Chrome\Application\chrome.exe" --headless --disable-gpu `
+        --no-pdf-header-footer --print-to-pdf="docs\external-services-and-costs.pdf" `
+        "file:///C:/Users/User/Documents/Claude/white-box-studio/docs/external-services-and-costs.html"
+
+  Then page through the result before sharing it — headless Chrome silently drops
+  glyphs its fonts lack. Known: the shekel sign (U+20AA) renders as an empty box,
+  which is why prices here read "27 ILS" and not the symbol. Arrows, em dashes,
+  curly quotes and the warning triangle all render correctly.
+
+  Audited 12 Aug 2026. Prices are vendor list prices as of 11-12 Aug 2026.
+-->
+
+<style>
+  @page { size: A4; margin: 17mm 15mm 15mm 15mm; }
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  body {
+    font-family: Cambria, Georgia, "Times New Roman", serif;
+    font-size: 10.5pt; line-height: 1.5; color: #000; margin: 0;
+  }
+  h1, h2, h3, h4, .sans { font-family: "Segoe UI", Calibri, Arial, sans-serif; }
+
+  .title-block { border-bottom: 2.5pt solid #000; padding-bottom: 7mm; margin-bottom: 7mm; }
+  h1 { font-size: 22pt; line-height: 1.15; margin: 0 0 2mm; letter-spacing: -0.2pt; }
+  .subtitle { font-size: 11pt; color: #333; margin: 0 0 5mm; font-style: italic; }
+  .meta-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4mm;
+    font-family: "Segoe UI", Calibri, Arial, sans-serif; font-size: 9pt; }
+  .meta-grid div { border-left: 2pt solid #999; padding-left: 3mm; }
+  .meta-grid .label { display: block; text-transform: uppercase; letter-spacing: 0.6pt;
+    font-size: 7.5pt; color: #555; margin-bottom: 0.5mm; }
+  .meta-grid .val { font-weight: 600; }
+
+  h2 { font-size: 14pt; margin: 8mm 0 3mm; padding-bottom: 1.5mm;
+    border-bottom: 1pt solid #000; page-break-after: avoid; break-after: avoid; }
+  h3 { font-size: 11.5pt; margin: 5mm 0 2mm; page-break-after: avoid; break-after: avoid; }
+  p { margin: 0 0 2.8mm; }
+  ul, ol { margin: 0 0 3mm; padding-left: 6mm; }
+  li { margin-bottom: 1.4mm; }
+
+  table { width: 100%; border-collapse: collapse; margin: 3mm 0 4mm; font-size: 9pt;
+    page-break-inside: avoid; break-inside: avoid; }
+  th { text-align: left; font-family: "Segoe UI", Calibri, Arial, sans-serif;
+    font-size: 8pt; text-transform: uppercase; letter-spacing: 0.5pt;
+    border-bottom: 1.2pt solid #000; padding: 1.5mm 2mm; vertical-align: bottom; }
+  td { padding: 1.7mm 2mm; border-bottom: 0.4pt solid #bbb; vertical-align: top; }
+  tr { page-break-inside: avoid; break-inside: avoid; }
+  .num { text-align: right; white-space: nowrap; }
+
+  code, .mono { font-family: Consolas, "Courier New", monospace; font-size: 8.5pt; }
+  td code { background: #f0f0f0; padding: 0.2mm 1mm; border: 0.3pt solid #ccc; }
+
+  .yes { font-weight: 700; }
+  .free { color: #333; }
+  .paid { font-weight: 700; }
+  .fill { border-bottom: 0.6pt solid #666; display: inline-block; min-width: 26mm; }
+
+  .callout { border-left: 3pt solid #000; background: #f4f4f4; padding: 3mm 4mm;
+    margin: 3.5mm 0; page-break-inside: avoid; break-inside: avoid; font-size: 10pt; }
+  .callout p:last-child { margin-bottom: 0; }
+  .callout .tag { display: block; font-family: "Segoe UI", Calibri, Arial, sans-serif;
+    font-size: 8pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.9pt;
+    margin-bottom: 1.2mm; }
+
+  .finding { border: 1pt solid #000; padding: 3.5mm 4mm; margin: 4mm 0;
+    page-break-inside: avoid; break-inside: avoid; }
+  .finding h4 { margin: 0 0 1.5mm; font-size: 10.5pt; }
+  .finding p { margin: 0 0 2mm; font-size: 9.5pt; }
+  .finding p:last-child { margin-bottom: 0; }
+  .finding .flag { font-family: "Segoe UI", Calibri, Arial, sans-serif; font-size: 7.5pt;
+    font-weight: 700; text-transform: uppercase; letter-spacing: 0.9pt;
+    border: 1pt solid #000; padding: 0.4mm 1.8mm; margin-right: 2mm; }
+
+  .legend { font-size: 8.5pt; color: #444; font-style: italic; margin-top: -1mm; }
+  .footer-note { margin-top: 8mm; padding-top: 3mm; border-top: 0.5pt solid #999;
+    font-size: 8.5pt; color: #444; font-style: italic; }
+  .newpage { page-break-before: always; break-before: page; }
+</style>
+</head>
+<body>
+
+<div class="title-block">
+  <h1>External Services &amp; Costs</h1>
+  <p class="subtitle">Everything white-box.co.il connects to, depends on, or is billed for</p>
+  <div class="meta-grid">
+    <div><span class="label">Audited</span><span class="val">12–13 August 2026<br>code + live checks</span></div>
+    <div><span class="label">Services found</span><span class="val">20 total<br>6 confirmed paid</span></div>
+    <div><span class="label">Status</span><span class="val">Both hosting costs<br>confirmed justified</span></div>
+  </div>
+</div>
+
+<h2>What you pay for — fill in your own figures</h2>
+
+<p>Two prices are confirmed. The rest come from your invoices — the right-hand column is deliberately blank so you can complete it by hand and end up with one page showing the studio's real running cost.</p>
+
+<p><strong>Both hosting subscriptions have been checked and are justified.</strong> Netlify Pro covers a second domain; uPress runs the Holy store and its development environment. Neither is waste.</p>
+
+<p>The unresolved costs are the <strong>two separate mail accounts</strong> — BOX for white-box.co.il, and inbox.co.il for white-box-holy.com, which is billed separately from the uPress package. One is already being replaced, and <strong>the other may be able to go with it at no extra cost</strong> — see Finding 7.</p>
+
+<table>
+  <thead>
+    <tr><th style="width:26%">Service</th><th style="width:34%">What it is for</th><th style="width:20%">Known price</th><th style="width:20%">What I actually pay</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Netlify</strong> (Pro)</td><td>Hosting + DNS for white-box.co.il <strong>and hydronova-robotics.com</strong>. Was free until the second domain was added</td><td>~$20 / month</td><td class="num"><span class="fill">&nbsp;</span></td></tr>
+    <tr><td><strong>uPress</strong></td><td>Hosting for white-box-holy.com <strong>+ its dev environment</strong></td><td><strong>$25.90 / month</strong></td><td class="num"><span class="fill">&nbsp;</span></td></tr>
+    <tr><td><strong>BOX</strong> (cPanel)<br><code>cp57.box.co.il</code></td><td>Email for white-box.co.il <em>only</em> — see Finding 2</td><td>unknown</td><td class="num"><span class="fill">&nbsp;</span></td></tr>
+    <tr><td><strong>inbox.co.il</strong></td><td>Email for white-box-holy.com. <strong>Billed separately</strong> from the uPress package — see Finding 7</td><td>unknown</td><td class="num"><span class="fill">&nbsp;</span></td></tr>
+    <tr><td><strong>Domain</strong> white-box.co.il</td><td>Registration, annual</td><td>unknown</td><td class="num"><span class="fill">&nbsp;</span></td></tr>
+    <tr><td><strong>Domain</strong> white-box-holy.com</td><td>Registration, annual — renews 14 Apr 2027</td><td>unknown</td><td class="num"><span class="fill">&nbsp;</span></td></tr>
+    <tr><td><strong>WooCommerce store</strong></td><td>Plugins, theme, payment gateway on the Holy site</td><td>not visible externally</td><td class="num"><span class="fill">&nbsp;</span></td></tr>
+    <tr><td colspan="3" style="text-align:right"><strong>Planned addition — Google Workspace</strong></td><td class="num">~27 ILS / mo</td></tr>
+  </tbody>
+</table>
+
+<div class="callout">
+  <span class="tag">Everything else is free</span>
+  <p>All 12 remaining services below cost nothing, and none of them requires an account you are billed for. Only one has a ceiling that could ever be reached — see Finding 3.</p>
+</div>
+
+<h2>1 &nbsp;Loaded on every page view</h2>
+<p class="legend">These load in every visitor's browser, on all 25 pages.</p>
+
+<table>
+  <thead><tr><th style="width:30%">Service</th><th style="width:44%">What it does</th><th style="width:26%">Cost</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Google Fonts</strong><br><code>fonts.googleapis.com</code><br><code>fonts.gstatic.com</code></td><td>Nunito + Heebo webfonts</td><td class="free">Free</td></tr>
+    <tr><td><strong>jsDelivr CDN</strong><br><code>cdn.jsdelivr.net</code></td><td>Delivers the three libraries below</td><td class="free">Free</td></tr>
+    <tr><td><strong>GSAP 3.12.5</strong><br>+ ScrollTrigger</td><td>Scroll animations</td><td class="free">Free — see Finding 4</td></tr>
+    <tr><td><strong>Lenis 1.1.20</strong></td><td>Smooth scrolling</td><td class="free">Free, open source</td></tr>
+    <tr><td><strong>Sienna</strong><br>accessibility widget</td><td>The regulated Israeli accessibility widget (IS 5568)</td><td class="free">Free, open-source package</td></tr>
+  </tbody>
+</table>
+
+<h2>2 &nbsp;Only on interaction, or conditionally</h2>
+<p class="legend">These are contacted only when a visitor does something, or after consent.</p>
+
+<table>
+  <thead><tr><th style="width:30%">Service</th><th style="width:44%">What it does</th><th style="width:26%">Cost</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Web3Forms</strong><br><code>api.web3forms.com</code></td><td>Contact form submissions. Emails a notification copied to <strong>both</strong> info@ and daphna@</td><td class="free"><strong>Free up to 250 submissions / month</strong></td></tr>
+    <tr><td><strong>Google Analytics 4</strong><br><code>G-ZYK627NZFG</code></td><td>Analytics. Loads <em>only after</em> the visitor grants consent</td><td class="free">Free</td></tr>
+    <tr><td><strong>Google Apps Script</strong><br><code>script.google.com</code></td><td>Second, fire-and-forget lead-logging webhook</td><td class="free">Free (quota-limited)</td></tr>
+    <tr><td><strong>WhatsApp</strong><br><code>wa.me</code></td><td>53 click-to-chat links</td><td class="free">Free</td></tr>
+    <tr><td><strong>Instagram</strong><br><code>@whiteboxstudio.il</code></td><td>22 plain links. <strong>No embedded feed</strong> — nothing loads from Instagram</td><td class="free">Free</td></tr>
+    <tr><td><strong>white-box-holy.com</strong></td><td>4 links to the Holy shop, on the concrete-judaica pages</td><td>Separate site — see Table 3</td></tr>
+  </tbody>
+</table>
+
+<h2 class="newpage" style="margin-top:0">3 &nbsp;Infrastructure and accounts</h2>
+<p class="legend">Not things the website contacts — things it runs on.</p>
+
+<table>
+  <thead><tr><th style="width:24%">Service</th><th style="width:36%">Role</th><th style="width:18%">Verified</th><th style="width:22%">Cost</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Netlify</strong></td><td>Hosts white-box.co.il <strong>and hydronova-robotics.com</strong>, and runs DNS for both</td><td>Live headers on both: <code>Server: Netlify</code></td><td class="paid">Paid — Pro, justified</td></tr>
+    <tr><td><strong>GitHub</strong></td><td>Code repository; triggers deploys</td><td>Repo is <strong>public</strong>, no Actions workflows</td><td class="free">Free</td></tr>
+    <tr><td><strong>Domain</strong><br>white-box.co.il</td><td>Registration</td><td>Registrar not retrievable — <code>.co.il</code> does not expose it</td><td class="paid">Paid, annual</td></tr>
+    <tr><td><strong>Domain</strong><br>white-box-holy.com</td><td>Registration</td><td>Registrar <strong>eNom</strong>; renews 14 Apr 2027</td><td class="paid">Paid, annual</td></tr>
+    <tr><td><strong>BOX</strong> (cPanel)<br><code>148.251.82.238</code></td><td>Email for white-box.co.il only</td><td>Reverse DNS: <code>cp57.box.co.il</code></td><td class="paid">Paid — being replaced</td></tr>
+    <tr><td><strong>uPress</strong></td><td>Hosts white-box-holy.com + its dev environment. Also holds an <strong>unused, unconnected</strong> white-box.co.il entry — see Finding 1</td><td><code>ns1/ns2.upress.io</code></td><td class="paid">$25.90/mo, justified</td></tr>
+    <tr><td><strong>Domain</strong><br>hydronova-robotics.com</td><td>Second Netlify site — the reason Pro is needed</td><td><code>dns1–4.p06.nsone.net</code>, HTTP 200</td><td>Separate project</td></tr>
+    <tr><td><strong>inbox.co.il</strong></td><td>Email for white-box-holy.com</td><td><code>mx1/mx2.inbox.co.il</code></td><td class="paid">Paid, <strong>separate from uPress</strong></td></tr>
+    <tr><td><strong>WordPress 7.0.3</strong><br>+ WooCommerce 10.7.0</td><td>The Holy store itself</td><td>Live response headers</td><td>Software free; add-ons may not be</td></tr>
+    <tr><td><strong>Google Search Console</strong></td><td>Search visibility</td><td>Verification tag in <code>index.html</code></td><td class="free">Free</td></tr>
+    <tr><td><strong>Google Workspace</strong></td><td>Email — <strong>planned, not yet active</strong></td><td>—</td><td>~27 ILS / mo when live</td></tr>
+  </tbody>
+</table>
+
+<h2>Findings</h2>
+
+<div class="callout">
+  <span class="tag">The pattern behind findings 1 and 2</span>
+  <p>Two of your control panels display urgent-sounding warnings that a domain "isn't pointing at us." <strong>In both cases the domain is pointing exactly where it should, and the correct action is to change nothing.</strong> A hosting panel can only see whether it is being used — it cannot know you deliberately host elsewhere. Treat "connect your domain to us" prompts as questions, never instructions.</p>
+</div>
+
+<div class="finding">
+  <h4><span class="flag">Ask</span>1 &nbsp;uPress holds an unused white-box.co.il entry — never connect it</h4>
+  <p>The uPress dashboard shows a <code>www.white-box.co.il</code> site stuck at <em>"ממתין לחיבור דומיין"</em> (waiting for domain connection), created around June 2026 and never connected. uPress is asking you to point the domain at its servers.</p>
+  <p><strong>Do not do this.</strong> Your nameservers are the master switch for the whole domain — website, the MX record that delivers your mail, SPF, and the accessibility-page redirects all live in the Netlify DNS zone. Repointing them at uPress would hand control to a server holding none of those records: the site would go down and mail would bounce. It could not work in any case — uPress is managed WordPress hosting and white-box.co.il is a hand-built static site.</p>
+  <p><strong>What to ask uPress support:</strong> <em>"is the white-box.co.il site in my package billed separately, or is it just using one of my site slots?"</em> If it is only a slot, removing it costs nothing, frees the slot, and stops the warning permanently.</p>
+</div>
+
+<div class="finding">
+  <h4><span class="flag">Act</span>2 &nbsp;Your email is still on BOX — the host you already left</h4>
+  <p>A reverse lookup of the mail server <code>148.251.82.238</code> returns <strong><code>cp57.box.co.il</code></strong>. The flaky cPanel account is <strong>BOX</strong> — the provider you moved away from because it was terrible.</p>
+  <p>The websites were moved. The email never followed, and has been sitting there ever since. That is the most likely explanation for the failures and disconnections you have been experiencing: it is the same service, still delivering your business enquiries.</p>
+  <p>This does not change the migration plan, but it does change its <em>urgency</em>. You already made this decision once — the mail simply did not come with you. Runbook: <code>docs/email-migration-plan.md</code> and <code>docs/email-migration-plan.pdf</code>.</p>
+</div>
+
+<div class="finding">
+  <h4><span class="flag">Watch</span>3 &nbsp;Web3Forms has a quiet ceiling</h4>
+  <p>The free plan allows <strong>250 form submissions per month</strong>. This is the only free service in the whole inventory that can run out, and it is the kind of limit that fails <em>silently</em> rather than visibly — you would notice it as an absence of enquiries, not as an error.</p>
+  <p>At current studio volume this is very unlikely to bite. Worth knowing it exists.</p>
+  <p>Also relevant to the email migration: the form's notification is delivered <em>to</em> both migrating addresses, so confirm it still arrives after the switch. Step 7 of the runbook includes this test.</p>
+</div>
+
+<div class="finding">
+  <h4><span class="flag">Resolved</span>4 &nbsp;Both hosting subscriptions are justified</h4>
+  <p><strong>Netlify Pro (~$20/month)</strong> — an earlier draft of this audit questioned this, because no Pro-only feature appears in the white-box.co.il codebase. The answer is that Netlify hosts a <strong>second domain, hydronova-robotics.com</strong> (confirmed live on Netlify). The account was on the free plan until that site was added. Justified; no action.</p>
+  <p><strong>uPress ($25.90/month)</strong> — runs white-box-holy.com and its development environment, and provides the WordPress platform that BOX could not. Justified; no action. Note this is separate from Finding 1, which concerns only an unused site entry inside the package.</p>
+</div>
+
+<div class="finding">
+  <h4><span class="flag">Context</span>5 &nbsp;You already use the uPress email service you were evaluating</h4>
+  <p>white-box-holy.com runs on uPress with its mail on <strong>inbox.co.il</strong> — the same service uPress would supply for white-box.co.il. You therefore have direct experience of it, which is better evidence than any feature page.</p>
+  <p>This does not change the Google Workspace recommendation — the 500MB-per-mailbox cap and the principle of keeping mail independent of web hosting both still stand — but the judgement is yours, with information the recommendation did not have.</p>
+</div>
+
+<div class="finding">
+  <h4><span class="flag">Note</span>6 &nbsp;GSAP is free, despite what older guides say</h4>
+  <p>ScrollTrigger used to be a paid Club GreenSock plugin. Webflow acquired GSAP and made the entire library, ScrollTrigger included, free for commercial use in April 2025. No licence is owed. Much of the advice still online predates that change.</p>
+</div>
+
+<div class="finding">
+  <h4><span class="flag">Opportunity</span>7 &nbsp;The second mail bill may be removable — decide before you set Workspace up</h4>
+  <p>You pay <strong>two separate mail providers</strong>: BOX for white-box.co.il and inbox.co.il for white-box-holy.com. Google Workspace can hold <strong>several domains on one account</strong>, and the cost depends entirely on which of two modes you choose:</p>
+  <ul>
+    <li><strong>Domain alias — free, no extra licence.</strong> Mail to <code>anything@white-box-holy.com</code> lands in the matching <code>@white-box.co.il</code> inbox, and you can still <em>send</em> as either address. If you simply want Holy enquiries reaching you, this costs nothing and <strong>inbox.co.il could be cancelled outright</strong>.</li>
+    <li><strong>Secondary domain — one licence per mailbox (~27 ILS/mo each).</strong> Needed only if Holy mail must live in a genuinely separate account, e.g. someone else handles it.</li>
+  </ul>
+  <p><strong>Check this before cancelling anything:</strong> does the WooCommerce store send its order confirmations <em>through</em> inbox.co.il? The SPF record for white-box-holy.com authorises the uPress server directly (<code>ip4:185.108.148.247</code>), which suggests the store sends its own mail and would be unaffected. Confirm in WordPress admin — look for an SMTP plugin and see which host it points at. If it does route through inbox.co.il, that must be re-pointed <em>before</em> cancelling, or customers stop receiving order emails.</p>
+  <p><strong>Why the timing matters:</strong> adding a domain at Workspace setup is a few clicks. Doing it after everything is running is a second migration. This decision is much cheaper to make now.</p>
+</div>
+
+<div class="finding">
+  <h4><span class="flag">Note</span>8 &nbsp;Neither domain has DKIM or DMARC</h4>
+  <p>white-box.co.il has neither, and <strong>white-box-holy.com has neither either</strong> — no DKIM selector responds and there is no <code>_dmarc</code> record on either domain. These are the records that keep your mail out of recipients' spam folders and stop others forging your addresses.</p>
+  <p>Step 9 of the email runbook adds both for white-box.co.il. Worth doing the same for the Holy domain, which matters more for a shop sending order confirmations to customers.</p>
+</div>
+
+<h2>Open questions</h2>
+
+<p>Things this audit could not determine from outside. All are answerable from your own accounts:</p>
+
+<ul>
+  <li><strong>Is the unused white-box.co.il entry inside uPress billed separately, or just a site slot?</strong> The one question with money attached — see Finding 1.</li>
+  <li><strong>What the BOX mail account costs.</strong> It is being replaced regardless, but you need the figure to cancel cleanly.</li>
+  <li><strong>Does WooCommerce send its order emails through inbox.co.il, or straight from the uPress server?</strong> This gates Finding 7. Check WordPress admin for an SMTP plugin and see which host it points at.</li>
+  <li><strong>What inbox.co.il costs</strong> — now known to be billed separately from uPress, so it is its own line item.</li>
+  <li><strong>The <code>.co.il</code> registrar and renewal date</strong> — that registry does not publish it the way <code>.com</code> does. Your invoice will name them.</li>
+  <li><strong>Holy store running costs</strong> — paid plugins, theme licence, payment gateway fees. Not visible externally.</li>
+  <li><strong>Whether the Netlify Pro cost belongs to the studio's books at all</strong>, given the second domain is a separate project. A bookkeeping question, not a technical one.</li>
+</ul>
+
+<p class="footer-note">Audited 12–13 August 2026 against the repository and live checks of white-box.co.il, white-box-holy.com and hydronova-robotics.com (DNS, reverse DNS, response headers, TLS, port reachability, domain registration). Service prices for Netlify, Web3Forms and Google Workspace were read from those vendors' own pricing pages on 11–12 August 2026 and may change. The uPress figure of $25.90/month and the reason Netlify Pro is required were supplied by Daphna and are not independently verifiable from outside. Other amounts you are billed were not visible to this audit and are left blank by design.</p>
+
+</body>
+</html>

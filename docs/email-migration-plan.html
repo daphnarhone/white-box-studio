@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Email Migration Plan — White Box Studio</title>
+<!--
+  ── SOURCE OF email-migration-plan.pdf — edit here, never the PDF ────────────
+  IMPORTANT: email-migration-plan.md in this folder is NOT the source of the PDF.
+  The two were written separately and can drift. This HTML file is what the PDF
+  is rendered from; if you change the plan, change BOTH this file and the .md.
+
+  Regenerate after editing, from the repo root:
+
+    & "C:\Program Files\Google\Chrome\Application\chrome.exe" --headless --disable-gpu `
+        --no-pdf-header-footer --print-to-pdf="docs\email-migration-plan.pdf" `
+        "file:///C:/Users/User/Documents/Claude/white-box-studio/docs/email-migration-plan.html"
+
+  Then page through the result before sharing it — headless Chrome silently drops
+  glyphs its fonts lack. Known: the shekel sign (U+20AA) renders as an empty box,
+  which is why Step 3 reads "27 ILS" and not the symbol.
+
+  DNS values here were read from the live zone on 11 Aug 2026. Re-verify the two
+  Google values (MX smtp.google.com pri 1, SPF include:_spf.google.com) if this is
+  being used much later.
+-->
+
+<style>
+  @page {
+    size: A4;
+    margin: 17mm 15mm 15mm 15mm;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  body {
+    font-family: Cambria, Georgia, "Times New Roman", serif;
+    font-size: 10.5pt;
+    line-height: 1.5;
+    color: #000;
+    margin: 0;
+  }
+
+  h1, h2, h3, h4, .sans {
+    font-family: "Segoe UI", Calibri, Arial, sans-serif;
+  }
+
+  /* ── Title block ───────────────────────────────── */
+  .title-block {
+    border-bottom: 2.5pt solid #000;
+    padding-bottom: 7mm;
+    margin-bottom: 7mm;
+  }
+  h1 {
+    font-size: 22pt;
+    line-height: 1.15;
+    margin: 0 0 2mm;
+    letter-spacing: -0.2pt;
+  }
+  .subtitle {
+    font-size: 11pt;
+    color: #333;
+    margin: 0 0 5mm;
+    font-family: Cambria, Georgia, serif;
+    font-style: italic;
+  }
+  .meta-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4mm;
+    font-family: "Segoe UI", Calibri, Arial, sans-serif;
+    font-size: 9pt;
+  }
+  .meta-grid div { border-left: 2pt solid #999; padding-left: 3mm; }
+  .meta-grid .label {
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 0.6pt;
+    font-size: 7.5pt;
+    color: #555;
+    margin-bottom: 0.5mm;
+  }
+  .meta-grid .val { font-weight: 600; }
+
+  /* ── Headings ──────────────────────────────────── */
+  h2 {
+    font-size: 14pt;
+    margin: 8mm 0 3mm;
+    padding-bottom: 1.5mm;
+    border-bottom: 1pt solid #000;
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+  h2 .step-num {
+    display: inline-block;
+    background: #000;
+    color: #fff;
+    font-size: 10pt;
+    padding: 0.4mm 2.2mm;
+    margin-right: 2.5mm;
+    vertical-align: 1pt;
+  }
+  h3 {
+    font-size: 11.5pt;
+    margin: 5mm 0 2mm;
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+  p { margin: 0 0 2.8mm; }
+  ul, ol { margin: 0 0 3mm; padding-left: 6mm; }
+  li { margin-bottom: 1.4mm; }
+  strong { font-weight: 700; }
+
+  /* ── Tables ────────────────────────────────────── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 3mm 0 4mm;
+    font-size: 9.5pt;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  th {
+    text-align: left;
+    font-family: "Segoe UI", Calibri, Arial, sans-serif;
+    font-size: 8.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.5pt;
+    border-bottom: 1.2pt solid #000;
+    padding: 1.5mm 2mm;
+    vertical-align: bottom;
+  }
+  td {
+    padding: 1.8mm 2mm;
+    border-bottom: 0.4pt solid #bbb;
+    vertical-align: top;
+  }
+  tr { page-break-inside: avoid; break-inside: avoid; }
+
+  /* ── Monospace values ──────────────────────────── */
+  code, .mono {
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 9.5pt;
+  }
+  td code, li code, p code {
+    background: #f0f0f0;
+    padding: 0.3mm 1.2mm;
+    border: 0.3pt solid #ccc;
+  }
+
+  .value-box {
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 11pt;
+    font-weight: bold;
+    background: #f4f4f4;
+    border: 1pt solid #000;
+    border-left: 3pt solid #000;
+    padding: 3mm 4mm;
+    margin: 3mm 0 4mm;
+    word-break: break-all;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    letter-spacing: 0.2pt;
+  }
+
+  /* ── Callouts ──────────────────────────────────── */
+  .callout {
+    border-left: 3pt solid #000;
+    background: #f4f4f4;
+    padding: 3mm 4mm;
+    margin: 3.5mm 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    font-size: 10pt;
+  }
+  .callout p:last-child { margin-bottom: 0; }
+  .callout .tag {
+    display: block;
+    font-family: "Segoe UI", Calibri, Arial, sans-serif;
+    font-size: 8pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.9pt;
+    margin-bottom: 1.2mm;
+  }
+  .callout--warn { border-left-width: 4pt; background: #ededed; }
+  .callout--warn .tag::before { content: "\26A0  "; }
+
+  /* ── Checklists ────────────────────────────────── */
+  .checklist { list-style: none; padding-left: 0; }
+  .checklist li {
+    position: relative;
+    padding-left: 8mm;
+    margin-bottom: 2.2mm;
+  }
+  .checklist li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.7mm;
+    width: 4.2mm;
+    height: 4.2mm;
+    border: 1pt solid #000;
+  }
+
+  /* Numbered step list on the overview page */
+  .oporder { list-style: none; padding-left: 0; counter-reset: op; }
+  .oporder li {
+    position: relative;
+    padding-left: 10mm;
+    margin-bottom: 2.4mm;
+    counter-increment: op;
+    min-height: 5.5mm;
+  }
+  .oporder li::before {
+    content: counter(op);
+    position: absolute;
+    left: 0;
+    top: 0.2mm;
+    width: 5.5mm;
+    height: 5.5mm;
+    border: 1.2pt solid #000;
+    text-align: center;
+    line-height: 5.2mm;
+    font-family: "Segoe UI", Calibri, Arial, sans-serif;
+    font-size: 9pt;
+    font-weight: 700;
+  }
+
+  /* ── Reference card page ───────────────────────── */
+  .card-page { page-break-before: always; break-before: page; }
+  .refcard {
+    border: 2pt solid #000;
+    padding: 6mm;
+    margin-top: 4mm;
+  }
+  .refcard h3 {
+    margin: 0 0 3mm;
+    font-size: 12pt;
+    text-transform: uppercase;
+    letter-spacing: 1pt;
+    border-bottom: 1pt solid #000;
+    padding-bottom: 1.5mm;
+  }
+  .refcard h4 {
+    font-size: 9pt;
+    text-transform: uppercase;
+    letter-spacing: 0.8pt;
+    margin: 5mm 0 1.5mm;
+    color: #333;
+  }
+  .refcard h4:first-of-type { margin-top: 0; }
+  .refcard pre {
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 9.5pt;
+    line-height: 1.6;
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+  .rollback-box {
+    border: 2.5pt solid #000;
+    padding: 4mm 5mm;
+    margin: 4mm 0;
+    text-align: center;
+    page-break-inside: avoid;
+  }
+  .rollback-box .lbl {
+    font-family: "Segoe UI", Calibri, Arial, sans-serif;
+    font-size: 8.5pt;
+    text-transform: uppercase;
+    letter-spacing: 1pt;
+    display: block;
+    margin-bottom: 1.5mm;
+  }
+  .rollback-box .val {
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 12pt;
+    font-weight: bold;
+  }
+
+  .footer-note {
+    margin-top: 8mm;
+    padding-top: 3mm;
+    border-top: 0.5pt solid #999;
+    font-size: 8.5pt;
+    color: #444;
+    font-style: italic;
+  }
+
+  .nobreak { page-break-inside: avoid; break-inside: avoid; }
+
+  /* Cambria lacks the shekel sign (U+20AA); borrow it from a sans face */
+  .ils { font-family: "Segoe UI", Arial, "Arial Unicode MS", sans-serif; }
+</style>
+</head>
+<body>
+
+<div class="title-block">
+  <h1>Email Migration Plan</h1>
+  <p class="subtitle">Moving White Box Studio email from BOX / cPanel to Google Workspace</p>
+  <div class="meta-grid">
+    <div><span class="label">Addresses moving</span><span class="val">info@white-box.co.il<br>daphna@white-box.co.il</span></div>
+    <div><span class="label">Hands-on time</span><span class="val">About 2 hours<br>spread over 2–3 weeks</span></div>
+    <div><span class="label">Risk</span><span class="val">Low, if you follow<br>the order of steps</span></div>
+  </div>
+</div>
+
+<h2>Start here: the reassuring part</h2>
+
+<p><strong>Your website will not change at all.</strong> Not one line. Your domain stays <code>white-box.co.il</code>, your email addresses stay exactly the same, and the 7 places <code>info@white-box.co.il</code> appears in the site's code stay exactly as they are. This migration changes only <em>where your mail is delivered</em>.</p>
+
+<p><strong>Your contact form does not send through the cPanel mail server</strong>, so nothing below can break the form itself. One nuance: the form posts to a service called Web3Forms, which emails a notification to <em>both</em> <code>info@</code> and <code>daphna@</code>. That notification is delivered <strong>to</strong> the two mailboxes you are migrating — so it follows your MX record like any other incoming mail, and works normally once mail is at Google. Step 7 has you test exactly this.</p>
+
+<div class="callout callout--warn">
+  <span class="tag">Why this migration matters more than it looks</span>
+  <p>A reverse lookup of the mail server <code>148.251.82.238</code> returns <strong><code>cp57.box.co.il</code></strong>. Your mail host is <strong>BOX</strong> — the provider you already left because it was terrible. The websites moved; the email never followed, and has been sitting there ever since. That is the most likely reason it "fails or disconnects often." This is not a new decision — it is finishing one you already made.</p>
+</div>
+
+<div class="callout">
+  <span class="tag">The one rule</span>
+  <p>The order of the ten steps <em>is</em> the safety mechanism. Your old mail gets copied across <strong>while email is still flowing normally to cPanel</strong>. By the time you flip the switch, nothing is at risk — and everything stays reversible until the very last step.</p>
+</div>
+
+<h2>The five words you need to understand</h2>
+
+<table>
+  <thead><tr><th style="width:22%">Term</th><th>What it actually means</th></tr></thead>
+  <tbody>
+    <tr><td><strong>DNS</strong></td><td>The phone book of the internet. It translates <code>white-box.co.il</code> into the address of an actual computer. Yours is managed at <strong>Netlify</strong>.</td></tr>
+    <tr><td><strong>MX record</strong></td><td>The line in the phone book that says <em>“send this domain's email to this server.”</em> <strong>This is the switch you are flipping.</strong></td></tr>
+    <tr><td><strong>SPF</strong></td><td>A public note saying <em>“only these servers may send email as me.”</em> Stops others forging your address, and keeps your mail out of spam folders.</td></tr>
+    <tr><td><strong>DKIM</strong></td><td>An invisible signature on every email you send, proving it really came from you and was not tampered with.</td></tr>
+    <tr><td><strong>DMARC</strong></td><td>Your instruction to other mail servers about what to do when an email <em>fails</em> the SPF and DKIM checks.</td></tr>
+    <tr><td><strong>TTL</strong></td><td>“Time To Live” — how long the world may remember an old answer before asking again. Lower means your changes take effect faster.</td></tr>
+  </tbody>
+</table>
+
+<h2>Where you will be clicking</h2>
+
+<p>Two websites, and it is worth being clear which is which, because it is easy to get lost:</p>
+
+<ul>
+  <li><strong>Netlify</strong> — <code>app.netlify.com</code> &rarr; <strong>Domains</strong> &rarr; <code>white-box.co.il</code> &rarr; <strong>DNS records</strong>. Every DNS change below happens here. Your DNS lives at Netlify even though your email does not.</li>
+  <li><strong>Google Admin</strong> — <code>admin.google.com</code>. Where you create mailboxes and get your DKIM key.</li>
+</ul>
+
+<p>You will never log into cPanel again, except to check old mail and — at the very end — to cancel it.</p>
+
+<h2>Your DNS records: before and after</h2>
+
+<p>This table is the whole migration. Everything else in this document is just how to get there safely.</p>
+
+<table>
+  <thead><tr><th style="width:20%">Record</th><th style="width:40%">Right now</th><th style="width:40%">After migration</th></tr></thead>
+  <tbody>
+    <tr><td><strong>MX</strong></td><td><code>mail.white-box.co.il</code><br>priority <code>0</code></td><td><code>smtp.google.com</code><br>priority <code>1</code></td></tr>
+    <tr><td><strong>SPF</strong><br><span style="font-size:8.5pt;color:#555">(a TXT record)</span></td><td><code>v=spf1 +a +mx +ip4:148.251.82.238 ~all</code></td><td><code>v=spf1 include:_spf.google.com ~all</code></td></tr>
+    <tr><td><strong>DKIM</strong><br><span style="font-size:8.5pt;color:#555">(TXT, <code>google._domainkey</code>)</span></td><td><em>does not exist</em></td><td>a long key Google gives you</td></tr>
+    <tr><td><strong>DMARC</strong><br><span style="font-size:8.5pt;color:#555">(TXT, <code>_dmarc</code>)</span></td><td><em>does not exist</em></td><td><code>v=DMARC1; p=none; rua=mailto:daphna@white-box.co.il</code></td></tr>
+  </tbody>
+</table>
+
+<p style="font-size:9.5pt;color:#444"><em>The <code>148.251.82.238</code> in your current SPF is the BOX server (<code>cp57.box.co.il</code>) that cPanel runs on. That is the thing you are leaving behind.</em></p>
+
+<h2>The order of operations</h2>
+
+<p><strong>Read this list before doing anything.</strong></p>
+
+<ol class="oporder">
+  <li>Lower the TTL — a day ahead, so the switch happens fast</li>
+  <li>Sign up for Google Workspace and verify you own the domain</li>
+  <li>Create your mailboxes</li>
+  <li><strong>Copy all your old mail across</strong> — while email still flows to cPanel</li>
+  <li>Flip the MX record — <em>this is the actual switch</em></li>
+  <li>Fix the SPF record</li>
+  <li>Test thoroughly</li>
+  <li>Run the mail copy one final time, to catch the gap</li>
+  <li>Add DKIM and DMARC</li>
+  <li>Wait two weeks, then cancel cPanel</li>
+</ol>
+
+<h2><span class="step-num">1</span>Lower the TTL <span style="font-weight:400;font-size:11pt">— do this the day before</span></h2>
+
+<p><strong>Why:</strong> TTL is how long the internet caches the old answer. Yours is probably 1 hour. Lower it to 5 minutes <em>first</em>, and tomorrow's switch takes effect in 5 minutes instead of an hour. A small step that removes a lot of anxiety later.</p>
+
+<ol>
+  <li>Netlify &rarr; Domains &rarr; <code>white-box.co.il</code> &rarr; DNS records</li>
+  <li>Find the <strong>MX</strong> record pointing at <code>mail.white-box.co.il</code></li>
+  <li>Edit it and change <strong>TTL</strong> to <code>300</code> (300 seconds = 5 minutes)</li>
+  <li>Save. <strong>Change nothing else.</strong></li>
+</ol>
+
+<p>Then wait a day before Step 5. You can do Steps 2–4 during that wait.</p>
+
+<h2><span class="step-num">2</span>Sign up and verify the domain</h2>
+
+<p>Go to <code>workspace.google.com</code> and sign up for <strong>Business Starter</strong>.</p>
+
+<ul>
+  <li>When it asks for your domain, enter <code>white-box.co.il</code></li>
+  <li>Make your first account <code>daphna@white-box.co.il</code> — see Step 3 for why</li>
+</ul>
+
+<p>Google then asks you to prove you own the domain, usually by adding a TXT record.</p>
+
+<div class="callout">
+  <span class="tag">Possible shortcut</span>
+  <p>Your site already carries a Google Search Console verification tag. Google sometimes recognises this and skips verification entirely. If it offers, take it.</p>
+</div>
+
+<p>If you do need to add the record:</p>
+
+<ol>
+  <li>Netlify &rarr; DNS records &rarr; <strong>Add new record</strong></li>
+  <li><strong>Type:</strong> TXT</li>
+  <li><strong>Name:</strong> leave empty. Netlify may show this as <code>@</code> or as the bare domain — all three mean “the domain itself”</li>
+  <li><strong>Value:</strong> paste exactly what Google gives you (it starts with <code>google-site-verification=</code>)</li>
+  <li>Save, then click verify in Google. Usually works within minutes.</li>
+</ol>
+
+<div class="callout callout--warn">
+  <span class="tag">Do not tidy up</span>
+  <p>You now have <strong>two</strong> TXT records on the domain — your existing SPF, and this new verification one. <strong>That is correct and expected.</strong> Do not delete the SPF one to “make room.” Multiple TXT records are completely normal.</p>
+</div>
+
+<h2><span class="step-num">3</span>Create your mailboxes — and save money</h2>
+
+<p>You have two addresses, but you probably only need <strong>one paid account</strong>.</p>
+
+<ul>
+  <li><code>daphna@white-box.co.il</code> — your real user account. This is the one you pay for.</li>
+  <li><code>info@white-box.co.il</code> — add as an <strong>alias</strong> on that same account.</li>
+</ul>
+
+<p>An alias is free. Mail to <code>info@</code> lands in the same inbox, and you can still <em>send</em> as <code>info@</code> when you want to appear as the studio rather than yourself. That is roughly <strong>27 ILS per month instead of 54</strong>.</p>
+
+<p><strong>To set it up:</strong> Admin &rarr; Directory &rarr; Users &rarr; click your account &rarr; <strong>User information</strong> &rarr; <strong>Email aliases</strong> &rarr; add <code>info</code>.</p>
+
+<p>Only make <code>info@</code> a separate paid account if someone <em>other than you</em> needs their own private login for it.</p>
+
+<h2><span class="step-num">4</span>Copy your old mail across <span style="font-weight:400;font-size:11pt">— the important one</span></h2>
+
+<p><strong>Do this while email is still being delivered to cPanel.</strong> You are copying, not moving. Nothing is deleted from cPanel, so there is no way to lose anything at this step.</p>
+
+<p>Google Admin &rarr; <strong>Data migration</strong>. If you cannot find it, type “data migration” into the admin search bar.</p>
+
+<table>
+  <thead><tr><th style="width:32%">Setting</th><th>Value</th></tr></thead>
+  <tbody>
+    <tr><td>Migration source</td><td>Other IMAP server (may appear as “IMAP” or “Generic IMAP”)</td></tr>
+    <tr><td>Server</td><td><code>mail.white-box.co.il</code></td></tr>
+    <tr><td>Port</td><td><code>993</code>, with SSL enabled</td></tr>
+    <tr><td>Username / password</td><td>your existing cPanel mailbox credentials</td></tr>
+  </tbody>
+</table>
+
+<p>Run it for both <code>info@</code> and <code>daphna@</code> if they are separate mailboxes on cPanel today.</p>
+
+<p>Depending on how many years of mail you have, this takes anywhere from minutes to several hours. Let it finish. Then <strong>open Gmail and actually look</strong> — confirm old messages are really there and folders came across — before going anywhere near Step 5.</p>
+
+<p style="font-size:9.5pt;color:#444"><em>Port 993 was verified as open and reachable on your mail server, so this connection should work.</em></p>
+
+<h2><span class="step-num">5</span>Flip the MX record <span style="font-weight:400;font-size:11pt">— the actual switch</span></h2>
+
+<p>This is the moment new mail starts going to Google. With TTL at 300, it takes about 5 minutes.</p>
+
+<ol>
+  <li>Netlify &rarr; DNS records</li>
+  <li><strong>Delete</strong> the existing MX record — <code>mail.white-box.co.il</code>, priority <code>0</code></li>
+  <li><strong>Add new record</strong>, with these values:</li>
+</ol>
+
+<div class="value-box">
+Type:      MX<br>
+Name:      (leave empty — the domain itself)<br>
+Value:     smtp.google.com<br>
+Priority:  1<br>
+TTL:       300
+</div>
+
+<p>That single record is all Google needs — they simplified this in 2023. If you find an older guide listing five <code>ASPMX.L.GOOGLE.COM</code> records, that is the legacy setup. It still works, but you do not need it.</p>
+
+<div class="callout">
+  <span class="tag">Timing</span>
+  <p>Do this on a <strong>weekday morning</strong>, not a Friday afternoon — so if anything looks wrong, you have the whole day to sort it out.</p>
+</div>
+
+<h2><span class="step-num">6</span>Fix the SPF record</h2>
+
+<p>Do this straight after the MX change. If you skip it, mail you send from Gmail may land in recipients' spam folders.</p>
+
+<ol>
+  <li>Netlify &rarr; DNS records &rarr; find the TXT record whose value starts with <code>v=spf1</code></li>
+  <li><strong>Edit it.</strong> Do not add a second one — see the mistakes section</li>
+  <li>Replace the value with:</li>
+</ol>
+
+<div class="value-box">v=spf1 include:_spf.google.com ip4:148.251.82.238 ~all</div>
+
+<p>This temporarily authorises <strong>both</strong> Google and your old server, which is the safe choice while both still exist.</p>
+
+<p><strong>Later</strong>, once cPanel is cancelled in Step 10, simplify it to:</p>
+
+<div class="value-box">v=spf1 include:_spf.google.com ~all</div>
+
+<h2><span class="step-num">7</span>Test</h2>
+
+<p>Do not skip this, and do not test in only one direction.</p>
+
+<ul class="checklist">
+  <li>Send an email <strong>from</strong> Gmail <strong>to</strong> your personal Gmail or other address — it arrives, and is <strong>not</strong> in spam</li>
+  <li>Send an email <strong>from</strong> that outside address <strong>to</strong> <code>info@white-box.co.il</code> — it arrives in Gmail</li>
+  <li>Repeat the incoming test for <code>daphna@white-box.co.il</code></li>
+  <li>Submit the contact form on white-box.co.il and confirm the notification still reaches you</li>
+  <li>Reply to a message and confirm the reply sends</li>
+</ul>
+
+<p>You can check the DNS side at <code>mxtoolbox.com</code> — enter <code>white-box.co.il</code>, and MX should show <code>smtp.google.com</code>.</p>
+
+<h2><span class="step-num">8</span>Run the migration once more</h2>
+
+<p>Between your Step 4 copy and the Step 5 switch, a few emails may have landed on cPanel. Re-run the same Data Migration from Step 4. It skips everything already copied and picks up only the stragglers.</p>
+
+<h2><span class="step-num">9</span>Add DKIM and DMARC</h2>
+
+<p>These are not strictly required for mail to work, but they are what keeps you out of spam folders long term. Do them a few days after everything else is stable.</p>
+
+<h3>DKIM</h3>
+<ol>
+  <li>Google Admin &rarr; <strong>Apps</strong> &rarr; <strong>Google Workspace</strong> &rarr; <strong>Gmail</strong> &rarr; <strong>Authenticate email</strong></li>
+  <li>Click <strong>Generate new record</strong> — use 2048-bit</li>
+  <li>Google shows you a <strong>name</strong> (<code>google._domainkey</code>) and a very long <strong>value</strong></li>
+  <li>In Netlify: Add new record &rarr; Type <strong>TXT</strong> &rarr; Name <code>google._domainkey</code> &rarr; Value: the long string, pasted exactly</li>
+  <li>Wait about 15 minutes, return to Google, click <strong>Start authentication</strong></li>
+</ol>
+
+<p>Copy that long value carefully. A single missing character breaks it silently.</p>
+
+<h3>DMARC</h3>
+<p>Add one more TXT record in Netlify:</p>
+
+<div class="value-box">
+Name:   _dmarc<br>
+Value:  v=DMARC1; p=none; rua=mailto:daphna@white-box.co.il
+</div>
+
+<p><code>p=none</code> means <strong>“monitor only, block nothing.”</strong> This is deliberate: you get reports with zero risk of legitimate mail being rejected. Only consider tightening to <code>p=quarantine</code> after months of clean reports, and there is no urgency at all.</p>
+
+<div class="callout callout--warn">
+  <span class="tag">Never do this</span>
+  <p>Do not start with <code>p=reject</code>. It can silently destroy real email.</p>
+</div>
+
+<h2><span class="step-num">10</span>Cancel cPanel</h2>
+
+<p><strong>Wait a full two weeks after Step 7 passes.</strong> Not two days. You want certainty that nothing was missed — including monthly senders such as invoices, or suppliers who email you only occasionally.</p>
+
+<p>Once you are confident:</p>
+
+<ol>
+  <li>Do one last check of the cPanel webmail for anything unexpected</li>
+  <li>Simplify SPF to <code>v=spf1 include:_spf.google.com ~all</code> — drop the old server's IP</li>
+  <li>Raise TTLs back to <code>3600</code>. You no longer need fast changes</li>
+  <li>Cancel the cPanel account</li>
+</ol>
+
+<div class="callout">
+  <span class="tag">The bonus</span>
+  <p>Those “AutoSSL reduced coverage” warning emails stop <strong>forever</strong>. That whole problem existed only because the cPanel server was trying to manage certificates for a website it does not host. Once mail leaves, the account has no reason to exist.</p>
+</div>
+
+<h2>Four mistakes that break email</h2>
+
+<p>Worth reading twice.</p>
+
+<ol>
+  <li><strong>Two SPF records.</strong> You must have <strong>exactly one</strong> TXT record starting with <code>v=spf1</code>. Two is worse than none — mail servers see the conflict and fail the check entirely. In Step 6, <em>edit</em> the existing record. Never add a second.</li>
+  <li><strong>Deleting the wrong TXT record.</strong> After Step 2 you will have several TXT records on the domain: SPF, Google verification, and later DKIM and DMARC. They coexist happily. Deleting one to tidy up breaks whatever depended on it.</li>
+  <li><strong>Switching MX before copying mail.</strong> Flip MX first and new mail arrives in an empty Google mailbox while your history sits stranded on a server you are about to cancel. Copy first. Always.</li>
+  <li><strong>Cancelling cPanel too early.</strong> A few more weeks of hosting fees is <em>nothing</em> compared to discovering in October that a client's email from September went to a server that no longer exists.</li>
+</ol>
+
+<h2>If something goes wrong</h2>
+
+<p><strong>You can always undo the switch.</strong> Nothing here is permanent until you cancel cPanel in Step 10 — which is exactly why Step 10 is last.</p>
+
+<p>To roll back: in Netlify, delete the <code>smtp.google.com</code> MX record and re-create the original one. With TTL at 300, mail flows back to cPanel within about 5 minutes, exactly as before.</p>
+
+<div class="rollback-box">
+  <span class="lbl">Rollback MX record — keep this where you can find it</span>
+  <span class="val">mail.white-box.co.il &nbsp;&nbsp; priority 0</span>
+</div>
+
+<!-- ── Tear-off reference page ─────────────────────── -->
+<div class="card-page">
+  <h2 style="margin-top:0">Quick reference card</h2>
+  <p>Keep this page beside you while you work. It contains every value you need to type.</p>
+
+  <div class="refcard">
+    <h3>White Box Studio — DNS</h3>
+
+    <h4>Final state, at Netlify</h4>
+<pre>MX    (name empty)        smtp.google.com          priority 1
+
+TXT   (name empty)        v=spf1 include:_spf.google.com ~all
+
+TXT   google._domainkey   v=DKIM1; k=rsa; p=... (from Google)
+
+TXT   _dmarc              v=DMARC1; p=none;
+                          rua=mailto:daphna@white-box.co.il</pre>
+
+    <h4>During the overlap (Step 6, temporary)</h4>
+<pre>TXT   (name empty)        v=spf1 include:_spf.google.com
+                          ip4:148.251.82.238 ~all</pre>
+
+    <h4>Rollback, if needed</h4>
+<pre>MX    (name empty)        mail.white-box.co.il     priority 0</pre>
+
+    <h4>Old server — what you are leaving behind</h4>
+<pre>Hetzner / cPanel          148.251.82.238
+IMAP, for the migration   mail.white-box.co.il : 993  (SSL)</pre>
+
+    <h4>Where to click</h4>
+<pre>DNS changes               app.netlify.com
+                          Domains &gt; white-box.co.il &gt; DNS records
+
+Mailboxes, DKIM           admin.google.com
+
+Check your work           mxtoolbox.com</pre>
+  </div>
+
+  <div class="rollback-box" style="margin-top:6mm">
+    <span class="lbl">If anything goes wrong, this one record undoes everything</span>
+    <span class="val">MX &nbsp; mail.white-box.co.il &nbsp;&nbsp; priority 0</span>
+  </div>
+
+  <p class="footer-note">DNS values in this document were read from the live white-box.co.il zone on 11 August 2026. Google's single-MX recommendation (<code>smtp.google.com</code>, priority 1) was confirmed against Google's current documentation the same day. If you are reading this much later, re-check the two Google values before typing them.</p>
+</div>
+
+</body>
+</html>
