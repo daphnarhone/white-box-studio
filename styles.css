@@ -194,9 +194,20 @@ html[lang="he"] .nav-right   { font-size: 18px; }   /* Hebrew header enlarged be
   z-index: 2;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: clamp(40px, 6vw, 80px);
-  align-items: center;
+  /* Logo spans the full width on its own row, so the text and image columns both
+     start at the eyebrow — which puts the image's top edge on the eyebrow line
+     and its bottom edge level with the end of the sub. row-gap stays 0 so the
+     children's own margins keep the vertical rhythm. */
+  grid-template-areas:
+    "logo logo"
+    "text visual";
+  column-gap: clamp(40px, 6vw, 80px);
+  row-gap: 0;
+  align-items: start;
 }
+.hero-logo-block { grid-area: logo; }
+.hero-text { grid-area: text; }
+.hero-visual { grid-area: visual; }
 .hero-logo-block {
   margin-bottom: 64px;
   text-align: left;
@@ -310,7 +321,9 @@ html[lang="he"] .eyebrow { font-size: 16px; } /* Heebo runs ~22% shorter — mat
   border-radius: var(--radius-card);
   overflow: hidden;
   box-shadow: 0 40px 80px rgba(42, 40, 38, 0.22);
-  aspect-ratio: 1 / 1;
+  /* 3:2 — the hero piece is a horizontal trio; a square crop would cut the
+     outer two busts out of frame entirely. */
+  aspect-ratio: 3 / 2;
 }
 .hero-image img {
   width: 100%;
@@ -1594,8 +1607,11 @@ html[dir="rtl"] .work-title {
      parallax on .hero-text stops painting here — no box — which is fine.) */
   .hero-inner {
     grid-template-columns: 1fr;
+    /* drop the desktop named areas so `order` drives the single-column stack */
+    grid-template-areas: none;
     gap: 0;
   }
+  .hero-logo-block, .hero-text, .hero-visual { grid-area: auto; }
   .hero-text { display: contents; }
   .hero-logo-block { order: -2; margin-bottom: 36px; }
   .hero-visual { order: -1; margin-bottom: 44px; }
@@ -1616,7 +1632,10 @@ html[dir="rtl"] .work-title {
   .hero { padding: 80px 24px 64px; }
   .hero-logo-block { margin-bottom: 16px; }
   .hero-visual { margin-bottom: 20px; }
-  .hero-image { max-width: 210px; }
+  /* 300px at 3:2 is 200px tall — still 10px shorter than the old 210px square,
+     so the above-fold budget above is preserved while the trio keeps enough
+     width to read as three distinct busts. */
+  .hero-image { max-width: 300px; }
   .hero .eyebrow { margin-bottom: 14px; font-size: 11px; letter-spacing: 0.14em; }
   html[lang="he"] .hero .eyebrow { font-size: 13px; letter-spacing: 0.1em; }
   .hero-headline { font-size: clamp(38px, 10.5vw, 54px); margin-bottom: 20px; max-width: none; }

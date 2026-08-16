@@ -65,6 +65,7 @@ const strings = {
     hero_h1_light: 'Walls, sculpture, and detail ',
     hero_h1_part2: 'no one else has.',
     hero_sub: 'Plaster, concrete, gold leaves, iron, gypsum and sculpture. Every piece designed, made and installed by our own team, since 2005.',
+    hero_image_alt: 'Three sculptural busts in white and cobalt blue, veined with gold and trailed by a gilded flowering branch, made in the studio',
     scroll_cue: 'Scroll',
 
     // ── Selected work section ─────────────────────
@@ -221,6 +222,7 @@ const strings = {
     hero_h1_light: 'קירות, פיסול ופרטים ',
     hero_h1_part2: 'שאין לאף אחד אחר.',
     hero_sub: 'טיח, בטון, עלה זהב, ברזל, גבס ופיסול. כל יצירה מעוצבת, נוצרת ומותקנת על ידי הצוות שלנו, מאז 2005.',
+    hero_image_alt: 'שלושה פסלי ראש וחזה בלבן ובכחול קובלט, עם עורקי זהב וענף פורח מוזהב, מעשה ידי הסטודיו',
     scroll_cue: 'גלילה',
 
     // ── Selected work section ─────────────────────
@@ -283,7 +285,7 @@ const strings = {
     sec_04_body: 'החללים שלנו ראויים ליותר מצבע. פאנלי גבס בעבודת יד עם דפוסים מורכבים, מגיאומטריה מרוקאית בתקרה עד לפסיפס דמויות על הקיר. מתאים לסלון, חדר שינה, לובי מלון ומשרדי הנהלה. מוסיפים לחלל אופי, נפח ועומק.',
 
     // ── Section 05 — Display & gift ───────────────
-    sec_05_eyebrow: '07 / אביזרי תצוגה ומתנה',
+    sec_05_eyebrow: '07 / אביזרי תצוגה, אירועים ומתנה',
     sec_05_headline: 'הפרט הקטן הוא הסיפור.',
     sec_05_body: 'לפעמים הפרט הקטן הוא זה שמשאיר את הרושם. קישוטי פרחים דקורטיביים בעבודת יד, סיכות ראש, שולחנות וסטנדים לתצוגה ואביזרי אירועים לחנויות, אירועים, מסיבות והשקות מותג. כל פריט מעוצב ומיוצר במיוחד עבור המותג, האירוע או האדם שמקבל אותו.',
 
@@ -293,7 +295,7 @@ const strings = {
     sec_06_body: 'כל הנוכחות של ברזל מחושל, בלי המשקל ובלי החלודה האמיתית. ציפוי דמוי ברזל לדלתות, קירות ומשטחים, בגוונים של פטינה כהה, חלודה חמה ומתכת מעושנת. מתאים לדלתות כניסה דרמטיות, קירות בולטים וחללים עם אופי תעשייתי-יוקרתי.',
 
     // ── Section 07 — Capitals & ornaments ─────────
-    sec_07_eyebrow: '10 / כותרות ועיטורים מגבס',
+    sec_07_eyebrow: '10 / כותרות ועיטורים אדריכליים מגבס',
     sec_07_headline: 'זהב, גבס, וקצת דרמה.',
     sec_07_body: 'קלאסיקה לא יוצאת מהאופנה. כותרות עמודים בסגנון קורינתי, עיטורי קיר בארוקיים ועבודות עלה זהב, כולם מיוצרים בייצור עצמי בסטודיו. מתאים לחללים בסגנון קלאסי וניאו-קלאסי, בתי מגורים מפוארים, אולמות אירועים וחזיתות מסחריות.',
 
@@ -305,7 +307,7 @@ const strings = {
     // ── Section 09 — Concrete ─────────────────────
     sec_09_eyebrow: '02 / עבודות וגימורים בבטון דקורטיבי',
     sec_09_headline: 'בטון שזורם כמו בד.',
-    sec_09_body: 'בטון לא חייב להיות מינימליסטי. עבודות וגימורים מבטון דקורטיב בעבודת יד, מאובייקטים שימושיים-פיסוליים בטקסטורת אבן ועד פאנלי קיר זורמים בסגנון פיסולי. מתאים לחללים מודרניים, מסחריים ומגורים, שמחפשים מגע גולמי ומעודן בו זמנית.',
+    sec_09_body: 'בטון לא חייב להיות מינימליסטי. עבודות וגימורים מבטון דקורטיבי בעבודת יד, מאובייקטים שימושיים-פיסוליים בטקסטורת אבן ועד פאנלי קיר זורמים בסגנון פיסולי. מתאים לחללים מודרניים, מסחריים ומגורים, שמחפשים מגע גולמי ומעודן בו זמנית.',
 
     // ── Section 10 — Concrete Judaica ─────────────
     sec_10_eyebrow: '08 / תשמישי קדושה מבטון',
@@ -434,6 +436,15 @@ function applyLang(lang) {
     const key = el.getAttribute('data-i18n-placeholder');
     const value = dict[key] !== undefined ? dict[key] : fallback[key];
     if (value !== undefined) el.setAttribute('placeholder', value);
+  });
+
+  // Image alt text. The homepage is a single URL serving both languages, so an
+  // alt baked into the HTML would leave Hebrew screen-reader users hearing
+  // English; the two-URL service pages get theirs from services-data.mjs instead.
+  document.querySelectorAll('[data-i18n-alt]').forEach(el => {
+    const key = el.getAttribute('data-i18n-alt');
+    const value = dict[key] !== undefined ? dict[key] : fallback[key];
+    if (value !== undefined) el.setAttribute('alt', value);
   });
 
   document.querySelectorAll('.lang-toggle button').forEach(btn => {

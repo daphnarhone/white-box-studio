@@ -515,7 +515,7 @@ export const SERVICES = [
       title: 'כותרות ועיטורים דקורטיביים מגבס בישראל | White Box Studio',
       desc: 'כותרות עמודים דקורטיביות, עיטורי גבס ואלמנטים אדריכליים בהזמנה אישית בישראל, פרטים קלאסיים, עיטורים ועבודות עלי זהב.',
       serviceType: 'כותרות ועיטורים מגבס', crumb: 'כותרות ועיטורים',
-      eyebrow: '10 / כותרות ועיטורים מגבס',
+      eyebrow: '10 / כותרות ועיטורים אדריכליים מגבס',
       h1: 'כותרות ועיטורים בדיוק פיסולי',
       lead: 'זהב, גבס, וקצת דרמה.',
       intro: [
@@ -554,7 +554,7 @@ export const SERVICES = [
       title: 'Decorative Capitals & Gypsum Ornaments in Israel | White Box Studio',
       desc: 'Bespoke decorative capitals, gypsum ornaments, and architectural embellishments in Israel, classical detail, ornamental features, and custom-made elements.',
       serviceType: 'Capitals and gypsum ornaments', crumb: 'Capitals & ornaments',
-      eyebrow: '10 / Gypsum capitals & ornaments',
+      eyebrow: '10 / Gypsum capitals & architectural ornaments',
       h1: 'Capitals and ornaments with sculptural precision',
       lead: 'Gold, gypsum, and a little drama.',
       intro: [

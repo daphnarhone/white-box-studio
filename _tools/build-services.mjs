@@ -10,7 +10,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const VER = '20260804a';
+const VER = '20260816a';
 const ORIGIN = 'https://white-box.co.il';
 const WA = '972546855568';
 const INSTAGRAM = 'https://instagram.com/whiteboxstudio.il';
@@ -345,7 +345,7 @@ ${footer(lang)}`;
 
   return head({ lang, title: d.title, desc: d.desc, canonical,
     altHe: `${ORIGIN}/faq.html`, altEn: `${ORIGIN}/en/faq.html`,
-    ogImg: `${ORIGIN}/assets/images/three-horses.jpg`, ogUrl: canonical, ldBlocks: ld }) + '\n' + body + '\n';
+    ogImg: `${ORIGIN}/assets/images/three-busts-kintsugi.jpg`, ogUrl: canonical, ldBlocks: ld }) + '\n' + body + '\n';
 }
 
 // ──────────────────────────────────────────────────────────────────────────
