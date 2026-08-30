@@ -7,7 +7,7 @@ const GA_MEASUREMENT_ID = 'G-ZYK627NZFG';
 // pixel never loads, so the site stays safe to deploy before the ID exists.
 // Paste the 15-16 digit ID from Events Manager to switch it on.
 const META_PIXEL_ID = '1343569618833097';
-const CONSENT_KEY = 'wbs-consent';
+const CONSENT_KEY = 'wbs-consent-v2';
 
 // Lead attribution + webhook fan-out (see setupAttribution / sendLeadWebhook).
 const WBS_LEADS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwgmKWxc0LC9GQdMbvXc0N3MOWPL9r4gqh31BwYnb-1JobqSbWK3SAqa7iHJDmboC0g/exec'; // Apps Script web app /exec URL, filled after deployment
