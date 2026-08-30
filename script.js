@@ -3,6 +3,10 @@ const STORAGE_KEY = 'wbs-lang';
 // Google Analytics 4. The tag is gated behind cookie consent — it only loads
 // after the visitor clicks Accept on the banner (see setupConsentBanner).
 const GA_MEASUREMENT_ID = 'G-ZYK627NZFG';
+// Meta Pixel. Same convention as GA4 above: while this holds the placeholder the
+// pixel never loads, so the site stays safe to deploy before the ID exists.
+// Paste the 15-16 digit ID from Events Manager to switch it on.
+const META_PIXEL_ID = '1343569618833097';
 const CONSENT_KEY = 'wbs-consent';
 
 // Lead attribution + webhook fan-out (see setupAttribution / sendLeadWebhook).
@@ -906,6 +910,7 @@ function setupContactForm() {
       t('form_message_label') + ': ' + (f.message || '-')
     ];
     const url = 'https://wa.me/' + whatsappNumber + '?text=' + encodeURIComponent(lines.join('\n'));
+    if (window.fbq) fbq('track', 'Contact', { content_name: 'whatsapp_form' });
     window.open(url, '_blank', 'noopener');
   });
 
@@ -930,6 +935,7 @@ function setupContactForm() {
         if (data.success) {
           setStatus('form_status_success', 'success');
           sendLeadWebhook(f);
+          if (window.fbq) fbq('track', 'Lead', { content_name: f.type || 'general' });
           form.reset();
         } else {
           setStatus('form_status_error', 'error');
@@ -1045,12 +1051,12 @@ function setupMobileServicesAccordion() {
 // Cookie-consent banner copy. Hebrew is sized up in CSS (Heebo renders smaller).
 const consentStrings = {
   en: {
-    text: 'We use cookies to see how visitors use the site. Analytics only, never ads.',
+    text: 'We use cookies to understand how visitors use the site and to measure our advertising.',
     accept: 'Accept',
     decline: 'Decline'
   },
   he: {
-    text: 'אנחנו משתמשים בעוגיות כדי להבין איך משתמשים באתר. רק לאנליטיקס, אף פעם לא לפרסום.',
+    text: 'אנחנו משתמשים בעוגיות כדי להבין איך משתמשים באתר וכדי למדוד את הפרסום שלנו.',
     accept: 'אישור',
     decline: 'לא תודה'
   }
@@ -1075,12 +1081,80 @@ function loadGA4() {
   gtag('config', GA_MEASUREMENT_ID);
 }
 
+// Which audience each service page belongs to. The rule: surfaces get specified
+// by a professional, objects get bought by the end client. Sent as
+// content_category so Meta learns which side actually produces enquiries.
+// Adjust freely -- this is a judgement call, not measured data.
+const WBS_SERVICE_ROUTE = {
+  'plaster-walls': 'trade',
+  'decorative-concrete': 'trade',
+  'gypsum-panels': 'trade',
+  'iron-look-coating': 'trade',
+  'capitals-ornaments': 'trade',
+  'wall-murals': 'trade',
+  'custom-sculpture': 'private',
+  'coffee-tables': 'private',
+  'display-accessories': 'private',
+  'concrete-judaica': 'private'
+};
+
+// ViewContent on the ten service pages, in either language. Called from
+// loadMetaPixel() rather than on DOMContentLoaded so it fires correctly both for
+// a returning visitor (consent already stored) and for one accepting just now.
+function trackMetaPageView() {
+  if (!window.fbq) return;
+  const path = location.pathname;
+  const m = path.match(/\/(?:en\/)?services\/([a-z0-9-]+?)(?:\.html)?\/?$/i);
+  if (!m) return;
+  const slug = m[1].toLowerCase();
+  fbq('track', 'ViewContent', {
+    content_name: slug,
+    content_type: 'service',
+    content_category: WBS_SERVICE_ROUTE[slug] || 'other',
+    content_language: path.indexOf('/en/') === 0 ? 'en' : 'he'
+  });
+}
+
+// Inject and initialise the Meta Pixel. Guarded so it loads at most once, and
+// never with the placeholder ID. Called only after consent is granted.
+function loadMetaPixel() {
+  if (window.__wbsPixelLoaded) return;
+  if (!META_PIXEL_ID || META_PIXEL_ID === 'XXXXXXXXXXXXXXX' || !/^\d{15,16}$/.test(META_PIXEL_ID)) return;
+  window.__wbsPixelLoaded = true;
+
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+  (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+  fbq('init', META_PIXEL_ID);
+  fbq('track', 'PageView');
+  trackMetaPageView();
+}
+
+// Single entry point for every consent-gated tag, so the two call sites in
+// setupConsentBanner() stay in sync as tags are added.
+function loadTrackers() {
+  loadGA4();
+  loadMetaPixel();
+}
+
+// WhatsApp is the primary CTA on this site, so an outbound wa.me click is the
+// strongest intent signal available. Delegated, so links added later are covered.
+function setupMetaEvents() {
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest && e.target.closest('a[href*="wa.me"]');
+    if (a && window.fbq) fbq('track', 'Contact', { content_name: 'whatsapp_link' });
+  });
+}
+
 // Cookie-consent gate. If the visitor already chose, honour it silently;
 // otherwise show a dismissible banner and only load GA4 on Accept.
 function setupConsentBanner() {
   let choice = null;
   try { choice = localStorage.getItem(CONSENT_KEY); } catch (_) {}
-  if (choice === 'granted') { loadGA4(); return; }
+  if (choice === 'granted') { loadTrackers(); return; }
   if (choice === 'denied') return;
 
   const banner = document.createElement('div');
@@ -1120,7 +1194,7 @@ function setupConsentBanner() {
 
   acceptBtn.addEventListener('click', () => {
     try { localStorage.setItem(CONSENT_KEY, 'granted'); } catch (_) {}
-    loadGA4();
+    loadTrackers();
     close();
   });
   declineBtn.addEventListener('click', () => {
@@ -1184,5 +1258,6 @@ document.addEventListener('DOMContentLoaded', () => {
   setupContactForm();
   setupStickyCta();
   setupInitialHashScroll(lenis);  // land on #contact/#work/#studio when arriving from a sub-page
-  setupConsentBanner();  // cookie consent → loads GA4 only after Accept
+  setupMetaEvents();     // wa.me click tracking (no-ops until the pixel loads)
+  setupConsentBanner();  // cookie consent → loads GA4 + Meta Pixel only after Accept
 });
