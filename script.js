@@ -6,7 +6,7 @@ const GA_MEASUREMENT_ID = 'G-ZYK627NZFG';
 // Meta Pixel. Same convention as GA4 above: while this holds the placeholder the
 // pixel never loads, so the site stays safe to deploy before the ID exists.
 // Paste the 15-16 digit ID from Events Manager to switch it on.
-const META_PIXEL_ID = '1343569618833097';
+const META_PIXEL_ID = '1591593436087212';
 const CONSENT_KEY = 'wbs-consent-v2';
 
 // Lead attribution + webhook fan-out (see setupAttribution / sendLeadWebhook).
