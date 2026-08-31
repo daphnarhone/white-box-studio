@@ -1122,11 +1122,26 @@ function loadMetaPixel() {
   if (!META_PIXEL_ID || META_PIXEL_ID === 'XXXXXXXXXXXXXXX' || !/^\d{15,16}$/.test(META_PIXEL_ID)) return;
   window.__wbsPixelLoaded = true;
 
-  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
-  (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  // fbq stub: queues calls until fbevents.js loads and defines callMethod.
+  const n = window.fbq = function () {
+    n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+  };
+  if (!window._fbq) window._fbq = n;
+  n.push = n;
+  n.loaded = true;
+  n.version = '2.0';
+  n.queue = [];
+
+  // Meta's own snippet inserts the tag before document.getElementsByTagName
+  // ('script')[0]. On this site that first script element is injected by a
+  // browser extension, so the anchor is outside the page's control and the tag
+  // never lands in the document -- fbq then queues every event forever and
+  // sends nothing, while client-side helpers still report the calls as fine.
+  // head.appendChild is what loadGA4() above uses, and it works here.
+  const fbs = document.createElement('script');
+  fbs.async = true;
+  fbs.src = 'https://connect.facebook.net/en_US/fbevents.js';
+  document.head.appendChild(fbs);
 
   fbq('init', META_PIXEL_ID);
   fbq('track', 'PageView');
