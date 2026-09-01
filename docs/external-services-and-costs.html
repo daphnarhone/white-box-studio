@@ -150,7 +150,7 @@
 <table>
   <thead><tr><th style="width:30%">Service</th><th style="width:44%">What it does</th><th style="width:26%">Cost</th></tr></thead>
   <tbody>
-    <tr><td><strong>Web3Forms</strong><br><code>api.web3forms.com</code></td><td>Contact form submissions. Emails a notification copied to <strong>both</strong> info@ and daphna@</td><td class="free"><strong>Free up to 250 submissions / month</strong></td></tr>
+    <tr><td><strong>Web3Forms</strong><br><code>api.web3forms.com</code></td><td>Contact form submissions. Notifications go to <strong>daphna.rhone@gmail.com</strong> only</td><td><strong>Pro</strong> — 10,000 submissions / month</td></tr>
     <tr><td><strong>Google Analytics 4</strong><br><code>G-ZYK627NZFG</code></td><td>Analytics. Loads <em>only after</em> the visitor grants consent</td><td class="free">Free</td></tr>
     <tr><td><strong>Google Apps Script</strong><br><code>script.google.com</code></td><td>Second, fire-and-forget lead-logging webhook</td><td class="free">Free (quota-limited)</td></tr>
     <tr><td><strong>WhatsApp</strong><br><code>wa.me</code></td><td>53 click-to-chat links</td><td class="free">Free</td></tr>
@@ -201,10 +201,10 @@
 </div>
 
 <div class="finding">
-  <h4><span class="flag">Watch</span>3 &nbsp;Web3Forms has a quiet ceiling</h4>
-  <p>The free plan allows <strong>250 form submissions per month</strong>. This is the only free service in the whole inventory that can run out, and it is the kind of limit that fails <em>silently</em> rather than visibly — you would notice it as an absence of enquiries, not as an error.</p>
-  <p>At current studio volume this is very unlikely to bite. Worth knowing it exists.</p>
-  <p>Also relevant to the email migration: the form's notification is delivered <em>to</em> both migrating addresses, so confirm it still arrives after the switch. Step 7 of the runbook includes this test.</p>
+  <h4><span class="flag">Resolved</span>3 &nbsp;Web3Forms is now on Pro</h4>
+  <p>This audit originally flagged the free plan's <strong>250 submissions per month</strong> as the only free service in the inventory that could quietly run out. The account has since moved to <strong>Pro, with a 10,000/month allowance</strong>, so the ceiling is no longer a practical concern.</p>
+  <p><strong>Corrected 1 September 2026:</strong> the earlier claim that notifications are copied to both <code>info@</code> and <code>daphna@</code> was wrong. The form's markup carried a <code>cc</code> field, but Web3Forms has no such field — it was passed through as ordinary form data and copied the notification to nobody. The only configured recipient is <strong>daphna.rhone@gmail.com</strong>, set in the Web3Forms dashboard. The dead field has been removed from the markup; recipients are managed in the dashboard under Settings &gt; Email Configuration (up to 5, plus CC/BCC on Pro).</p>
+  <p>This also simplifies the email migration: form notifications go to a Gmail address, so they never touch the MX record being changed and cannot be affected by the cutover.</p>
 </div>
 
 <div class="finding">

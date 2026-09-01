@@ -62,7 +62,7 @@
 <!-- Fonts loaded non-render-blocking; display=swap paints text immediately in the fallback -->
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700;800&family=Heebo:wght@300;400;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700;800&family=Heebo:wght@300;400;700;800&display=swap"></noscript>
-<link rel="stylesheet" href="styles.css?v=20260831b">
+<link rel="stylesheet" href="styles.css?v=20260901a">
 
 <!-- LocalBusiness structured data (SEO / Google local results). Optional: to add an exact
      map pin, look up the studio on Google Maps, right-click it → copy the lat,long, and add a
@@ -480,7 +480,12 @@
       <input type="hidden" name="access_key" value="3b704e8b-3512-4328-a85d-491ec93ee40c">
       <input type="hidden" name="subject" value="New project inquiry, white-box.co.il">
       <input type="hidden" name="from_name" value="White Box website">
-      <input type="hidden" name="cc" value="info@white-box.co.il,daphna@white-box.co.il">
+      <!-- Reply-to, set on submit only when the visitor typed an email rather than
+           a phone. Recipients themselves are configured in the Web3Forms dashboard
+           (Settings > Email Configuration), not here: there is no `cc` field in
+           their API, so one set in the markup is silently sent on as ordinary form
+           data and copies the notification to nobody. -->
+      <input type="hidden" name="replyto" value="">
       <!-- lead attribution: filled by setupAttribution() in script.js -->
       <input type="hidden" name="utm_source" value="">
       <input type="hidden" name="utm_medium" value="">
@@ -488,6 +493,7 @@
       <input type="hidden" name="utm_term" value="">
       <input type="hidden" name="utm_content" value="">
       <input type="hidden" name="click_id" value="">
+      <input type="hidden" name="click_source" value="">
       <input type="hidden" name="landing_page" value="">
       <input type="hidden" name="referrer" value="">
       <!-- honeypot: bots fill this, humans never see it -->
@@ -592,7 +598,7 @@
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
-<script src="script.js?v=20260831b" defer></script>
+<script src="script.js?v=20260901a" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/sienna-accessibility/dist/sienna-accessibility.umd.js" async></script>
 </body>
 </html>

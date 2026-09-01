@@ -311,7 +311,11 @@
 
 <p><strong>Your website will not change at all.</strong> Not one line. Your domain stays <code>white-box.co.il</code>, your email addresses stay exactly the same, and the 7 places <code>info@white-box.co.il</code> appears in the site's code stay exactly as they are. This migration changes only <em>where your mail is delivered</em>.</p>
 
-<p><strong>Your contact form does not send through the cPanel mail server</strong>, so nothing below can break the form itself. One nuance: the form posts to a service called Web3Forms, which emails a notification to <em>both</em> <code>info@</code> and <code>daphna@</code>. That notification is delivered <strong>to</strong> the two mailboxes you are migrating — so it follows your MX record like any other incoming mail, and works normally once mail is at Google. Step 7 has you test exactly this.</p>
+<p><strong>Your contact form does not send through the cPanel mail server</strong>, so nothing below can break the form itself. The form posts to a service called Web3Forms, and as of 1 September 2026 its only configured recipient is <strong><code>daphna.rhone@gmail.com</code></strong> — not <code>info@</code> or <code>daphna@</code>. So form notifications do not follow your MX record at all, and are completely unaffected by this migration. Step 7 still has you submit the form once, but treat it as a general health check rather than a test of the mail cutover.</p>
+
+<div class="callout callout--warn">
+<p><strong>If you later add <code>info@</code> or <code>daphna@</code> as Web3Forms recipients, do it <em>after</em> this migration is finished and those mailboxes are confirmed receiving.</strong> Web3Forms suppresses an address that bounces and then silently stops delivering to it, so adding an address mid-cutover can quietly break notifications to it for good.</p>
+</div>
 
 <div class="callout callout--warn">
   <span class="tag">Why this migration matters more than it looks</span>
@@ -513,7 +517,7 @@ TTL:       300
   <li>Send an email <strong>from</strong> Gmail <strong>to</strong> your personal Gmail or other address — it arrives, and is <strong>not</strong> in spam</li>
   <li>Send an email <strong>from</strong> that outside address <strong>to</strong> <code>info@white-box.co.il</code> — it arrives in Gmail</li>
   <li>Repeat the incoming test for <code>daphna@white-box.co.il</code></li>
-  <li>Submit the contact form on white-box.co.il and confirm the notification still reaches you</li>
+  <li>Submit the contact form on white-box.co.il and confirm the notification reaches <code>daphna.rhone@gmail.com</code> (a general health check, not a test of the mail cutover — the form does not use your MX record)</li>
   <li>Reply to a message and confirm the reply sends</li>
 </ul>
 

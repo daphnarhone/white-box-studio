@@ -13,7 +13,22 @@ const CONSENT_KEY = 'wbs-consent-v2';
 const WBS_LEADS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwgmKWxc0LC9GQdMbvXc0N3MOWPL9r4gqh31BwYnb-1JobqSbWK3SAqa7iHJDmboC0g/exec'; // Apps Script web app /exec URL, filled after deployment
 const WBS_LEADS_TOKEN = 'wbx-lead-8451-kepler';
 const ATTRIB_KEY = 'wbs-attrib';
-const ATTRIB_FIELDS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'click_id', 'landing_page', 'referrer'];
+const ATTRIB_FIELDS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'click_id', 'click_source', 'landing_page', 'referrer'];
+
+// Ad click ids, in priority order, each paired with the platform that issued it.
+// Recording the platform alongside the id is what makes a lead traceable: the id
+// on its own is an opaque string, and a gclid and an fbclid look alike in a
+// report. wbraid/gbraid are what Google sends instead of gclid in iOS and other
+// privacy contexts, so reading gclid alone silently drops that share of traffic.
+const CLICK_ID_PARAMS = [
+  ['gclid', 'google'],
+  ['wbraid', 'google'],
+  ['gbraid', 'google'],
+  ['fbclid', 'meta'],
+  ['msclkid', 'microsoft'],
+  ['ttclid', 'tiktok'],
+  ['li_fat_id', 'linkedin']
+];
 
 const whatsappNumber = '972546855568';
 const whatsappPrefills = {
@@ -812,30 +827,52 @@ function setupAttribution() {
   ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'].forEach(name => {
     utm[name] = params.get(name) || '';
   });
-  const clickId = params.get('gclid') || params.get('fbclid') || '';
+  // First match wins, so CLICK_ID_PARAMS is ordered by how much we trust the id.
+  let clickId = '';
+  let clickSource = '';
+  for (let i = 0; i < CLICK_ID_PARAMS.length; i++) {
+    const value = params.get(CLICK_ID_PARAMS[i][0]);
+    if (value) {
+      clickId = value;
+      clickSource = CLICK_ID_PARAMS[i][1];
+      break;
+    }
+  }
   const hasCampaign = clickId !== '' || Object.keys(utm).some(name => utm[name] !== '');
+
+  // The query string is kept on landing_page: it is the only record of which
+  // exact ad variant was clicked once the visitor navigates on.
+  const landingPage = location.pathname + location.search;
 
   let attrib = getStoredAttribution();
   if (hasCampaign) {
     attrib = Object.assign({}, utm, {
       click_id: clickId,
-      landing_page: location.pathname,
+      click_source: clickSource,
+      landing_page: landingPage,
       referrer: document.referrer,
       ts: Date.now()
     });
     try { localStorage.setItem(ATTRIB_KEY, JSON.stringify(attrib)); } catch (_) {}
   } else if (!attrib) {
     attrib = {
-      landing_page: location.pathname,
+      landing_page: landingPage,
       referrer: document.referrer,
       ts: Date.now()
     };
     try { localStorage.setItem(ATTRIB_KEY, JSON.stringify(attrib)); } catch (_) {}
   }
 
-  // Mirror the stored attribution into the form's hidden inputs so it rides
-  // along with the Web3Forms email as well.
+  fillAttributionInputs();
+}
+
+// Mirror the stored attribution into the form's hidden inputs so it rides along
+// with the Web3Forms email as well. Called again after a successful submit:
+// form.reset() restores every hidden input to its empty HTML value attribute, so
+// without this a second lead in the same visit would arrive unattributed.
+function fillAttributionInputs() {
   const form = document.getElementById('contact-form');
+  const attrib = getStoredAttribution();
   if (!form || !attrib) return;
   ATTRIB_FIELDS.forEach(name => {
     const input = form.querySelector(`input[name="${name}"]`);
@@ -910,7 +947,7 @@ function setupContactForm() {
       t('form_message_label') + ': ' + (f.message || '-')
     ];
     const url = 'https://wa.me/' + whatsappNumber + '?text=' + encodeURIComponent(lines.join('\n'));
-    if (window.fbq) fbq('track', 'Contact', { content_name: 'whatsapp_form' });
+    trackConversion('Contact', 'contact', { content_name: 'whatsapp_form' });
     window.open(url, '_blank', 'noopener');
   });
 
@@ -924,6 +961,13 @@ function setupContactForm() {
       setStatus('form_status_required', 'error');
       return;
     }
+    // Web3Forms takes the notification's reply-to from a field named `email` or
+    // `replyto`. This form deliberately asks for an email OR a phone in one box,
+    // so promote it only when it actually looks like an address -- a phone number
+    // in reply-to would make every notification unreplyable.
+    const replyto = form.querySelector('input[name="replyto"]');
+    if (replyto) replyto.value = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.contact) ? f.contact : '';
+
     setStatus('form_status_sending', 'sending');
     fetch('https://api.web3forms.com/submit', {
       method: 'POST',
@@ -935,8 +979,10 @@ function setupContactForm() {
         if (data.success) {
           setStatus('form_status_success', 'success');
           sendLeadWebhook(f);
-          if (window.fbq) fbq('track', 'Lead', { content_name: f.type || 'general' });
+          trackConversion('Lead', 'generate_lead', { content_name: f.type || 'general' });
           form.reset();
+          // reset() blanks the hidden inputs too, so re-seed them for a second lead.
+          fillAttributionInputs();
         } else {
           setStatus('form_status_error', 'error');
         }
@@ -1098,16 +1144,14 @@ const WBS_SERVICE_ROUTE = {
   'concrete-judaica': 'private'
 };
 
-// ViewContent on the ten service pages, in either language. Called from
-// loadMetaPixel() rather than on DOMContentLoaded so it fires correctly both for
-// a returning visitor (consent already stored) and for one accepting just now.
-function trackMetaPageView() {
-  if (!window.fbq) return;
+// ViewContent / view_item on the ten service pages, in either language.
+// Called from loadTrackers() so both tags receive it.
+function trackServicePageView() {
   const path = location.pathname;
   const m = path.match(/\/(?:en\/)?services\/([a-z0-9-]+?)(?:\.html)?\/?$/i);
   if (!m) return;
   const slug = m[1].toLowerCase();
-  fbq('track', 'ViewContent', {
+  trackConversion('ViewContent', 'view_item', {
     content_name: slug,
     content_type: 'service',
     content_category: WBS_SERVICE_ROUTE[slug] || 'other',
@@ -1145,14 +1189,26 @@ function loadMetaPixel() {
 
   fbq('init', META_PIXEL_ID);
   fbq('track', 'PageView');
-  trackMetaPageView();
+}
+
+// Fire one conversion into both tags at once. Meta and GA4 name the same action
+// differently, so every call site supplies both names. Either tag can legitimately
+// be missing -- the visitor declined consent, or fbevents.js is still in flight --
+// so both are guarded and an absent tag is never treated as an error.
+function trackConversion(metaEvent, gaEvent, params) {
+  if (window.fbq) fbq('track', metaEvent, params);
+  if (window.gtag) gtag('event', gaEvent, params);
 }
 
 // Single entry point for every consent-gated tag, so the two call sites in
-// setupConsentBanner() stay in sync as tags are added.
+// setupConsentBanner() stay in sync as tags are added. The service-page event
+// fires here rather than inside loadMetaPixel() so it reaches GA4 as well, and
+// it stays out of DOMContentLoaded so it fires correctly both for a returning
+// visitor (consent already stored) and for one accepting just now.
 function loadTrackers() {
   loadGA4();
   loadMetaPixel();
+  trackServicePageView();
 }
 
 // WhatsApp is the primary CTA on this site, so an outbound wa.me click is the
@@ -1160,7 +1216,7 @@ function loadTrackers() {
 function setupMetaEvents() {
   document.addEventListener('click', (e) => {
     const a = e.target.closest && e.target.closest('a[href*="wa.me"]');
-    if (a && window.fbq) fbq('track', 'Contact', { content_name: 'whatsapp_link' });
+    if (a) trackConversion('Contact', 'contact', { content_name: 'whatsapp_link' });
   });
 }
 

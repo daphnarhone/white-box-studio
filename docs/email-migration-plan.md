@@ -16,7 +16,9 @@
 
 **Your website will not change at all.** Not one line. Your domain stays `white-box.co.il`, your addresses stay exactly the same, and the 7 places `info@white-box.co.il` appears in `index.html` and `script.js` stay exactly as they are. This migration touches only where your *mail* is delivered.
 
-**Your contact form does not send through the cPanel mail server**, so nothing you do below can break the form itself. One nuance worth knowing: the form posts to a service called Web3Forms, which emails a notification to *both* `info@` and `daphna@`. So the notification is delivered **to** the two mailboxes you're migrating — meaning it follows your MX record like any other incoming mail, and works normally once mail is at Google. Step 7 has you test exactly this.
+**Your contact form does not send through the cPanel mail server**, so nothing you do below can break the form itself. The form posts to a service called Web3Forms, and as of 1 September 2026 its only configured recipient is **`daphna.rhone@gmail.com`** — not `info@` or `daphna@`. That means form notifications do not follow your MX record at all and are completely unaffected by this migration. Step 7 still has you submit the form once, but treat it as a general health check rather than a test of the mail cutover.
+
+> **If you later add `info@` or `daphna@` as Web3Forms recipients, do it *after* the migration is finished and those mailboxes are confirmed receiving.** Web3Forms suppresses an address that bounces and then silently stops delivering to it, so adding an address that is mid-cutover can quietly break notifications to it for good.
 
 ---
 
@@ -201,7 +203,7 @@ Don't skip this, and don't test only in one direction.
 - [ ] Send an email **from** Gmail **to** your personal Gmail/other address — it arrives, and is **not** in spam
 - [ ] Send an email **from** that outside address **to** `info@white-box.co.il` — it arrives in Gmail
 - [ ] Repeat the incoming test for `daphna@white-box.co.il`
-- [ ] Submit the contact form on white-box.co.il and confirm the notification still reaches you
+- [ ] Submit the contact form on white-box.co.il and confirm the notification reaches `daphna.rhone@gmail.com` (this is a general health check, not a test of the mail cutover — the form does not use your MX record)
 - [ ] Reply to a message and confirm the reply sends
 
 You can check the DNS side at **mxtoolbox.com** — enter `white-box.co.il`, and MX should show `smtp.google.com`. Or just ask me and I'll verify the records from here.
