@@ -968,11 +968,29 @@ function setupContactForm() {
     const replyto = form.querySelector('input[name="replyto"]');
     if (replyto) replyto.value = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.contact) ? f.contact : '';
 
+    // Web3Forms prints every field it receives, so the attribution inputs -- which
+    // are always present but empty for anyone who did not arrive from a campaign,
+    // i.e. most enquiries -- turn the notification into a wall of blank labels with
+    // the actual message buried underneath. FormData skips disabled inputs, so mute
+    // the empty ones for this submit and restore them immediately: the visitor may
+    // correct a field and send again, and a permanently disabled input would then
+    // drop real attribution from the second attempt.
+    const muted = [];
+    ATTRIB_FIELDS.concat(['replyto']).forEach(name => {
+      const input = form.querySelector(`input[name="${name}"]`);
+      if (input && !input.value) {
+        input.disabled = true;
+        muted.push(input);
+      }
+    });
+    const payload = new FormData(form);
+    muted.forEach(input => { input.disabled = false; });
+
     setStatus('form_status_sending', 'sending');
     fetch('https://api.web3forms.com/submit', {
       method: 'POST',
       headers: { 'Accept': 'application/json' },
-      body: new FormData(form)
+      body: payload
     })
       .then(res => res.json())
       .then(data => {
