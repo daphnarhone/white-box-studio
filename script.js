@@ -1,7 +1,8 @@
 const STORAGE_KEY = 'wbs-lang';
 
-// Google Analytics 4. The tag is gated behind cookie consent — it only loads
-// after the visitor clicks Accept on the banner (see setupConsentBanner).
+// Google Analytics 4. Loads on every page under Consent Mode v2 with every
+// consent type denied, so it writes no cookie and sends no identifier until the
+// visitor accepts — see initAnalytics() and setupConsentBanner().
 const GA_MEASUREMENT_ID = 'G-ZYK627NZFG';
 // Meta Pixel. Same convention as GA4 above: while this holds the placeholder the
 // pixel never loads, so the site stays safe to deploy before the ID exists.
@@ -1126,23 +1127,54 @@ const consentStrings = {
   }
 };
 
-// Inject and configure GA4. Guarded so it loads at most once, and never with a
-// placeholder ID. Called only after consent is granted.
-function loadGA4() {
+// Inject GA4 under Consent Mode v2, with every consent type denied. In that
+// state gtag writes no cookie and sends no identifier -- it sends cookieless
+// pings instead, which is the entire point: a visitor who lands and leaves in
+// four seconds is otherwise invisible, because nothing loads before they scroll
+// past the banner and accept. Guarded so it runs at most once, and never with a
+// placeholder ID. Safe to call on every page load.
+function initAnalytics() {
   if (window.__wbsGALoaded) return;
   if (!GA_MEASUREMENT_ID || GA_MEASUREMENT_ID.indexOf('G-') !== 0 || GA_MEASUREMENT_ID === 'G-XXXXXXXXXX') return;
   window.__wbsGALoaded = true;
+
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { window.dataLayer.push(arguments); }
+  window.gtag = gtag;
+
+  // Defaults MUST be pushed before gtag.js runs, or the first hit escapes the
+  // gate. wait_for_update holds hits briefly so a returning visitor's stored
+  // Accept applies to their very first pageview rather than their second.
+  gtag('consent', 'default', {
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    analytics_storage: 'denied',
+    wait_for_update: 500
+  });
+  // Strips ad click identifiers from the cookieless pings while consent is denied.
+  gtag('set', 'ads_data_redaction', true);
 
   const s = document.createElement('script');
   s.async = true;
   s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_MEASUREMENT_ID;
   document.head.appendChild(s);
 
-  window.dataLayer = window.dataLayer || [];
-  function gtag() { window.dataLayer.push(arguments); }
-  window.gtag = gtag;
   gtag('js', new Date());
   gtag('config', GA_MEASUREMENT_ID);
+}
+
+// Lift GA4 from cookieless pings to full measurement. Called on Accept, and on
+// later page loads for a visitor whose Accept is already stored.
+function grantAnalyticsConsent() {
+  if (!window.gtag) return;
+  gtag('consent', 'update', {
+    ad_storage: 'granted',
+    ad_user_data: 'granted',
+    ad_personalization: 'granted',
+    analytics_storage: 'granted'
+  });
+  gtag('set', 'ads_data_redaction', false);
 }
 
 // Which audience each service page belongs to. The rule: surfaces get specified
@@ -1162,19 +1194,34 @@ const WBS_SERVICE_ROUTE = {
   'concrete-judaica': 'private'
 };
 
-// ViewContent / view_item on the ten service pages, in either language.
-// Called from loadTrackers() so both tags receive it.
-function trackServicePageView() {
+// The service-page event payload, or null when this is not a service page.
+function servicePageParams() {
   const path = location.pathname;
   const m = path.match(/\/(?:en\/)?services\/([a-z0-9-]+?)(?:\.html)?\/?$/i);
-  if (!m) return;
+  if (!m) return null;
   const slug = m[1].toLowerCase();
-  trackConversion('ViewContent', 'view_item', {
+  return {
     content_name: slug,
     content_type: 'service',
     content_category: WBS_SERVICE_ROUTE[slug] || 'other',
     content_language: path.indexOf('/en/') === 0 ? 'en' : 'he'
-  });
+  };
+}
+
+// ViewContent / view_item on the ten service pages, in either language. Fired at
+// page load, so GA4 records it as a cookieless ping even when consent is denied.
+// The Meta half is a no-op until the pixel exists -- trackConversion guards it.
+function trackServicePageView() {
+  const p = servicePageParams();
+  if (p) trackConversion('ViewContent', 'view_item', p);
+}
+
+// Meta-only replay for the moment consent arrives. GA4 already received this
+// event at page load, so sending it through trackConversion again would double
+// it there; the pixel, which has only just loaded, has not seen it at all.
+function trackServicePageViewMetaOnly() {
+  const p = servicePageParams();
+  if (p && window.__wbsPixelLoaded && window.fbq) fbq('track', 'ViewContent', p);
 }
 
 // Inject and initialise the Meta Pixel. Guarded so it loads at most once, and
@@ -1199,7 +1246,7 @@ function loadMetaPixel() {
   // browser extension, so the anchor is outside the page's control and the tag
   // never lands in the document -- fbq then queues every event forever and
   // sends nothing, while client-side helpers still report the calls as fine.
-  // head.appendChild is what loadGA4() above uses, and it works here.
+  // head.appendChild is what initAnalytics() above uses, and it works here.
   const fbs = document.createElement('script');
   fbs.async = true;
   fbs.src = 'https://connect.facebook.net/en_US/fbevents.js';
@@ -1214,19 +1261,23 @@ function loadMetaPixel() {
 // be missing -- the visitor declined consent, or fbevents.js is still in flight --
 // so both are guarded and an absent tag is never treated as an error.
 function trackConversion(metaEvent, gaEvent, params) {
-  if (window.fbq) fbq('track', metaEvent, params);
+  // Gate the Meta half on OUR load flag, not on window.fbq. A browser extension
+  // defines fbq on this site (the same one that owns the first script tag, see
+  // loadMetaPixel), so testing fbq alone would call into Meta before the visitor
+  // has consented and before our own pixel is initialised.
+  if (window.__wbsPixelLoaded && window.fbq) fbq('track', metaEvent, params);
   if (window.gtag) gtag('event', gaEvent, params);
 }
 
-// Single entry point for every consent-gated tag, so the two call sites in
-// setupConsentBanner() stay in sync as tags are added. The service-page event
-// fires here rather than inside loadMetaPixel() so it reaches GA4 as well, and
-// it stays out of DOMContentLoaded so it fires correctly both for a returning
-// visitor (consent already stored) and for one accepting just now.
+// Single entry point for every tag that genuinely requires consent, so the two
+// call sites in setupConsentBanner() stay in sync as tags are added. GA4 is not
+// here: it starts in denied mode at page load and is merely upgraded on Accept.
+// The Meta Pixel is, because Meta has no cookieless equivalent -- fbq under
+// 'consent revoke' sends nothing at all, so loading it early would buy no
+// measurement and cost a request.
 function loadTrackers() {
-  loadGA4();
   loadMetaPixel();
-  trackServicePageView();
+  trackServicePageViewMetaOnly();
 }
 
 // WhatsApp is the primary CTA on this site, so an outbound wa.me click is the
@@ -1238,13 +1289,18 @@ function setupMetaEvents() {
   });
 }
 
-// Cookie-consent gate. If the visitor already chose, honour it silently;
-// otherwise show a dismissible banner and only load GA4 on Accept.
+// Cookie-consent gate. GA4 starts immediately in denied mode whatever the
+// visitor later chooses, so bounces and short visits are counted at all; only
+// the Meta Pixel and full GA4 storage wait for Accept. If the visitor already
+// chose, honour it silently; otherwise show a dismissible banner.
 function setupConsentBanner() {
+  initAnalytics();
+  trackServicePageView();
+
   let choice = null;
   try { choice = localStorage.getItem(CONSENT_KEY); } catch (_) {}
-  if (choice === 'granted') { loadTrackers(); return; }
-  if (choice === 'denied') return;
+  if (choice === 'granted') { grantAnalyticsConsent(); loadTrackers(); return; }
+  if (choice === 'denied') return;  // GA4 stays on cookieless pings
 
   const banner = document.createElement('div');
   banner.className = 'wbs-consent';
@@ -1283,6 +1339,7 @@ function setupConsentBanner() {
 
   acceptBtn.addEventListener('click', () => {
     try { localStorage.setItem(CONSENT_KEY, 'granted'); } catch (_) {}
+    grantAnalyticsConsent();
     loadTrackers();
     close();
   });
@@ -1348,5 +1405,5 @@ document.addEventListener('DOMContentLoaded', () => {
   setupStickyCta();
   setupInitialHashScroll(lenis);  // land on #contact/#work/#studio when arriving from a sub-page
   setupMetaEvents();     // wa.me click tracking (no-ops until the pixel loads)
-  setupConsentBanner();  // cookie consent → loads GA4 + Meta Pixel only after Accept
+  setupConsentBanner();  // GA4 starts cookieless; Accept upgrades it, loads Pixel
 });
