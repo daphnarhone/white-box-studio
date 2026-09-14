@@ -11,17 +11,21 @@
 
   Regenerate after editing, from the repo root:
 
-    & "C:\Program Files\Google\Chrome\Application\chrome.exe" --headless --disable-gpu `
-        --no-pdf-header-footer --print-to-pdf="docs\email-migration-plan.pdf" `
+    & "C:\Program Files\Google\Chrome\Application\chrome.exe" --headless=new --disable-gpu `
+        --no-pdf-header-footer --print-to-pdf="C:\Users\User\Documents\Claude\white-box-studio\docs\email-migration-plan.pdf" `
         "file:///C:/Users/User/Documents/Claude/white-box-studio/docs/email-migration-plan.html"
+
+  NOTE: it must be --headless=new and the output path must be ABSOLUTE. Plain
+  --headless writes nothing at all and reports no error, so the old PDF simply
+  stays on disk with its old timestamp and looks like it worked. Check
+  LastWriteTime after rendering.
 
   Then page through the result before sharing it — headless Chrome silently drops
   glyphs its fonts lack. Known: the shekel sign (U+20AA) renders as an empty box,
   which is why Step 3 reads "27 ILS" and not the symbol.
 
-  DNS values here were read from the live zone on 11 Aug 2026. Re-verify the two
-  Google values (MX smtp.google.com pri 1, SPF include:_spf.google.com) if this is
-  being used much later.
+  DNS values here were read from the live zone on 11 Aug 2026 and re-verified at
+  every step of the real cutover on 7 Sep 2026.
 -->
 
 <style>
@@ -307,6 +311,42 @@
   </div>
 </div>
 
+<div class="callout callout--warn">
+<p style="margin-top:0"><strong>DONE — cutover completed 7 September 2026.</strong> Mail for
+<code>white-box.co.il</code> now arrives in Google Workspace. Steps 1&ndash;7 were carried out
+and verified that afternoon; external mail was confirmed landing in Gmail the same day.
+Final DNS: <strong>MX <code>smtp.google.com</code> priority 1</strong>, and exactly one SPF record,
+<code>v=spf1 include:_spf.google.com ip4:148.251.82.238 ~all</code>.</p>
+<p><strong>Still to do:</strong> Step 8 (re-run the mail import to sweep up anything that reached
+BOX between the first import and the switch), Step 9 (DKIM and DMARC &mdash; the domain has never
+had either), and Step 10 (<strong>do not cancel BOX before about 21 September 2026</strong>).</p>
+<p style="margin-bottom:0">The steps below are kept as written so the remaining ones can be
+followed, and so the reasoning is on record. Where a step is already complete it is marked.</p>
+</div>
+
+<h2>Before anything else: Netlify has no “edit”</h2>
+
+<div class="callout callout--warn">
+<p style="margin-top:0"><strong>This is the single most dangerous thing in this document, and it
+already caused one outage.</strong> The Netlify DNS panel has <strong>no edit function</strong>.
+Netlify's own documentation says records cannot be edited &mdash; you add a new record and delete
+the old one.</p>
+<p>An earlier version of this plan said “find the MX record, <em>edit it</em>, change the TTL”.
+That is impossible on Netlify, so the natural move is to delete the record and re-create it. On
+<strong>about 31 August 2026 the re-create did not complete</strong>, the domain was left with
+<strong>no MX record at all</strong>, and mail to <code>white-box.co.il</code> silently stopped
+being delivered for roughly a week before it was noticed. Senders queue for 3&ndash;5 days and
+then bounce, so some mail was lost.</p>
+<p style="margin-bottom:0"><strong>The rule, and note the two halves point in opposite directions:</strong></p>
+<ul style="margin-bottom:0">
+  <li><strong>MX &mdash; add the new record FIRST, then delete the old.</strong> Two MX records
+  coexist harmlessly; the lower priority number simply wins. There is never a moment with no MX.</li>
+  <li><strong>SPF &mdash; delete the old record FIRST, then add the new.</strong> The opposite,
+  because two TXT records starting <code>v=spf1</code> is a hard failure, worse than having none.
+  A brief moment with no SPF is far safer than a moment with two.</li>
+</ul>
+</div>
+
 <h2>Start here: the reassuring part</h2>
 
 <p><strong>Your website will not change at all.</strong> Not one line. Your domain stays <code>white-box.co.il</code>, your email addresses stay exactly the same, and the 7 places <code>info@white-box.co.il</code> appears in the site's code stay exactly as they are. This migration changes only <em>where your mail is delivered</em>.</p>
@@ -357,12 +397,13 @@
 <p>This table is the whole migration. Everything else in this document is just how to get there safely.</p>
 
 <table>
-  <thead><tr><th style="width:20%">Record</th><th style="width:40%">Right now</th><th style="width:40%">After migration</th></tr></thead>
+  <thead><tr><th style="width:20%">Record</th><th style="width:40%">Before (BOX)</th><th style="width:40%">Now — live since 7 Sep 2026</th></tr></thead>
   <tbody>
-    <tr><td><strong>MX</strong></td><td><code>mail.white-box.co.il</code><br>priority <code>0</code></td><td><code>smtp.google.com</code><br>priority <code>1</code></td></tr>
-    <tr><td><strong>SPF</strong><br><span style="font-size:8.5pt;color:#555">(a TXT record)</span></td><td><code>v=spf1 +a +mx +ip4:148.251.82.238 ~all</code></td><td><code>v=spf1 include:_spf.google.com ~all</code></td></tr>
-    <tr><td><strong>DKIM</strong><br><span style="font-size:8.5pt;color:#555">(TXT, <code>google._domainkey</code>)</span></td><td><em>does not exist</em></td><td>a long key Google gives you</td></tr>
-    <tr><td><strong>DMARC</strong><br><span style="font-size:8.5pt;color:#555">(TXT, <code>_dmarc</code>)</span></td><td><em>does not exist</em></td><td><code>v=DMARC1; p=none; rua=mailto:daphna@white-box.co.il</code></td></tr>
+    <tr><td><strong>MX</strong></td><td><code>mail.white-box.co.il</code><br>priority <code>0</code></td><td><code>smtp.google.com</code><br>priority <code>1</code> &nbsp;<strong>&check; done</strong></td></tr>
+    <tr><td><strong>SPF</strong><br><span style="font-size:8.5pt;color:#555">(a TXT record)</span></td><td><code>v=spf1 +a +mx +ip4:148.251.82.238 ~all</code></td><td><code>v=spf1 include:_spf.google.com ip4:148.251.82.238 ~all</code> &nbsp;<strong>&check; done</strong><br><span style="font-size:8.5pt;color:#555">simplifies to <code>v=spf1 include:_spf.google.com ~all</code> at Step 10</span></td></tr>
+    <tr><td><strong>DKIM</strong><br><span style="font-size:8.5pt;color:#555">(TXT, <code>google._domainkey</code>)</span></td><td><em>never existed</em></td><td>a long key Google gives you &nbsp;<strong>&mdash; still to do</strong></td></tr>
+    <tr><td><strong>DMARC</strong><br><span style="font-size:8.5pt;color:#555">(TXT, <code>_dmarc</code>)</span></td><td><em>never existed</em></td><td><code>v=DMARC1; p=none; rua=mailto:daphna@white-box.co.il</code> &nbsp;<strong>&mdash; still to do</strong></td></tr>
+    <tr><td><strong>Google verification</strong><br><span style="font-size:8.5pt;color:#555">(a TXT record)</span></td><td><em>n/a</em></td><td><code>google-site-verification=Npp&hellip;</code><br><strong>never delete this</strong> &mdash; the domain un-verifies</td></tr>
   </tbody>
 </table>
 
@@ -391,10 +432,24 @@
 
 <ol>
   <li>Netlify &rarr; Domains &rarr; <code>white-box.co.il</code> &rarr; DNS records</li>
-  <li>Find the <strong>MX</strong> record pointing at <code>mail.white-box.co.il</code></li>
-  <li>Edit it and change <strong>TTL</strong> to <code>300</code> (300 seconds = 5 minutes)</li>
-  <li>Save. <strong>Change nothing else.</strong></li>
+  <li><strong>Add a new record</strong> that is identical to the existing MX &mdash; type
+  <code>MX</code>, name empty, value <code>mail.white-box.co.il</code>, priority <code>0</code>
+  &mdash; but with <strong>TTL <code>300</code></strong></li>
+  <li><strong>Then</strong> delete the old MX record, the one whose TTL is 3600</li>
+  <li><strong>Change nothing else.</strong></li>
 </ol>
+
+<div class="callout callout--warn">
+<p style="margin-top:0"><strong>Do not simply delete the MX and re-create it.</strong> There is no
+edit button (see the warning at the top of this document), and deleting first is exactly what left
+the domain with no MX at all and broke incoming mail for a week. Add first, delete second, so the
+domain is never without an MX record.</p>
+<p style="margin-bottom:0">Netlify may then show the MX row <strong>twice</strong> even though DNS
+serves only one record &mdash; identical records collapse into one. That is a display quirk, not a
+duplicate. Do not “tidy it up” by deleting one, because there may be only one real record behind
+the two rows. But <strong>do</strong> remember both rows exist when you come to Step 5, or you will
+delete one and quietly leave mail pointing at BOX.</p>
+</div>
 
 <p>Then wait a day before Step 5. You can do Steps 2–4 during that wait.</p>
 
@@ -440,7 +495,28 @@
 
 <p>An alias is free. Mail to <code>info@</code> lands in the same inbox, and you can still <em>send</em> as <code>info@</code> when you want to appear as the studio rather than yourself. That is roughly <strong>27 ILS per month instead of 54</strong>.</p>
 
-<p><strong>To set it up:</strong> Admin &rarr; Directory &rarr; Users &rarr; click your account &rarr; <strong>User information</strong> &rarr; <strong>Email aliases</strong> &rarr; add <code>info</code>.</p>
+<p><strong>To set it up:</strong> Admin &rarr; Directory &rarr; Users &rarr; click the user's
+<em>name</em> &rarr; on the left-hand card, <strong>ADD ALTERNATE EMAILS</strong> &rarr; type
+<code>info</code> (just that, not the full address) &rarr; <strong>SAVE</strong>.</p>
+
+<div class="callout callout--warn">
+<p style="margin-top:0"><strong>On this domain the alias is not optional.</strong> On BOX,
+<code>info@</code> was a <strong>forwarder</strong> to <code>daphna@</code>, not a mailbox. That
+forwarder stops working the moment the MX leaves BOX, and the alias is its only replacement. If the
+MX is switched before the alias exists, every message to <code>info@</code> bounces &mdash; and
+<code>info@</code> is the address printed in seven places on the website.</p>
+<p><strong>Three things that waste time here:</strong></p>
+<ul style="margin-bottom:0">
+  <li>The Users list shows <strong>one user</strong> and that is correct. Aliases are not accounts
+  and never appear as rows. If <code>info@</code> <em>did</em> appear as a second user, it would be
+  a second paid seat and should be removed.</li>
+  <li>The Users <strong>search box does not match aliases</strong>. Searching
+  <code>info@white-box.co.il</code> finds nothing even when the alias exists. Use
+  <strong>“Show all alternate emails”</strong> on the user's page &mdash; that is the reliable check.</li>
+  <li>A <strong>greyed-out SAVE button means the alias is already saved</strong>, not that saving
+  failed. These forms only enable SAVE when something has changed.</li>
+</ul>
+</div>
 
 <p>Only make <code>info@</code> a separate paid account if someone <em>other than you</em> needs their own private login for it.</p>
 
@@ -448,7 +524,19 @@
 
 <p><strong>Do this while email is still being delivered to cPanel.</strong> You are copying, not moving. Nothing is deleted from cPanel, so there is no way to lose anything at this step.</p>
 
-<p>Google Admin &rarr; <strong>Data migration</strong>. If you cannot find it, type “data migration” into the admin search bar.</p>
+<p>Google Admin &rarr; <strong>Data</strong> &rarr; <strong>Data import &amp; export</strong> &rarr;
+<strong>Data Import</strong>. The page is headed <em>“Import data from IMAP”</em>.</p>
+
+<div class="callout">
+<p style="margin-top:0"><strong>The name has changed.</strong> Google's old “Data migration” label is
+gone, and searching the admin console for “data migration” finds nothing useful. It is now
+<strong>Data Import</strong>, under <strong>Data &rarr; Data import &amp; export</strong> in the
+left-hand menu. The direct URL <code>admin.google.com/ac/dm</code> does <em>not</em> reach it &mdash;
+it lands on an unrelated page.</p>
+<p style="margin-bottom:0">The first screen asks only for the IMAP server address. Enter
+<code>mail.white-box.co.il</code> on its own &mdash; no <code>https://</code>, no port &mdash; and
+press <strong>Test connection</strong>. It then asks for the mailbox credentials.</p>
+</div>
 
 <table>
   <thead><tr><th style="width:32%">Setting</th><th>Value</th></tr></thead>
@@ -470,10 +558,16 @@
 
 <p>This is the moment new mail starts going to Google. With TTL at 300, it takes about 5 minutes.</p>
 
+<p><strong>Add first, delete second.</strong> While both records exist, BOX is priority <code>0</code>
+and Google is priority <code>1</code>; the lower number wins, so mail keeps going to BOX and nothing
+has changed yet. Only deleting the BOX records performs the switch.</p>
+
 <ol>
-  <li>Netlify &rarr; DNS records</li>
-  <li><strong>Delete</strong> the existing MX record — <code>mail.white-box.co.il</code>, priority <code>0</code></li>
-  <li><strong>Add new record</strong>, with these values:</li>
+  <li>Netlify &rarr; DNS records &rarr; <strong>Add new record</strong>, with the values below</li>
+  <li>Check it is live before going further</li>
+  <li><strong>Then delete every</strong> <code>mail.white-box.co.il</code> MX record &mdash; there
+  may be <strong>two rows</strong>, and both must go</li>
+  <li>Confirm the only MX left is <code>smtp.google.com</code></li>
 </ol>
 
 <div class="value-box">
@@ -482,6 +576,15 @@ Name:      (leave empty — the domain itself)<br>
 Value:     smtp.google.com<br>
 Priority:  1<br>
 TTL:       300
+</div>
+
+<div class="callout callout--warn">
+<p style="margin-top:0"><strong>Delete both rows.</strong> Netlify listed
+<code>mail.white-box.co.il</code> twice during the real cutover. Deleting only one leaves mail
+routed to BOX while everything looks finished &mdash; the failure would be silent.</p>
+<p style="margin-bottom:0">Verify from outside afterwards rather than trusting the panel:
+<code>nslookup -type=MX white-box.co.il 8.8.8.8</code> should return
+<strong>one</strong> record, <code>smtp.google.com</code>.</p>
 </div>
 
 <p>That single record is all Google needs — they simplified this in 2023. If you find an older guide listing five <code>ASPMX.L.GOOGLE.COM</code> records, that is the legacy setup. It still works, but you do not need it.</p>
@@ -495,13 +598,28 @@ TTL:       300
 
 <p>Do this straight after the MX change. If you skip it, mail you send from Gmail may land in recipients' spam folders.</p>
 
+<p><strong>Delete first, add second &mdash; the opposite order to Step 5.</strong> Two TXT records
+starting <code>v=spf1</code> is a hard failure, worse than having none at all, so a brief moment
+with no SPF is much safer than a moment with two.</p>
+
 <ol>
   <li>Netlify &rarr; DNS records &rarr; find the TXT record whose value starts with <code>v=spf1</code></li>
-  <li><strong>Edit it.</strong> Do not add a second one — see the mistakes section</li>
-  <li>Replace the value with:</li>
+  <li><strong>Delete it.</strong> There is no edit button &mdash; see the warning at the top</li>
+  <li><strong>Immediately add a new record</strong>: type <code>TXT</code>, name empty, TTL
+  <code>300</code>, value:</li>
 </ol>
 
 <div class="value-box">v=spf1 include:_spf.google.com ip4:148.251.82.238 ~all</div>
+
+<div class="callout callout--warn">
+<p style="margin-top:0"><strong>Do not touch the other TXT record</strong> &mdash; the one reading
+<code>google-site-verification=&hellip;</code>. Google re-checks it periodically and will
+un-verify the domain if it disappears. When you are done you should have <strong>exactly two</strong>
+TXT records: this SPF, and that verification string.</p>
+<p style="margin-bottom:0">Check from outside:
+<code>nslookup -type=TXT white-box.co.il 8.8.8.8</code> &mdash; exactly one line should begin
+<code>v=spf1</code>.</p>
+</div>
 
 <p>This temporarily authorises <strong>both</strong> Google and your old server, which is the safe choice while both still exist.</p>
 
@@ -522,6 +640,21 @@ TTL:       300
 </ul>
 
 <p>You can check the DNS side at <code>mxtoolbox.com</code> — enter <code>white-box.co.il</code>, and MX should show <code>smtp.google.com</code>.</p>
+
+<div class="callout">
+<p style="margin-top:0"><strong>Test before you switch, not only after.</strong> Google gives every
+Workspace domain a free mirror at <code>&lt;yourdomain&gt;.test-google-a.com</code>, which points at
+Google's mail servers regardless of your own MX. So you can prove the mailbox and the alias work
+<em>while mail is still going to BOX</em>. Send from any outside address to:</p>
+<div class="value-box">
+daphna@white-box.co.il.test-google-a.com<br>
+info@white-box.co.il.test-google-a.com
+</div>
+<p style="margin-bottom:0">Both should arrive in the new inbox &mdash; <strong>check the Spam
+folder</strong>, because a brand-new mailbox with no history is cautious and the first test almost
+certainly lands there. This removes nearly all the risk from Step 5: by the time you change the MX
+you already know the destination receives.</p>
+</div>
 
 <h2><span class="step-num">8</span>Run the migration once more</h2>
 
@@ -575,26 +708,29 @@ Value:  v=DMARC1; p=none; rua=mailto:daphna@white-box.co.il
   <p>Those “AutoSSL reduced coverage” warning emails stop <strong>forever</strong>. That whole problem existed only because the cPanel server was trying to manage certificates for a website it does not host. Once mail leaves, the account has no reason to exist.</p>
 </div>
 
-<h2>Four mistakes that break email</h2>
+<h2>Five mistakes that break email</h2>
 
-<p>Worth reading twice.</p>
+<p>Worth reading twice. The first one is not hypothetical — it happened.</p>
 
 <ol>
-  <li><strong>Two SPF records.</strong> You must have <strong>exactly one</strong> TXT record starting with <code>v=spf1</code>. Two is worse than none — mail servers see the conflict and fail the check entirely. In Step 6, <em>edit</em> the existing record. Never add a second.</li>
+  <li><strong>Deleting a record in order to change it.</strong> Netlify has no edit button, so changing a record means delete-and-recreate — and if the recreate does not complete you are left with nothing. This is what removed the MX record around 31 August 2026 and stopped incoming mail for a week. For <strong>MX, add the new record first and delete second</strong>. Only SPF works the other way round, and only because two SPF records is itself a failure.</li>
+  <li><strong>Two SPF records.</strong> You must have <strong>exactly one</strong> TXT record starting with <code>v=spf1</code>. Two is worse than none — mail servers see the conflict and fail the check entirely.</li>
   <li><strong>Deleting the wrong TXT record.</strong> After Step 2 you will have several TXT records on the domain: SPF, Google verification, and later DKIM and DMARC. They coexist happily. Deleting one to tidy up breaks whatever depended on it.</li>
   <li><strong>Switching MX before copying mail.</strong> Flip MX first and new mail arrives in an empty Google mailbox while your history sits stranded on a server you are about to cancel. Copy first. Always.</li>
   <li><strong>Cancelling cPanel too early.</strong> A few more weeks of hosting fees is <em>nothing</em> compared to discovering in October that a client's email from September went to a server that no longer exists.</li>
 </ol>
 
+<div class="nobreak">
 <h2>If something goes wrong</h2>
 
 <p><strong>You can always undo the switch.</strong> Nothing here is permanent until you cancel cPanel in Step 10 — which is exactly why Step 10 is last.</p>
 
-<p>To roll back: in Netlify, delete the <code>smtp.google.com</code> MX record and re-create the original one. With TTL at 300, mail flows back to cPanel within about 5 minutes, exactly as before.</p>
+<p>To roll back: in Netlify, <strong>add</strong> the original MX record back first, then delete the <code>smtp.google.com</code> one. With TTL at 300, mail flows back to cPanel within about 5 minutes, exactly as before. This works only while the cPanel account still exists, which is the real reason Step 10 waits two weeks.</p>
 
 <div class="rollback-box">
   <span class="lbl">Rollback MX record — keep this where you can find it</span>
   <span class="val">mail.white-box.co.il &nbsp;&nbsp; priority 0</span>
+</div>
 </div>
 
 <!-- ── Tear-off reference page ─────────────────────── -->
@@ -640,7 +776,7 @@ Check your work           mxtoolbox.com</pre>
     <span class="val">MX &nbsp; mail.white-box.co.il &nbsp;&nbsp; priority 0</span>
   </div>
 
-  <p class="footer-note">DNS values in this document were read from the live white-box.co.il zone on 11 August 2026. Google's single-MX recommendation (<code>smtp.google.com</code>, priority 1) was confirmed against Google's current documentation the same day. If you are reading this much later, re-check the two Google values before typing them.</p>
+  <p class="footer-note">DNS values in this document were read from the live white-box.co.il zone on 11 August 2026, and every one of them was re-verified against live DNS during the real cutover on <strong>7 September 2026</strong>, when Steps 1&ndash;7 were carried out and external mail was confirmed arriving in Gmail. Google's single-MX recommendation (<code>smtp.google.com</code>, priority 1) was confirmed against Google's current documentation. Steps 8&ndash;10 remain outstanding: re-run the mail import, add DKIM and DMARC, and do not cancel BOX before about 21 September 2026.</p>
 </div>
 
 </body>
