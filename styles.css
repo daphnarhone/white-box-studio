@@ -51,7 +51,6 @@ img { max-width: 100%; display: block; }
 
 /* ── Hebrew typography ──────────────────────────── */
 html[lang="he"] body,
-html[lang="he"] .hero-tagline,
 html[lang="he"] .hero-headline,
 html[lang="he"] .hero-sub,
 html[lang="he"] .detail-headline,
@@ -68,7 +67,13 @@ html[lang="he"] .work-note,
 html[lang="he"] .studio-pullquote p,
 html[lang="he"] .contact-headline,
 html[lang="he"] .contact-card-value,
-html[lang="he"] .mobile-menu-nav a {
+html[lang="he"] .mobile-menu-nav a,
+html[lang="he"] .projects-title,
+html[lang="he"] .projects-note,
+html[lang="he"] .project-name,
+html[lang="he"] .project-desc,
+html[lang="he"] .project-meta dd,
+html[lang="he"] .studio-process-caption {
   font-family: var(--font-hebrew);
 }
 /* Wordmark stays in Nunito (English brand wordmark stays EN even in HE) */
@@ -229,19 +234,12 @@ html[lang="he"] .nav-right   { font-size: 18px; }   /* Hebrew header enlarged be
   margin-bottom: 8px;
   line-height: 1;
 }
-.hero-tagline {
-  font-weight: 300;
-  font-size: 13px;
-  letter-spacing: 0.18em;
-  text-transform: lowercase;
-  color: rgba(26, 26, 26, 0.72);
-}
 @keyframes heroLogoFade {
   from { opacity: 0; transform: translateY(10px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-/* Hebrew (RTL): stack the logo, wordmark and tagline to the right so the studio
-   name + tagline sit under the logo. Desktop/tablet only — mobile stays centered. */
+/* Hebrew (RTL): stack the logo and wordmark to the right so the studio name
+   sits under the logo. Desktop/tablet only — mobile stays centered. */
 @media (min-width: 769px) {
   html[lang="he"] .hero-logo-block { text-align: right; }
   html[lang="he"] .hero-icon { margin-left: auto; margin-right: 0; }
@@ -1123,6 +1121,107 @@ html[dir="rtl"] .next-teaser .next-target::after { content: ' ←'; }
 html[dir="rtl"] .next-teaser:hover .next-target::after { transform: translateX(-6px); }
 
 /* ══════════════════════ Studio section ══════════════════════ */
+/* ── Selected projects ──────────────────────────────
+   Sits between Work and Studio. Same cream ground as both neighbours so it reads
+   as part of the same run rather than a new zone; the dark break is still
+   Contact. Top padding is 0 because .section-work already pads below itself. */
+.section-projects {
+  background: var(--cream);
+  color: var(--charcoal);
+  padding: 0 40px var(--section-pad);
+  position: relative;
+}
+.section-projects .section-inner {
+  max-width: var(--container);
+  margin: 0 auto;
+}
+.projects-header {
+  max-width: 62ch;
+  margin-bottom: clamp(40px, 5vw, 64px);
+}
+.projects-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(32px, 4vw, 54px);
+  line-height: 1.05;
+  letter-spacing: var(--tracking-tight);
+  margin-bottom: 18px;
+}
+.projects-note {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.65;
+  opacity: 0.8;
+}
+.projects-list {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(64px, 8vw, 120px);
+}
+.project {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: clamp(32px, 4vw, 64px);
+  align-items: center;
+}
+.project-figure { margin: 0; }
+.project-figure img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius-card);
+  box-shadow: 0 40px 80px rgba(42, 40, 38, 0.18);
+}
+.project-client {
+  font-size: 13px;
+  font-weight: 300;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.66;
+  margin-bottom: 14px;
+}
+html[lang="he"] .project-client { font-size: 15px; letter-spacing: 0.1em; }
+.project-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(26px, 2.6vw, 38px);
+  line-height: 1.12;
+  letter-spacing: var(--tracking-tight);
+  margin-bottom: 18px;
+}
+.project-desc {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.65;
+  opacity: 0.85;
+  margin-bottom: 32px;
+}
+.project-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px 44px;
+  margin: 0;
+}
+.project-meta dt {
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  opacity: 0.6;
+  margin-bottom: 6px;
+}
+html[lang="he"] .project-meta dt { font-size: 13px; letter-spacing: 0.12em; }
+.project-meta dd {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+@media (max-width: 1024px) {
+  .project { grid-template-columns: 1fr; gap: 32px; }
+  .project-figure img { max-width: 720px; }
+}
+
 .section-studio {
   background: var(--cream);
   color: var(--charcoal);
@@ -1216,6 +1315,30 @@ html[dir="rtl"] .next-teaser:hover .next-target::after { transform: translateX(-
   background-size: cover;
   background-repeat: no-repeat;
 }
+/* Process shot: sits under the studio copy, in the space the text leaves beside
+   the 4:5 frame, rather than stacking a second slab under it. It lives inside
+   .studio-text so RTL/LTR mirroring is automatic - it follows the text's side.
+   margin-inline-start:auto pushes it to the column's far edge in both. */
+.studio-process {
+  margin: 56px 0 0;
+  width: 84%;
+  margin-inline-start: auto;
+}
+.studio-process img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius-card);
+  box-shadow: 0 24px 56px rgba(42, 40, 38, 0.16);
+}
+.studio-process-caption {
+  margin-top: 14px;
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.5;
+  opacity: 0.7;
+}
+html[lang="he"] .studio-process-caption { font-size: 15px; }
 .studio-pullquote {
   margin: clamp(80px, 12vw, 140px) auto 0;
   max-width: 880px;
@@ -1581,6 +1704,7 @@ html[dir="rtl"] .work-title {
     gap: 56px;
   }
   .studio-image { max-width: 560px; }
+  .studio-process { width: 100%; max-width: 560px; margin-inline-start: 0; margin-top: 40px; }
   .contact-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
@@ -1621,8 +1745,6 @@ html[dir="rtl"] .work-title {
      full-width hero image right below it. */
   .hero-icon { margin: 0 auto 12px; width: min(30vw, 118px); }
   .hero-wordmark { font-size: 24px; }
-  .hero-tagline { font-size: 13px; }
-  html[lang="he"] .hero-tagline { font-size: 16px; } /* Heebo renders smaller */
 
   /* Above-the-fold budget at 375px: tighten every vertical gap in the hero
      stack, and pull the CTAs directly under the H1 (the sub reorders after

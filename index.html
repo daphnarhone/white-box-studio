@@ -62,7 +62,7 @@
 <!-- Fonts loaded non-render-blocking; display=swap paints text immediately in the fallback -->
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700;800&family=Heebo:wght@300;400;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700;800&family=Heebo:wght@300;400;700;800&display=swap"></noscript>
-<link rel="stylesheet" href="styles.css?v=20260901a">
+<link rel="stylesheet" href="styles.css?v=20260917a">
 
 <!-- LocalBusiness structured data (SEO / Google local results). Optional: to add an exact
      map pin, look up the studio on Google Maps, right-click it → copy the lat,long, and add a
@@ -149,6 +149,7 @@
           </div>
         </div>
       </div>
+      <a href="#projects" data-i18n="nav_projects">Selected projects</a>
       <a href="#studio" data-i18n="nav_studio">Studio</a>
       <a data-faq-link href="/faq.html" data-i18n="nav_faq">FAQ</a>
       <a href="#contact" class="header-cta" data-i18n="cta_start">Start a project</a>
@@ -169,6 +170,7 @@
 <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
   <nav class="mobile-menu-nav" aria-label="Mobile navigation">
     <a href="#work" data-i18n="nav_work">Work</a>
+    <a href="#projects" data-i18n="nav_projects">Selected projects</a>
     <a href="#studio" data-i18n="nav_studio">Studio</a>
     <a data-faq-link href="/faq.html" data-i18n="nav_faq">FAQ</a>
     <a href="#contact" data-i18n="nav_contact">Contact</a>
@@ -225,7 +227,6 @@
     <div class="hero-logo-block">
       <img class="hero-icon" src="assets/logo.svg" alt="The White Box Studio">
       <div class="hero-wordmark" data-i18n="wordmark">white box studio</div>
-      <div class="hero-tagline" data-i18n="tagline">art &amp; architectural finishes</div>
     </div>
     <div class="hero-text">
       <p class="eyebrow" data-i18n="hero_eyebrow">Atelier of art and architectural finishes · since 2005</p>
@@ -423,6 +424,50 @@
   </div>
 </section>
 
+<!-- ════════════════════ Selected projects (cream) ══════════════════════════════
+     Proof block (2026-09-17): named commissions with client-facing detail. The
+     site carried no third-party validation anywhere before this. Further entries
+     are additional <article class="project"> siblings inside .projects-list. -->
+<section id="projects" class="section-projects">
+  <div class="section-inner">
+    <div class="projects-header">
+      <p class="eyebrow" data-i18n="projects_eyebrow">SELECTED PROJECTS</p>
+      <h2 class="projects-title" data-i18n="projects_heading">Recent projects</h2>
+      <p class="projects-note" data-i18n="projects_note">Commissioned work, designed and made in the studio, and installed on site by our own team.</p>
+    </div>
+
+    <div class="projects-list">
+      <article class="project">
+        <figure class="project-figure">
+          <picture>
+            <source type="image/webp" srcset="assets/images/nahariya-monument.webp">
+            <img src="assets/images/nahariya-monument.jpg" data-i18n-alt="project_nahariya_alt" alt="A hand-sculpted wall relief of the Ma&rsquo;apilim immigrant boat and its passengers, lit at night beside an illuminated Hebrew text panel" width="1200" height="800" loading="lazy" decoding="async">
+          </picture>
+        </figure>
+        <div class="project-body">
+          <p class="project-client" data-i18n="project_nahariya_client">Nahariya Municipality &amp; the Strauss family</p>
+          <h3 class="project-name" data-i18n="project_nahariya_name">The Maritime Heritage of Nahariya</h3>
+          <p class="project-desc" data-i18n="project_nahariya_desc">A public monument telling the story of Nahariya&rsquo;s maritime heritage. The Ma&rsquo;apilim boat and its passengers are sculpted by hand in relief across the full width of the wall, set beside an illuminated text panel.</p>
+          <dl class="project-meta">
+            <div class="project-meta-item">
+              <dt data-i18n="project_meta_year">Completed</dt>
+              <dd data-i18n="project_nahariya_year">September 2026</dd>
+            </div>
+            <div class="project-meta-item">
+              <dt data-i18n="project_meta_location">Location</dt>
+              <dd data-i18n="project_nahariya_location">Nahariya Maritime Centre</dd>
+            </div>
+            <div class="project-meta-item">
+              <dt data-i18n="project_meta_scope">Scope</dt>
+              <dd data-i18n="project_nahariya_scope">Hand-sculpted relief &middot; illuminated entrance wall</dd>
+            </div>
+          </dl>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
 <!-- Standalone WhatsApp CTA: section-transition band (work → studio) -->
 <div class="standalone-cta">
   <a data-whatsapp-link data-whatsapp-prefill="standalone" href="https://wa.me/972546855568?text=Hi%2C%20I%27d%20like%20to%20talk%20to%20your%20team%20about%20a%20project." target="_blank" rel="noopener" class="cta-quiet">
@@ -443,6 +488,15 @@
         <p class="studio-philosophy" data-i18n="studio_philosophy">The White Box Studio is an artist&rsquo;s atelier in the full sense of the word. We deeply understand our materials: how they behave, where they come from, and how they age. With this expertise, we design and execute one-off pieces and finishes for architects, interior designers, and anyone seeking a look no one else has.</p>
         <p class="eyebrow studio-howwework-eyebrow" data-i18n="studio_howwework_eyebrow">How we work</p>
         <p class="studio-howwework-body" data-i18n="studio_howwework_body">We co-design alongside architects, designers, or end clients, then handle full on-site installation. Installation is carried out by the studio&rsquo;s own team. We currently take on projects exclusively in Israel. We strongly prefer early-stage collaboration to guarantee that all required infrastructure is seamlessly planned and executed.</p>
+        <!-- Process shot: evidence for the "everything by hand, made and installed
+             by our own team" claim the copy alongside it makes. -->
+        <figure class="studio-process">
+          <picture>
+            <source type="image/webp" srcset="assets/images/nahariya-making.webp">
+            <img src="assets/images/nahariya-making.jpg" data-i18n-alt="studio_process_alt" alt="A studio member working on the large plaster relief on site, with a ladder, hand tools and buckets of plaster in low evening light" width="800" height="1000" loading="lazy" decoding="async">
+          </picture>
+          <figcaption class="studio-process-caption" data-i18n="studio_process_caption">Sculpting the Nahariya relief on site, September 2026.</figcaption>
+        </figure>
       </div>
       <figure class="studio-image" aria-hidden="true">
         <!-- Placeholder gradient until assets/images/studio_1.jpg is added; replace the file to swap. -->
@@ -514,16 +568,13 @@
           <label for="cf-type" data-i18n="form_type_label">Project type</label>
           <select id="cf-type" name="project_type">
             <option value="" data-i18n="form_type_default">Select a category</option>
-            <option data-i18n="sec_01_eyebrow">01 / Plaster wall finishes</option>
-            <option data-i18n="sec_09_eyebrow">02 / Decorative concrete works &amp; finishes</option>
-            <option data-i18n="sec_06_eyebrow">03 / Iron-look coating for doors &amp; walls</option>
-            <option data-i18n="sec_08_eyebrow">04 / Commission wall murals</option>
-            <option data-i18n="sec_03_eyebrow">05 / Sculpture Commission</option>
-            <option data-i18n="sec_02_eyebrow">06 / Sculptural coffee tables</option>
-            <option data-i18n="sec_05_eyebrow">07 / Display, event &amp; gift accessories</option>
-            <option data-i18n="sec_10_eyebrow">08 / Handmade concrete Judaica</option>
-            <option data-i18n="sec_04_eyebrow">09 / Gypsum panels for walls &amp; ceilings</option>
-            <option data-i18n="sec_07_eyebrow">10 / Gypsum capitals &amp; architectural ornaments</option>
+            <!-- Four families, not the ten numbered services (2026-09-17): a visitor
+                 should not have to file themselves into an internal taxonomy before
+                 they are allowed to send. "Not sure / other" stays as the escape. -->
+            <option data-i18n="form_type_walls">Plaster, concrete &amp; wall finishes</option>
+            <option data-i18n="form_type_sculpture">Commissioned sculpture</option>
+            <option data-i18n="form_type_display">Display, event &amp; gift accessories</option>
+            <option data-i18n="form_type_ornament">Panels, capitals &amp; ornament</option>
             <option data-i18n="form_type_other">Not sure / other</option>
           </select>
         </div>
@@ -598,7 +649,7 @@
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
-<script src="script.js?v=20260909a" defer></script>
+<script src="script.js?v=20260917a" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/sienna-accessibility/dist/sienna-accessibility.umd.js" async></script>
 </body>
 </html>

@@ -69,6 +69,7 @@ const strings = {
     // ── Header navigation ─────────────────────────
     nav_work: 'Work',
     nav_services: 'Services',
+    nav_projects: 'Selected projects',
     nav_studio: 'Studio',
     nav_faq: 'FAQ',
     nav_contact: 'Contact',
@@ -77,7 +78,6 @@ const strings = {
 
     // ── Logo lockup (stays in EN in both languages) ──
     wordmark: 'white box studio',
-    tagline: 'art & architectural finishes',
 
     // ── Hero ──────────────────────────────────────
     hero_eyebrow: 'Atelier of art and architectural finishes · since 2005',
@@ -177,6 +177,23 @@ const strings = {
     sec_10_headline: 'Ritual you can hold.',
     sec_10_body: 'Sacred objects, cast by hand in concrete. Kiddush goblets with brass, Netalah, mezuzah cases, Havdalah sets, blessing and prayer plaques, each with a weight that carries a sense of calm, stability, and longevity. These pieces live in our Holy collection.',
 
+    // ── Selected projects ─────────────────────────
+    projects_eyebrow: 'SELECTED PROJECTS',
+    projects_heading: 'Recent projects',
+    projects_note: 'Commissioned work, designed and made in the studio, and installed on site by our own team.',
+    project_meta_year: 'Completed',
+    project_meta_location: 'Location',
+    project_meta_scope: 'Scope',
+    project_nahariya_client: 'Nahariya Municipality & the Strauss family',
+    project_nahariya_name: 'The Maritime Heritage of Nahariya',
+    project_nahariya_desc: "A public monument telling the story of Nahariya's maritime heritage. The Ma'apilim boat and its passengers are sculpted by hand in relief across the full width of the wall, set beside an illuminated text panel.",
+    project_nahariya_year: 'September 2026',
+    project_nahariya_location: 'Nahariya Maritime Centre',
+    project_nahariya_scope: 'Hand-sculpted relief · illuminated entrance wall',
+    project_nahariya_alt: "A hand-sculpted wall relief of the Ma'apilim immigrant boat and its passengers, lit at night beside an illuminated Hebrew text panel",
+    studio_process_caption: 'Sculpting the Nahariya relief on site, September 2026.',
+    studio_process_alt: 'A studio member working on the large plaster relief on site, with a ladder, hand tools and buckets of plaster in low evening light',
+
     // ── Studio section ────────────────────────────
     studio_eyebrow: 'THE STUDIO',
     studio_headline: 'Everything by hand. Everything made here.',
@@ -209,6 +226,10 @@ const strings = {
     form_contact_ph: 'So we can get back to you',
     form_type_label: 'Project type',
     form_type_default: 'Select a category',
+    form_type_walls: 'Plaster, concrete & wall finishes',
+    form_type_sculpture: 'Commissioned sculpture',
+    form_type_display: 'Display, event & gift accessories',
+    form_type_ornament: 'Panels, capitals & ornament',
     form_type_other: 'Not sure / other',
     form_message_label: 'Message',
     form_message_ph: 'Tell us about your space, ideas, inspiration images, and timeline.',
@@ -226,6 +247,7 @@ const strings = {
     // ── Header navigation ─────────────────────────
     nav_work: 'עבודות',
     nav_services: 'תחומי עשייה',
+    nav_projects: 'פרויקטים נבחרים',
     nav_studio: 'סטודיו',
     nav_faq: 'שאלות נפוצות',
     nav_contact: 'צרו קשר',
@@ -234,7 +256,6 @@ const strings = {
 
     // ── Logo lockup ───────────────────────────────
     wordmark: 'white box studio',
-    tagline: 'אמנות וגימורים אדריכליים',
 
     // ── Hero ──────────────────────────────────────
     hero_eyebrow: 'סטודיו לאמנות וגימורים אדריכליים · מאז 2005',
@@ -334,6 +355,23 @@ const strings = {
     sec_10_headline: 'מנהג שאפשר להחזיק ביד.',
     sec_10_body: 'תשמישי קדושה, יצוקים ביד מבטון. גביעי קידוש עם פליז, נטלות, בתי מזוזות, כלי הבדלה ולוחות ברכה ותפילה, כל אחד עם משקל שנותן תחושה של שקט, יציבות ואריכות ימים. הפריטים האלה נמצאים באוסף Holy שלנו.',
 
+    // ── Selected projects ─────────────────────────
+    projects_eyebrow: 'פרויקטים נבחרים',
+    projects_heading: 'פרויקטים אחרונים',
+    projects_note: 'עבודות בהזמנה, מעוצבות ונוצרות בסטודיו ומותקנות באתר על ידי הצוות שלנו.',
+    project_meta_year: 'הושלם',
+    project_meta_location: 'מיקום',
+    project_meta_scope: 'היקף',
+    project_nahariya_client: 'עיריית נהריה ומשפחת שטראוס',
+    project_nahariya_name: 'מורשת הים של נהריה',
+    project_nahariya_desc: 'אנדרטה ציבורית המספרת את סיפור מורשת הים של נהריה. סירת המעפילים ונוסעיה מפוסלות בעבודת יד בתבליט לרוחב הקיר כולו, לצד פאנל טקסט מואר.',
+    project_nahariya_year: 'ספטמבר 2026',
+    project_nahariya_location: 'המרכז לחינוך וספורט ימי נהריה',
+    project_nahariya_scope: 'תבליט בעבודת יד · קיר כניסה מואר',
+    project_nahariya_alt: 'תבליט קיר מפוסל בעבודת יד של סירת המעפילים ונוסעיה, מואר בלילה לצד פאנל טקסט מואר',
+    studio_process_caption: 'פיסול תבליט נהריה באתר, ספטמבר 2026.',
+    studio_process_alt: 'איש צוות הסטודיו עובד על תבליט הטיח הגדול באתר, עם סולם, כלי עבודה ודליי טיח באור ערב נמוך',
+
     // ── Studio section ────────────────────────────
     studio_eyebrow: 'הסטודיו',
     studio_headline: 'הכול נעשה ביד. הכול נוצר כאן.',
@@ -366,6 +404,10 @@ const strings = {
     form_contact_ph: 'כדי שנוכל לחזור אליכם',
     form_type_label: 'סוג הפרויקט',
     form_type_default: 'בחרו קטגוריה',
+    form_type_walls: 'טיח, בטון וגימורי קיר',
+    form_type_sculpture: 'פיסול בהזמנה אישית',
+    form_type_display: 'אביזרי תצוגה, אירועים ומתנה',
+    form_type_ornament: 'פאנלים, כותרות ועיטורים',
     form_type_other: 'לא בטוח/ה / אחר',
     form_message_label: 'הודעה',
     form_message_ph: 'ספרו לנו על החלל שלכם, הרעיונות, תמונות השראה ולוח הזמנים.',
