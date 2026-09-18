@@ -674,8 +674,8 @@ export const SERVICES = [
   {
     slug: 'decorative-concrete', family: 'a', order: 2,
     he: {
-      title: 'עבודות וגימורים בבטון דקורטיבי בישראל | White Box Studio',
-      desc: 'עבודות וגימורים בבטון דקורטיבי בעבודת יד בישראל, מאובייקטים פיסוליים-שימושיים ועד ציפוי קירות במראה ייחודי, לחללים מודרניים, מסחריים ולמגורים.',
+      title: 'קיר בטון דקורטיבי, טקסטורות ועבודות בטון מיוחדות | White Box',
+      desc: 'קיר בטון דקורטיבי ועבודות בטון בעבודת יד בישראל, מאובייקטים פיסוליים-שימושיים ועד ציפוי קירות במראה ייחודי, לחללים מודרניים, מסחריים ולמגורים.',
       serviceType: 'בטון דקורטיבי', crumb: 'בטון דקורטיבי',
       eyebrow: '02 / עבודות וגימורים בבטון דקורטיבי',
       h1: 'עבודות וגימורים בבטון דקורטיבי',
@@ -689,6 +689,13 @@ export const SERVICES = [
         { src: '/assets/images/09_concrete_1.jpeg', alt: 'קיר בטון דקורטיבי בטקסטורת בד זורם' },
         { src: '/assets/images/09_concrete_2.jpeg', alt: 'קיר בטון דקורטיבי עם מנורה פיסולית' }
       ],
+      focus: {
+        title: 'קיר בטון דקורטיבי',
+        body: [
+          'קיר בטון דקורטיבי הוא הדרך המהירה ביותר לשנות את האופי של חלל שלם. במקום לצפות את הקיר בחומר מוכן, אנחנו מיישמים את הבטון ישירות על הקיר הקיים בשכבות דקות בעבודת יד, כך שהטקסטורה נבנית במקום ולא חוזרת על עצמה.',
+          'אפשר לקבל משטח גולמי ושקט, טקסטורה זורמת בסגנון בד, או מגע מינרלי שמזכיר אבן. עובי השכבה נע בין חצי סנטימטר לחמישה סנטימטרים, לפי העומק והטקסטורה שרוצים להשיג, ואפשר ליישם גם על גבס, בלוק או בטון קיים.'
+        ]
+      },
       applicationsTitle: 'יישומים',
       applications: ['קירות כוח', 'קירות עם הצהרה', 'חללי מסחר ואירוח', 'חללי מגורים מודרניים', 'אובייקטים פיסוליים-שימושיים', 'פאנלי קיר ומשטחים', 'פרטי אדריכלות'],
       finishesTitle: 'כיווני גימור',
@@ -703,6 +710,7 @@ export const SERVICES = [
       ],
       faqTitle: 'שאלות נפוצות',
       faq: [
+        { q: 'כמה עבה קיר בטון דקורטיבי?', a: 'עובי השכבה נע בין חצי סנטימטר לחמישה סנטימטרים, לפי העומק והטקסטורה שרוצים להשיג. אפשר ליישם על גבס, בלוק או בטון קיים.' },
         { q: 'בטון דקורטיבי מתאים גם לפנים וגם לחוץ?', a: 'כן, בהתאם לפרויקט ולתשתית.' },
         { q: 'אפשר להזמין פריטים פיסוליים שעומדים בפני עצמם?', a: 'כן, מפריטים שימושיים ועד פסלים.' },
         { q: 'אפשר להתאים גוון וטקסטורה?', a: 'כן, באופן מלא.' },
@@ -714,7 +722,7 @@ export const SERVICES = [
     },
     en: {
       title: 'Decorative Concrete Works & Finishes in Israel | White Box Studio',
-      desc: 'Handmade decorative concrete works and finishes in Israel, from sculptural-functional objects to flowing wall panels, for modern residential and commercial spaces.',
+      desc: 'Decorative concrete walls and handmade concrete works in Israel, from sculptural objects to flowing wall panels, for modern residential and commercial spaces.',
       serviceType: 'Decorative concrete works', crumb: 'Decorative concrete',
       eyebrow: '02 / Decorative concrete works & finishes',
       h1: 'Decorative concrete works, finished by hand',
@@ -728,6 +736,13 @@ export const SERVICES = [
         { src: '/assets/images/09_concrete_1.jpeg', alt: 'Drapery-flow textured decorative concrete wall' },
         { src: '/assets/images/09_concrete_2.jpeg', alt: 'Decorative concrete wall with sculptural menorah' }
       ],
+      focus: {
+        title: 'Decorative concrete walls',
+        body: [
+          'A decorative concrete wall is the fastest way to change the character of a whole room. Rather than cladding the wall in a ready-made material, we apply the concrete directly onto the existing wall in thin layers by hand, so the texture is built in place and never repeats.',
+          'The finish can be raw and quiet, a flowing fabric-like texture, or a mineral surface closer to stone. The layer runs from half a centimetre to five centimetres, depending on the depth and texture you want, and it can go over plasterboard, block or existing concrete.'
+        ]
+      },
       applicationsTitle: 'Applications',
       applications: ['Feature and statement walls', 'Commercial and hospitality spaces', 'Modern residential interiors', 'Sculptural-functional objects', 'Wall panels and surfaces', 'Architectural details'],
       finishesTitle: 'Finish directions',
@@ -742,6 +757,7 @@ export const SERVICES = [
       ],
       faqTitle: 'Frequently asked questions',
       faq: [
+        { q: 'How thick is a decorative concrete wall?', a: 'The layer runs from half a centimetre to five centimetres, depending on the depth and texture you want. It can go over plasterboard, block or existing concrete.' },
         { q: 'Is decorative concrete suitable for both interior and exterior?', a: 'Yes, depending on the project and substrate.' },
         { q: 'Can you make standalone sculptural objects?', a: 'Yes, from functional pieces to sculptures.' },
         { q: 'Can tone and texture be customized?', a: 'Yes, fully.' },

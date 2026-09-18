@@ -10,7 +10,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const VER = '20260901a';
+const VER = '20260917a';
 const ORIGIN = 'https://white-box.co.il';
 const WA = '972546855568';
 const INSTAGRAM = 'https://instagram.com/whiteboxstudio.il';
@@ -19,13 +19,13 @@ const INSTAGRAM = 'https://instagram.com/whiteboxstudio.il';
 const UI = {
   he: {
     skip: 'דלג לתוכן הראשי', work: 'עבודות', studio: 'סטודיו', contact: 'צרו קשר',
-    home: 'בית', services: 'תחומי עשייה', faq: 'שאלות נפוצות', start: 'התחילו פרויקט', whatsapp: 'וואטסאפ',
+    home: 'בית', services: 'תחומי עשייה', projects: 'פרויקטים נבחרים', faq: 'שאלות נפוצות', start: 'התחילו פרויקט', whatsapp: 'וואטסאפ',
     a11y: 'הצהרת נגישות', menu: 'פתח תפריט', mobileNav: 'ניווט נייד', bcAria: 'מסלול ניווט',
     waText: 'שלום, אשמח לדבר על פרויקט'
   },
   en: {
     skip: 'Skip to main content', work: 'Work', studio: 'Studio', contact: 'Contact',
-    home: 'Home', services: 'Services', faq: 'FAQ', start: 'Start a project', whatsapp: 'WhatsApp',
+    home: 'Home', services: 'Services', projects: 'Selected projects', faq: 'FAQ', start: 'Start a project', whatsapp: 'WhatsApp',
     a11y: 'Accessibility Statement', menu: 'Open menu', mobileNav: 'Mobile navigation', bcAria: 'Breadcrumb',
     waText: "Hi, I'd like to discuss a project"
   }
@@ -128,6 +128,7 @@ ${links}
 ${megaCols}
         </div>
       </div>
+      <a href="/index.html#projects" data-i18n="nav_projects">${u.projects}</a>
       <a href="/index.html#studio" data-i18n="nav_studio">${u.studio}</a>
       <a data-faq-link href="${faqHref(lang)}" data-i18n="nav_faq">${UI[lang].faq || 'FAQ'}</a>
       <a href="/index.html#contact" class="header-cta" data-i18n="cta_start">${u.start}</a>
@@ -142,6 +143,7 @@ ${megaCols}
 <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
   <nav class="mobile-menu-nav" aria-label="${u.mobileNav}">
     <a href="/index.html#work" data-i18n="nav_work">${u.work}</a>
+    <a href="/index.html#projects" data-i18n="nav_projects">${u.projects}</a>
     <a href="/index.html#studio" data-i18n="nav_studio">${u.studio}</a>
     <a data-faq-link href="${faqHref(lang)}" data-i18n="nav_faq">${UI[lang].faq || 'FAQ'}</a>
     <a href="/index.html#contact" data-i18n="nav_contact">${u.contact}</a>
@@ -237,7 +239,12 @@ ${d.intro.map(p => `      <p class="svc-body">${p}</p>`).join('\n')}
 
     <div class="svc-gallery">
 ${galleryFigs(d.images)}
-    </div>
+    </div>${d.focus ? `
+
+    <div class="svc-section">
+      <h2 class="svc-h2">${d.focus.title}</h2>
+${d.focus.body.map(p => `      <p class="svc-body">${p}</p>`).join('\n')}
+    </div>` : ''}
 
     <div class="svc-section svc-cols">
       <div>
